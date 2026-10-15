@@ -1,0 +1,20 @@
+name: CI Security Checks
+
+# Calls Blink-Tech's shared, org-standard security scan maintained in
+# blinktechnologies/engineering-standards. Edit the checks there, not here.
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+  workflow_dispatch:
+
+jobs:
+  security-scan:
+    uses: blinktechnologies/engineering-standards/.github/workflows/security-scan.yml@main
+    secrets: inherit

@@ -1,0 +1,4 @@
+# Default owners for everything in this repo.
+# Required reviews from code owners only take effect once branch protection
+# (or a repository ruleset) is enabled on this repository's branches.
+* @Byiringiro215
