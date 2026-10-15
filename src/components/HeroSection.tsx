@@ -21,6 +21,7 @@ export const HeroSection: React.FC = () => {
     >
       {/* Top-Left Exact Stepped Pixel Blocks matching user close-up image */}
       <div 
+        className="corner-pixel-block-top"
         style={{
           position: 'absolute',
           top: 0,
@@ -45,6 +46,7 @@ export const HeroSection: React.FC = () => {
 
       {/* Bottom-Right Exact Stepped Pixel Blocks matching user screenshot (180 deg rotation) */}
       <div 
+        className="corner-pixel-block-bottom"
         style={{
           position: 'absolute',
           bottom: 0,
@@ -83,8 +85,8 @@ export const HeroSection: React.FC = () => {
       />
 
       <div style={{ position: 'relative', zIndex: 3, width: '100%' }}>
-        {/* Top Tag: AI-Driven Agency with clear vertical spacing */}
-        <div style={{ textAlign: 'center', paddingTop: '42px', paddingBottom: '68px', position: 'relative', zIndex: 5 }}>
+        {/* Top Tag: AI-Driven Agency with animated entrance and twinkle */}
+        <div className="hero-ai-tag-wrapper">
           <div 
             className="ai-badge"
             style={{ 
@@ -95,7 +97,7 @@ export const HeroSection: React.FC = () => {
               borderRadius: '999px', 
               backgroundColor: '#ffffff', 
               border: '1px solid #e2e8f0',
-              boxShadow: '0 1px 3px rgba(0, 0, 0, 0.04)',
+              boxShadow: '0 2px 6px rgba(0, 0, 0, 0.04)',
               fontSize: '11px',
               fontWeight: 700,
               color: '#0f172a'
@@ -111,6 +113,7 @@ export const HeroSection: React.FC = () => {
           <div className="container hero-band-content">
             {/* Left: WE CRAFT */}
             <div 
+              className="hero-we-craft"
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -121,6 +124,7 @@ export const HeroSection: React.FC = () => {
               }}
             >
               <span 
+                className="word-we"
                 style={{
                   fontFamily: '"Arial Black", Arial, -apple-system, BlinkMacSystemFont, sans-serif',
                   fontSize: 'clamp(44px, 7.8vw, 102px)',
@@ -133,6 +137,7 @@ export const HeroSection: React.FC = () => {
                 WE
               </span>
               <span 
+                className="word-craft"
                 style={{
                   fontFamily: '"Arial Black", Arial, -apple-system, BlinkMacSystemFont, sans-serif',
                   fontSize: 'clamp(44px, 7.8vw, 102px)',
@@ -154,15 +159,18 @@ export const HeroSection: React.FC = () => {
               <div style={{ position: 'absolute', bottom: '35px', left: '-3px', width: '6px', height: '6px', backgroundColor: '#000000', zIndex: 10 }} />
               <div style={{ position: 'absolute', bottom: '35px', right: '-3px', width: '6px', height: '6px', backgroundColor: '#000000', zIndex: 10 }} />
 
-              {/* Dashed Circular Halo enclosing the BT emblem */}
+              {/* Animated Dashed Circular Halo enclosing the BT emblem */}
               <div className="bt-dashed-halo" />
 
-              {/* Exact BT Metallic Circular Emblem */}
-              <BTLogo size={136} />
+              {/* Exact BT Metallic Circular Emblem with float response */}
+              <div className="bt-emblem-float">
+                <BTLogo size={136} />
+              </div>
             </div>
 
             {/* Right: IMPACT + Row of Chevrons inside the band */}
             <div 
+              className="hero-impact-container"
               style={{ 
                 position: 'relative', 
                 display: 'flex', 
@@ -173,6 +181,7 @@ export const HeroSection: React.FC = () => {
               }}
             >
               <span 
+                className="word-impact"
                 style={{
                   fontFamily: '"Arial Black", Arial, -apple-system, BlinkMacSystemFont, sans-serif',
                   fontSize: 'clamp(44px, 7.8vw, 102px)',
@@ -187,7 +196,7 @@ export const HeroSection: React.FC = () => {
                 IMPACT
               </span>
 
-              {/* Chevrons inside the band pointing LEFT (< < < < < < < < <) */}
+              {/* Chevrons inside the band pointing LEFT with animated wave (< < < < < < < < <) */}
               <div 
                 style={{
                   position: 'absolute',
@@ -200,16 +209,18 @@ export const HeroSection: React.FC = () => {
                 }}
               >
                 {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-                  <PixelChevronLeft key={i} color={i === 6 ? '#000000' : '#cbd5e1'} />
+                  <div key={i} className="chevron-pulse-item" style={{ animationDelay: `${(8 - i) * 160}ms` }}>
+                    <PixelChevronLeft color={i === 6 ? '#000000' : '#cbd5e1'} />
+                  </div>
                 ))}
               </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Chevrons Row on the left (pointing RIGHT: > > > > > > > > > > >) */}
+        {/* Bottom Chevrons Row on the left with animated wave (pointing RIGHT: > > > > > > > > > > >) */}
         <div 
-          className="container"
+          className="container hero-bottom-chevrons"
           style={{
             display: 'flex',
             justifyContent: 'flex-start',
@@ -222,12 +233,15 @@ export const HeroSection: React.FC = () => {
           }}
         >
           {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
-            <PixelChevronRight key={i} color={i === 3 ? '#000000' : '#cbd5e1'} />
+            <div key={i} className="chevron-pulse-item" style={{ animationDelay: `${i * 140}ms` }}>
+              <PixelChevronRight color={i === 3 ? '#000000' : '#cbd5e1'} />
+            </div>
           ))}
         </div>
 
         {/* Subtitle text */}
         <div 
+          className="hero-subtitle-box"
           style={{
             textAlign: 'center',
             marginBottom: '28px',
@@ -243,6 +257,7 @@ export const HeroSection: React.FC = () => {
 
         {/* CTA Buttons */}
         <div 
+          className="hero-cta-buttons"
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -267,13 +282,13 @@ export const HeroSection: React.FC = () => {
               fontWeight: 600,
               border: '1px solid #e2e8f0',
               boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
-              transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
+              transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)'
             }}
           >
             Explore our vision
           </a>
 
-          {/* Get in touch with dotted matrix icon and glossy pill container */}
+          {/* Get in touch with dotted matrix icon, glossy pill, and neon rim glow */}
           <button
             onClick={() => setModalOpen(true)}
             className="btn-touch"
@@ -290,7 +305,9 @@ export const HeroSection: React.FC = () => {
               border: '1px solid #33353e',
               boxShadow: '0 10px 24px rgba(0, 0, 0, 0.4)',
               cursor: 'pointer',
-              transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
+              transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
+              position: 'relative',
+              overflow: 'hidden'
             }}
           >
             {/* Light Inset Badge with Dotted Constellation Arrow */}
@@ -306,11 +323,11 @@ export const HeroSection: React.FC = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                transition: 'transform 0.2s ease'
+                transition: 'transform 0.25s ease'
               }}
             >
               {/* Dotted Arrow matching scratch_buttons.png */}
-              <svg className="touch-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ transition: 'transform 0.2s ease' }}>
+              <svg className="touch-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ transition: 'transform 0.25s ease' }}>
                 <circle cx="2.5" cy="3.5" r="1.1" fill="#475569" />
                 <circle cx="5.5" cy="3.5" r="1.1" fill="#475569" />
                 <circle cx="5.5" cy="6.5" r="1.1" fill="#475569" />
@@ -330,6 +347,81 @@ export const HeroSection: React.FC = () => {
       <StartProjectModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
 
       <style jsx>{`
+        /* Hero Load Choreography */
+        .hero-ai-tag-wrapper {
+          text-align: center;
+          padding-top: 42px;
+          padding-bottom: 68px;
+          position: relative;
+          z-index: 5;
+          animation: dropTag 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        .hero-we-craft {
+          animation: slideFromLeft 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+        }
+
+        .hero-impact-container {
+          animation: slideFromRight 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+        }
+
+        .center-bt-card {
+          position: relative;
+          width: clamp(170px, 18vw, 215px);
+          height: clamp(170px, 18vw, 215px);
+          background-color: #ffffff;
+          border-radius: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 12px 36px rgba(0, 0, 0, 0.06);
+          border: 1px dashed #cbd5e1;
+          flex-shrink: 0;
+          z-index: 5;
+          animation: popCenter 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+          transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.3s ease;
+        }
+
+        .center-bt-card:hover {
+          transform: translateY(-5px) scale(1.02);
+          box-shadow: 0 24px 54px rgba(0, 0, 0, 0.12);
+          border-color: #94a3b8;
+        }
+
+        /* Rotating Orbit Halo */
+        .bt-dashed-halo {
+          position: absolute;
+          width: clamp(130px, 14vw, 172px);
+          height: clamp(130px, 14vw, 172px);
+          border-radius: 50%;
+          border: 1px dashed #cbd5e1;
+          pointer-events: none;
+          animation: rotateOrbit 36s linear infinite;
+          transition: border-color 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .center-bt-card:hover .bt-dashed-halo {
+          border-color: #475569;
+          box-shadow: 0 0 18px rgba(15, 23, 42, 0.08);
+          animation-duration: 20s;
+        }
+
+        .bt-emblem-float {
+          transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .center-bt-card:hover .bt-emblem-float {
+          transform: scale(1.05);
+        }
+
+        .hero-subtitle-box {
+          animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+        }
+
+        .hero-cta-buttons {
+          animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+        }
+
         .hero-band-wrapper {
           border-top: 1px dashed #cbd5e1;
           border-bottom: 1px dashed #cbd5e1;
@@ -348,45 +440,110 @@ export const HeroSection: React.FC = () => {
           height: 100%;
         }
 
-        .center-bt-card {
-          position: relative;
-          width: clamp(170px, 18vw, 215px);
-          height: clamp(170px, 18vw, 215px);
-          background-color: #ffffff;
-          border-radius: 40px;
+        /* Travelling Pulse on Chevrons */
+        .chevron-pulse-item {
           display: flex;
           align-items: center;
           justify-content: center;
-          box-shadow: 0 12px 36px rgba(0, 0, 0, 0.06);
-          border: 1px dashed #cbd5e1;
-          flex-shrink: 0;
-          z-index: 5;
-          transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+          animation: chevronGlow 2.8s ease-in-out infinite;
         }
 
-        .center-bt-card:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 22px 50px rgba(0, 0, 0, 0.1);
+        @keyframes chevronGlow {
+          0%, 100% {
+            opacity: 0.4;
+            transform: scale(1);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.15);
+          }
         }
 
-        .bt-dashed-halo {
-          position: absolute;
-          width: clamp(130px, 14vw, 172px);
-          height: clamp(130px, 14vw, 172px);
-          border-radius: 50%;
-          border: 1px dashed #cbd5e1;
-          pointer-events: none;
-          transition: transform 0.35s ease, border-color 0.35s ease;
+        @keyframes rotateOrbit {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
         }
 
-        .center-bt-card:hover .bt-dashed-halo {
-          transform: scale(1.03);
-          border-color: #94a3b8;
+        @keyframes dropTag {
+          from {
+            opacity: 0;
+            transform: translateY(-16px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
 
+        @keyframes slideFromLeft {
+          from {
+            opacity: 0;
+            transform: translateX(-32px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes slideFromRight {
+          from {
+            opacity: 0;
+            transform: translateX(32px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        @keyframes popCenter {
+          from {
+            opacity: 0;
+            transform: scale(0.92);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(18px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        /* Twinkle on AI Sparkle */
+        .ai-sparkle {
+          animation: twinkleSparkle 2.6s ease-in-out infinite;
+        }
+
+        @keyframes twinkleSparkle {
+          0%, 100% {
+            transform: scale(1) rotate(0deg);
+            opacity: 0.9;
+          }
+          50% {
+            transform: scale(1.28) rotate(30deg);
+            opacity: 1;
+            color: #0284c7;
+          }
+        }
+
+        /* Interactive Buttons */
         .btn-explore:hover {
           transform: translateY(-2px);
-          box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08) !important;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08) !important;
           border-color: #cbd5e1 !important;
         }
 
@@ -396,11 +553,16 @@ export const HeroSection: React.FC = () => {
 
         .btn-touch:hover {
           transform: translateY(-2px);
-          box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5) !important;
+          box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 12px rgba(163, 230, 53, 0.35) !important;
+          border-color: #4b5162 !important;
         }
 
         .btn-touch:hover .touch-arrow {
-          transform: translateX(2px);
+          transform: translateX(3px);
+        }
+
+        .btn-touch:hover .touch-badge {
+          transform: scale(1.06);
         }
 
         .btn-touch:active {
@@ -413,13 +575,8 @@ export const HeroSection: React.FC = () => {
 
         :global(.ai-badge:hover) {
           transform: translateY(-2px);
-          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08) !important;
+          box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08) !important;
           border-color: #cbd5e1 !important;
-        }
-
-        :global(.ai-badge:hover .ai-sparkle) {
-          transform: rotate(45deg) scale(1.15);
-          transition: transform 0.3s ease;
         }
       `}</style>
     </section>
