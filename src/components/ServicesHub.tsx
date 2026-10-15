@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { BTLogo } from './BTLogo';
 import { Code2, Palette, BrainCircuit, Cloud, Kanban, Users } from 'lucide-react';
+import { ScrollReveal } from './ScrollReveal';
 
 interface ServiceItem {
   id: string;
@@ -60,43 +61,49 @@ export const ServicesHub: React.FC = () => {
     <section id="services" style={{ padding: '90px 0 100px', backgroundColor: '#ffffff', position: 'relative' }}>
       <div className="container">
         {/* Section Pill Badge */}
-        <div style={{ textAlign: 'center', marginBottom: '16px' }}>
-          <div 
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              padding: '5px 14px',
-              borderRadius: '999px',
-              backgroundColor: '#f1f2f5',
-              fontSize: '11px',
-              fontWeight: 600,
-              color: '#334155',
-              border: '1px solid #e2e8f0'
-            }}
-          >
-            <span style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: '#0f172a' }} />
-            <span>SERVICES</span>
+        <ScrollReveal delay={50} yOffset={16}>
+          <div style={{ textAlign: 'center', marginBottom: '16px' }}>
+            <div 
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '6px 16px',
+                borderRadius: '999px',
+                backgroundColor: '#ffffff',
+                fontSize: '11.5px',
+                fontWeight: 700,
+                color: '#0f172a',
+                border: '1px solid #e2e8f0',
+                boxShadow: '0 2px 6px rgba(0, 0, 0, 0.04)'
+              }}
+            >
+              <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#0f172a', display: 'inline-block' }} />
+              <span>Services</span>
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
 
         {/* Section Heading */}
-        <h2 
-          style={{ 
-            fontFamily: 'var(--font-heading)',
-            fontSize: 'clamp(32px, 4.5vw, 48px)', 
-            fontWeight: 800, 
-            color: '#0a0a0c',
-            letterSpacing: '-0.02em',
-            textAlign: 'center',
-            marginBottom: '64px'
-          }}
-        >
-          What We Provide
-        </h2>
+        <ScrollReveal delay={120} yOffset={20}>
+          <h2 
+            style={{ 
+              fontFamily: 'var(--font-heading)',
+              fontSize: 'clamp(32px, 4.5vw, 48px)', 
+              fontWeight: 800, 
+              color: '#0a0a0c',
+              letterSpacing: '-0.02em',
+              textAlign: 'center',
+              marginBottom: '64px'
+            }}
+          >
+            What We Provide
+          </h2>
+        </ScrollReveal>
 
         {/* Hub Diagram Grid */}
-        <div className="services-hub-wrapper">
+        <ScrollReveal delay={200} duration={850} yOffset={32}>
+          <div className="services-hub-wrapper">
           {/* Left Column (3 Cards) */}
           <div className="services-column">
             {leftServices.map((service) => (
@@ -188,6 +195,7 @@ export const ServicesHub: React.FC = () => {
             ))}
           </div>
         </div>
+      </ScrollReveal>
       </div>
 
       <style jsx>{`

@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { BTLogo } from './BTLogo';
 import { StartProjectModal } from './StartProjectModal';
 import { ArrowRight, Sparkles } from 'lucide-react';
+import { ScrollReveal } from './ScrollReveal';
 
 export const AiSystemCta: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -23,73 +24,77 @@ export const AiSystemCta: React.FC = () => {
       >
         <div className="container" style={{ position: 'relative' }}>
           {/* Top Indicator Chevrons */}
-          <div 
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              marginBottom: '32px',
-              padding: '0 10px'
-            }}
-          >
-            {/* Left Chevron Cluster */}
-            <div style={{ display: 'flex', gap: '8px', color: '#94a3b8' }}>
-              <ChevronCluster direction="right" />
-              <ChevronCluster direction="right" />
-              <ChevronCluster direction="right" />
-              <ChevronCluster direction="right" />
-            </div>
-
-            {/* Right Chevron Cluster */}
-            <div style={{ display: 'flex', gap: '8px', color: '#94a3b8' }}>
-              <ChevronCluster direction="left" />
-              <ChevronCluster direction="left" />
-              <ChevronCluster direction="left" />
-              <ChevronCluster direction="left" />
-            </div>
-          </div>
-
-          {/* Main Giant Headline */}
-          <div 
-            style={{
-              textAlign: 'center',
-              cursor: 'pointer',
-              userSelect: 'none'
-            }}
-            onClick={() => setModalOpen(true)}
-          >
-            <h2 
-              style={{
-                fontFamily: 'var(--font-heading)',
-                fontSize: 'clamp(42px, 7.5vw, 96px)',
-                fontWeight: 900,
-                color: '#0a0a0c',
-                letterSpacing: '-0.04em',
-                lineHeight: 1.05,
-                textTransform: 'uppercase',
-                margin: 0
-              }}
-            >
-              LET’S START <br />
-              YOUR AI SYSTEM
-            </h2>
-
-            {/* Center BT Logo Badge */}
+          <ScrollReveal delay={40} yOffset={14}>
             <div 
               style={{
-                display: 'inline-flex',
+                display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
-                marginTop: '36px',
-                marginBottom: '40px',
-                transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
+                justifyContent: 'space-between',
+                marginBottom: '32px',
+                padding: '0 10px'
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.12) rotate(4deg)')}
-              onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1) rotate(0deg)')}
             >
-              <BTLogo size={96} />
+              {/* Left Chevron Cluster */}
+              <div style={{ display: 'flex', gap: '8px', color: '#94a3b8' }}>
+                <ChevronCluster direction="right" />
+                <ChevronCluster direction="right" />
+                <ChevronCluster direction="right" />
+                <ChevronCluster direction="right" />
+              </div>
+
+              {/* Right Chevron Cluster */}
+              <div style={{ display: 'flex', gap: '8px', color: '#94a3b8' }}>
+                <ChevronCluster direction="left" />
+                <ChevronCluster direction="left" />
+                <ChevronCluster direction="left" />
+                <ChevronCluster direction="left" />
+              </div>
             </div>
-          </div>
+          </ScrollReveal>
+
+          {/* Main Giant Headline */}
+          <ScrollReveal delay={120} duration={850} yOffset={28}>
+            <div 
+              style={{
+                textAlign: 'center',
+                cursor: 'pointer',
+                userSelect: 'none'
+              }}
+              onClick={() => setModalOpen(true)}
+            >
+              <h2 
+                style={{
+                  fontFamily: 'var(--font-heading)',
+                  fontSize: 'clamp(42px, 7.5vw, 96px)',
+                  fontWeight: 900,
+                  color: '#0a0a0c',
+                  letterSpacing: '-0.04em',
+                  lineHeight: 1.05,
+                  textTransform: 'uppercase',
+                  margin: 0
+                }}
+              >
+                LET’S START <br />
+                YOUR AI SYSTEM
+              </h2>
+
+              {/* Center BT Logo Badge */}
+              <div 
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginTop: '36px',
+                  marginBottom: '40px',
+                  transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.12) rotate(4deg)')}
+                onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1) rotate(0deg)')}
+              >
+                <BTLogo size={96} />
+              </div>
+            </div>
+          </ScrollReveal>
 
           {/* Bottom Left & Right Technical Markers */}
           <div 

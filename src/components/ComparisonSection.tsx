@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { BTLogo } from './BTLogo';
 import { Check, X } from 'lucide-react';
 import { StartProjectModal } from './StartProjectModal';
+import { ScrollReveal } from './ScrollReveal';
 
 export const ComparisonSection: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -28,43 +29,49 @@ export const ComparisonSection: React.FC = () => {
     <section style={{ padding: '90px 0 100px', backgroundColor: '#fafbfc', borderBottom: '1px solid #eeeff2' }}>
       <div className="container">
         {/* Section Pill Badge */}
-        <div style={{ textAlign: 'center', marginBottom: '16px' }}>
-          <div 
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              padding: '5px 14px',
-              borderRadius: '999px',
-              backgroundColor: '#f1f2f5',
-              fontSize: '11px',
-              fontWeight: 600,
-              color: '#334155',
-              border: '1px solid #e2e8f0'
-            }}
-          >
-            <span style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: '#0f172a' }} />
-            <span>COMPARISON</span>
+        <ScrollReveal delay={50} yOffset={16}>
+          <div style={{ textAlign: 'center', marginBottom: '16px' }}>
+            <div 
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '6px 16px',
+                borderRadius: '999px',
+                backgroundColor: '#ffffff',
+                fontSize: '11.5px',
+                fontWeight: 700,
+                color: '#0f172a',
+                border: '1px solid #e2e8f0',
+                boxShadow: '0 2px 6px rgba(0, 0, 0, 0.04)'
+              }}
+            >
+              <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#0f172a', display: 'inline-block' }} />
+              <span>Comparison</span>
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
 
         {/* Heading */}
-        <h2 
-          style={{ 
-            fontFamily: 'var(--font-heading)',
-            fontSize: 'clamp(32px, 4.5vw, 48px)', 
-            fontWeight: 800, 
-            color: '#0a0a0c',
-            letterSpacing: '-0.02em',
-            textAlign: 'center',
-            marginBottom: '48px'
-          }}
-        >
-          Why Should You Choose Us
-        </h2>
+        <ScrollReveal delay={120} yOffset={20}>
+          <h2 
+            style={{ 
+              fontFamily: 'var(--font-heading)',
+              fontSize: 'clamp(32px, 4.5vw, 48px)', 
+              fontWeight: 800, 
+              color: '#0a0a0c',
+              letterSpacing: '-0.02em',
+              textAlign: 'center',
+              marginBottom: '48px'
+            }}
+          >
+            Why Should You Choose Us
+          </h2>
+        </ScrollReveal>
 
         {/* Side-by-side comparison cards */}
-        <div className="comparison-cards-wrapper">
+        <ScrollReveal delay={200} duration={850} yOffset={32}>
+          <div className="comparison-cards-wrapper">
           {/* Card 1: Other Agencies */}
           <div className="compare-card compare-agency">
             <h3 className="agency-heading">Other Agencies</h3>
@@ -97,17 +104,20 @@ export const ComparisonSection: React.FC = () => {
               ))}
             </ul>
           </div>
-        </div>
+          </div>
+        </ScrollReveal>
 
         {/* Action Button: Review */}
-        <div style={{ textAlign: 'center', marginTop: '48px' }}>
-          <button 
-            onClick={() => setModalOpen(true)}
-            className="btn-metallic-review"
-          >
-            Review
-          </button>
-        </div>
+        <ScrollReveal delay={280} yOffset={16}>
+          <div style={{ textAlign: 'center', marginTop: '48px' }}>
+            <button 
+              onClick={() => setModalOpen(true)}
+              className="btn-metallic-review"
+            >
+              Review
+            </button>
+          </div>
+        </ScrollReveal>
       </div>
 
       <StartProjectModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />

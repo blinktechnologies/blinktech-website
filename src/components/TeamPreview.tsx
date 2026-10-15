@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
+import { ScrollReveal } from './ScrollReveal';
 
 interface TeamMember {
   id: string;
@@ -61,43 +62,49 @@ export const TeamPreview: React.FC = () => {
     <section id="teams" style={{ padding: '90px 0 100px', backgroundColor: '#ffffff', borderBottom: '1px solid #eeeff2' }}>
       <div className="container">
         {/* Section Pill Badge */}
-        <div style={{ textAlign: 'center', marginBottom: '16px' }}>
-          <div 
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              padding: '5px 14px',
-              borderRadius: '999px',
-              backgroundColor: '#f1f2f5',
-              fontSize: '11px',
-              fontWeight: 600,
-              color: '#334155',
-              border: '1px solid #e2e8f0'
-            }}
-          >
-            <span style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: '#0f172a' }} />
-            <span>OUR TEAM</span>
+        <ScrollReveal delay={50} yOffset={16}>
+          <div style={{ textAlign: 'center', marginBottom: '16px' }}>
+            <div 
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '6px 16px',
+                borderRadius: '999px',
+                backgroundColor: '#ffffff',
+                fontSize: '11.5px',
+                fontWeight: 700,
+                color: '#0f172a',
+                border: '1px solid #e2e8f0',
+                boxShadow: '0 2px 6px rgba(0, 0, 0, 0.04)'
+              }}
+            >
+              <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#0f172a', display: 'inline-block' }} />
+              <span>Our Team</span>
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
 
         {/* Section Heading */}
-        <h2 
-          style={{ 
-            fontFamily: 'var(--font-heading)',
-            fontSize: 'clamp(32px, 4.5vw, 48px)', 
-            fontWeight: 800, 
-            color: '#0a0a0c',
-            letterSpacing: '-0.02em',
-            textAlign: 'center',
-            marginBottom: '48px'
-          }}
-        >
-          The Minds Behind the Work
-        </h2>
+        <ScrollReveal delay={120} yOffset={20}>
+          <h2 
+            style={{ 
+              fontFamily: 'var(--font-heading)',
+              fontSize: 'clamp(32px, 4.5vw, 48px)', 
+              fontWeight: 800, 
+              color: '#0a0a0c',
+              letterSpacing: '-0.02em',
+              textAlign: 'center',
+              marginBottom: '48px'
+            }}
+          >
+            The Minds Behind the Work
+          </h2>
+        </ScrollReveal>
 
         {/* 8-Card Grid (4 per row on desktop) */}
-        <div className="team-cards-grid">
+        <ScrollReveal delay={200} duration={850} yOffset={32}>
+          <div className="team-cards-grid">
           {members.map((member) => (
             <div key={member.id} className="team-card">
               {/* Corner tech ticks */}
@@ -140,7 +147,8 @@ export const TeamPreview: React.FC = () => {
               </div>
             </div>
           </Link>
-        </div>
+          </div>
+        </ScrollReveal>
       </div>
 
       <style jsx>{`
