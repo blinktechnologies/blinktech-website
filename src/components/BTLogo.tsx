@@ -37,10 +37,10 @@ export const BTLogo: React.FC<BTLogoProps> = ({ size = 72, className = '', withT
         <div style={{ display: 'inline-flex', alignItems: 'flex-start', userSelect: 'none', position: 'relative' }}>
           <span 
             style={{ 
-              fontFamily: 'Arial, "Arial Black", -apple-system, BlinkMacSystemFont, sans-serif', 
-              fontWeight: 700, 
-              fontSize: '21px', 
-              letterSpacing: '-0.2px',
+              fontFamily: "'Urbanist', sans-serif", 
+              fontWeight: 800, 
+              fontSize: '22px', 
+              letterSpacing: '-0.3px',
               display: 'inline-flex',
               alignItems: 'baseline'
             }}
@@ -50,8 +50,8 @@ export const BTLogo: React.FC<BTLogoProps> = ({ size = 72, className = '', withT
           </span>
           <span 
             style={{ 
-              fontFamily: 'Arial, sans-serif',
-              fontSize: '9.5px', 
+              fontFamily: "'Urbanist', sans-serif",
+              fontSize: '10px', 
               fontWeight: 700, 
               color: '#64748b', 
               marginLeft: '2px',
@@ -72,10 +72,10 @@ export const BlinkTechTextLogo: React.FC<{ theme?: 'light' | 'dark' }> = ({ them
     <div style={{ display: 'inline-flex', alignItems: 'flex-start', userSelect: 'none', position: 'relative' }}>
       <span 
         style={{ 
-          fontFamily: 'Arial, "Arial Black", -apple-system, BlinkMacSystemFont, sans-serif', 
-          fontWeight: 700, 
-          fontSize: '21px', 
-          letterSpacing: '-0.2px',
+          fontFamily: "'Urbanist', sans-serif", 
+          fontWeight: 800, 
+          fontSize: '22px', 
+          letterSpacing: '-0.3px',
           display: 'inline-flex',
           alignItems: 'baseline'
         }}
@@ -85,8 +85,8 @@ export const BlinkTechTextLogo: React.FC<{ theme?: 'light' | 'dark' }> = ({ them
       </span>
       <span 
         style={{ 
-          fontFamily: 'Arial, sans-serif',
-          fontSize: '9.5px', 
+          fontFamily: "'Urbanist', sans-serif",
+          fontSize: '10px', 
           fontWeight: 700, 
           color: isLight ? '#64748b' : '#94a3b8', 
           marginLeft: '2px',

@@ -14,17 +14,17 @@ export const Navbar: React.FC = () => {
 
   const navLinks = [
     { label: 'HOME', href: '/' },
-    { label: 'BLOGS', href: '/news' },
-    { label: 'SERVICES', href: '/#services' },
-    { label: 'PROJECTS', href: '/#projects' },
+    { label: 'ABOUT US', href: '/#about' },
+    { label: 'SERVICES', href: '/services' },
+    { label: 'PROJECTS', href: '/projects' },
     { label: 'TEAMS', href: '/teams' },
     { label: 'CONTACT', href: '/contact' }
   ];
 
   const isActive = (href: string) => {
     if (href === '/') return pathname === '/';
-    if (href.startsWith('/#')) return false;
-    return pathname.startsWith(href);
+    if (href === '/#about') return pathname === '/about';
+    return pathname === href || pathname.startsWith(href + '/');
   };
 
   return (
@@ -102,25 +102,30 @@ export const Navbar: React.FC = () => {
                   href={link.href}
                   style={{
                     position: 'relative',
-                    fontFamily: "'Outfit', var(--font-heading), sans-serif",
-                    fontSize: '11px',
-                    fontWeight: active ? 700 : 500,
+                    fontFamily: "'Urbanist', sans-serif",
+                    fontSize: '11.5px',
+                    fontWeight: active ? 800 : 500,
                     color: active ? '#0a0a0c' : '#4b5563',
                     letterSpacing: '0.8px',
-                    padding: '8px 2px',
-                    textTransform: 'uppercase'
+                    padding: '8px 4px 12px',
+                    display: 'inline-flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    textTransform: 'uppercase',
+                    transition: 'color 0.2s ease'
                   }}
                 >
-                  {link.label}
+                  <span>{link.label}</span>
                   {active && (
                     <span 
                       style={{
                         position: 'absolute',
-                        bottom: '12px',
+                        bottom: '2px',
                         left: 0,
                         right: 0,
                         height: '2px',
-                        backgroundColor: '#0a0a0c'
+                        backgroundColor: '#0a0a0c',
+                        borderRadius: '9999px'
                       }}
                     />
                   )}
@@ -143,7 +148,7 @@ export const Navbar: React.FC = () => {
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                fontFamily: "'Outfit', var(--font-heading), sans-serif",
+                fontFamily: "'Urbanist', sans-serif",
                 background: 'linear-gradient(180deg, #373942 0%, #1e1f24 50%, #131417 100%)',
                 color: '#ffffff',
                 padding: '9px 24px',

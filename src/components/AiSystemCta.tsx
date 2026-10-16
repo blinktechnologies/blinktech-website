@@ -134,9 +134,16 @@ export const AiSystemCta: React.FC = () => {
 const ChevronCluster: React.FC<{ direction: 'left' | 'right' }> = ({ direction }) => {
   const isRight = direction === 'right';
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style={{ transform: isRight ? 'none' : 'scaleX(-1)' }}>
-      <path d="M7 6L13 12L7 18" stroke="#94a3b8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M13 6L19 12L13 18" stroke="#cbd5e1" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
+    <img 
+      src="/images/Arrow 19.png" 
+      alt="" 
+      style={{ 
+        width: '16px', 
+        height: '16px', 
+        objectFit: 'contain',
+        transform: isRight ? 'scaleX(-1)' : 'none',
+        display: 'inline-block'
+      }} 
+    />
   );
 };
