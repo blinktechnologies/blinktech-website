@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 :root {
   --bg-primary: #ffffff;
@@ -16,8 +16,8 @@
   --border-dark: #26262b;
   --accent-cyan: #00e5ff;
   --accent-blue: #0066ff;
-  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-body: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  --font-heading: 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'Space Grotesk', monospace;
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -26,23 +26,28 @@
   --container-max: 1240px;
 }
 
-* {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 86px;
+  font-family: 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-html, body {
+html, body, button, input, textarea, select, h1, h2, h3, h4, h5, h6, a, p, span, div, label {
+  font-family: 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
   width: 100%;
   min-height: 100vh;
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;

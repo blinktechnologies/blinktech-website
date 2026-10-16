@@ -44,7 +44,7 @@ export const TopTicker: React.FC = () => {
             display: 'flex',
             alignItems: 'center',
             gap: '8px',
-            fontFamily: "'Outfit', var(--font-heading), sans-serif",
+            fontFamily: "'Urbanist', sans-serif",
             fontWeight: 700,
             fontSize: '11px',
             letterSpacing: '1.6px',
@@ -99,23 +99,16 @@ export const TopTicker: React.FC = () => {
 };
 
 const PixelTickerChevron: React.FC<{ direction: 'left' | 'right' }> = ({ direction }) => (
-  <svg width="6" height="8" viewBox="0 0 6 8" fill="none" style={{ opacity: 0.55 }}>
-    {direction === 'right' ? (
-      <>
-        <circle cx="1" cy="1" r="0.8" fill="#ffffff" />
-        <circle cx="3" cy="2.5" r="0.8" fill="#ffffff" />
-        <circle cx="5" cy="4" r="0.8" fill="#ffffff" />
-        <circle cx="3" cy="5.5" r="0.8" fill="#ffffff" />
-        <circle cx="1" cy="7" r="0.8" fill="#ffffff" />
-      </>
-    ) : (
-      <>
-        <circle cx="5" cy="1" r="0.8" fill="#ffffff" />
-        <circle cx="3" cy="2.5" r="0.8" fill="#ffffff" />
-        <circle cx="1" cy="4" r="0.8" fill="#ffffff" />
-        <circle cx="3" cy="5.5" r="0.8" fill="#ffffff" />
-        <circle cx="5" cy="7" r="0.8" fill="#ffffff" />
-      </>
-    )}
-  </svg>
+  <img 
+    src="/images/Arrow 19.png" 
+    alt="" 
+    style={{ 
+      width: '10px', 
+      height: '10px', 
+      objectFit: 'contain',
+      filter: 'brightness(0) invert(1)',
+      opacity: 0.65,
+      transform: direction === 'right' ? 'scaleX(-1)' : 'none' 
+    }} 
+  />
 );
