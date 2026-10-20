@@ -88,21 +88,22 @@ export default function ServicesPage() {
         }}
       >
         <div className="container" style={{ position: 'relative' }}>
-          {/* Pill Badge: • Services */}
-          <div style={{ marginBottom: '14px' }}>
+          {/* Pill Badge: • Services (Elevated tactile pill matching screenshot) */}
+          <div style={{ marginBottom: '22px' }}>
             <div 
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '8px',
-                padding: '6px 18px',
-                borderRadius: '999px',
+                padding: '7px 18px',
+                borderRadius: '8px',
                 backgroundColor: '#ffffff',
-                fontSize: '12px',
+                fontSize: '14px',
                 fontWeight: 700,
+                fontFamily: "'Urbanist', sans-serif",
                 color: '#0f172a',
-                border: '1px solid #e2e8f0',
-                boxShadow: '0 1px 3px rgba(0, 0, 0, 0.04)'
+                border: '3px solid #eceef1ff',
+                boxShadow: '4px 4px 14px 4px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.9)'
               }}
             >
               <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#0f172a', display: 'inline-block' }} />
@@ -123,13 +124,14 @@ export default function ServicesPage() {
           >
             <div style={{ maxWidth: '640px' }}>
               <h1 
+                className="font-urbanist"
                 style={{ 
-                  fontSize: 'clamp(34px, 4.8vw, 56px)', 
-                  fontWeight: 900, 
+                  fontFamily: "var(--font-urbanist), 'Urbanist', sans-serif",
+                  fontSize: '42px', 
                   color: '#0a0a0c',
                   letterSpacing: '-0.025em',
-                  lineHeight: 1.15,
-                  margin: 0
+                  lineHeight: 1.4,
+                  margin: 0,
                 }}
               >
                 Automation infrastructure <br />
@@ -137,25 +139,60 @@ export default function ServicesPage() {
               </h1>
             </div>
 
-            {/* Right Side HUD Chevrons matching Image 3 using Arrow 19.png */}
-            <div className="services-hud-chevrons" style={{ display: 'flex', flexDirection: 'column', gap: '16px', paddingTop: '16px' }}>
-              <div style={{ display: 'flex', gap: '22px', alignItems: 'center' }}>
+            {/* Right Side HUD Chevrons matching Image using Arrow 19.png */}
+            <div 
+              className="services-hud-chevrons" 
+              style={{ 
+                display: 'flex', 
+                flexDirection: 'column', 
+                gap: '24px', 
+                marginLeft: 'auto'
+              }}
+            >
+              {/* Row 1: 11 chevrons, shifted 2 positions right to form echelon alignment */}
+              <div 
+                style={{ 
+                  display: 'flex', 
+                  gap: '16px', 
+                  alignItems: 'center',
+                  marginTop: '-40px',
+                  marginLeft: '112px'
+                }}
+              >
                 {[...Array(10)].map((_, i) => (
                   <img 
-                    key={i} 
+                    key={`r1-${i}`} 
                     src="/images/Arrow 19.png" 
                     alt="<" 
-                    style={{ width: '12px', height: '12px', objectFit: 'contain' }} 
+                    style={{ 
+                      width: '40px', 
+                      height: '40px', 
+                      objectFit: 'contain',
+                      imageRendering: 'pixelated'
+                    }} 
                   />
                 ))}
               </div>
-              <div style={{ display: 'flex', gap: '22px', alignItems: 'center' }}>
-                {[...Array(9)].map((_, i) => (
+
+              {/* Row 2: 11 chevrons, aligned directly with Row 1 columns */}
+              <div 
+                style={{ 
+                  display: 'flex', 
+                  gap: '16px', 
+                  alignItems: 'center' 
+                }}
+              >
+                {[...Array(10)].map((_, i) => (
                   <img 
-                    key={i} 
+                    key={`r2-${i}`} 
                     src="/images/Arrow 19.png" 
                     alt="<" 
-                    style={{ width: '12px', height: '12px', objectFit: 'contain' }} 
+                    style={{ 
+                      width: '40px', 
+                      height: '40px', 
+                      objectFit: 'contain',
+                      imageRendering: 'pixelated'
+                    }} 
                   />
                 ))}
               </div>

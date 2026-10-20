@@ -43,44 +43,65 @@ export const TopTicker: React.FC = () => {
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '8px',
-            fontFamily: "'Urbanist', sans-serif",
+            gap: '4px',
+            fontFamily: "'Space Grotesk', sans-serif",
             fontWeight: 700,
             fontSize: '11px',
-            letterSpacing: '1.6px',
+            letterSpacing: '1.8px',
             color: '#f8fafc'
           }}
         >
-          <span style={{ color: '#d1d5db' }}>WE ARE</span>
-          <span style={{ color: '#ffffff' }}>ONLINE</span>
+          <span 
+            style={{
+              background: 'linear-gradient(90deg, #9ca3af 0%, #d1d5db 45%, #ffffff 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              display: 'inline-block',
+              fontFamily: "'Space Grotesk', sans-serif",
+              fontWeight: 700,
+            }}
+          >
+            WE ARE ONLINE
+          </span>
           <div 
             className="online-dot"
             style={{
-              width: '10px',
-              height: '10px',
+              width: '12px',
+              height: '12px',
               borderRadius: '50%',
-              backgroundColor: '#4ade80',
-              border: '2px solid rgba(255, 255, 255, 0.4)',
-              display: 'inline-block',
-              marginLeft: '2px'
+              backgroundColor: '#374151',
+              border: '1.5px solid rgba(255, 255, 255, 0.5)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginLeft: '4px'
             }}
-          />
+          >
+            <div 
+              style={{
+                width: '4px',
+                height: '4px',
+                borderRadius: '50%',
+                backgroundColor: '#ffffff',
+                boxShadow: '0 0 6px rgba(255, 255, 255, 0.9)'
+              }}
+            />
+          </div>
         </div>
 
         <style jsx>{`
           .online-dot {
-            box-shadow: 0 0 10px rgba(74, 222, 128, 0.8), 0 0 4px #4ade80;
             animation: onlinePulse 2.5s infinite ease-in-out;
           }
 
           @keyframes onlinePulse {
             0%, 100% {
               transform: scale(1);
-              box-shadow: 0 0 8px rgba(74, 222, 128, 0.7), 0 0 3px #4ade80;
+              box-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
             }
             50% {
-              transform: scale(1.15);
-              box-shadow: 0 0 14px rgba(74, 222, 128, 1), 0 0 6px #4ade80;
+              transform: scale(1.1);
+              box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
             }
           }
         `}</style>

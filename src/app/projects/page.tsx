@@ -128,24 +128,16 @@ export default function ProjectsPage() {
               </h1>
             </div>
 
-            {/* Right Side HUD Chevrons matching Image 2 using Arrow 19.png */}
-            <div className="hud-chevron-grid" style={{ display: 'flex', flexDirection: 'column', gap: '14px', paddingTop: '12px' }}>
-              {/* Row 1 */}
-              <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
-                {[...Array(10)].map((_, i) => (
-                  <img key={i} src="/images/Arrow 19.png" alt="<" style={{ width: '12px', height: '12px', objectFit: 'contain' }} />
+            {/* Right Side HUD Chevrons using Arrow 19.png */}
+            <div className="hud-chevron-grid" style={{ display: 'flex', flexDirection: 'column', gap: '24px', paddingTop: '16px', marginLeft: 'auto' }}>
+              <div style={{ display: 'flex', gap: '28px', alignItems: 'center', marginLeft: '96px' }}>
+                {[...Array(11)].map((_, i) => (
+                  <img key={`pr1-${i}`} src="/images/Arrow 19.png" alt="<" style={{ width: '20px', height: '20px', objectFit: 'contain', imageRendering: 'pixelated' }} />
                 ))}
               </div>
-              {/* Row 2 */}
-              <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
-                {[...Array(9)].map((_, i) => (
-                  <img key={i} src="/images/Arrow 19.png" alt="<" style={{ width: '12px', height: '12px', objectFit: 'contain' }} />
-                ))}
-              </div>
-              {/* Row 3 */}
-              <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
-                {[...Array(8)].map((_, i) => (
-                  <img key={i} src="/images/Arrow 19.png" alt="<" style={{ width: '12px', height: '12px', objectFit: 'contain' }} />
+              <div style={{ display: 'flex', gap: '28px', alignItems: 'center' }}>
+                {[...Array(11)].map((_, i) => (
+                  <img key={`pr2-${i}`} src="/images/Arrow 19.png" alt="<" style={{ width: '20px', height: '20px', objectFit: 'contain', imageRendering: 'pixelated' }} />
                 ))}
               </div>
             </div>
