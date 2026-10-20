@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { BlinkTechTextLogo } from './BTLogo';
 import { StartProjectModal } from './StartProjectModal';
+import { TopTicker } from './TopTicker';
 import { Menu, X } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
@@ -39,6 +40,7 @@ export const Navbar: React.FC = () => {
           transition: 'all 0.2s ease'
         }}
       >
+        <TopTicker />
         <div 
           className="container"
           style={{

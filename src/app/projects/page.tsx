@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { StartProjectModal } from '@/components/StartProjectModal';
 
 interface ProjectItem {
@@ -10,7 +10,6 @@ interface ProjectItem {
   title: string;
   description: string;
   image: string;
-  stats?: { label: string; value: string }[];
   tags: string[];
 }
 
@@ -25,11 +24,7 @@ export default function ProjectsPage() {
       title: 'AI Chatbot Website',
       description: 'We developed an AI-powered website with integrated chatbot features focused on automation and seamless user support.',
       image: '/images/Macbook Pro mockup.png',
-      tags: ['Next.js', 'OpenAI', 'Tailwind', 'Real-time WebSocket'],
-      stats: [
-        { label: 'Automation Rate', value: '94%' },
-        { label: 'Response Latency', value: '< 280ms' }
-      ]
+      tags: ['Next.js', 'OpenAI', 'Tailwind', 'Real-time WebSocket']
     },
     {
       id: 'inziralink',
@@ -37,11 +32,7 @@ export default function ProjectsPage() {
       title: 'InziraLink Logistics Platform',
       description: 'End-to-end freight dispatching and digital cargo transit management for East Africa, connecting transporters and enterprise clients.',
       image: '/images/Macbook Pro mockup.png',
-      tags: ['React', 'Node.js', 'PostgreSQL', 'IoT Telematics'],
-      stats: [
-        { label: 'Active Fleets', value: '450+' },
-        { label: 'Transit Efficiency', value: '+38%' }
-      ]
+      tags: ['React', 'Node.js', 'PostgreSQL', 'IoT Telematics']
     },
     {
       id: 'fintech-suite',
@@ -49,11 +40,7 @@ export default function ProjectsPage() {
       title: 'Enterprise Billing & Payment Hub',
       description: 'Multi-currency settlement infrastructure with automated reconciliation and bank-grade ISO compliance for scaling businesses.',
       image: '/images/Macbook Pro mockup.png',
-      tags: ['TypeScript', 'Kubernetes', 'Go', 'Stripe & MoMo'],
-      stats: [
-        { label: 'Monthly Volume', value: '$4.2M' },
-        { label: 'Uptime SLA', value: '99.99%' }
-      ]
+      tags: ['TypeScript', 'Kubernetes', 'Go', 'Stripe & MoMo']
     }
   ];
 
@@ -68,32 +55,36 @@ export default function ProjectsPage() {
   };
 
   return (
-    <div style={{ backgroundColor: '#ffffff', minHeight: '100vh', fontFamily: "'Urbanist', sans-serif" }}>
-      {/* Hero & Project Showcase Section matching Image 2 */}
-      <section 
-        className="tech-grid-bg" 
-        style={{ 
-          padding: '60px 0 100px', 
+    <div style={{ backgroundColor: '#ffffff', minHeight: '100vh', fontFamily: "var(--font-urbanist), 'Urbanist', sans-serif" }}>
+      {/* SECTION 1: Top Hero Header on White Grid Background */}
+      <section
+        style={{
+          padding: '60px 0 50px',
           position: 'relative',
-          overflow: 'hidden'
+          backgroundColor: '#ffffff',
+          backgroundImage: 'linear-gradient(to right, rgba(0, 0, 0, 0.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(0, 0, 0, 0.045) 1px, transparent 1px)',
+          backgroundSize: '37px 37px',
+          backgroundPosition: 'center center',
+          overflow: 'visible'
         }}
       >
-        <div className="container" style={{ position: 'relative' }}>
-          {/* Top Pill Badge */}
-          <div style={{ marginBottom: '14px' }}>
-            <div 
+        <div className="container" style={{ position: 'relative', maxWidth: '1240px', margin: '0 auto', padding: '0 24px' }}>
+          {/* Pill Badge: • Projects (tactile 3D pill matching Services page) */}
+          <div style={{ marginBottom: '18px' }}>
+            <div
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '8px',
-                padding: '6px 18px',
-                borderRadius: '999px',
+                padding: '7px 18px',
+                borderRadius: '8px',
                 backgroundColor: '#ffffff',
-                fontSize: '12px',
+                fontSize: '14px',
                 fontWeight: 700,
+                fontFamily: "var(--font-urbanist), 'Urbanist', sans-serif",
                 color: '#0f172a',
-                border: '1px solid #e2e8f0',
-                boxShadow: '0 1px 3px rgba(0, 0, 0, 0.04)'
+                border: '3px solid #eceef1ff',
+                boxShadow: '4px 4px 14px 4px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.9)'
               }}
             >
               <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#0f172a', display: 'inline-block' }} />
@@ -102,211 +93,252 @@ export default function ProjectsPage() {
           </div>
 
           {/* Heading Row with HUD chevrons */}
-          <div 
-            style={{ 
-              display: 'flex', 
-              alignItems: 'flex-start', 
-              justifyContent: 'space-between', 
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'flex-start',
+              justifyContent: 'space-between',
               gap: '24px',
-              marginBottom: '38px',
-              flexWrap: 'wrap'
+              position: 'relative'
             }}
           >
             <div>
-              <h1 
-                style={{ 
-                  fontSize: 'clamp(42px, 5.8vw, 72px)', 
-                  fontWeight: 900, 
+              <h1
+                style={{
+                  fontFamily: "var(--font-urbanist), 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif",
+                  fontSize: 'clamp(44px, 5.6vw, 72px)',
                   color: '#0a0a0c',
-                  letterSpacing: '-0.03em',
-                  lineHeight: 1.05,
+                  letterSpacing: '-0.035em',
+                  lineHeight: 1.15,
                   margin: 0
                 }}
               >
                 From Idea <br />
                 to Production
               </h1>
+
+              {/* Carousel Buttons (< and >) placed on the left directly under title with clean breathing room */}
+              <div style={{ display: 'flex', gap: '14px', marginTop: '32px', marginBottom: '12px' }}>
+                <button
+                  onClick={handlePrev}
+                  aria-label="Previous project"
+                  className="carousel-circle-btn"
+                >
+                  <ChevronLeft size={20} strokeWidth={2.4} />
+                </button>
+                <button
+                  onClick={handleNext}
+                  aria-label="Next project"
+                  className="carousel-circle-btn"
+                >
+                  <ChevronRight size={20} strokeWidth={2.4} />
+                </button>
+              </div>
             </div>
 
-            {/* Right Side HUD Chevrons using Arrow 19.png */}
-            <div className="hud-chevron-grid" style={{ display: 'flex', flexDirection: 'column', gap: '24px', paddingTop: '16px', marginLeft: 'auto' }}>
-              <div style={{ display: 'flex', gap: '28px', alignItems: 'center', marginLeft: '96px' }}>
-                {[...Array(11)].map((_, i) => (
-                  <img key={`pr1-${i}`} src="/images/Arrow 19.png" alt="<" style={{ width: '20px', height: '20px', objectFit: 'contain', imageRendering: 'pixelated' }} />
+            {/* Right Side HUD Chevrons: 3 Staggered Rows of 10 Chevrons pointing LEFT (<) */}
+            <div
+              className="projects-hud-chevrons"
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '16px',
+                marginLeft: 'auto',
+                paddingTop: '10px'
+              }}
+            >
+              {/* Row 1: 10 chevrons, shifted furthest right */}
+              <div style={{ display: 'flex', gap: '24px', alignItems: 'center', marginLeft: '140px' }}>
+                {[...Array(10)].map((_, i) => (
+                  <ChevronDot key={`p-r1-${i}`} />
                 ))}
               </div>
-              <div style={{ display: 'flex', gap: '28px', alignItems: 'center' }}>
-                {[...Array(11)].map((_, i) => (
-                  <img key={`pr2-${i}`} src="/images/Arrow 19.png" alt="<" style={{ width: '20px', height: '20px', objectFit: 'contain', imageRendering: 'pixelated' }} />
+
+              {/* Row 2: 10 chevrons, middle offset */}
+              <div style={{ display: 'flex', gap: '24px', alignItems: 'center', marginLeft: '70px' }}>
+                {[...Array(10)].map((_, i) => (
+                  <ChevronDot key={`p-r2-${i}`} />
+                ))}
+              </div>
+
+              {/* Row 3: 10 chevrons, aligned on the left */}
+              <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
+                {[...Array(10)].map((_, i) => (
+                  <ChevronDot key={`p-r3-${i}`} />
                 ))}
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Carousel Arrows on the left */}
-          <div style={{ display: 'flex', gap: '14px', marginBottom: '32px' }}>
-            <button
-              onClick={handlePrev}
-              aria-label="Previous project"
-              className="carousel-circle-btn"
-            >
-              <ChevronLeft size={18} />
-            </button>
-            <button
-              onClick={handleNext}
-              aria-label="Next project"
-              className="carousel-circle-btn"
-            >
-              <ChevronRight size={18} />
-            </button>
-          </div>
-
-          {/* Master Split Showcase Card matching Image 2 */}
-          <div 
+      {/* SECTION 2: Full-Width Solid Black Project Showcase Band matching screenshot */}
+      <section
+        style={{
+          backgroundColor: '#000000',
+          width: '100%',
+          position: 'relative',
+          padding: '0',
+          overflow: 'visible',
+          borderTop: '1px solid rgba(255, 255, 255, 0.12)'
+        }}
+      >
+        <div
+          className="container"
+          style={{
+            maxWidth: '1240px',
+            margin: '0 auto',
+            padding: '0 24px',
+            position: 'relative'
+          }}
+        >
+          <div
             className="project-showcase-split"
             style={{
-              backgroundColor: '#000000',
-              borderRadius: '24px',
-              border: '1px solid #1c1d22',
-              overflow: 'hidden',
-              boxShadow: '0 25px 70px rgba(0, 0, 0, 0.45)',
               display: 'grid',
-              gridTemplateColumns: '420px 1fr',
-              alignItems: 'center',
+              gridTemplateColumns: 'minmax(320px, 420px) 1fr',
+              alignItems: 'stretch',
               position: 'relative'
             }}
           >
-            {/* Left Column: Black Card with Glowing BT Emblem, Title, Description */}
-            <div 
+            {/* Left Column: Structured Card with horizontal divider lines & right vertical border */}
+            <div
               style={{
-                padding: '60px 48px',
                 color: '#ffffff',
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'center',
-                height: '100%',
-                borderRight: '1px solid rgba(255, 255, 255, 0.08)',
-                zIndex: 2,
-                backgroundColor: '#000000'
+                borderRight: '1px solid rgba(255, 255, 255, 0.12)',
+                position: 'relative',
+                zIndex: 2
               }}
             >
-              {/* Glowing Circular BT Logo Emblem */}
-              <div 
+              {/* Compartment 1: Centered 3D BT Logo Emblem */}
+              <div
                 style={{
-                  width: '74px',
-                  height: '74px',
-                  borderRadius: '50%',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  marginBottom: '42px',
-                  position: 'relative'
+                  padding: '36px 20px',
+                  borderBottom: '1px solid rgba(255, 255, 255, 0.14)',
+                  width: '100%'
                 }}
               >
-                <div 
+                <div
                   style={{
-                    position: 'absolute',
-                    inset: '-8px',
+                    width: '82px',
+                    height: '82px',
                     borderRadius: '50%',
-                    background: 'radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%)',
-                    filter: 'blur(10px)'
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    position: 'relative',
+                    filter: 'drop-shadow(0 12px 26px rgba(0, 0, 0, 0.8))',
+                    cursor: 'pointer',
+                    transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
                   }}
-                />
-                <img 
-                  src="/images/bt-logo.png" 
-                  alt="BT Logo" 
-                  style={{ width: '100%', height: '100%', objectFit: 'contain', position: 'relative', zIndex: 1 }} 
-                />
+                  onClick={() => setModalOpen(true)}
+                  onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.08)')}
+                  onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                >
+                  <div
+                    style={{
+                      position: 'absolute',
+                      inset: '-6px',
+                      borderRadius: '50%',
+                      background: 'radial-gradient(circle, rgba(255, 255, 255, 0.14) 0%, transparent 70%)',
+                      filter: 'blur(8px)'
+                    }}
+                  />
+                  <img
+                    src="/images/bt-logo.png"
+                    alt="BT Logo"
+                    style={{ width: '100%', height: '100%', objectFit: 'contain', position: 'relative', zIndex: 1 }}
+                  />
+                </div>
               </div>
 
-              {/* Project Title */}
-              <h2 
+              {/* Compartment 2: Title and Description with crisp bottom border */}
+              <div
                 style={{
-                  fontFamily: "'Urbanist', sans-serif",
-                  fontSize: 'clamp(32px, 3.8vw, 46px)',
-                  fontWeight: 900,
-                  color: '#ffffff',
-                  letterSpacing: '-0.02em',
-                  lineHeight: 1.15,
-                  marginBottom: '18px'
+                  padding: '36px 32px 36px 0',
+                  borderBottom: '1px solid rgba(255, 255, 255, 0.14)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center'
                 }}
               >
-                {currentProject.title}
-              </h2>
+                {/* Project Title */}
+                <h2
+                  style={{
+                    fontFamily: "var(--font-urbanist), 'Urbanist', sans-serif",
+                    fontSize: 'clamp(32px, 3.4vw, 44px)',
+                    fontWeight: 900,
+                    color: '#ffffff',
+                    letterSpacing: '-0.025em',
+                    lineHeight: 1.15,
+                    margin: '0 0 16px 0'
+                  }}
+                >
+                  {currentProject.title}
+                </h2>
 
-              {/* Project Description */}
-              <p 
-                style={{
-                  fontSize: '15px',
-                  lineHeight: 1.65,
-                  color: '#94a3b8',
-                  margin: 0,
-                  maxWidth: '380px',
-                  fontWeight: 400
-                }}
-              >
-                {currentProject.description}
-              </p>
+                {/* Project Description */}
+                <p
+                  style={{
+                    fontSize: '15px',
+                    lineHeight: 1.65,
+                    color: '#94a3b8',
+                    margin: 0,
+                    maxWidth: '380px',
+                    fontWeight: 400
+                  }}
+                >
+                  {currentProject.description}
+                </p>
+              </div>
+
+              {/* Compartment 3: Empty lower section aligned with laptop floor */}
+              <div style={{ flex: 1, minHeight: '60px' }} />
             </div>
 
-            {/* Right Column: MacBook Pro Mockup Image matching Image 2 */}
-            <div 
+            {/* Right Column: MacBook Pro Mockup Image protruding upwards into the white grid */}
+            <div
               className="laptop-mockup-wrapper"
               style={{
                 position: 'relative',
                 display: 'flex',
-                alignItems: 'center',
+                alignItems: 'flex-end',
                 justifyContent: 'center',
-                padding: '24px 20px 0',
-                overflow: 'hidden',
-                backgroundColor: '#050608'
+                paddingLeft: '32px',
+                marginTop: '-72px',
+                zIndex: 10
               }}
             >
-              <div 
+              <div
                 style={{
                   width: '100%',
                   maxWidth: '820px',
                   position: 'relative',
-                  transform: 'scale(1.02) translateY(12px)',
-                  transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
+                  filter: 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.95))'
                 }}
               >
-                <img 
-                  src={currentProject.image} 
-                  alt={currentProject.title} 
+                <img
+                  src={currentProject.image}
+                  alt={currentProject.title}
                   style={{
                     width: '100%',
                     height: 'auto',
-                    display: 'block',
-                    filter: 'drop-shadow(0 20px 40px rgba(0, 0, 0, 0.8))'
+                    display: 'block'
                   }}
                 />
               </div>
             </div>
           </div>
-
-          {/* Project Carousel Pagination Dots */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginTop: '36px' }}>
-            {projects.map((proj, idx) => (
-              <button
-                key={proj.id}
-                onClick={() => setCurrentIndex(idx)}
-                style={{
-                  width: currentIndex === idx ? '32px' : '9px',
-                  height: '9px',
-                  borderRadius: '999px',
-                  backgroundColor: currentIndex === idx ? '#0a0a0c' : '#cbd5e1',
-                  border: 'none',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease',
-                  padding: 0
-                }}
-                aria-label={`Go to project ${idx + 1}`}
-              />
-            ))}
-          </div>
         </div>
       </section>
+
+      {/* Clean White Separation Gap before Footer matching screenshot */}
+      <div style={{ height: '38px', backgroundColor: '#ffffff' }} />
 
       <StartProjectModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
 
@@ -316,14 +348,14 @@ export default function ProjectsPage() {
           height: 44px;
           border-radius: 50%;
           background-color: #ffffff;
-          border: 1px solid #e2e8f0;
+          border: 1px solid rgba(0, 0, 0, 0.08);
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #0f172a;
+          color: #334155;
           cursor: pointer;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-          transition: all 0.2s ease;
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+          transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .carousel-circle-btn:hover {
@@ -331,19 +363,21 @@ export default function ProjectsPage() {
           color: #ffffff;
           border-color: #0f172a;
           transform: translateY(-2px);
-          box-shadow: 0 6px 16px rgba(15, 23, 42, 0.15);
+          box-shadow: 0 8px 20px rgba(15, 23, 42, 0.18);
         }
 
-        .start-project-btn:hover {
-          transform: translateY(-1px);
-          box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
+        .carousel-circle-btn:active {
+          transform: translateY(0);
         }
 
         @media (max-width: 980px) {
           .project-showcase-split {
             grid-template-columns: 1fr;
           }
-          .hud-chevron-grid {
+          .laptop-mockup-wrapper {
+            margin-top: 0 !important;
+          }
+          .projects-hud-chevrons {
             display: none;
           }
         }
@@ -351,3 +385,23 @@ export default function ProjectsPage() {
     </div>
   );
 }
+
+const ChevronDot: React.FC = () => (
+  <div
+    style={{
+      width: '40px',
+      height: '40px',
+      backgroundColor: '#1e293b',
+      maskImage: 'url("/images/arrow-tight.png")',
+      WebkitMaskImage: 'url("/images/Arrow 19.png")',
+      maskSize: 'contain',
+      WebkitMaskSize: 'contain',
+      maskRepeat: 'no-repeat',
+      WebkitMaskRepeat: 'no-repeat',
+      maskPosition: 'center',
+      WebkitMaskPosition: 'center',
+      display: 'inline-block',
+      flexShrink: 0
+    }}
+  />
+);

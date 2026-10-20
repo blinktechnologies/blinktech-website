@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Urbanist, Space_Grotesk } from 'next/font/google';
 import './globals.css';
-import { TopTicker } from '@/components/TopTicker';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 
@@ -44,7 +43,6 @@ export default function RootLayout({
         />
       </head>
       <body className={urbanist.className} suppressHydrationWarning>
-        <TopTicker />
         <Navbar />
         <main>{children}</main>
         <Footer />
