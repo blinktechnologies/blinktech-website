@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&family=Space+Grotesk:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 :root {
   --bg-primary: #ffffff;
@@ -16,9 +16,9 @@
   --border-dark: #26262b;
   --accent-cyan: #00e5ff;
   --accent-blue: #0066ff;
-  --font-heading: 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-body: 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'Space Grotesk', monospace;
+  --font-heading: var(--font-urbanist), 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: var(--font-urbanist), 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: var(--font-space-grotesk), 'Space Grotesk', monospace, sans-serif;
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
   --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12);
@@ -30,17 +30,27 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 86px;
-  font-family: 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-html, body, button, input, textarea, select, h1, h2, h3, h4, h5, h6, a, p, span, div, label {
-  font-family: 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif;
+body {
+  font-family: var(--font-urbanist), 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.font-urbanist,
+.font-urbanist * {
+  font-family: var(--font-urbanist), 'Urbanist', sans-serif !important;
+}
+
+.font-space-grotesk, 
+.font-space-grotesk *,
+[data-font="space-grotesk"],
+[data-font="space-grotesk"] * {
+  font-family: var(--font-space-grotesk), 'Space Grotesk', sans-serif !important;
 }
 
 body {

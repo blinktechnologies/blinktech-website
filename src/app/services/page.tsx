@@ -88,21 +88,22 @@ export default function ServicesPage() {
         }}
       >
         <div className="container" style={{ position: 'relative' }}>
-          {/* Pill Badge: • Services */}
-          <div style={{ marginBottom: '14px' }}>
+          {/* Pill Badge: • Services (Elevated tactile pill matching screenshot) */}
+          <div style={{ marginBottom: '22px' }}>
             <div 
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '8px',
-                padding: '6px 18px',
-                borderRadius: '999px',
+                padding: '7px 18px',
+                borderRadius: '8px',
                 backgroundColor: '#ffffff',
-                fontSize: '12px',
+                fontSize: '14px',
                 fontWeight: 700,
+                fontFamily: "'Urbanist', sans-serif",
                 color: '#0f172a',
-                border: '1px solid #e2e8f0',
-                boxShadow: '0 1px 3px rgba(0, 0, 0, 0.04)'
+                border: '3px solid #eceef1ff',
+                boxShadow: '4px 4px 14px 4px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.9)'
               }}
             >
               <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#0f172a', display: 'inline-block' }} />
@@ -123,13 +124,14 @@ export default function ServicesPage() {
           >
             <div style={{ maxWidth: '640px' }}>
               <h1 
+                className="font-urbanist"
                 style={{ 
-                  fontSize: 'clamp(34px, 4.8vw, 56px)', 
-                  fontWeight: 900, 
+                  fontFamily: "var(--font-urbanist), 'Urbanist', sans-serif",
+                  fontSize: '42px', 
                   color: '#0a0a0c',
                   letterSpacing: '-0.025em',
-                  lineHeight: 1.15,
-                  margin: 0
+                  lineHeight: 1.4,
+                  margin: 0,
                 }}
               >
                 Automation infrastructure <br />
@@ -137,25 +139,60 @@ export default function ServicesPage() {
               </h1>
             </div>
 
-            {/* Right Side HUD Chevrons matching Image 3 using Arrow 19.png */}
-            <div className="services-hud-chevrons" style={{ display: 'flex', flexDirection: 'column', gap: '16px', paddingTop: '16px' }}>
-              <div style={{ display: 'flex', gap: '22px', alignItems: 'center' }}>
+            {/* Right Side HUD Chevrons matching Image using Arrow 19.png */}
+            <div 
+              className="services-hud-chevrons" 
+              style={{ 
+                display: 'flex', 
+                flexDirection: 'column', 
+                gap: '24px', 
+                marginLeft: 'auto'
+              }}
+            >
+              {/* Row 1: 11 chevrons, shifted 2 positions right to form echelon alignment */}
+              <div 
+                style={{ 
+                  display: 'flex', 
+                  gap: '16px', 
+                  alignItems: 'center',
+                  marginTop: '-40px',
+                  marginLeft: '112px'
+                }}
+              >
                 {[...Array(10)].map((_, i) => (
                   <img 
-                    key={i} 
+                    key={`r1-${i}`} 
                     src="/images/Arrow 19.png" 
                     alt="<" 
-                    style={{ width: '12px', height: '12px', objectFit: 'contain' }} 
+                    style={{ 
+                      width: '40px', 
+                      height: '40px', 
+                      objectFit: 'contain',
+                      imageRendering: 'pixelated'
+                    }} 
                   />
                 ))}
               </div>
-              <div style={{ display: 'flex', gap: '22px', alignItems: 'center' }}>
-                {[...Array(9)].map((_, i) => (
+
+              {/* Row 2: 11 chevrons, aligned directly with Row 1 columns */}
+              <div 
+                style={{ 
+                  display: 'flex', 
+                  gap: '16px', 
+                  alignItems: 'center' 
+                }}
+              >
+                {[...Array(10)].map((_, i) => (
                   <img 
-                    key={i} 
+                    key={`r2-${i}`} 
                     src="/images/Arrow 19.png" 
                     alt="<" 
-                    style={{ width: '12px', height: '12px', objectFit: 'contain' }} 
+                    style={{ 
+                      width: '40px', 
+                      height: '40px', 
+                      objectFit: 'contain',
+                      imageRendering: 'pixelated'
+                    }} 
                   />
                 ))}
               </div>
@@ -389,41 +426,43 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* SECTION 3: LET'S START YOUR AI SYSTEM matching Image 3 */}
+      {/* SECTION 3: LET'S START YOUR AI SYSTEM matching reference image */}
       <section 
-        className="tech-grid-bg"
         style={{
           borderTop: '1px solid #eeeff2',
           borderBottom: '1px solid #eeeff2',
-          padding: '80px 0 60px',
+          padding: '72px 0 52px',
           position: 'relative',
           overflow: 'hidden',
-          backgroundColor: '#fafbfc'
+          backgroundColor: '#ffffff',
+          backgroundImage: 'linear-gradient(to right, rgba(0, 0, 0, 0.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(0, 0, 0, 0.045) 1px, transparent 1px)',
+          backgroundSize: '37px 37px',
+          backgroundPosition: 'center center'
         }}
       >
-        <div className="container" style={{ position: 'relative' }}>
+        <div className="container" style={{ position: 'relative', maxWidth: '1160px', margin: '0 auto', padding: '0 24px' }}>
           {/* Top Indicator Chevrons */}
           <div 
             style={{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              marginBottom: '32px',
-              padding: '0 10px'
+              marginBottom: '28px',
+              padding: '0 4px'
             }}
           >
-            {/* Left Chevron Cluster */}
-            <div style={{ display: 'flex', gap: '12px' }}>
-              <ChevronCluster direction="right" />
-              <ChevronCluster direction="right" />
-              <ChevronCluster direction="right" />
+            {/* Left Chevron Cluster: 3 chevrons pointing RIGHT with directional fade */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+              <ChevronCluster direction="right" opacity={1} color="#3d5a73" />
+              <ChevronCluster direction="right" opacity={1.0} color="#0d2840" />
+              <ChevronCluster direction="right" opacity={1} color="#8ba4b8" />
             </div>
 
-            {/* Right Chevron Cluster */}
-            <div style={{ display: 'flex', gap: '12px' }}>
-              <ChevronCluster direction="left" />
-              <ChevronCluster direction="left" />
-              <ChevronCluster direction="left" />
+            {/* Right Chevron Cluster: 3 chevrons pointing LEFT with directional fade */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+              <ChevronCluster direction="left" opacity={1} color="#8ba4b8" />
+              <ChevronCluster direction="left" opacity={1.0} color="#0d2840" />
+              <ChevronCluster direction="left" opacity={1} color="#3d5a73" />
             </div>
           </div>
 
@@ -438,41 +477,48 @@ export default function ServicesPage() {
           >
             <h2 
               style={{
-                fontFamily: "'Urbanist', sans-serif",
-                fontSize: 'clamp(44px, 7.8vw, 98px)',
+                fontFamily: "var(--font-urbanist), 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif",
+                fontSize: 'clamp(46px, 7.5vw, 92px)',
                 fontWeight: 900,
-                color: '#0a0a0c',
                 letterSpacing: '-0.04em',
-                lineHeight: 1.05,
+                lineHeight: 1.04,
                 textTransform: 'uppercase',
-                margin: 0
+                margin: 0,
+                backgroundImage: 'linear-gradient(90deg, #585c65 0%, #383b42 36%, #121316 75%, #000000 100%)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                color: 'transparent',
+                display: 'inline-block'
               }}
             >
-              LET&apos;S START <br />
+              LET’S START <br />
               YOUR AI SYSTEM
             </h2>
 
             {/* Center BT Logo Badge */}
             <div 
               style={{
-                display: 'inline-flex',
+                display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginTop: '36px',
-                marginBottom: '40px',
-                transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
+                marginTop: '28px',
+                marginBottom: '48px'
               }}
-              className="center-bt-logo-bounce"
             >
               <div 
                 style={{
-                  width: '92px',
-                  height: '92px',
+                  width: '84px',
+                  height: '84px',
                   borderRadius: '50%',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
+                  filter: 'drop-shadow(0 14px 22px rgba(0, 0, 0, 0.42))',
+                  transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
                 }}
+                onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.08)')}
+                onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
               >
                 <img 
                   src="/images/bt-logo.png" 
@@ -483,31 +529,85 @@ export default function ServicesPage() {
             </div>
           </div>
 
-          {/* Bottom Left & Right Technical Markers */}
+          {/* Bottom Left & Right Technical Markers (Black Solid Badges) */}
           <div 
             style={{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              paddingTop: '24px',
-              borderTop: '1px solid rgba(0, 0, 0, 0.08)',
-              fontSize: '11px',
-              fontWeight: 800,
-              fontFamily: 'monospace',
-              letterSpacing: '1.5px',
-              color: '#1f242d',
+              padding: '0 4px',
               flexWrap: 'wrap',
               gap: '16px'
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{ display: 'inline-block', width: '8px', height: '8px', backgroundColor: '#0a0a0c' }} />
-              <span>INTELLIGENT AUTOMATION</span>
+            {/* Left Badge: INTELLIGENT AUTOMATION */}
+            <div 
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '7px',
+                backgroundColor: '#0a0a0c',
+                color: '#ffffff',
+                padding: '3px 8px',
+                borderRadius: '1px',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.18)'
+              }}
+            >
+              <span 
+                style={{ 
+                  display: 'inline-block', 
+                  width: '7px', 
+                  height: '7px', 
+                  backgroundColor: '#ffffff',
+                  flexShrink: 0 
+                }} 
+              />
+              <span 
+                style={{ 
+                  fontFamily: "var(--font-space-grotesk), 'Space Grotesk', monospace",
+                  fontSize: '9.5px', 
+                  fontWeight: 700, 
+                  letterSpacing: '0.8px',
+                  lineHeight: 1
+                }}
+              >
+                INTELLIGENT AUTOMATION
+              </span>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{ display: 'inline-block', width: '8px', height: '8px', backgroundColor: '#0a0a0c' }} />
-              <span>GLOBAL SUPPORT</span>
+            {/* Right Badge: GLOBAL SUPPORT */}
+            <div 
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '7px',
+                backgroundColor: '#0a0a0c',
+                color: '#ffffff',
+                padding: '3px 8px',
+                borderRadius: '1px',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.18)'
+              }}
+            >
+              <span 
+                style={{ 
+                  display: 'inline-block', 
+                  width: '7px', 
+                  height: '7px', 
+                  backgroundColor: '#ffffff',
+                  flexShrink: 0 
+                }} 
+              />
+              <span 
+                style={{ 
+                  fontFamily: "var(--font-space-grotesk), 'Space Grotesk', monospace",
+                  fontSize: '9.5px', 
+                  fontWeight: 700, 
+                  letterSpacing: '0.8px',
+                  lineHeight: 1
+                }}
+              >
+                GLOBAL SUPPORT
+              </span>
             </div>
           </div>
         </div>
@@ -576,19 +676,37 @@ export default function ServicesPage() {
   );
 }
 
-const ChevronCluster: React.FC<{ direction: 'left' | 'right' }> = ({ direction }) => {
+const ChevronCluster: React.FC<{ 
+  direction: 'left' | 'right'; 
+  opacity?: number; 
+  color?: string; 
+  size?: number 
+}> = ({ 
+  direction, 
+  opacity = 1, 
+  color = '#0d2840', 
+  size = 22
+}) => {
   const isRight = direction === 'right';
   return (
-    <img 
-      src="/images/Arrow 19.png" 
-      alt="" 
-      style={{ 
-        width: '18px', 
-        height: '18px', 
-        objectFit: 'contain',
+    <div
+      style={{
+        width: `${size}px`,
+        height: `${Math.round(size * 1.25)}px`,
+        backgroundColor: color,
+        opacity: opacity,
+        maskImage: 'url("/images/arrow-tight.png")',
+        WebkitMaskImage: 'url("/images/arrow-tight.png")',
+        maskSize: 'contain',
+        WebkitMaskSize: 'contain',
+        maskRepeat: 'no-repeat',
+        WebkitMaskRepeat: 'no-repeat',
+        maskPosition: 'center',
+        WebkitMaskPosition: 'center',
         transform: isRight ? 'scaleX(-1)' : 'none',
-        display: 'inline-block'
-      }} 
+        display: 'inline-block',
+        flexShrink: 0
+      }}
     />
   );
 };
