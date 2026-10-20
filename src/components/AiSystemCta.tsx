@@ -69,7 +69,6 @@ export const AiSystemCta: React.FC = () => {
                   lineHeight: 1.04,
                   textTransform: 'uppercase',
                   backgroundImage: 'linear-gradient(90deg, #585c65 0%, #383b42 36%, #121316 75%, #000000 100%)',
-                  WebkitBackgroundImage: 'linear-gradient(90deg, #585c65 0%, #383b42 36%, #121316 75%, #000000 100%)',
                   WebkitBackgroundClip: 'text',
                   backgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
