@@ -2,12 +2,65 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { ChevronUp } from 'lucide-react';
 
 export const Footer: React.FC = () => {
+  const pathname = usePathname();
+  const isProjectsPage = pathname === '/projects';
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  if (isProjectsPage) {
+    return (
+      <footer 
+        style={{
+          backgroundColor: '#000000',
+          color: '#ffffff',
+          position: 'relative',
+          overflow: 'hidden',
+          borderTop: 'none',
+          fontFamily: "'Urbanist', sans-serif",
+          padding: '16px 0'
+        }}
+      >
+        <div 
+          className="container"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: '16px'
+          }}
+        >
+          {/* Social Links */}
+          <div style={{ display: 'flex', gap: '22px', fontWeight: 500, fontSize: '13px' }}>
+            <a href="https://instagram.com" target="_blank" rel="noreferrer" className="footer-social-link">Instagram</a>
+            <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="footer-social-link">Linkedin</a>
+            <a href="https://dribbble.com" target="_blank" rel="noreferrer" className="footer-social-link">Dribble</a>
+            <a href="https://behance.net" target="_blank" rel="noreferrer" className="footer-social-link">Behance</a>
+          </div>
+
+          {/* Copyright */}
+          <div style={{ textAlign: 'center', fontSize: '12.5px', color: '#9ca3af' }}>
+            © 2026 BlinkTech. All Rights Reserved
+          </div>
+
+          {/* Back to Home Button */}
+          <button 
+            onClick={scrollToTop}
+            className="back-to-home-btn"
+          >
+            <span>Back to Home</span>
+            <ChevronUp size={16} />
+          </button>
+        </div>
+      </footer>
+    );
+  }
 
   return (
     <footer 

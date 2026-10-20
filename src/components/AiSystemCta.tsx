@@ -1,9 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { BTLogo } from './BTLogo';
 import { StartProjectModal } from './StartProjectModal';
-import { ArrowRight, Sparkles } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
 
 export const AiSystemCta: React.FC = () => {
@@ -12,17 +10,19 @@ export const AiSystemCta: React.FC = () => {
   return (
     <>
       <section 
-        className="tech-grid-bg"
         style={{
           borderTop: '1px solid #eeeff2',
           borderBottom: '1px solid #eeeff2',
-          padding: '90px 0 70px',
+          padding: '72px 0 52px',
           position: 'relative',
           overflow: 'hidden',
-          backgroundColor: '#fafbfc'
+          backgroundColor: '#ffffff',
+          backgroundImage: 'linear-gradient(to right, rgba(0, 0, 0, 0.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(0, 0, 0, 0.045) 1px, transparent 1px)',
+          backgroundSize: '37px 37px',
+          backgroundPosition: 'center center'
         }}
       >
-        <div className="container" style={{ position: 'relative' }}>
+        <div className="container" style={{ position: 'relative', maxWidth: '1160px', margin: '0 auto', padding: '0 24px' }}>
           {/* Top Indicator Chevrons */}
           <ScrollReveal delay={40} yOffset={14}>
             <div 
@@ -30,24 +30,22 @@ export const AiSystemCta: React.FC = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                marginBottom: '32px',
-                padding: '0 10px'
+                marginBottom: '28px',
+                padding: '0 4px'
               }}
             >
-              {/* Left Chevron Cluster */}
-              <div style={{ display: 'flex', gap: '8px', color: '#94a3b8' }}>
-                <ChevronCluster direction="right" />
-                <ChevronCluster direction="right" />
-                <ChevronCluster direction="right" />
-                <ChevronCluster direction="right" />
+              {/* Left Chevron Cluster: 3 chevrons pointing RIGHT with directional fade */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <ChevronCluster direction="right" opacity={0.65} color="#3d5a73" />
+                <ChevronCluster direction="right" opacity={1.0} color="#0d2840" />
+                <ChevronCluster direction="right" opacity={0.35} color="#8ba4b8" />
               </div>
 
-              {/* Right Chevron Cluster */}
-              <div style={{ display: 'flex', gap: '8px', color: '#94a3b8' }}>
-                <ChevronCluster direction="left" />
-                <ChevronCluster direction="left" />
-                <ChevronCluster direction="left" />
-                <ChevronCluster direction="left" />
+              {/* Right Chevron Cluster: 3 chevrons pointing LEFT with directional fade */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <ChevronCluster direction="left" opacity={0.35} color="#8ba4b8" />
+                <ChevronCluster direction="left" opacity={1.0} color="#0d2840" />
+                <ChevronCluster direction="left" opacity={0.65} color="#3d5a73" />
               </div>
             </div>
           </ScrollReveal>
@@ -64,14 +62,18 @@ export const AiSystemCta: React.FC = () => {
             >
               <h2 
                 style={{
-                  fontFamily: 'var(--font-heading)',
-                  fontSize: 'clamp(42px, 7.5vw, 96px)',
+                  fontFamily: "var(--font-urbanist), 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif",
+                  fontSize: 'clamp(46px, 7.5vw, 92px)',
                   fontWeight: 900,
-                  color: '#0a0a0c',
                   letterSpacing: '-0.04em',
-                  lineHeight: 1.05,
+                  lineHeight: 1.04,
                   textTransform: 'uppercase',
-                  margin: 0
+                  backgroundImage: 'linear-gradient(90deg, #585c65 0%, #383b42 36%, #121316 75%, #000000 100%)',
+                  WebkitBackgroundClip: 'text',
+                  backgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  color: 'transparent',
+                  display: 'inline-block'
                 }}
               >
                 LET’S START <br />
@@ -81,46 +83,116 @@ export const AiSystemCta: React.FC = () => {
               {/* Center BT Logo Badge */}
               <div 
                 style={{
-                  display: 'inline-flex',
+                  display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  marginTop: '36px',
-                  marginBottom: '40px',
-                  transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
+                  marginTop: '28px',
+                  marginBottom: '48px'
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.12) rotate(4deg)')}
-                onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1) rotate(0deg)')}
               >
-                <BTLogo size={96} />
+                <div 
+                  style={{
+                    width: '84px',
+                    height: '84px',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    filter: 'drop-shadow(0 14px 22px rgba(0, 0, 0, 0.42))',
+                    transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.08)')}
+                  onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                >
+                  <img 
+                    src="/images/bt-logo.png" 
+                    alt="BT Logo" 
+                    style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                  />
+                </div>
               </div>
             </div>
           </ScrollReveal>
 
-          {/* Bottom Left & Right Technical Markers */}
+          {/* Bottom Left & Right Technical Markers (Black Solid Badges) */}
           <div 
             style={{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              paddingTop: '24px',
-              borderTop: '1px solid rgba(0, 0, 0, 0.08)',
-              fontSize: '11px',
-              fontWeight: 800,
-              fontFamily: 'var(--font-mono)',
-              letterSpacing: '1.5px',
-              color: '#1f242d',
+              padding: '0 4px',
               flexWrap: 'wrap',
               gap: '16px'
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{ display: 'inline-block', width: '8px', height: '8px', backgroundColor: '#0a0a0c' }} />
-              <span>INTELLIGENT AUTOMATION</span>
+            {/* Left Badge: INTELLIGENT AUTOMATION */}
+            <div 
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '7px',
+                backgroundColor: '#0a0a0c',
+                color: '#ffffff',
+                padding: '3px 8px',
+                borderRadius: '1px',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.18)'
+              }}
+            >
+              <span 
+                style={{ 
+                  display: 'inline-block', 
+                  width: '7px', 
+                  height: '7px', 
+                  backgroundColor: '#ffffff',
+                  flexShrink: 0 
+                }} 
+              />
+              <span 
+                style={{ 
+                  fontFamily: "var(--font-space-grotesk), 'Space Grotesk', monospace",
+                  fontSize: '9.5px', 
+                  fontWeight: 700, 
+                  letterSpacing: '0.8px',
+                  lineHeight: 1
+                }}
+              >
+                INTELLIGENT AUTOMATION
+              </span>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{ display: 'inline-block', width: '8px', height: '8px', backgroundColor: '#0a0a0c' }} />
-              <span>GLOBAL SUPPORT</span>
+            {/* Right Badge: GLOBAL SUPPORT */}
+            <div 
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '7px',
+                backgroundColor: '#0a0a0c',
+                color: '#ffffff',
+                padding: '3px 8px',
+                borderRadius: '1px',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.18)'
+              }}
+            >
+              <span 
+                style={{ 
+                  display: 'inline-block', 
+                  width: '7px', 
+                  height: '7px', 
+                  backgroundColor: '#ffffff',
+                  flexShrink: 0 
+                }} 
+              />
+              <span 
+                style={{ 
+                  fontFamily: "var(--font-space-grotesk), 'Space Grotesk', monospace",
+                  fontSize: '9.5px', 
+                  fontWeight: 700, 
+                  letterSpacing: '0.8px',
+                  lineHeight: 1
+                }}
+              >
+                GLOBAL SUPPORT
+              </span>
             </div>
           </div>
         </div>
@@ -131,19 +203,37 @@ export const AiSystemCta: React.FC = () => {
   );
 };
 
-const ChevronCluster: React.FC<{ direction: 'left' | 'right' }> = ({ direction }) => {
+const ChevronCluster: React.FC<{ 
+  direction: 'left' | 'right'; 
+  opacity?: number; 
+  color?: string; 
+  size?: number 
+}> = ({ 
+  direction, 
+  opacity = 1, 
+  color = '#0d2840', 
+  size = 22 
+}) => {
   const isRight = direction === 'right';
   return (
-    <img 
-      src="/images/Arrow 19.png" 
-      alt="" 
-      style={{ 
-        width: '16px', 
-        height: '16px', 
-        objectFit: 'contain',
+    <div
+      style={{
+        width: `${size}px`,
+        height: `${Math.round(size * 1.25)}px`,
+        backgroundColor: color,
+        opacity: opacity,
+        maskImage: 'url("/images/arrow-tight.png")',
+        WebkitMaskImage: 'url("/images/arrow-tight.png")',
+        maskSize: 'contain',
+        WebkitMaskSize: 'contain',
+        maskRepeat: 'no-repeat',
+        WebkitMaskRepeat: 'no-repeat',
+        maskPosition: 'center',
+        WebkitMaskPosition: 'center',
         transform: isRight ? 'scaleX(-1)' : 'none',
-        display: 'inline-block'
-      }} 
+        display: 'inline-block',
+        flexShrink: 0
+      }}
     />
   );
 };
