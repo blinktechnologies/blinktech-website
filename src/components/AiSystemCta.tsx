@@ -62,11 +62,11 @@ export const AiSystemCta: React.FC = () => {
             >
               <h2 
                 style={{
-                  fontFamily: "var(--font-urbanist), 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif",
-                  fontSize: 'clamp(46px, 7.5vw, 92px)',
-                  fontWeight: 900,
-                  letterSpacing: '-0.04em',
-                  lineHeight: 1.04,
+                  fontFamily: "'Space Grotesk', var(--font-space-grotesk), sans-serif",
+                  fontSize: 'clamp(54px, 8.8vw, 112px)',
+                  fontWeight: 700,
+                  letterSpacing: '-0.02em',
+                  lineHeight: 1.0,
                   textTransform: 'uppercase',
                   backgroundImage: 'linear-gradient(90deg, #585c65 0%, #383b42 36%, #121316 75%, #000000 100%)',
                   WebkitBackgroundClip: 'text',

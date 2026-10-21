@@ -12,8 +12,12 @@ export const HeroSection: React.FC = () => {
       className="tech-grid-bg"
       style={{
         position: 'relative',
-        paddingTop: '0px',
-        paddingBottom: '44px',
+        minHeight: 'calc(100vh - 86px)',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        paddingTop: '16px',
+        paddingBottom: '36px',
         borderBottom: '1px solid #eeeff2',
         overflow: 'hidden',
         backgroundColor: '#ffffff'
@@ -98,8 +102,10 @@ export const HeroSection: React.FC = () => {
               backgroundColor: '#ffffff', 
               border: '1px solid #e2e8f0',
               boxShadow: '0 2px 6px rgba(0, 0, 0, 0.04)',
-              fontSize: '11px',
-              fontWeight: 700,
+              fontFamily: "'Plus Jakarta Sans', var(--font-plus-jakarta), sans-serif",
+              fontSize: '11.5px',
+              fontWeight: 600,
+              letterSpacing: '0.02em',
               color: '#0f172a'
             }}
           >
@@ -117,7 +123,7 @@ export const HeroSection: React.FC = () => {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: 'clamp(8px, 1.5vw, 16px)',
+                gap: 'clamp(10px, 1.8vw, 20px)',
                 flex: 1,
                 justifyContent: 'flex-end',
                 paddingRight: 'clamp(8px, 2vw, 24px)'
@@ -126,11 +132,11 @@ export const HeroSection: React.FC = () => {
               <span 
                 className="word-we"
                 style={{
-                  fontFamily: '"Arial Black", Arial, -apple-system, BlinkMacSystemFont, sans-serif',
-                  fontSize: 'clamp(44px, 7.8vw, 102px)',
-                  fontWeight: 900,
+                  fontFamily: "'Space Grotesk', var(--font-space-grotesk), sans-serif",
+                  fontSize: 'clamp(42px, 7.5vw, 98px)',
+                  fontWeight: 700,
                   color: '#64748b',
-                  letterSpacing: '-0.04em',
+                  letterSpacing: '0.04em',
                   lineHeight: 1
                 }}
               >
@@ -139,11 +145,11 @@ export const HeroSection: React.FC = () => {
               <span 
                 className="word-craft"
                 style={{
-                  fontFamily: '"Arial Black", Arial, -apple-system, BlinkMacSystemFont, sans-serif',
-                  fontSize: 'clamp(44px, 7.8vw, 102px)',
-                  fontWeight: 900,
+                  fontFamily: "'Space Grotesk', var(--font-space-grotesk), sans-serif",
+                  fontSize: 'clamp(42px, 7.5vw, 98px)',
+                  fontWeight: 700,
                   color: '#000000',
-                  letterSpacing: '-0.04em',
+                  letterSpacing: '0.04em',
                   lineHeight: 1
                 }}
               >
@@ -183,13 +189,11 @@ export const HeroSection: React.FC = () => {
               <span 
                 className="word-impact"
                 style={{
-                  fontFamily: '"Arial Black", Arial, -apple-system, BlinkMacSystemFont, sans-serif',
-                  fontSize: 'clamp(44px, 7.8vw, 102px)',
-                  fontWeight: 900,
-                  background: 'linear-gradient(90deg, #64748b 0%, #334155 35%, #0f172a 75%, #000000 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  letterSpacing: '-0.04em',
+                  fontFamily: "'Space Grotesk', var(--font-space-grotesk), sans-serif",
+                  fontSize: 'clamp(42px, 7.5vw, 98px)',
+                  fontWeight: 700,
+                  color: '#000000',
+                  letterSpacing: '0.04em',
                   lineHeight: 1
                 }}
               >
@@ -209,7 +213,7 @@ export const HeroSection: React.FC = () => {
                 }}
               >
                 {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-                  <div key={i} className="chevron-pulse-item" style={{ animationDelay: `${(8 - i) * 160}ms` }}>
+                  <div key={i} className="chevron-stream-left" style={{ animationDelay: `${(8 - i) * 180}ms` }}>
                     <PixelChevronLeft color={i === 6 ? '#000000' : '#cbd5e1'} />
                   </div>
                 ))}
@@ -233,7 +237,7 @@ export const HeroSection: React.FC = () => {
           }}
         >
           {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
-            <div key={i} className="chevron-pulse-item" style={{ animationDelay: `${i * 140}ms` }}>
+            <div key={i} className="chevron-stream-right" style={{ animationDelay: `${i * 160}ms` }}>
               <PixelChevronRight color={i === 3 ? '#000000' : '#cbd5e1'} />
             </div>
           ))}
@@ -245,10 +249,12 @@ export const HeroSection: React.FC = () => {
           style={{
             textAlign: 'center',
             marginBottom: '28px',
-            fontSize: '12px',
-            lineHeight: 1.5,
-            color: '#1e293b',
-            fontWeight: 500
+            fontFamily: "'Plus Jakarta Sans', var(--font-plus-jakarta), sans-serif",
+            fontSize: '13px',
+            lineHeight: 1.55,
+            color: '#334155',
+            fontWeight: 500,
+            letterSpacing: '-0.01em'
           }}
         >
           <p style={{ margin: 0 }}>Turning ideas into meaningful change.</p>
@@ -278,8 +284,10 @@ export const HeroSection: React.FC = () => {
               color: '#0f172a',
               padding: '10px 24px',
               borderRadius: '8px',
-              fontSize: '12px',
+              fontFamily: "'Plus Jakarta Sans', var(--font-plus-jakarta), sans-serif",
+              fontSize: '12.5px',
               fontWeight: 600,
+              letterSpacing: '0.01em',
               border: '1px solid #e2e8f0',
               boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
               transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)'
@@ -300,8 +308,10 @@ export const HeroSection: React.FC = () => {
               color: '#ffffff',
               padding: '6px 20px 6px 7px',
               borderRadius: '10px',
-              fontSize: '12px',
+              fontFamily: "'Plus Jakarta Sans', var(--font-plus-jakarta), sans-serif",
+              fontSize: '12.5px',
               fontWeight: 600,
+              letterSpacing: '0.01em',
               border: '1px solid #33353e',
               boxShadow: '0 10px 24px rgba(0, 0, 0, 0.4)',
               cursor: 'pointer',
@@ -350,8 +360,8 @@ export const HeroSection: React.FC = () => {
         /* Hero Load Choreography */
         .hero-ai-tag-wrapper {
           text-align: center;
-          padding-top: 42px;
-          padding-bottom: 68px;
+          padding-top: 64px;
+          padding-bottom: 60px;
           position: relative;
           z-index: 5;
           animation: dropTag 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -440,22 +450,48 @@ export const HeroSection: React.FC = () => {
           height: 100%;
         }
 
-        /* Travelling Pulse on Chevrons */
-        .chevron-pulse-item {
+        /* Streaming Animated Chevrons moving into page */
+        .chevron-stream-left {
           display: flex;
           align-items: center;
           justify-content: center;
-          animation: chevronGlow 2.8s ease-in-out infinite;
+          animation: streamLeft 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
         }
 
-        @keyframes chevronGlow {
-          0%, 100% {
-            opacity: 0.4;
-            transform: scale(1);
+        @keyframes streamLeft {
+          0% {
+            opacity: 0.15;
+            transform: translateX(12px) scale(0.92);
           }
-          50% {
+          40%, 60% {
             opacity: 1;
-            transform: scale(1.15);
+            transform: translateX(0px) scale(1.08);
+          }
+          100% {
+            opacity: 0.15;
+            transform: translateX(-12px) scale(0.92);
+          }
+        }
+
+        .chevron-stream-right {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          animation: streamRight 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes streamRight {
+          0% {
+            opacity: 0.15;
+            transform: translateX(-12px) scale(0.92);
+          }
+          40%, 60% {
+            opacity: 1;
+            transform: translateX(0px) scale(1.08);
+          }
+          100% {
+            opacity: 0.15;
+            transform: translateX(12px) scale(0.92);
           }
         }
 
