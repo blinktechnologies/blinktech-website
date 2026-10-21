@@ -2,151 +2,224 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
 
-interface TeamMember {
+interface MemberData {
   id: string;
   name: string;
   role: string;
   image: string;
+  yOffset: number; // Staggering offset in px
 }
 
 export const TeamPreview: React.FC = () => {
-  const members: TeamMember[] = [
+  const membersRow1: MemberData[] = [
     {
       id: 'm-1',
-      name: 'BYIRINGIRO Emmanuel',
-      role: 'FOUNDER & CEO',
-      image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=450&q=80'
+      name: 'BIENVENUE Alliance',
+      role: 'BlinkTech Founder',
+      image: '/images/team/person1_bienvenue.png',
+      yOffset: 0
     },
     {
       id: 'm-2',
-      name: 'BIENVENU ALLIANCE',
-      role: 'TECH LEAD',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=450&q=80'
+      name: 'BYIRINGIRO Emmanuel',
+      role: 'BlinkTech Co-Founder',
+      image: '/images/team/person2_emmanuel.png',
+      yOffset: 24
     },
     {
       id: 'm-3',
-      name: 'JEAN CLAUDE',
-      role: 'SENIOR ARCHITECT',
-      image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=450&q=80'
+      name: 'BYIRINGIRO Samuel',
+      role: 'BlinkTech Co-Founder',
+      image: '/images/team/person3_samuel.png',
+      yOffset: 0
     },
     {
       id: 'm-4',
-      name: 'SARAH NIYONZIMA',
-      role: 'PRODUCT DESIGNER',
-      image: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=450&q=80'
-    },
+      name: 'KANEZA Amandine',
+      role: 'BlinkTech Co-Founder',
+      image: '/images/team/person4_amandine.png',
+      yOffset: 24
+    }
+  ];
+
+  const membersRow2: MemberData[] = [
     {
       id: 'm-5',
-      name: 'ERIC MUGISHA',
-      role: 'FULL STACK DEV',
-      image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=450&q=80'
+      name: 'UMURERWA Bonnette',
+      role: 'Chief Media & Marketing Officer',
+      image: '/images/team/person5_bonnette.png',
+      yOffset: 0
     },
     {
       id: 'm-6',
-      name: 'DAVID MUTANGANA',
-      role: 'AI SPECIALIST',
-      image: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=450&q=80'
+      name: 'ABAYO Moise',
+      role: 'Chief Information Security Officer',
+      image: '/images/team/person6_moise.png',
+      yOffset: 40
     },
     {
       id: 'm-7',
-      name: 'ALICE UMUTONI',
-      role: 'DEVOPS LEAD',
-      image: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=450&q=80'
+      name: 'NIYONKURU Darius',
+      role: 'Chief Financial Officer',
+      image: '/images/team/person7_darius.png',
+      yOffset: 0
     }
   ];
 
   return (
-    <section id="teams" style={{ padding: '90px 0 100px', backgroundColor: '#ffffff', borderBottom: '1px solid #eeeff2' }}>
-      <div className="container">
-        {/* Section Pill Badge */}
-        <ScrollReveal delay={50} yOffset={16}>
-          <div style={{ textAlign: 'center', marginBottom: '16px' }}>
-            <div 
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '6px 16px',
-                borderRadius: '999px',
-                backgroundColor: '#ffffff',
-                fontSize: '11.5px',
-                fontWeight: 700,
-                color: '#0f172a',
-                border: '1px solid #e2e8f0',
-                boxShadow: '0 2px 6px rgba(0, 0, 0, 0.04)'
-              }}
-            >
-              <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#0f172a', display: 'inline-block' }} />
-              <span>Our Team</span>
-            </div>
-          </div>
-        </ScrollReveal>
+    <section 
+      id="teams" 
+      className="team-preview-section"
+      style={{ 
+        padding: '84px 20px 96px', 
+        backgroundColor: '#f3f4f6', 
+        borderTop: '1px solid #e5e7eb',
+        borderBottom: '1px solid #e5e7eb',
+        position: 'relative',
+        overflow: 'hidden'
+      }}
+    >
+      {/* Background Technical Grid Pattern */}
+      <div 
+        className="technical-grid-bg"
+        style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundImage: `
+            linear-gradient(to right, rgba(0, 0, 0, 0.038) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(0, 0, 0, 0.038) 1px, transparent 1px)
+          `,
+          backgroundSize: '25.5px 25.5px',
+          backgroundPosition: 'center top',
+          pointerEvents: 'none',
+          zIndex: 0
+        }}
+      />
 
-        {/* Section Heading */}
-        <ScrollReveal delay={120} yOffset={20}>
+      <div 
+        className="container" 
+        style={{ 
+          position: 'relative', 
+          zIndex: 2, 
+          maxWidth: '1060px', 
+          margin: '0 auto' 
+        }}
+      >
+        {/* Decorative White Pixel Blocks behind cards */}
+        <div className="bg-pixel-decor tl-pixel" />
+        <div className="bg-pixel-decor tr-pixel" />
+        <div className="bg-pixel-decor ml-pixel" />
+        <div className="bg-pixel-decor mr-pixel" />
+        <div className="bg-pixel-decor b-pixel" />
+
+        {/* Section Heading matching screenshot */}
+        <ScrollReveal delay={80} yOffset={20}>
           <h2 
+            className="team-main-heading"
             style={{ 
-              fontFamily: 'var(--font-heading)',
-              fontSize: 'clamp(32px, 4.5vw, 48px)', 
+              fontFamily: "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
+              fontSize: 'clamp(36px, 4.6vw, 48px)', 
               fontWeight: 800, 
               color: '#0a0a0c',
-              letterSpacing: '-0.02em',
+              letterSpacing: '-0.025em',
+              lineHeight: 1.14,
               textAlign: 'center',
-              marginBottom: '48px'
+              marginBottom: '54px'
             }}
           >
-            The Minds Behind the Work
+            The Minds<br />Behind the Work
           </h2>
         </ScrollReveal>
 
         {/* 8-Card Grid (4 per row on desktop) */}
-        <ScrollReveal delay={200} duration={850} yOffset={32}>
+        <ScrollReveal delay={160} duration={800} yOffset={24}>
           <div className="team-cards-grid">
-          {members.map((member) => (
-            <div key={member.id} className="team-card">
-              {/* Corner tech ticks */}
-              <div className="card-tick tick-tl" />
-              <div className="card-tick tick-br" />
-
-              <div className="photo-container">
-                <img src={member.image} alt={member.name} className="member-photo" />
+            {/* ROW 1 */}
+            {membersRow1.map((member) => (
+              <div 
+                key={member.id} 
+                className="member-card"
+                style={{ transform: `translateY(${member.yOffset}px)` }}
+              >
+                <div className="member-portrait-container">
+                  <img 
+                    src={member.image} 
+                    alt={member.name} 
+                    className="member-portrait-img"
+                    loading="eager"
+                  />
+                </div>
+                <div className="member-badge">
+                  <h4 className="member-name">{member.name}</h4>
+                  <p className="member-role">{member.role}</p>
+                </div>
               </div>
+            ))}
 
-              {/* White Overlay Box at bottom */}
-              <div className="member-label-pill">
-                <h4 className="member-name">{member.name}</h4>
-                <span className="member-role">{member.role}</span>
+            {/* ROW 2: Members 5, 6, 7 */}
+            {membersRow2.map((member) => (
+              <div 
+                key={member.id} 
+                className="member-card"
+                style={{ transform: `translateY(${member.yOffset}px)` }}
+              >
+                <div className="member-portrait-container">
+                  <img 
+                    src={member.image} 
+                    alt={member.name} 
+                    className="member-portrait-img"
+                    loading="eager"
+                  />
+                </div>
+                <div className="member-badge">
+                  <h4 className="member-name">{member.name}</h4>
+                  <p className="member-role">{member.role}</p>
+                </div>
+              </div>
+            ))}
+
+            {/* ROW 2, Item 8: Our Background (Pure HTML/CSS Dark Card) */}
+            <div 
+              className="background-card-wrapper"
+              style={{ transform: 'translateY(0px)', height: '100%' }}
+            >
+              <div className="background-card">
+                {/* Technical Grid on Bottom & Right */}
+                <div className="card-inner-grid" />
+
+                <div className="card-content-top">
+                  {/* Top Square Indicator */}
+                  <div className="card-top-indicator" />
+
+                  {/* Heading */}
+                  <h3 className="card-title">Our Background</h3>
+
+                  {/* Description with constrained width to match exact 5 lines */}
+                  <p className="card-description">
+                    We are a team of builders based in Rwanda, creating technology that solves real-world problems. With 3+ years of experience, we turn bold ideas into practical solutions that create impact.
+                  </p>
+                </div>
+
+                {/* Full-width Explore the Team Button with lime glow icon */}
+                <Link href="/teams" className="explore-button">
+                  <div className="explore-icon-squircle">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                      <circle cx="4" cy="5" r="1.3" fill="#64748b" />
+                      <circle cx="4" cy="13" r="1.3" fill="#64748b" />
+                      <circle cx="7.5" cy="3" r="1.3" fill="#64748b" />
+                      <circle cx="7.5" cy="9" r="1.3" fill="#334155" />
+                      <circle cx="7.5" cy="15" r="1.3" fill="#64748b" />
+                      <circle cx="11" cy="6" r="1.3" fill="#334155" />
+                      <circle cx="11" cy="12" r="1.3" fill="#334155" />
+                      <circle cx="14.5" cy="9" r="1.4" fill="#0f172a" />
+                    </svg>
+                  </div>
+                  <span className="explore-button-text">Explore the team</span>
+                </Link>
               </div>
             </div>
-          ))}
-
-          {/* 8th Card: Join Our Team (Dark Card) */}
-          <Link href="/teams" className="join-card">
-            {/* Corner tech ticks */}
-            <div className="card-tick tick-tl tick-light" />
-            <div className="card-tick tick-br tick-light" />
-
-            <div>
-              <div className="hiring-badge">
-                <span className="hiring-dot" />
-                <span>WE ARE HIRING</span>
-              </div>
-              <h4 className="join-heading">Join Our Team</h4>
-              <p className="join-text">
-                We are always looking for passionate engineers, designers, and innovators to push the envelope of modern technology.
-              </p>
-            </div>
-
-            <div className="join-button-row">
-              <span className="join-btn-label">View Open Positions</span>
-              <div className="join-arrow-box">
-                <ArrowUpRight size={14} />
-              </div>
-            </div>
-          </Link>
           </div>
         </ScrollReveal>
       </div>
@@ -155,208 +228,312 @@ export const TeamPreview: React.FC = () => {
         .team-cards-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          gap: 20px;
-          max-width: 1140px;
+          gap: 32px 16px;
+          max-width: 1020px;
           margin: 0 auto;
+          align-items: start;
         }
 
-        .team-card {
+        /* Member Card */
+        .member-card {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+          user-select: none;
+        }
+
+        .member-card:hover {
+          filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.09));
+        }
+
+        .member-portrait-container {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: flex-end;
+          position: relative;
+        }
+
+        .member-portrait-img {
+          width: 100%;
+          max-width: 238px;
+          height: auto;
+          display: block;
+          object-fit: contain;
+          transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .member-card:hover .member-portrait-img {
+          transform: scale(1.025);
+        }
+
+        /* Floating Pill Badge */
+        .member-badge {
+          position: relative;
+          z-index: 2;
           background: #ffffff;
-          border: 1px solid #e5e7eb;
-          border-radius: 18px;
-          overflow: hidden;
-          position: relative;
-          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
-          transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
-        }
-
-        .team-card:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-          border-color: #cbd5e1;
-        }
-
-        .photo-container {
-          width: 100%;
-          padding-top: 115%;
-          position: relative;
-          background: #f1f5f9;
-          overflow: hidden;
-        }
-
-        .member-photo {
-          position: absolute;
-          inset: 0;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: transform 0.4s ease;
-        }
-
-        .team-card:hover .member-photo {
-          transform: scale(1.05);
-        }
-
-        .member-label-pill {
-          position: absolute;
-          bottom: 12px;
-          left: 12px;
-          right: 12px;
-          background: rgba(255, 255, 255, 0.95);
-          backdrop-filter: blur(8px);
-          border: 1px solid #e5e7eb;
-          border-radius: 10px;
-          padding: 8px 12px;
+          border-radius: 12px;
+          padding: 10px 14px 11px;
+          width: 92%;
+          max-width: 220px;
+          margin-top: -24px;
           text-align: center;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-          transition: transform 0.25s ease;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08), 0 2px 5px rgba(0, 0, 0, 0.03);
+          border: 1px solid rgba(0, 0, 0, 0.04);
+          transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
 
-        .team-card:hover .member-label-pill {
+        .member-card:hover .member-badge {
           transform: translateY(-2px);
+          box-shadow: 0 12px 28px rgba(0, 0, 0, 0.11);
         }
 
         .member-name {
-          font-size: 11.5px;
+          font-family: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif;
+          font-size: 13.5px;
           font-weight: 800;
-          color: #0a0a0c;
-          letter-spacing: -0.2px;
-          margin: 0 0 2px;
+          color: #0f1115;
+          letter-spacing: -0.015em;
+          margin: 0 0 3px;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
         }
 
         .member-role {
-          font-size: 9.5px;
-          font-weight: 700;
-          color: #64748b;
-          letter-spacing: 0.5px;
-          text-transform: uppercase;
+          font-family: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif;
+          font-size: 10.5px;
+          font-weight: 600;
+          color: #71717a;
+          letter-spacing: 0.01em;
+          margin: 0;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
-        .join-card {
-          background: #0f1013;
-          border: 1px solid #22252c;
+        /* Dark Card 8: Our Background */
+        .background-card-wrapper {
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+          transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .background-card-wrapper:hover {
+          transform: translateY(14px) !important;
+        }
+
+        /* Dark Card 8: Our Background */
+        .background-card-wrapper {
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+          transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .background-card-wrapper:hover {
+          transform: translateY(14px) !important;
+        }
+
+        .background-card {
+          background: linear-gradient(180deg, #383e45 0%, #2b3036 40%, #1e2226 100%);
           border-radius: 18px;
-          padding: 24px 20px;
+          border: 1px solid rgba(255, 255, 255, 0.09);
+          box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3);
+          padding: 26px 20px 22px;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
           position: relative;
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-          transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
-          text-decoration: none;
+          overflow: hidden;
+          min-height: 310px;
+          height: 100%;
+          box-sizing: border-box;
         }
 
-        .join-card:hover {
-          transform: translateY(-4px);
-          border-color: #3b404d;
-        }
-
-        .card-tick {
+        /* Technical Grid on Bottom & Right */
+        .card-inner-grid {
           position: absolute;
-          width: 6px;
-          height: 6px;
-          z-index: 5;
+          inset: 0;
+          background-image: 
+            linear-gradient(to right, rgba(255, 255, 255, 0.11) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.11) 1px, transparent 1px);
+          background-size: 24px 24px;
+          background-position: right bottom;
+          mask-image: linear-gradient(135deg, transparent 20%, rgba(0,0,0,0.35) 45%, rgba(0,0,0,1) 75%);
+          -webkit-mask-image: linear-gradient(135deg, transparent 20%, rgba(0,0,0,0.35) 45%, rgba(0,0,0,1) 75%);
+          pointer-events: none;
         }
 
-        .tick-tl {
-          top: 8px;
-          left: 8px;
-          border-top: 1.5px solid #cbd5e1;
-          border-left: 1.5px solid #cbd5e1;
+        .card-content-top {
+          position: relative;
+          z-index: 2;
         }
 
-        .tick-br {
-          bottom: 8px;
-          right: 8px;
-          border-bottom: 1.5px solid #cbd5e1;
-          border-right: 1.5px solid #cbd5e1;
-        }
-
-        .tick-light {
-          border-color: #475569;
-        }
-
-        .hiring-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          background: rgba(56, 189, 248, 0.15);
-          border: 1px solid rgba(56, 189, 248, 0.3);
-          border-radius: 999px;
-          padding: 3px 10px;
-          font-size: 9px;
-          font-weight: 800;
-          letter-spacing: 0.8px;
-          color: #38bdf8;
+        .card-top-indicator {
+          width: 9px;
+          height: 9px;
+          background-color: #ffffff;
+          border-radius: 1.5px;
           margin-bottom: 14px;
         }
 
-        .hiring-dot {
-          width: 5px;
-          height: 5px;
-          border-radius: 50%;
-          background: #38bdf8;
-          box-shadow: 0 0 6px #38bdf8;
-        }
-
-        .join-heading {
-          font-size: 18px;
-          font-weight: 800;
+        .card-title {
+          font-family: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif;
+          font-size: 20px;
+          font-weight: 700;
           color: #ffffff;
-          margin-bottom: 8px;
-          letter-spacing: -0.01em;
+          letter-spacing: -0.015em;
+          margin: 0 0 12px;
         }
 
-        .join-text {
+        .card-description {
+          font-family: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif;
           font-size: 11.5px;
           line-height: 1.55;
-          color: #94a3b8;
+          color: #cbd5e1;
           margin: 0;
+          font-weight: 400;
+          max-width: 205px;
+          opacity: 0.95;
         }
 
-        .join-button-row {
+        /* Full-Width Explore Button inside Card 8 */
+        .explore-button {
+          position: relative;
+          z-index: 2;
           display: flex;
           align-items: center;
-          justify-content: space-between;
-          padding-top: 16px;
-          border-top: 1px solid rgba(255, 255, 255, 0.1);
-          color: #ffffff;
+          gap: 12px;
+          background: linear-gradient(180deg, #32373e 0%, #1c2024 100%);
+          border: 1px solid rgba(255, 255, 255, 0.16);
+          border-radius: 14px;
+          padding: 8px 18px 8px 8px;
+          text-decoration: none;
+          box-shadow: 0 10px 24px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+          margin-top: auto;
+          width: 100%;
+          box-sizing: border-box;
+          transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .join-btn-label {
-          font-size: 11.5px;
-          font-weight: 700;
+        .explore-button:hover {
+          transform: translateY(-2px);
+          border-color: rgba(255, 255, 255, 0.3);
+          box-shadow: 0 12px 28px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
 
-        .join-arrow-box {
-          width: 28px;
-          height: 28px;
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.1);
+        .explore-icon-squircle {
+          width: 36px;
+          height: 36px;
+          border-radius: 10px;
+          background: linear-gradient(180deg, #f8fafc 0%, #d1d5db 50%, #9ca3af 100%);
           display: flex;
           align-items: center;
           justify-content: center;
-          transition: transform 0.25s ease, background 0.25s ease;
+          box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.95), 0 2px 6px rgba(0, 0, 0, 0.45), 0 2px 4px rgba(163, 230, 53, 0.55);
+          flex-shrink: 0;
+          overflow: hidden;
         }
 
-        .join-card:hover .join-arrow-box {
-          transform: translate(2px, -2px);
-          background: #38bdf8;
-          color: #000000;
+        .explore-logo-mark {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
         }
 
-        @media (max-width: 1024px) {
+        .explore-button-text {
+          font-family: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif;
+          font-size: 13.5px;
+          font-weight: 600;
+          color: #f8fafc;
+          letter-spacing: -0.01em;
+          white-space: nowrap;
+          margin-left: 2px;
+        }
+
+        /* Stepped Decorative Pixel Blocks in Background */
+        .bg-pixel-decor {
+          position: absolute;
+          pointer-events: none;
+          z-index: 1;
+        }
+
+        .tl-pixel {
+          top: 140px;
+          left: 10px;
+          width: 56px;
+          height: 46px;
+          background: #ffffff;
+          clip-path: polygon(0 0, 100% 0, 100% 50%, 50% 50%, 50% 100%, 0 100%);
+          opacity: 0.95;
+        }
+
+        .tr-pixel {
+          top: 140px;
+          right: 235px;
+          width: 58px;
+          height: 46px;
+          background: #ffffff;
+          clip-path: polygon(0 0, 100% 0, 100% 100%, 60% 100%, 60% 50%, 0 50%);
+          opacity: 0.95;
+        }
+
+        .ml-pixel {
+          top: 400px;
+          left: 205px;
+          width: 54px;
+          height: 48px;
+          background: #ffffff;
+          clip-path: polygon(0 0, 100% 0, 100% 50%, 45% 50%, 45% 100%, 0 100%);
+          opacity: 0.95;
+        }
+
+        .mr-pixel {
+          top: 400px;
+          right: 230px;
+          width: 56px;
+          height: 48px;
+          background: #ffffff;
+          clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 100%, 50% 50%, 0 50%);
+          opacity: 0.95;
+        }
+
+        .b-pixel {
+          bottom: 14px;
+          left: 345px;
+          width: 20px;
+          height: 20px;
+          background: #ffffff;
+          opacity: 0.95;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 900px) {
           .team-cards-grid {
             grid-template-columns: repeat(2, 1fr);
+            max-width: 520px;
+            gap: 28px 16px;
+          }
+
+          .member-card,
+          .background-card-wrapper {
+            transform: none !important;
+          }
+
+          .bg-pixel-decor {
+            display: none;
           }
         }
 
-        @media (max-width: 560px) {
+        @media (max-width: 500px) {
           .team-cards-grid {
             grid-template-columns: 1fr;
+            max-width: 270px;
+            gap: 24px;
           }
         }
       `}</style>

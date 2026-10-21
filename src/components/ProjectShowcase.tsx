@@ -1,8 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import Link from 'next/link';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
 
 export const ProjectShowcase: React.FC = () => {
@@ -10,388 +8,275 @@ export const ProjectShowcase: React.FC = () => {
 
   const projects = [
     {
-      id: 'ai-chatbot',
-      title: 'AI Chatbot Website',
-      description: 'We developed an AI-powered website with integrated chatbot features focused on automation and seamless user support.',
-      image: '/images/Macbook Pro mockup.png',
-      tags: ['Next.js', 'OpenAI', 'Autonomous Agents']
-    },
-    {
       id: 'inziralink',
-      title: 'InziraLink Logistics Platform',
-      description: 'End-to-end freight dispatching and digital cargo transit management for East Africa, connecting transporters and enterprise clients.',
-      image: '/images/Macbook Pro mockup.png',
-      tags: ['Enterprise Cloud', 'Telematics', 'Logistics']
+      title: 'Inziralink',
+      description: 'A design of a platform that helps people transport goods easily just connecting companies to transport systems to ensure the safety and efficiency of transportation of Goods.',
+      image: '/images/project_inziralink_exact.png'
     },
     {
-      id: 'fintech-gateway',
+      id: 'ai-automation',
+      title: 'AI Automation Platform',
+      description: 'Autonomous neural agent architecture and natural language control system enabling automated customer resolution, pipeline execution, and predictive enterprise intelligence.',
+      image: '/images/project_ai_automation.png'
+    },
+    {
+      id: 'fintech-settlement',
       title: 'FinTech Settlement Core',
-      description: 'High-throughput payment orchestration and automated reconciliation engine designed for regional African commercial operations.',
-      image: '/images/Macbook Pro mockup.png',
-      tags: ['FinTech', 'ISO 20022', 'PostgreSQL']
+      description: 'High-throughput regional payment orchestration and automated ISO 20022 reconciliation engine designed for seamless cross-border multi-currency African trade.',
+      image: '/images/project_fintech_settlement.png'
+    },
+    {
+      id: 'telematics-fleet',
+      title: 'Logistics Fleet Telematics',
+      description: 'Connected telemetry and automated transit telemetry suite providing real-time GPS fleet visibility, corridor ETA monitoring, fuel analytics, and driver safety reporting.',
+      image: '/images/project_fleet_telematics.png'
     }
   ];
 
   const current = projects[activeSlide];
 
-  const handlePrev = () => {
-    setActiveSlide((prev) => (prev === 0 ? projects.length - 1 : prev - 1));
-  };
-
-  const handleNext = () => {
-    setActiveSlide((prev) => (prev === projects.length - 1 ? 0 : prev + 1));
-  };
-
   return (
-    <div id="projects" style={{ backgroundColor: '#ffffff', overflow: 'visible', fontFamily: "var(--font-urbanist), 'Urbanist', sans-serif" }}>
-      {/* SECTION 1: Top Header on White Grid Background */}
-      <section 
-        style={{ 
-          padding: '60px 0 50px', 
-          backgroundColor: '#ffffff', 
-          backgroundImage: 'linear-gradient(to right, rgba(0, 0, 0, 0.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(0, 0, 0, 0.045) 1px, transparent 1px)',
-          backgroundSize: '37px 37px',
-          backgroundPosition: 'center center',
-          position: 'relative',
-          overflow: 'visible'
-        }}
-      >
-        <div className="container" style={{ position: 'relative', maxWidth: '1240px', margin: '0 auto', padding: '0 24px' }}>
-          {/* Section Pill Badge: • Projects (tactile 3D pill) */}
-          <ScrollReveal delay={40} yOffset={14}>
-            <div style={{ marginBottom: '18px' }}>
-              <div 
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  padding: '7px 18px',
-                  borderRadius: '8px',
-                  backgroundColor: '#ffffff',
-                  fontSize: '14px',
-                  fontWeight: 700,
-                  fontFamily: "var(--font-urbanist), 'Urbanist', sans-serif",
-                  color: '#0f172a',
-                  border: '3px solid #eceef1ff',
-                  boxShadow: '4px 4px 14px 4px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.9)'
-                }}
-              >
-                <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#0f172a', display: 'inline-block' }} />
-                <span>Projects</span>
-              </div>
-            </div>
-          </ScrollReveal>
-
-          {/* Section Heading & HUD Chevrons */}
-          <ScrollReveal delay={100} yOffset={20}>
+    <section 
+      id="projects" 
+      style={{ 
+        padding: '76px 20px 92px', 
+        backgroundColor: '#ffffff', 
+        borderBottom: '1px solid #eeeff2',
+        position: 'relative',
+        overflow: 'hidden'
+      }}
+    >
+      <div className="container" style={{ maxWidth: '1060px', margin: '0 auto' }}>
+        {/* Section Pill Badge: • Projects */}
+        <ScrollReveal delay={40} yOffset={14}>
+          <div style={{ textAlign: 'center', marginBottom: '14px' }}>
             <div 
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '6px 18px',
+                borderRadius: '999px',
+                backgroundColor: '#ffffff',
+                fontSize: '12px',
+                fontWeight: 700,
+                fontFamily: "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
+                color: '#0f172a',
+                border: '1px solid #e2e8f0',
+                boxShadow: '0 2px 6px rgba(0, 0, 0, 0.04)'
+              }}
+            >
+              <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#0f172a', display: 'inline-block' }} />
+              <span>Projects</span>
+            </div>
+          </div>
+        </ScrollReveal>
+
+        {/* Section Heading & Subtitle */}
+        <ScrollReveal delay={90} yOffset={20}>
+          <div style={{ textAlign: 'center', marginBottom: '46px' }}>
+            <h2 
               style={{ 
-                display: 'flex', 
-                alignItems: 'flex-start', 
-                justifyContent: 'space-between', 
-                gap: '24px',
-                position: 'relative'
+                fontFamily: "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
+                fontSize: 'clamp(36px, 4.8vw, 56px)', 
+                fontWeight: 800, 
+                color: '#0a0b0d',
+                letterSpacing: '-0.025em',
+                lineHeight: 1.15,
+                margin: '0 0 12px'
               }}
             >
-              <div>
-                <h2 
-                  style={{ 
-                    fontFamily: "var(--font-urbanist), 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif",
-                    fontSize: 'clamp(44px, 5.6vw, 72px)', 
-                    fontWeight: 900, 
-                    color: '#0a0a0c',
-                    letterSpacing: '-0.035em',
-                    lineHeight: 1.15,
-                    margin: 0
-                  }}
-                >
-                  From Idea <br />
-                  to Production
-                </h2>
-
-                {/* Carousel Arrow Controls */}
-                <div style={{ display: 'flex', gap: '14px', marginTop: '32px', marginBottom: '12px' }}>
-                  <button
-                    onClick={handlePrev}
-                    aria-label="Previous project"
-                    className="carousel-circle-btn"
-                  >
-                    <ChevronLeft size={20} strokeWidth={2.4} />
-                  </button>
-                  <button
-                    onClick={handleNext}
-                    aria-label="Next project"
-                    className="carousel-circle-btn"
-                  >
-                    <ChevronRight size={20} strokeWidth={2.4} />
-                  </button>
-                </div>
-              </div>
-
-              {/* Right Side HUD Chevrons: 3 Staggered Rows of 10 Chevrons pointing LEFT (<) */}
-              <div 
-                className="projects-hud-chevrons" 
-                style={{ 
-                  display: 'flex', 
-                  flexDirection: 'column', 
-                  gap: '16px', 
-                  paddingTop: '10px', 
-                  marginLeft: 'auto' 
-                }}
-              >
-                {/* Row 1: 10 chevrons, shifted furthest right */}
-                <div style={{ display: 'flex', gap: '24px', alignItems: 'center', marginLeft: '140px' }}>
-                  {[...Array(10)].map((_, i) => (
-                    <ChevronDot key={`hp-r1-${i}`} />
-                  ))}
-                </div>
-
-                {/* Row 2: 10 chevrons, middle offset */}
-                <div style={{ display: 'flex', gap: '24px', alignItems: 'center', marginLeft: '70px' }}>
-                  {[...Array(10)].map((_, i) => (
-                    <ChevronDot key={`hp-r2-${i}`} />
-                  ))}
-                </div>
-
-                {/* Row 3: 10 chevrons, aligned on the left */}
-                <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
-                  {[...Array(10)].map((_, i) => (
-                    <ChevronDot key={`hp-r3-${i}`} />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* SECTION 2: Full-Width Solid Black Project Showcase Band */}
-      <section 
-        style={{ 
-          backgroundColor: '#000000', 
-          width: '100%', 
-          position: 'relative',
-          padding: '0',
-          overflow: 'visible',
-          borderTop: '1px solid rgba(255, 255, 255, 0.12)'
-        }}
-      >
-        <div 
-          className="container" 
-          style={{ 
-            maxWidth: '1240px', 
-            margin: '0 auto', 
-            padding: '0 24px',
-            position: 'relative'
-          }}
-        >
-          <div 
-            className="project-showcase-split"
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'minmax(320px, 420px) 1fr',
-              alignItems: 'stretch',
-              position: 'relative'
-            }}
-          >
-            {/* Left Column: Structured Card with horizontal divider lines & right vertical border */}
-            <div 
+              From Idea to Production
+            </h2>
+            <p 
               style={{
-                color: '#ffffff',
-                display: 'flex',
-                flexDirection: 'column',
-                borderRight: '1px solid rgba(255, 255, 255, 0.12)',
-                position: 'relative',
-                zIndex: 2
+                fontFamily: "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
+                fontSize: '13.5px',
+                lineHeight: 1.55,
+                color: '#64748b',
+                maxWidth: '560px',
+                margin: '0 auto'
               }}
             >
-              {/* Compartment 1: Centered 3D BT Logo Emblem */}
-              <div 
-                style={{ 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'center', 
-                  padding: '36px 20px',
-                  borderBottom: '1px solid rgba(255, 255, 255, 0.14)',
-                  width: '100%' 
-                }}
-              >
-                <div 
-                  style={{
-                    width: '82px',
-                    height: '82px',
-                    borderRadius: '50%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    position: 'relative',
-                    filter: 'drop-shadow(0 12px 26px rgba(0, 0, 0, 0.8))',
-                    cursor: 'pointer',
-                    transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.08)')}
-                  onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-                >
-                  <div 
-                    style={{
-                      position: 'absolute',
-                      inset: '-6px',
-                      borderRadius: '50%',
-                      background: 'radial-gradient(circle, rgba(255, 255, 255, 0.14) 0%, transparent 70%)',
-                      filter: 'blur(8px)'
-                    }}
-                  />
-                  <img 
-                    src="/images/bt-logo.png" 
-                    alt="BT Logo" 
-                    style={{ width: '100%', height: '100%', objectFit: 'contain', position: 'relative', zIndex: 1 }} 
-                  />
-                </div>
-              </div>
+              From concept to execution, we build solutions that matter.<br />
+              Explore the breakthrough projects shaping the future of our industry.
+            </p>
+          </div>
+        </ScrollReveal>
 
-              {/* Compartment 2: Title and Description with crisp bottom border */}
-              <div
-                style={{
-                  padding: '36px 32px 36px 0',
-                  borderBottom: '1px solid rgba(255, 255, 255, 0.14)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center'
-                }}
-              >
-                {/* Project Title */}
-                <h3 
-                  style={{
-                    fontFamily: "var(--font-urbanist), 'Urbanist', sans-serif",
-                    fontSize: 'clamp(32px, 3.4vw, 44px)',
-                    fontWeight: 900,
-                    color: '#ffffff',
-                    letterSpacing: '-0.025em',
-                    lineHeight: 1.15,
-                    margin: '0 0 16px 0'
-                  }}
-                >
-                  {current.title}
-                </h3>
-
-                {/* Project Description */}
-                <p 
-                  style={{
-                    fontSize: '15px',
-                    lineHeight: 1.65,
-                    color: '#94a3b8',
-                    margin: 0,
-                    maxWidth: '380px',
-                    fontWeight: 400
-                  }}
-                >
-                  {current.description}
-                </p>
-              </div>
-
-              {/* Compartment 3: Empty lower section aligned with laptop floor */}
-              <div style={{ flex: 1, minHeight: '60px' }} />
+        {/* Main Showcase Card matching exact design */}
+        <ScrollReveal delay={160} duration={800} yOffset={24}>
+          <div className="showcase-card">
+            {/* Dark Media Preview Box with built-in stepped pixel corners */}
+            <div className="media-preview-box">
+              <img 
+                key={current.id}
+                src={current.image} 
+                alt={current.title} 
+                className="showcase-laptop-img"
+              />
             </div>
 
-            {/* Right Column: MacBook Pro Mockup Image protruding upwards into the white grid */}
-            <div 
-              className="laptop-mockup-wrapper"
-              style={{
-                position: 'relative',
-                display: 'flex',
-                alignItems: 'flex-end',
-                justifyContent: 'center',
-                paddingLeft: '32px',
-                marginTop: '-72px',
-                zIndex: 10
-              }}
-            >
-              <div 
-                style={{
-                  width: '100%',
-                  maxWidth: '820px',
-                  position: 'relative',
-                  filter: 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.95))'
-                }}
-              >
-                <img 
-                  src={current.image} 
-                  alt={current.title} 
-                  style={{
-                    width: '100%',
-                    height: 'auto',
-                    display: 'block'
-                  }}
+            {/* Pagination Slider Dots */}
+            <div className="showcase-dots-row">
+              {projects.map((proj, idx) => (
+                <button
+                  key={proj.id}
+                  onClick={() => setActiveSlide(idx)}
+                  className={`dot-pill ${activeSlide === idx ? 'dot-active' : ''}`}
+                  aria-label={`Go to ${proj.title}`}
                 />
+              ))}
+            </div>
+
+            {/* Bottom Details Row */}
+            <div className="showcase-details-row">
+              <h3 className="project-heading-title">{current.title}</h3>
+
+              <div className="project-description-box">
+                <span className="desc-heading-label">DESCRIPTION</span>
+                <p className="desc-body-text">{current.description}</p>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Clean White Separation Gap */}
-      <div style={{ height: '38px', backgroundColor: '#ffffff' }} />
+        </ScrollReveal>
+      </div>
 
       <style jsx>{`
-        .carousel-circle-btn {
-          width: 44px;
-          height: 44px;
-          border-radius: 50%;
-          background-color: #ffffff;
-          border: 1px solid rgba(0, 0, 0, 0.08);
+        .showcase-card {
+          background: #ffffff;
+          border: 1px solid #e5e7eb;
+          border-radius: 26px;
+          padding: 16px 16px 28px;
+          box-shadow: 0 10px 34px rgba(0, 0, 0, 0.05);
+          max-width: 980px;
+          margin: 0 auto;
+          transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+        }
+
+        .showcase-card:hover {
+          box-shadow: 0 18px 48px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Dark Media Preview Box */
+        .media-preview-box {
+          position: relative;
+          background: #111316;
+          border-radius: 20px;
+          overflow: hidden;
+          width: 100%;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: #334155;
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .showcase-laptop-img {
+          width: 100%;
+          height: auto;
+          display: block;
+          object-fit: cover;
+          animation: fadeInSlide 0.4s ease-out;
+          transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes fadeInSlide {
+          from {
+            opacity: 0.82;
+            transform: scale(0.99);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        .showcase-card:hover .showcase-laptop-img {
+          transform: scale(1.012);
+        }
+
+        /* Slider Dots */
+        .showcase-dots-row {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin: 22px 0 20px 10px;
+        }
+
+        .dot-pill {
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          background-color: #d1d5db;
+          border: none;
+          padding: 0;
           cursor: pointer;
-          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
-          transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+          transition: background-color 0.25s ease, transform 0.25s ease;
         }
 
-        .carousel-circle-btn:hover {
+        .dot-pill:hover {
+          background-color: #94a3b8;
+          transform: scale(1.2);
+        }
+
+        .dot-active {
           background-color: #0f172a;
-          color: #ffffff;
-          border-color: #0f172a;
-          transform: translateY(-2px);
-          box-shadow: 0 8px 20px rgba(15, 23, 42, 0.18);
+          transform: scale(1.25);
         }
 
-        .carousel-circle-btn:active {
-          transform: translateY(0);
+        /* Bottom Details */
+        .showcase-details-row {
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-between;
+          padding: 0 12px;
+          gap: 32px;
         }
 
-        @media (max-width: 980px) {
-          .project-showcase-split {
-            grid-template-columns: 1fr;
+        .project-heading-title {
+          font-family: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif;
+          font-size: 26px;
+          font-weight: 800;
+          color: #0a0b0d;
+          letter-spacing: -0.02em;
+          margin: 0;
+          flex-shrink: 0;
+        }
+
+        .project-description-box {
+          max-width: 500px;
+        }
+
+        .desc-heading-label {
+          display: block;
+          font-family: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif;
+          font-size: 11px;
+          font-weight: 700;
+          color: #94a3b8;
+          letter-spacing: 0.8px;
+          margin-bottom: 6px;
+        }
+
+        .desc-body-text {
+          font-family: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif;
+          font-size: 13px;
+          line-height: 1.58;
+          color: #52525b;
+          margin: 0;
+          font-weight: 400;
+        }
+
+        @media (max-width: 768px) {
+          .showcase-details-row {
+            flex-direction: column;
+            gap: 16px;
           }
-          .laptop-mockup-wrapper {
-            margin-top: 0 !important;
-          }
-          .projects-hud-chevrons {
-            display: none;
+
+          .project-description-box {
+            max-width: 100%;
           }
         }
       `}</style>
-    </div>
+    </section>
   );
 };
-
-const ChevronDot: React.FC = () => (
-  <div
-    style={{
-      width: '14px',
-      height: '18px',
-      backgroundColor: '#1e293b',
-      maskImage: 'url("/images/arrow-tight.png")',
-      WebkitMaskImage: 'url("/images/arrow-tight.png")',
-      maskSize: 'contain',
-      WebkitMaskSize: 'contain',
-      maskRepeat: 'no-repeat',
-      WebkitMaskRepeat: 'no-repeat',
-      maskPosition: 'center',
-      WebkitMaskPosition: 'center',
-      display: 'inline-block',
-      flexShrink: 0
-    }}
-  />
-);

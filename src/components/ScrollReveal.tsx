@@ -29,8 +29,8 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
         }
       },
       {
-        threshold: 0.12,
-        rootMargin: '0px 0px -40px 0px'
+        threshold: 0.01,
+        rootMargin: '120px 0px 50px 0px'
       }
     );
 
@@ -39,12 +39,18 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
       observer.observe(currentElem);
     }
 
+    // Safety fallback to guarantee content is visible even if observer is delayed
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 350 + delay);
+
     return () => {
+      clearTimeout(timer);
       if (currentElem) {
         observer.unobserve(currentElem);
       }
     };
-  }, []);
+  }, [delay]);
 
   return (
     <div

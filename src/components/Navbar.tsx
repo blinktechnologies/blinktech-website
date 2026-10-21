@@ -15,7 +15,7 @@ export const Navbar: React.FC = () => {
 
   const navLinks = [
     { label: 'HOME', href: '/' },
-    { label: 'ABOUT US', href: '/#about' },
+    { label: 'BLOGS', href: '/news' },
     { label: 'SERVICES', href: '/services' },
     { label: 'PROJECTS', href: '/projects' },
     { label: 'TEAMS', href: '/teams' },
@@ -24,7 +24,6 @@ export const Navbar: React.FC = () => {
 
   const isActive = (href: string) => {
     if (href === '/') return pathname === '/';
-    if (href === '/#about') return pathname === '/about';
     return pathname === href || pathname.startsWith(href + '/');
   };
 
@@ -73,7 +72,7 @@ export const Navbar: React.FC = () => {
             <div 
               style={{ 
                 display: 'flex', 
-                alignItems: 'center',
+                alignItems: 'center', 
                 padding: '0 28px',
                 borderRight: '1px solid #e5e7eb',
                 position: 'relative'
@@ -108,19 +107,20 @@ export const Navbar: React.FC = () => {
                   <Link
                     key={link.label}
                     href={link.href}
-                    className="nav-link-item font-space-grotesk"
+                    className="nav-link-item"
                     style={{
                       position: 'relative',
-                      fontFamily: "var(--font-space-grotesk), 'Space Grotesk', sans-serif",
+                      fontFamily: "var(--font-ui), 'Inter', sans-serif",
                       fontSize: '12px',
-                      fontWeight: 700,
-                      color: active ? '#09090b' : '#3f3f46',
+                      fontWeight: 600,
+                      letterSpacing: '0.04em',
+                      color: active ? '#09090b' : '#475569',
                       padding: '8px 2px',
                       textTransform: 'uppercase',
                       transition: 'color 0.2s ease'
                     }}
                   >
-                    <span style={{ fontFamily: "var(--font-space-grotesk), 'Space Grotesk', sans-serif" }}>{link.label}</span>
+                    <span>{link.label}</span>
                     {active && (
                       <span 
                         style={{
@@ -149,7 +149,7 @@ export const Navbar: React.FC = () => {
           <div 
             style={{ 
               display: 'flex', 
-              alignItems: 'center',
+              alignItems: 'center', 
               paddingLeft: '32px'
             }}
           >
@@ -160,13 +160,14 @@ export const Navbar: React.FC = () => {
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                fontFamily: "'Urbanist', sans-serif",
+                fontFamily: "var(--font-ui), 'Inter', sans-serif",
                 background: 'linear-gradient(180deg, #4b525d 0%, #30353e 50%, #1c1f24 100%)',
                 color: '#ffffff',
                 padding: '11px 24px',
                 borderRadius: '8px',
-                fontSize: '14px',
-                letterSpacing: '0.01em',
+                fontSize: '13.5px',
+                fontWeight: 600,
+                letterSpacing: '0.02em',
                 border: '1px solid rgba(255, 255, 255, 0.14)',
                 boxShadow: '0 8px 18px -2px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.28)',
                 cursor: 'pointer',
@@ -216,6 +217,7 @@ export const Navbar: React.FC = () => {
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
                 style={{
+                  fontFamily: "var(--font-ui), 'Inter', sans-serif",
                   fontSize: '13px',
                   fontWeight: isActive(link.href) ? 700 : 500,
                   color: isActive(link.href) ? '#0a0a0c' : '#4b5563',
@@ -235,7 +237,7 @@ export const Navbar: React.FC = () => {
       <style jsx>{`
         .nav-link-item,
         .nav-link-item * {
-          font-family: 'Space Grotesk', sans-serif !important;
+          font-family: var(--font-ui), 'Inter', sans-serif !important;
         }
         .nav-link-item:hover {
           color: #09090b !important;
