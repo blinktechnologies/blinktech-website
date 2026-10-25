@@ -202,19 +202,19 @@ export const TeamPreview: React.FC = () => {
                   </p>
                 </div>
 
-                {/* Full-width Explore the Team Button with lime glow icon */}
-                <Link href="/teams" className="explore-button">
+                {/* Full-width Explore the Team Button with authentic squircle icon and smooth navigation */}
+                <Link 
+                  href="/teams" 
+                  className="explore-button"
+                  id="explore-the-team-btn"
+                  aria-label="Explore the team"
+                >
                   <div className="explore-icon-squircle">
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                      <circle cx="4" cy="5" r="1.3" fill="#64748b" />
-                      <circle cx="4" cy="13" r="1.3" fill="#64748b" />
-                      <circle cx="7.5" cy="3" r="1.3" fill="#64748b" />
-                      <circle cx="7.5" cy="9" r="1.3" fill="#334155" />
-                      <circle cx="7.5" cy="15" r="1.3" fill="#64748b" />
-                      <circle cx="11" cy="6" r="1.3" fill="#334155" />
-                      <circle cx="11" cy="12" r="1.3" fill="#334155" />
-                      <circle cx="14.5" cy="9" r="1.4" fill="#0f172a" />
-                    </svg>
+                    <img 
+                      src="/images/team/btn_logo_icon.png" 
+                      alt="" 
+                      style={{ width: '100%', height: '100%', objectFit: 'contain' }} 
+                    />
                   </div>
                   <span className="explore-button-text">Explore the team</span>
                 </Link>
