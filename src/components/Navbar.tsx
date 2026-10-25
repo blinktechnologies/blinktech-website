@@ -107,12 +107,12 @@ export const Navbar: React.FC = () => {
                   <Link
                     key={link.label}
                     href={link.href}
-                    className="nav-link-item"
+                    className="nav-link-item font-space-grotesk"
                     style={{
                       position: 'relative',
-                      fontFamily: "var(--font-ui), 'Inter', sans-serif",
+                      fontFamily: "var(--font-space-grotesk), 'Space Grotesk', sans-serif",
                       fontSize: '12px',
-                      fontWeight: 600,
+                      fontWeight: 700,
                       letterSpacing: '0.04em',
                       color: active ? '#09090b' : '#475569',
                       padding: '8px 2px',
@@ -120,7 +120,7 @@ export const Navbar: React.FC = () => {
                       transition: 'color 0.2s ease'
                     }}
                   >
-                    <span>{link.label}</span>
+                    <span style={{ fontFamily: "var(--font-space-grotesk), 'Space Grotesk', sans-serif" }}>{link.label}</span>
                     {active && (
                       <span 
                         style={{
@@ -217,9 +217,9 @@ export const Navbar: React.FC = () => {
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
                 style={{
-                  fontFamily: "var(--font-ui), 'Inter', sans-serif",
+                  fontFamily: "var(--font-space-grotesk), 'Space Grotesk', sans-serif",
                   fontSize: '13px',
-                  fontWeight: isActive(link.href) ? 700 : 500,
+                  fontWeight: isActive(link.href) ? 700 : 600,
                   color: isActive(link.href) ? '#0a0a0c' : '#4b5563',
                   padding: '6px 0',
                   borderBottom: '1px solid #f3f4f6'
@@ -237,7 +237,7 @@ export const Navbar: React.FC = () => {
       <style jsx>{`
         .nav-link-item,
         .nav-link-item * {
-          font-family: var(--font-ui), 'Inter', sans-serif !important;
+          font-family: var(--font-space-grotesk), 'Space Grotesk', sans-serif !important;
         }
         .nav-link-item:hover {
           color: #09090b !important;
