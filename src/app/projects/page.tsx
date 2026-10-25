@@ -113,8 +113,8 @@ export default function ProjectsPage() {
                   margin: 0
                 }}
               >
-                From Idea <br />
-                to Production
+                From Idea to<br />
+                Production
               </h1>
 
               {/* Carousel Buttons (< and >) placed on the left directly under title with clean breathing room */}
