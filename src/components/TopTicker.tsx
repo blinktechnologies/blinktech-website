@@ -45,7 +45,7 @@ export const TopTicker: React.FC = () => {
             display: 'flex',
             alignItems: 'center',
             gap: '6px',
-            fontFamily: "var(--font-ui), 'Inter', sans-serif",
+            fontFamily: "var(--font-space-grotesk), 'Space Grotesk', sans-serif",
             fontWeight: 700,
             fontSize: '11px',
             letterSpacing: '1.8px',
@@ -57,7 +57,7 @@ export const TopTicker: React.FC = () => {
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               display: 'inline-block',
-              fontFamily: "var(--font-ui), 'Inter', sans-serif",
+              fontFamily: "var(--font-space-grotesk), 'Space Grotesk', sans-serif",
               fontWeight: 700,
               color: 'transparent'
             }}
