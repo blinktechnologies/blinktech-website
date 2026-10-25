@@ -25,27 +25,41 @@ const GlobeIcon = ({ size = 11 }: { size?: number }) => (
 );
 
 export const TeamsSection: React.FC<{ isFullPage?: boolean }> = () => {
-  // Exactly 7 Founders matching user's Image 1: Row 1 has 4, Row 2 has 3
+  // Exactly 7 Founders matching user instructions: Row 1 has 4, Row 2 has 3
   const foundersRow1 = [
-    { id: 'f-1', name: 'BYIRINGIRO Emmanuel', role: 'BlinkTech Co-Founder', image: '/images/team/person2_emmanuel.png' },
-    { id: 'f-2', name: 'BYIRINGIRO Emmanuel', role: 'BlinkTech Co-Founder', image: '/images/team/person2_emmanuel.png' },
-    { id: 'f-3', name: 'BYIRINGIRO Emmanuel', role: 'BlinkTech Co-Founder', image: '/images/team/person2_emmanuel.png' },
-    { id: 'f-4', name: 'BYIRINGIRO Emmanuel', role: 'BlinkTech Co-Founder', image: '/images/team/person2_emmanuel.png' },
+    { id: 'f-1', name: 'Bienvenue Alliance', role: 'CEO & FOUNDER', image: '/images/team/person1_bienvenue.png' },
+    { id: 'f-2', name: 'BYIRINGIRO Samuel', role: 'CO-FOUNDER', image: '/images/team/Samuel.png' },
+    { id: 'f-3', name: 'KANEZA Amandine', role: 'CO-FOUNDER', image: '/images/team/Amandine.png' },
+    { id: 'f-4', name: 'BYIRINGIRO Emmanuel', role: 'CO-FOUNDER', image: '/images/team/person2_emmanuel.png' },
   ];
 
   const foundersRow2 = [
-    { id: 'f-5', name: 'BYIRINGIRO Emmanuel', role: 'BlinkTech Co-Founder', image: '/images/team/person2_emmanuel.png' },
-    { id: 'f-6', name: 'BYIRINGIRO Emmanuel', role: 'BlinkTech Co-Founder', image: '/images/team/person2_emmanuel.png' },
-    { id: 'f-7', name: 'BYIRINGIRO Emmanuel', role: 'BlinkTech Co-Founder', image: '/images/team/person2_emmanuel.png' },
+    { id: 'f-5', name: 'Darius NIYONKURU', role: 'CHIEF FINANCIAL OFFICER', image: '/images/team/Darius.png' },
+    { id: 'f-6', name: 'Umurerwa Bonnette', role: 'CHIEF MEDIA AND MARKETING OFFICER', image: '/images/team/person5_bonnette.png' },
+    { id: 'f-7', name: 'ABAYO Moise', role: 'CISO (Chief Information Security Officer)', image: '/images/team/Moise.png' },
   ];
 
-  // Exactly 10 Developers matching user's Image 1 (2 rows of 5)
-  const developers = Array.from({ length: 10 }).map((_, idx) => ({
-    id: `dev-${idx + 1}`,
-    name: 'BIENVENU ALLIANCE',
-    role: 'CEO & FOUNDER',
-    image: '/images/team/dev_bienvenu.png'
-  }));
+  // Software Engineers in Section Below (2 rows of 5)
+  const developers = [
+    {
+      id: 'dev-1',
+      name: 'UWASE UTUJE Sandrine',
+      role: 'SOFTWARE ENGINEER',
+      image: '/images/team/Sandrine.png'
+    },
+    {
+      id: 'dev-2',
+      name: 'TWARIMITSWE Aron',
+      role: 'SOFTWARE ENGINEER',
+      image: '/images/team/aaron_portrait.png'
+    },
+    ...Array.from({ length: 8 }).map((_, idx) => ({
+      id: `dev-${idx + 3}`,
+      name: 'BIENVENU ALLIANCE',
+      role: 'SOFTWARE ENGINEER',
+      image: '/images/team/dev_bienvenu.png'
+    }))
+  ];
 
   return (
     <section 
@@ -283,18 +297,21 @@ export const TeamsSection: React.FC<{ isFullPage?: boolean }> = () => {
 
         .founder-portrait-container {
           width: 100%;
+          height: 224px;
           display: flex;
           justify-content: center;
           align-items: flex-end;
           position: relative;
+          overflow: hidden;
         }
 
         .founder-portrait-img {
           width: 100%;
           max-width: 236px;
-          height: auto;
+          height: 100%;
           display: block;
           object-fit: contain;
+          object-position: bottom center;
           transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .founder-card:hover .founder-portrait-img {
