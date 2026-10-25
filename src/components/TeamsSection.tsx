@@ -45,16 +45,34 @@ export const TeamsSection: React.FC<{ isFullPage?: boolean }> = () => {
       id: 'dev-1',
       name: 'UWASE UTUJE Sandrine',
       role: 'SOFTWARE ENGINEER',
-      image: '/images/team/Sandrine.png'
+      image: '/images/team/sandrine_circle.png'
     },
     {
       id: 'dev-2',
       name: 'TWARIMITSWE Aron',
       role: 'SOFTWARE ENGINEER',
-      image: '/images/team/aaron_portrait.png'
+      image: '/images/team/aron_circle.png'
     },
-    ...Array.from({ length: 8 }).map((_, idx) => ({
-      id: `dev-${idx + 3}`,
+    {
+      id: 'dev-3',
+      name: 'IRAKOZE Prince Bonheur',
+      role: 'SOFTWARE ENGINEER',
+      image: '/images/team/prince_bonheur_circle.png'
+    },
+    {
+      id: 'dev-4',
+      name: 'IMPANO Blessed Winner',
+      role: 'SOFTWARE ENGINEER',
+      image: '/images/team/blessed_winner_circle.png'
+    },
+    {
+      id: 'dev-5',
+      name: 'ISHIMWE Amani Samuel',
+      role: 'SOFTWARE ENGINEER',
+      image: '/images/team/amani_samuel_circle.png'
+    },
+    ...Array.from({ length: 5 }).map((_, idx) => ({
+      id: `dev-${idx + 6}`,
       name: 'BIENVENU ALLIANCE',
       role: 'SOFTWARE ENGINEER',
       image: '/images/team/dev_bienvenu.png'
