@@ -16,30 +16,30 @@ export const TeamPreview: React.FC = () => {
   const membersRow1: MemberData[] = [
     {
       id: 'm-1',
-      name: 'BIENVENUE Alliance',
-      role: 'BlinkTech Founder',
+      name: 'Bienvenue Alliance',
+      role: 'CEO & FOUNDER',
       image: '/images/team/person1_bienvenue.png',
       yOffset: 0
     },
     {
       id: 'm-2',
-      name: 'BYIRINGIRO Emmanuel',
-      role: 'BlinkTech Co-Founder',
-      image: '/images/team/person2_emmanuel.png',
+      name: 'BYIRINGIRO Samuel',
+      role: 'CO-FOUNDER',
+      image: '/images/team/Samuel.png',
       yOffset: 24
     },
     {
       id: 'm-3',
-      name: 'BYIRINGIRO Samuel',
-      role: 'BlinkTech Co-Founder',
-      image: '/images/team/person3_samuel.png',
+      name: 'KANEZA Amandine',
+      role: 'CO-FOUNDER',
+      image: '/images/team/Amandine.png',
       yOffset: 0
     },
     {
       id: 'm-4',
-      name: 'KANEZA Amandine',
-      role: 'BlinkTech Co-Founder',
-      image: '/images/team/person4_amandine.png',
+      name: 'BYIRINGIRO Emmanuel',
+      role: 'CO-FOUNDER',
+      image: '/images/team/person2_emmanuel.png',
       yOffset: 24
     }
   ];
@@ -47,23 +47,23 @@ export const TeamPreview: React.FC = () => {
   const membersRow2: MemberData[] = [
     {
       id: 'm-5',
-      name: 'UMURERWA Bonnette',
-      role: 'Chief Media & Marketing Officer',
-      image: '/images/team/person5_bonnette.png',
+      name: 'Darius NIYONKURU',
+      role: 'CHIEF FINANCIAL OFFICER',
+      image: '/images/team/Darius.png',
       yOffset: 0
     },
     {
       id: 'm-6',
-      name: 'ABAYO Moise',
-      role: 'Chief Information Security Officer',
-      image: '/images/team/person6_moise.png',
+      name: 'Umurerwa Bonnette',
+      role: 'CHIEF MEDIA AND MARKETING OFFICER',
+      image: '/images/team/person5_bonnette.png',
       yOffset: 40
     },
     {
       id: 'm-7',
-      name: 'NIYONKURU Darius',
-      role: 'Chief Financial Officer',
-      image: '/images/team/person7_darius.png',
+      name: 'ABAYO Moise',
+      role: 'CISO (Chief Information Security Officer)',
+      image: '/images/team/Moise.png',
       yOffset: 0
     }
   ];
@@ -250,18 +250,21 @@ export const TeamPreview: React.FC = () => {
 
         .member-portrait-container {
           width: 100%;
+          height: 224px;
           display: flex;
           justify-content: center;
           align-items: flex-end;
           position: relative;
+          overflow: hidden;
         }
 
         .member-portrait-img {
           width: 100%;
           max-width: 238px;
-          height: auto;
+          height: 100%;
           display: block;
           object-fit: contain;
+          object-position: bottom center;
           transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
