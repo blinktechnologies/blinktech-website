@@ -72,9 +72,10 @@ export const BlinkTechTextLogo: React.FC<{ theme?: 'light' | 'dark' }> = ({ them
     <div style={{ display: 'inline-flex', alignItems: 'flex-start', userSelect: 'none', position: 'relative' }}>
       <span 
         style={{ 
-          fontFamily: "'Urbanist', sans-serif",  
+          fontFamily: "'Plus Jakarta Sans', var(--font-heading), sans-serif",  
           fontWeight: 700, 
           fontSize: '28px', 
+          letterSpacing: '-0.02em',
           display: 'inline-flex',
           alignItems: 'baseline',
           color: isLight ? '#0f0f0fff' : '#ffffff'
@@ -84,10 +85,10 @@ export const BlinkTechTextLogo: React.FC<{ theme?: 'light' | 'dark' }> = ({ them
       </span>
       <span 
         style={{ 
-          fontFamily: "'Space Grotesk', sans-serif",
+          fontFamily: "var(--font-ui), 'Inter', sans-serif",
           fontSize: '9.5px', 
           fontWeight: 600, 
-          color: isLight ? '#1c1c1cff' : '#000000', 
+          color: isLight ? '#475569' : '#94a3b8', 
           marginLeft: '3px',
           transform: 'translateY(-3px)'
         }}
