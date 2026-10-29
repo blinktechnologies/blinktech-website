@@ -1,0 +1,21 @@
+{
+  "default_branch": "main",
+  "branches": [
+    "dependabot/npm_and_yarn/npm-dependencies-59d3df6ff5",
+    "main",
+    "origin",
+    "sonia"
+  ],
+  "parent": {
+    "dependabot/npm_and_yarn/npm-dependencies-59d3df6ff5": "main",
+    "main": null,
+    "origin": "main",
+    "sonia": "main"
+  },
+  "order": [
+    "main",
+    "dependabot/npm_and_yarn/npm-dependencies-59d3df6ff5",
+    "origin",
+    "sonia"
+  ]
+}
