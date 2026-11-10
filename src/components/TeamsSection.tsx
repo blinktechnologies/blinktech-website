@@ -27,19 +27,19 @@ const GlobeIcon = ({ size = 11 }: { size?: number }) => (
 export const TeamsSection: React.FC<{ isFullPage?: boolean }> = () => {
   // Exactly 7 Founders matching user instructions: Row 1 has 4, Row 2 has 3
   const foundersRow1 = [
-    { id: 'f-1', name: 'Bienvenue Alliance', role: 'CEO & FOUNDER', image: '/images/team/person1_bienvenue.png' },
+    { id: 'f-1', name: 'Bienvenue Alliance', role: 'CEO & FOUNDER', image: '/images/team/Bienvenue_Alliance.png' },
     { id: 'f-2', name: 'BYIRINGIRO Samuel', role: 'CO-FOUNDER', image: '/images/team/Samuel.png' },
     { id: 'f-3', name: 'KANEZA Amandine', role: 'CO-FOUNDER', image: '/images/team/Amandine.png' },
-    { id: 'f-4', name: 'BYIRINGIRO Emmanuel', role: 'CO-FOUNDER', image: '/images/team/person2_emmanuel.png' },
+    { id: 'f-4', name: 'BYIRINGIRO Emmanuel', role: 'CO-FOUNDER', image: '/images/team/Emmanuel.png' },
   ];
 
   const foundersRow2 = [
     { id: 'f-5', name: 'Darius NIYONKURU', role: 'CHIEF FINANCIAL OFFICER', image: '/images/team/Darius.png' },
-    { id: 'f-6', name: 'Umurerwa Bonnette', role: 'CHIEF MEDIA AND MARKETING OFFICER', image: '/images/team/person5_bonnette.png' },
+    { id: 'f-6', name: 'Umurerwa Bonnette', role: 'CHIEF MEDIA AND MARKETING OFFICER', image: '/images/team/Bonnette.png' },
     { id: 'f-7', name: 'ABAYO Moise', role: 'CISO (Chief Information Security Officer)', image: '/images/team/Moise.png' },
   ];
 
-  // Software Engineers in Section Below (2 rows of 5)
+  // Software Engineers in Section Below
   const developers = [
     {
       id: 'dev-1',
@@ -71,12 +71,24 @@ export const TeamsSection: React.FC<{ isFullPage?: boolean }> = () => {
       role: 'SOFTWARE ENGINEER',
       image: '/images/team/amani_samuel_circle.png'
     },
-    ...Array.from({ length: 5 }).map((_, idx) => ({
-      id: `dev-${idx + 6}`,
-      name: 'BIENVENU ALLIANCE',
+    {
+      id: 'dev-6',
+      name: 'HITAYEZU Frank',
       role: 'SOFTWARE ENGINEER',
-      image: '/images/team/dev_bienvenu.png'
-    }))
+      image: '/images/team/hitayezu_frank_circle.png'
+    },
+    {
+      id: 'dev-7',
+      name: 'IZERE Joshua',
+      role: 'SOFTWARE ENGINEER',
+      image: '/images/team/izere_joshua_circle.png'
+    },
+    {
+      id: 'dev-8',
+      name: 'UWASE Sonia',
+      role: 'SOFTWARE ENGINEER',
+      image: '/images/team/uwase_sonia_circle.png'
+    }
   ];
 
   return (

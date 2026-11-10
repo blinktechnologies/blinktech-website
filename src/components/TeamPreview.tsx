@@ -18,7 +18,7 @@ export const TeamPreview: React.FC = () => {
       id: 'm-1',
       name: 'Bienvenue Alliance',
       role: 'CEO & FOUNDER',
-      image: '/images/team/person1_bienvenue.png',
+      image: '/images/team/Bienvenue_Alliance.png',
       yOffset: 0
     },
     {
@@ -39,7 +39,7 @@ export const TeamPreview: React.FC = () => {
       id: 'm-4',
       name: 'BYIRINGIRO Emmanuel',
       role: 'CO-FOUNDER',
-      image: '/images/team/person2_emmanuel.png',
+      image: '/images/team/Emmanuel.png',
       yOffset: 24
     }
   ];
@@ -56,7 +56,7 @@ export const TeamPreview: React.FC = () => {
       id: 'm-6',
       name: 'Umurerwa Bonnette',
       role: 'CHIEF MEDIA AND MARKETING OFFICER',
-      image: '/images/team/person5_bonnette.png',
+      image: '/images/team/Bonnette.png',
       yOffset: 40
     },
     {
