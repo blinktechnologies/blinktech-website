@@ -27,66 +27,66 @@ const GlobeIcon = ({ size = 11 }: { size?: number }) => (
 export const TeamsSection: React.FC<{ isFullPage?: boolean }> = () => {
   // Exactly 7 Founders matching user instructions: Row 1 has 4, Row 2 has 3
   const foundersRow1 = [
-    { id: 'f-1', name: 'Bienvenue Alliance', role: 'CEO & FOUNDER', image: '/images/team/Bienvenue_Alliance.png' },
-    { id: 'f-2', name: 'BYIRINGIRO Samuel', role: 'CO-FOUNDER', image: '/images/team/Samuel.png' },
-    { id: 'f-3', name: 'KANEZA Amandine', role: 'CO-FOUNDER', image: '/images/team/Amandine.png' },
-    { id: 'f-4', name: 'BYIRINGIRO Emmanuel', role: 'CO-FOUNDER', image: '/images/team/Emmanuel.png' },
+    { id: 'f-1', name: 'BIENVENUE Alliance', role: 'CEO & Founder', image: '/images/team/Bienvenue_Alliance.png' },
+    { id: 'f-2', name: 'BYIRINGIRO Samuel', role: 'BlinkTech Co-Founder', image: '/images/team/Samuel.png' },
+    { id: 'f-3', name: 'KANEZA Amandine', role: 'BlinkTech Co-Founder', image: '/images/team/Amandine.png' },
+    { id: 'f-4', name: 'BYIRINGIRO Emmanuel', role: 'BlinkTech Co-Founder', image: '/images/team/Emmanuel.png' },
   ];
 
   const foundersRow2 = [
-    { id: 'f-5', name: 'Darius NIYONKURU', role: 'CHIEF FINANCIAL OFFICER', image: '/images/team/Darius.png' },
-    { id: 'f-6', name: 'Umurerwa Bonnette', role: 'CHIEF MEDIA AND MARKETING OFFICER', image: '/images/team/Bonnette.png' },
-    { id: 'f-7', name: 'ABAYO Moise', role: 'CISO (Chief Information Security Officer)', image: '/images/team/Moise.png' },
+    { id: 'f-5', name: 'NIYONKURU Darius', role: 'Chief Financial Officer', image: '/images/team/Darius.png' },
+    { id: 'f-6', name: 'UMURERWA Bonnette', role: 'Chief Media & Marketing Officer', image: '/images/team/Bonnette.png' },
+    { id: 'f-7', name: 'ABAYO Moise', role: 'Chief Information Security Officer', image: '/images/team/Moise.png' },
   ];
 
-  // Software Engineers in Section Below
+  // Software Engineers in Section Below (2 balanced rows of 4 for 8 developers)
   const developers = [
     {
       id: 'dev-1',
       name: 'UWASE UTUJE Sandrine',
-      role: 'SOFTWARE ENGINEER',
+      role: 'Software Engineer',
       image: '/images/team/sandrine_circle.png'
     },
     {
       id: 'dev-2',
       name: 'TWARIMITSWE Aron',
-      role: 'SOFTWARE ENGINEER',
+      role: 'Software Engineer',
       image: '/images/team/aron_circle.png'
     },
     {
       id: 'dev-3',
       name: 'IRAKOZE Prince Bonheur',
-      role: 'SOFTWARE ENGINEER',
+      role: 'Software Engineer',
       image: '/images/team/prince_bonheur_circle.png'
     },
     {
       id: 'dev-4',
       name: 'IMPANO Blessed Winner',
-      role: 'SOFTWARE ENGINEER',
+      role: 'Software Engineer',
       image: '/images/team/blessed_winner_circle.png'
     },
     {
       id: 'dev-5',
       name: 'ISHIMWE Amani Samuel',
-      role: 'SOFTWARE ENGINEER',
+      role: 'Software Engineer',
       image: '/images/team/amani_samuel_circle.png'
     },
     {
       id: 'dev-6',
       name: 'HITAYEZU Frank',
-      role: 'SOFTWARE ENGINEER',
+      role: 'Software Engineer',
       image: '/images/team/hitayezu_frank_circle.png'
     },
     {
       id: 'dev-7',
       name: 'IZERE Joshua',
-      role: 'SOFTWARE ENGINEER',
+      role: 'Software Engineer',
       image: '/images/team/izere_joshua_circle.png'
     },
     {
       id: 'dev-8',
       name: 'UWASE Sonia',
-      role: 'SOFTWARE ENGINEER',
+      role: 'Software Engineer',
       image: '/images/team/uwase_sonia_circle.png'
     }
   ];
@@ -179,8 +179,8 @@ export const TeamsSection: React.FC<{ isFullPage?: boolean }> = () => {
           <ScrollReveal delay={160} duration={800} yOffset={20}>
             {/* Row 1: 4 Cards */}
             <div className="founders-row row-1">
-              {foundersRow1.map((founder) => (
-                <div key={founder.id} className="founder-card">
+              {foundersRow1.map((founder, idx) => (
+                <div key={founder.id} className="founder-card" style={{ animationDelay: `${idx * 80}ms` }}>
                   <div className="founder-portrait-container">
                     <img 
                       src={founder.image} 
@@ -199,8 +199,8 @@ export const TeamsSection: React.FC<{ isFullPage?: boolean }> = () => {
 
             {/* Row 2: 3 Cards (Col 4 remains empty as in user reference) */}
             <div className="founders-row row-2">
-              {foundersRow2.map((founder) => (
-                <div key={founder.id} className="founder-card">
+              {foundersRow2.map((founder, idx) => (
+                <div key={founder.id} className="founder-card" style={{ animationDelay: `${(idx + 4) * 80}ms` }}>
                   <div className="founder-portrait-container">
                     <img 
                       src={founder.image} 
@@ -273,8 +273,8 @@ export const TeamsSection: React.FC<{ isFullPage?: boolean }> = () => {
 
           <ScrollReveal delay={180} duration={800} yOffset={20}>
             <div className="developers-grid">
-              {developers.map((dev) => (
-                <div key={dev.id} className="dev-card">
+              {developers.map((dev, idx) => (
+                <div key={dev.id} className="dev-card" style={{ animationDelay: `${idx * 70}ms` }}>
                   <div className="dev-avatar-ring">
                     <img src={dev.image} alt={dev.name} className="dev-avatar" loading="lazy" />
                   </div>
@@ -317,12 +317,23 @@ export const TeamsSection: React.FC<{ isFullPage?: boolean }> = () => {
           display: flex;
           flex-direction: column;
           align-items: center;
-          transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
+          animation: cardStaggerIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+          transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), filter 0.45s ease;
           user-select: none;
         }
+        @keyframes cardStaggerIn {
+          from {
+            opacity: 0;
+            transform: translateY(22px) scale(0.96);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
         .founder-card:hover {
-          transform: translateY(-4px);
-          filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.08));
+          transform: translateY(-6px);
+          filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.1));
         }
 
         .founder-portrait-container {
@@ -342,10 +353,10 @@ export const TeamsSection: React.FC<{ isFullPage?: boolean }> = () => {
           display: block;
           object-fit: contain;
           object-position: bottom center;
-          transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+          transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), filter 0.45s ease;
         }
         .founder-card:hover .founder-portrait-img {
-          transform: scale(1.025);
+          transform: scale(1.045) translateY(-2px);
         }
 
         /* Clean White Pill Badge */
@@ -361,44 +372,45 @@ export const TeamsSection: React.FC<{ isFullPage?: boolean }> = () => {
           text-align: center;
           box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.02);
           border: 1px solid rgba(0, 0, 0, 0.04);
-          transition: transform 0.25s ease, box-shadow 0.25s ease;
+          transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.35s ease;
         }
         .founder-card:hover .founder-badge {
-          transform: translateY(-2px);
-          box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+          transform: translateY(-3px) scale(1.015);
+          box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+          border-color: rgba(0, 0, 0, 0.08);
         }
 
         .founder-name {
           font-family: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif;
-          font-size: 13.5px;
-          font-weight: 800;
-          color: #0f1115;
-          letter-spacing: -0.015em;
-          margin: 0 0 2px;
+          font-size: 14.5px;
+          font-weight: 500;
+          color: #0b0d13;
+          letter-spacing: -0.01em;
+          margin: 0 0 3px;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
         }
 
         .founder-role {
-          font-family: var(--font-inter), 'Inter', sans-serif;
-          font-size: 10.5px;
-          font-weight: 500;
-          color: #64748b;
-          letter-spacing: 0.01em;
+          font-family: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif;
+          font-size: 11.5px;
+          font-weight: 400;
+          color: #6b7280;
+          letter-spacing: 0;
           margin: 0;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
         }
 
-        /* Developers Grid (2 rows of 5) */
+        /* Developers Grid (2 rows of 4 for 8 developers) */
         .developers-grid {
           display: grid;
-          grid-template-columns: repeat(5, 1fr);
-          gap: 34px 18px;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 38px 24px;
           text-align: center;
-          max-width: 1040px;
+          max-width: 980px;
           margin: 0 auto;
         }
 
@@ -406,22 +418,23 @@ export const TeamsSection: React.FC<{ isFullPage?: boolean }> = () => {
           display: flex;
           flex-direction: column;
           align-items: center;
-          transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          animation: cardStaggerIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+          transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
         }
         .dev-card:hover {
-          transform: translateY(-4px);
+          transform: translateY(-6px);
         }
 
         .dev-avatar-ring {
-          width: 96px;
-          height: 96px;
+          width: 104px;
+          height: 104px;
           border-radius: 50%;
           overflow: hidden;
           padding: 2px;
           background: #ffffff;
           box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
           border: 1px solid #e2e8f0;
-          margin-bottom: 11px;
+          margin-bottom: 12px;
           transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
         }
         .dev-card:hover .dev-avatar-ring {
@@ -439,21 +452,19 @@ export const TeamsSection: React.FC<{ isFullPage?: boolean }> = () => {
 
         .dev-name {
           font-family: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif;
-          font-size: 12.5px;
-          font-weight: 800;
-          letter-spacing: 0.2px;
-          color: #0a0a0c;
-          text-transform: uppercase;
-          margin: 0 0 2px;
+          font-size: 14.5px;
+          font-weight: 500;
+          letter-spacing: -0.01em;
+          color: #0b0d13;
+          margin: 0 0 3px;
         }
 
         .dev-role {
-          font-family: var(--font-inter), 'Inter', sans-serif;
-          font-size: 10px;
-          font-weight: 600;
-          color: #64748b;
-          text-transform: uppercase;
-          letter-spacing: 0.3px;
+          font-family: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif;
+          font-size: 11.5px;
+          font-weight: 400;
+          color: #6b7280;
+          letter-spacing: 0;
           margin: 0 0 10px;
         }
 

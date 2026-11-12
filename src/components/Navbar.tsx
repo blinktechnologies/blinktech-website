@@ -12,6 +12,14 @@ export const Navbar: React.FC = () => {
   const pathname = usePathname();
   const [modalOpen, setModalOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  React.useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const navLinks = [
     { label: 'HOME', href: '/' },
@@ -34,9 +42,12 @@ export const Navbar: React.FC = () => {
           position: 'sticky',
           top: 0,
           zIndex: 50,
-          backgroundColor: '#ffffff',
+          backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.92)' : '#ffffff',
+          backdropFilter: scrolled ? 'blur(14px) saturate(180%)' : 'none',
+          WebkitBackdropFilter: scrolled ? 'blur(14px) saturate(180%)' : 'none',
           borderBottom: '1px solid #eeeff2',
-          transition: 'all 0.2s ease'
+          boxShadow: scrolled ? '0 8px 30px rgba(0, 0, 0, 0.04)' : 'none',
+          transition: 'background-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease'
         }}
       >
         <TopTicker />
@@ -239,16 +250,35 @@ export const Navbar: React.FC = () => {
         .nav-link-item * {
           font-family: var(--font-space-grotesk), 'Space Grotesk', sans-serif !important;
         }
+        .nav-link-item {
+          transition: color 0.25s ease, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1) !important;
+        }
+        .nav-link-item::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          width: 0;
+          height: 2px;
+          background-color: #09090b;
+          border-radius: 9999px;
+          transform: translateX(-50%);
+          transition: width 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+        }
         .nav-link-item:hover {
           color: #09090b !important;
+          transform: translateY(-1px);
+        }
+        .nav-link-item:hover::after {
+          width: 16px;
         }
         .start-project-btn:hover {
-          transform: translateY(-1px);
-          box-shadow: 0 12px 24px -2px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.4) !important;
+          transform: translateY(-2px) scale(1.015);
+          box-shadow: 0 14px 28px -2px rgba(0, 0, 0, 0.52), inset 0 1px 1px rgba(255, 255, 255, 0.45) !important;
           filter: brightness(1.08);
         }
         .start-project-btn:active {
-          transform: translateY(0);
+          transform: translateY(0) scale(0.985);
         }
         @media (max-width: 820px) {
           .desktop-nav {
