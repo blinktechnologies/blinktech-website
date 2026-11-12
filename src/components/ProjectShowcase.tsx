@@ -5,6 +5,7 @@ import { ScrollReveal } from './ScrollReveal';
 
 export const ProjectShowcase: React.FC = () => {
   const [activeSlide, setActiveSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   const projects = [
     {
@@ -32,6 +33,14 @@ export const ProjectShowcase: React.FC = () => {
       image: '/images/project_fleet_telematics.png'
     }
   ];
+
+  React.useEffect(() => {
+    if (isPaused) return;
+    const timer = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % projects.length);
+    }, 4800);
+    return () => clearInterval(timer);
+  }, [isPaused, projects.length]);
 
   const current = projects[activeSlide];
 
@@ -106,8 +115,34 @@ export const ProjectShowcase: React.FC = () => {
 
         {/* Main Showcase Card matching exact design */}
         <ScrollReveal delay={160} duration={800} yOffset={24}>
-          <div className="showcase-card">
-            {/* Dark Media Preview Box with built-in stepped pixel corners */}
+          <div 
+            className="showcase-card"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
+            {/* Outer Stepped Pixel Pattern (Outside the dark photo/video frame) */}
+            <div className="project-corner-pixel top-left" aria-hidden="true">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                <rect x="0" y="0" width="16" height="16" fill="#f8fafc" />
+                <rect x="16" y="0" width="16" height="16" fill="#f8fafc" />
+                <rect x="0" y="16" width="16" height="16" fill="#f8fafc" />
+                <rect x="16" y="16" width="16" height="16" fill="#ffffff" />
+                <rect x="32" y="16" width="16" height="16" fill="#f8fafc" />
+                <rect x="0" y="32" width="16" height="16" fill="#f8fafc" />
+              </svg>
+            </div>
+            <div className="project-corner-pixel top-right" aria-hidden="true">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                <rect x="16" y="0" width="16" height="16" fill="#f8fafc" />
+                <rect x="32" y="0" width="16" height="16" fill="#f8fafc" />
+                <rect x="0" y="16" width="16" height="16" fill="#f8fafc" />
+                <rect x="16" y="16" width="16" height="16" fill="#ffffff" />
+                <rect x="32" y="16" width="16" height="16" fill="#f8fafc" />
+                <rect x="32" y="32" width="16" height="16" fill="#f8fafc" />
+              </svg>
+            </div>
+
+            {/* Dark Media Preview Box with clean photo inside */}
             <div className="media-preview-box">
               <img 
                 key={current.id}
@@ -130,7 +165,7 @@ export const ProjectShowcase: React.FC = () => {
             </div>
 
             {/* Bottom Details Row */}
-            <div className="showcase-details-row">
+            <div key={`details-${current.id}`} className="showcase-details-row">
               <h3 className="project-heading-title">{current.title}</h3>
 
               <div className="project-description-box">
@@ -144,6 +179,7 @@ export const ProjectShowcase: React.FC = () => {
 
       <style jsx>{`
         .showcase-card {
+          position: relative;
           background: #ffffff;
           border: 1px solid #e5e7eb;
           border-radius: 26px;
@@ -156,6 +192,25 @@ export const ProjectShowcase: React.FC = () => {
 
         .showcase-card:hover {
           box-shadow: 0 18px 48px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Exterior Corner Pixel Accents (positioned on outside border of media preview) */
+        .project-corner-pixel {
+          position: absolute;
+          z-index: 4;
+          pointer-events: none;
+          user-select: none;
+          filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.04));
+        }
+
+        .project-corner-pixel.top-left {
+          top: 10px;
+          left: 10px;
+        }
+
+        .project-corner-pixel.top-right {
+          top: 10px;
+          right: 10px;
         }
 
         /* Dark Media Preview Box */
@@ -176,23 +231,25 @@ export const ProjectShowcase: React.FC = () => {
           height: auto;
           display: block;
           object-fit: cover;
-          animation: fadeInSlide 0.4s ease-out;
-          transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          animation: fadeInSlide 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+          transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         @keyframes fadeInSlide {
           from {
-            opacity: 0.82;
-            transform: scale(0.99);
+            opacity: 0;
+            transform: scale(0.975) translateY(6px);
+            filter: blur(4px);
           }
           to {
             opacity: 1;
-            transform: scale(1);
+            transform: scale(1) translateY(0);
+            filter: blur(0px);
           }
         }
 
         .showcase-card:hover .showcase-laptop-img {
-          transform: scale(1.012);
+          transform: scale(1.016);
         }
 
         /* Slider Dots */
@@ -206,22 +263,22 @@ export const ProjectShowcase: React.FC = () => {
         .dot-pill {
           width: 7px;
           height: 7px;
-          border-radius: 50%;
+          border-radius: 999px;
           background-color: #d1d5db;
           border: none;
           padding: 0;
           cursor: pointer;
-          transition: background-color 0.25s ease, transform 0.25s ease;
+          transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.25s ease, transform 0.25s ease;
         }
 
         .dot-pill:hover {
           background-color: #94a3b8;
-          transform: scale(1.2);
+          transform: scale(1.15);
         }
 
         .dot-active {
+          width: 24px;
           background-color: #0f172a;
-          transform: scale(1.25);
         }
 
         /* Bottom Details */
@@ -231,6 +288,18 @@ export const ProjectShowcase: React.FC = () => {
           justify-content: space-between;
           padding: 0 12px;
           gap: 32px;
+          animation: detailsFadeIn 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        @keyframes detailsFadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(8px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
 
         .project-heading-title {

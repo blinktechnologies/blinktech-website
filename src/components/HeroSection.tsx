@@ -357,22 +357,22 @@ export const HeroSection: React.FC = () => {
       <StartProjectModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
 
       <style jsx>{`
-        /* Hero Load Choreography */
+        /* Hero Load Choreography - zero layout shift, seamless entrance */
         .hero-ai-tag-wrapper {
           text-align: center;
           padding-top: 64px;
           padding-bottom: 60px;
           position: relative;
           z-index: 5;
-          animation: dropTag 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+          animation: dropTag 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
         }
 
         .hero-we-craft {
-          animation: slideFromLeft 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+          animation: heroFadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
         }
 
         .hero-impact-container {
-          animation: slideFromRight 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+          animation: heroFadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
         }
 
         .center-bt-card {
@@ -388,7 +388,7 @@ export const HeroSection: React.FC = () => {
           border: 1px dashed #cbd5e1;
           flex-shrink: 0;
           z-index: 5;
-          animation: popCenter 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+          animation: heroFadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
           transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.3s ease;
         }
 
@@ -425,11 +425,11 @@ export const HeroSection: React.FC = () => {
         }
 
         .hero-subtitle-box {
-          animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+          animation: heroFadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
         }
 
         .hero-cta-buttons {
-          animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+          animation: heroFadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both;
         }
 
         .hero-band-wrapper {
@@ -507,7 +507,7 @@ export const HeroSection: React.FC = () => {
         @keyframes dropTag {
           from {
             opacity: 0;
-            transform: translateY(-16px);
+            transform: translateY(-8px);
           }
           to {
             opacity: 1;
@@ -515,43 +515,10 @@ export const HeroSection: React.FC = () => {
           }
         }
 
-        @keyframes slideFromLeft {
+        @keyframes heroFadeIn {
           from {
             opacity: 0;
-            transform: translateX(-32px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-
-        @keyframes slideFromRight {
-          from {
-            opacity: 0;
-            transform: translateX(32px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-
-        @keyframes popCenter {
-          from {
-            opacity: 0;
-            transform: scale(0.92);
-          }
-          to {
-            opacity: 1;
-            transform: scale(1);
-          }
-        }
-
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(18px);
+            transform: translateY(6px);
           }
           to {
             opacity: 1;

@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans, Inter, Outfit, Space_Grotesk, Urbanist } from 'next/
 import './globals.css';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
+import { PageLoader } from '@/components/PageLoader';
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -44,7 +45,28 @@ export const metadata: Metadata = {
   description: 'Blink-Tech architects innovative digital products, robust enterprise cloud systems, and AI automation for visionary enterprises worldwide.',
   keywords: 'Blink-Tech, software engineering, AI systems, cloud solutions, product development, East Africa tech',
   icons: {
-    icon: '/favicon.ico',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/images/bt-logo.png', type: 'image/png' },
+      { url: '/icon.png', type: 'image/png', sizes: '192x192' }
+    ],
+    shortcut: '/favicon.ico',
+    apple: [
+      { url: '/images/bt-logo.png' },
+      { url: '/apple-icon.png', sizes: '180x180' }
+    ]
+  },
+  openGraph: {
+    title: 'Blink-Tech Ltd | Next-Gen Tech Solutions Built in a Blink',
+    description: 'Blink-Tech architects innovative digital products, robust enterprise cloud systems, and AI automation for visionary enterprises worldwide.',
+    images: [
+      {
+        url: '/images/bt-logo.png',
+        width: 512,
+        height: 512,
+        alt: 'Blink-Tech Logo'
+      }
+    ]
   }
 };
 
@@ -64,6 +86,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${plusJakartaSans.className} ${plusJakartaSans.variable} ${inter.variable}`} suppressHydrationWarning>
+        <PageLoader />
         <Navbar />
         <main>{children}</main>
         <Footer />
