@@ -12,25 +12,36 @@ export const ProjectShowcase: React.FC = () => {
       id: 'inziralink',
       title: 'Inziralink',
       description: 'A design of a platform that helps people transport goods easily just connecting companies to transport systems to ensure the safety and efficiency of transportation of Goods.',
-      image: '/images/project_inziralink_exact.png'
+      image: '/images/project_inziralink_exact.png',
+      projectUrl: null
     },
     {
-      id: 'ai-automation',
-      title: 'AI Automation Platform',
-      description: 'Autonomous neural agent architecture and natural language control system enabling automated customer resolution, pipeline execution, and predictive enterprise intelligence.',
-      image: '/images/project_ai_automation.png'
+      id: 'restohive',
+      title: 'RestoHive',
+      description: 'Resto Hive is an all-in-one restaurant management solution designed to simplify operations, boost efficiency, and enhance customer experiences. From POS and menu management to reservations, inventory, and payments, Resto Hive provides restaurants with the tools they need to grow and thrive in today’s fast-paced food industry.',
+      image: '/images/project_restohive.png',
+      projectUrl: 'https://restohive.com/'
     },
     {
-      id: 'fintech-settlement',
-      title: 'FinTech Settlement Core',
-      description: 'High-throughput regional payment orchestration and automated ISO 20022 reconciliation engine designed for seamless cross-border multi-currency African trade.',
-      image: '/images/project_fintech_settlement.png'
+      id: 'thepressradio',
+      title: 'Thepressradio.com',
+      description: 'ThePressRadio.com is a dynamic African-focused news and media platform delivering timely, credible stories from across Africa and the world. It covers diverse topics including politics, business, sports, lifestyle, and entertainment, while also offering an online radio station and space for public opinions.',
+      image: '/images/project_thepressradio_com.png',
+      projectUrl: 'https://thepressradio.com'
     },
     {
-      id: 'telematics-fleet',
-      title: 'Logistics Fleet Telematics',
-      description: 'Connected telemetry and automated transit telemetry suite providing real-time GPS fleet visibility, corridor ETA monitoring, fuel analytics, and driver safety reporting.',
-      image: '/images/project_fleet_telematics.png'
+      id: 'mazi-care',
+      title: 'Mazi-care website and web-app',
+      description: 'MaziCare is a platform that connects families in Greece with verified caregivers, allowing users to easily create an account, describe their loved one’s needs, and receive personalized caregiver recommendations.',
+      image: '/images/project_mazi_care_website_and_web_app.png',
+      projectUrl: 'https://mazicare.gr/'
+    },
+    {
+      id: 'wordpress-ecommerce',
+      title: 'WordPress eCommerce Website',
+      description: 'Developed a fully functional eCommerce platform using WordPress and WooCommerce, enabling seamless product browsing, cart management, and secure checkout. Implemented responsive design, product categorization, inventory management, and payment integration to deliver a smooth user experience across devices.',
+      image: '/images/project_wordpress_ecommerce_website.png',
+      projectUrl: 'https://www.blissfultreasureinterior.com'
     }
   ];
 
@@ -152,21 +163,61 @@ export const ProjectShowcase: React.FC = () => {
               />
             </div>
 
-            {/* Pagination Slider Dots */}
-            <div className="showcase-dots-row">
-              {projects.map((proj, idx) => (
+            {/* Pagination Controls Row */}
+            <div className="showcase-controls-row">
+              <div className="showcase-dots-row">
+                {projects.map((proj, idx) => (
+                  <button
+                    key={proj.id}
+                    onClick={() => setActiveSlide(idx)}
+                    className={`dot-pill ${activeSlide === idx ? 'dot-active' : ''}`}
+                    aria-label={`Go to ${proj.title}`}
+                  />
+                ))}
+              </div>
+
+              {/* Slide Counter & Arrow Nav */}
+              <div className="showcase-nav-actions">
+                <span className="slide-counter-badge">
+                  0{activeSlide + 1} / 0{projects.length}
+                </span>
                 <button
-                  key={proj.id}
-                  onClick={() => setActiveSlide(idx)}
-                  className={`dot-pill ${activeSlide === idx ? 'dot-active' : ''}`}
-                  aria-label={`Go to ${proj.title}`}
-                />
-              ))}
+                  type="button"
+                  onClick={() => setActiveSlide((prev) => (prev === 0 ? projects.length - 1 : prev - 1))}
+                  className="showcase-arrow-btn"
+                  aria-label="Previous slide"
+                >
+                  ‹
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveSlide((prev) => (prev + 1) % projects.length)}
+                  className="showcase-arrow-btn"
+                  aria-label="Next slide"
+                >
+                  ›
+                </button>
+              </div>
             </div>
 
             {/* Bottom Details Row */}
             <div key={`details-${current.id}`} className="showcase-details-row">
-              <h3 className="project-heading-title">{current.title}</h3>
+              <div className="project-title-group">
+                <h3 className="project-heading-title">{current.title}</h3>
+                {current.projectUrl && (
+                  <a
+                    href={current.projectUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="project-live-link"
+                  >
+                    <span>Visit Live Site</span>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M7 17l9.2-9.2M17 17V7H7" />
+                    </svg>
+                  </a>
+                )}
+              </div>
 
               <div className="project-description-box">
                 <span className="desc-heading-label">DESCRIPTION</span>
@@ -252,12 +303,56 @@ export const ProjectShowcase: React.FC = () => {
           transform: scale(1.016);
         }
 
-        /* Slider Dots */
+        /* Slider Controls */
+        .showcase-controls-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin: 20px 8px 18px;
+        }
+
         .showcase-dots-row {
           display: flex;
           align-items: center;
           gap: 8px;
-          margin: 22px 0 20px 10px;
+        }
+
+        .showcase-nav-actions {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .slide-counter-badge {
+          font-family: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif;
+          font-size: 11.5px;
+          font-weight: 600;
+          color: #94a3b8;
+          letter-spacing: 0.5px;
+          margin-right: 4px;
+        }
+
+        .showcase-arrow-btn {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          border: 1px solid #e2e8f0;
+          background: #ffffff;
+          color: #334155;
+          font-size: 18px;
+          line-height: 1;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .showcase-arrow-btn:hover {
+          background: #0f172a;
+          color: #ffffff;
+          border-color: #0f172a;
+          transform: translateY(-1px);
         }
 
         .dot-pill {
@@ -289,6 +384,31 @@ export const ProjectShowcase: React.FC = () => {
           padding: 0 12px;
           gap: 32px;
           animation: detailsFadeIn 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .project-title-group {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          flex-shrink: 0;
+        }
+
+        .project-live-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          font-family: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif;
+          font-size: 12.5px;
+          font-weight: 600;
+          color: #2563eb;
+          text-decoration: none;
+          transition: all 0.2s ease;
+          width: fit-content;
+        }
+
+        .project-live-link:hover {
+          color: #1d4ed8;
+          transform: translateX(2px);
         }
 
         @keyframes detailsFadeIn {
