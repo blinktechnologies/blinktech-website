@@ -372,8 +372,8 @@ export default function ProjectsPage() {
       <StartProjectModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
 
       <style jsx>{`
-        /* ─── ChevronDot base (no inline width/height) ───────────────── */
-        .projects-chevron-dot {
+        /* ─── ChevronDot: must use :global() because component is outside scope ── */
+        :global(.projects-chevron-dot) {
           width: 40px;
           height: 40px;
         }
@@ -397,20 +397,20 @@ export default function ProjectsPage() {
           gap: 16px;
         }
 
-        /* Row-3 and items 6-10 hidden below 1240px */
-        .projects-row3-desktop-only {
+        /* Row-3 and items 6-10: visible on all sizes, hidden classes inactive until needed */
+        :global(.projects-row3-desktop-only) {
           display: none;
         }
-        .projects-chevron-desktop-only {
+        :global(.projects-chevron-desktop-only) {
           display: none;
         }
 
         @media (min-width: 1240px) {
-          .projects-row3-desktop-only {
-            display: flex;
+          :global(.projects-row3-desktop-only) {
+            display: flex !important;
           }
-          .projects-chevron-desktop-only {
-            display: inline-block;
+          :global(.projects-chevron-desktop-only) {
+            display: inline-block !important;
           }
         }
 
@@ -530,7 +530,7 @@ export default function ProjectsPage() {
             padding-top: 6px !important;
             flex-shrink: 0 !important;
           }
-          .projects-chevron-dot {
+          :global(.projects-chevron-dot) {
             width: 36px !important;
             height: 36px !important;
           }
@@ -633,7 +633,7 @@ export default function ProjectsPage() {
             padding-top: 4px !important;
             flex-shrink: 0 !important;
           }
-          .projects-chevron-dot {
+          :global(.projects-chevron-dot) {
             width: 32px !important;
             height: 32px !important;
           }
@@ -695,7 +695,7 @@ export default function ProjectsPage() {
             gap: 10px !important;
             padding-top: 3px !important;
           }
-          .projects-chevron-dot {
+          :global(.projects-chevron-dot) {
             width: 27px !important;
             height: 27px !important;
           }
