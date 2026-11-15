@@ -954,7 +954,7 @@ const ChevronCluster: React.FC<{
   direction, 
   opacity = 1, 
   color = '#0d2840', 
-  size = 22
+  size = 24
 }) => {
   const isRight = direction === 'right';
   return (
