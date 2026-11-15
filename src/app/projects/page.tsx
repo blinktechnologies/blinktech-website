@@ -448,7 +448,7 @@ export default function ProjectsPage() {
 
         /* ─── Laptop: 1081px – 1239px ──────────────────────────────── */
         @media (max-width: 1239px) and (min-width: 1081px) {
-          :global(.projects-chevron-dot) {
+          .projects-chevron-dot {
             width: 26px !important;
             height: 26px !important;
           }
@@ -469,7 +469,7 @@ export default function ProjectsPage() {
 
         /* ─── Tablet Landscape: 861px – 1080px ─────────────────────── */
         @media (max-width: 1080px) and (min-width: 861px) {
-          :global(.projects-chevron-dot) {
+          .projects-chevron-dot {
             width: 36px !important;
             height: 36px !important;
           }
