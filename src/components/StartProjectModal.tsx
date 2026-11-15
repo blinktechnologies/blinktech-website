@@ -74,7 +74,8 @@ export const StartProjectModal: React.FC<StartProjectModalProps> = ({ isOpen, on
           boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.35)',
           border: '1px solid #e5e7eb',
           overflow: 'hidden',
-          position: 'relative'
+          position: 'relative',
+          fontFamily: "var(--font-outfit), 'Outfit', sans-serif"
         }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -162,7 +163,8 @@ export const StartProjectModal: React.FC<StartProjectModalProps> = ({ isOpen, on
                       border: '1px solid #d1d5db',
                       fontSize: '14px',
                       outline: 'none',
-                      backgroundColor: '#f9fafb'
+                      backgroundColor: '#f9fafb',
+                      fontFamily: "var(--font-outfit), 'Outfit', sans-serif"
                     }}
                   />
                 </div>
@@ -181,7 +183,8 @@ export const StartProjectModal: React.FC<StartProjectModalProps> = ({ isOpen, on
                       border: '1px solid #d1d5db',
                       fontSize: '14px',
                       outline: 'none',
-                      backgroundColor: '#f9fafb'
+                      backgroundColor: '#f9fafb',
+                      fontFamily: "var(--font-outfit), 'Outfit', sans-serif"
                     }}
                   />
                 </div>
@@ -200,7 +203,8 @@ export const StartProjectModal: React.FC<StartProjectModalProps> = ({ isOpen, on
                       border: '1px solid #d1d5db',
                       fontSize: '14px',
                       outline: 'none',
-                      backgroundColor: '#f9fafb'
+                      backgroundColor: '#f9fafb',
+                      fontFamily: "var(--font-outfit), 'Outfit', sans-serif"
                     }}
                   >
                     <option>Product Development</option>
@@ -223,7 +227,8 @@ export const StartProjectModal: React.FC<StartProjectModalProps> = ({ isOpen, on
                       border: '1px solid #d1d5db',
                       fontSize: '14px',
                       outline: 'none',
-                      backgroundColor: '#f9fafb'
+                      backgroundColor: '#f9fafb',
+                      fontFamily: "var(--font-outfit), 'Outfit', sans-serif"
                     }}
                   >
                     <option>&lt; $5,000</option>
@@ -249,7 +254,8 @@ export const StartProjectModal: React.FC<StartProjectModalProps> = ({ isOpen, on
                     fontSize: '14px',
                     outline: 'none',
                     backgroundColor: '#f9fafb',
-                    resize: 'vertical'
+                    resize: 'vertical',
+                    fontFamily: "var(--font-outfit), 'Outfit', sans-serif"
                   }}
                 />
               </div>
@@ -286,6 +292,17 @@ export const StartProjectModal: React.FC<StartProjectModalProps> = ({ isOpen, on
       </div>
 
       <style jsx>{`
+        .modal-card input,
+        .modal-card select,
+        .modal-card textarea {
+          font-family: var(--font-outfit), 'Outfit', sans-serif !important;
+        }
+
+        .modal-card input::placeholder,
+        .modal-card textarea::placeholder {
+          font-family: var(--font-outfit), 'Outfit', sans-serif !important;
+        }
+
         .modal-overlay {
           animation: backdropFade 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }

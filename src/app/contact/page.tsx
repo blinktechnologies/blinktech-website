@@ -595,7 +595,7 @@ export default function ContactPage() {
           border-radius: 10px;
           border: 1px solid #e2e8f0;
           background-color: #ffffff;
-          font-family: 'Urbanist', sans-serif;
+          font-family: var(--font-outfit), 'Outfit', sans-serif !important;
           font-size: 13.5px;
           color: #0f172a;
           outline: none;
@@ -603,6 +603,7 @@ export default function ContactPage() {
         }
 
         .clean-form-input::placeholder {
+          font-family: var(--font-outfit), 'Outfit', sans-serif !important;
           color: #9ca3af;
           font-weight: 400;
         }
