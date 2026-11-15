@@ -71,14 +71,16 @@ export const BlinkTechTextLogo: React.FC<{ theme?: 'light' | 'dark' }> = ({ them
   return (
     <div style={{ display: 'inline-flex', alignItems: 'flex-start', userSelect: 'none', position: 'relative' }}>
       <span 
+        className="blink-tech-logo-text"
         style={{ 
           fontFamily: "'Plus Jakarta Sans', var(--font-heading), sans-serif",  
           fontWeight: 700, 
-          fontSize: '28px', 
+          fontSize: 'clamp(17px, 2.4vw, 28px)',
           letterSpacing: '-0.02em',
           display: 'inline-flex',
           alignItems: 'baseline',
-          color: isLight ? '#0f0f0fff' : '#ffffff'
+          color: isLight ? '#0f0f0fff' : '#ffffff',
+          whiteSpace: 'nowrap'
         }}
       >
         Blink-Tech
@@ -86,11 +88,12 @@ export const BlinkTechTextLogo: React.FC<{ theme?: 'light' | 'dark' }> = ({ them
       <span 
         style={{ 
           fontFamily: "var(--font-ui), 'Inter', sans-serif",
-          fontSize: '9.5px', 
+          fontSize: '9px', 
           fontWeight: 600, 
           color: isLight ? '#475569' : '#94a3b8', 
-          marginLeft: '3px',
-          transform: 'translateY(-3px)'
+          marginLeft: '2px',
+          transform: 'translateY(-2px)',
+          whiteSpace: 'nowrap'
         }}
       >
         Ltd

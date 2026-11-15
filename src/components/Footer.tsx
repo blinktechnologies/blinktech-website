@@ -2,12 +2,98 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { ChevronUp } from 'lucide-react';
 
 export const Footer: React.FC = () => {
+  const pathname = usePathname();
+  const isProjectsPage = pathname === '/projects';
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  if (isProjectsPage) {
+    return (
+      <footer 
+        style={{
+          backgroundColor: '#000000',
+          color: '#ffffff',
+          position: 'relative',
+          overflow: 'hidden',
+          borderTop: 'none',
+          fontFamily: "'Urbanist', sans-serif",
+          padding: '16px 0'
+        }}
+      >
+        <div 
+          className="container"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: '16px'
+          }}
+        >
+          {/* Social Links */}
+          <div style={{ display: 'flex', gap: '22px', fontWeight: 500, fontSize: '13px' }}>
+            <a href="https://instagram.com" target="_blank" rel="noreferrer" className="footer-sub-link">Instagram</a>
+            <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="footer-sub-link">Linkedin</a>
+            <a href="https://dribbble.com" target="_blank" rel="noreferrer" className="footer-sub-link">Dribble</a>
+            <a href="https://behance.net" target="_blank" rel="noreferrer" className="footer-sub-link">Behance</a>
+          </div>
+
+          {/* Copyright */}
+          <div style={{ textAlign: 'center', fontSize: '12.5px', color: '#9ca3af' }}>
+            © 2026 BlinkTech. All Rights Reserved
+          </div>
+
+          {/* Back to Home Button */}
+          <button 
+            onClick={scrollToTop}
+            className="footer-back-to-home"
+            aria-label="Back to top of home page"
+          >
+            <span>Back to Home</span>
+            <ChevronUp size={15} className="back-arrow-icon" />
+          </button>
+        </div>
+        <style jsx>{`
+          .footer-sub-link {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.2s ease, transform 0.2s ease;
+          }
+          .footer-sub-link:hover {
+            color: #60a5fa;
+            transform: translateY(-1px);
+          }
+          .footer-back-to-home {
+            background: none;
+            border: none;
+            color: #ffffff;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            font-family: inherit;
+            padding: 0;
+            transition: opacity 0.2s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+          }
+          .footer-back-to-home:hover {
+            opacity: 0.85;
+            transform: translateY(-2px);
+          }
+          .back-arrow-icon {
+            transition: transform 0.25s ease;
+          }
+        `}</style>
+      </footer>
+    );
+  }
 
   return (
     <footer 
@@ -156,27 +242,16 @@ export const Footer: React.FC = () => {
             />
           </div>
 
-          {/* Typography: BLINK-TECH with superscript Ltd */}
-          <div 
-            className="footer-brand-lockup"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              position: 'relative',
-              lineHeight: 1
-            }}
-          >
+          {/* Typography: BLINK-TECH with metallic gradient on TECH */}
+          <div style={{ position: 'relative', display: 'inline-block' }}>
             <h2 
-              className="footer-brand-title"
               style={{
-                fontFamily: "'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif",
+                fontFamily: "'Urbanist', sans-serif",
+                fontSize: 'clamp(36px, 5vw, 64px)',
                 fontWeight: 900,
-                fontSize: 'clamp(36px, 5.5vw, 68px)',
-                letterSpacing: '1.5px',
-                textTransform: 'uppercase',
-                margin: 0,
-                padding: 0,
+                letterSpacing: '-0.02em',
                 lineHeight: 1,
+                margin: 0,
                 display: 'inline-flex',
                 alignItems: 'baseline'
               }}
@@ -293,9 +368,9 @@ export const Footer: React.FC = () => {
             <a href="https://behance.net" target="_blank" rel="noreferrer" className="footer-sub-link">Behance</a>
           </div>
 
-          {/* Exact Copyright notice as in image */}
+          {/* Copyright */}
           <div style={{ color: '#9ca3af', textAlign: 'center', letterSpacing: '0.2px' }}>
-            © 2026 Agenio. All Rights Reserved
+            © 2026 BlinkTech. All Rights Reserved
           </div>
 
           {/* Back to Home Button with upward chevron */}
@@ -330,7 +405,8 @@ export const Footer: React.FC = () => {
 
         .footer-sub-link {
           color: #ffffff;
-          transition: color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+          text-decoration: none;
+          transition: color 0.2s ease, transform 0.2s ease;
           display: inline-block;
         }
         .footer-sub-link:hover {

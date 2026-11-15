@@ -27,21 +27,22 @@ export const TopTicker: React.FC = () => {
       <div className="ticker-ambient-glow" />
 
       <div 
+        className="ticker-inner"
         style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           width: '100%',
           maxWidth: '1240px',
-          padding: '0 24px',
+          padding: '0 16px',
           position: 'relative',
           zIndex: 2
         }}
       >
         {/* Left Directional Chevron Stream: points right >>> */}
         <div 
-          className="ticker-chevron-track left"
-          style={{ display: 'flex', gap: '28px', alignItems: 'center' }}
+          className="ticker-chevrons ticker-chevrons-left ticker-chevron-track left"
+          style={{ display: 'flex', gap: '20px', alignItems: 'center' }}
           title="Direction indicator"
         >
           {[0, 1, 2, 3].map((idx) => (
@@ -51,7 +52,7 @@ export const TopTicker: React.FC = () => {
 
         {/* Center Live Indicator: WE ARE ONLINE with enhanced radar beacon */}
         <div 
-          className="live-status-pill"
+          className="ticker-center live-status-pill"
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -65,6 +66,8 @@ export const TopTicker: React.FC = () => {
             background: 'rgba(255, 255, 255, 0.04)',
             border: '1px solid rgba(255, 255, 255, 0.08)',
             backdropFilter: 'blur(8px)',
+            flexShrink: 0,
+            whiteSpace: 'nowrap',
             transition: 'all 0.3s cubic-bezier(0.22, 1, 0.36, 1)',
             cursor: 'default'
           }}
@@ -102,8 +105,8 @@ export const TopTicker: React.FC = () => {
 
         {/* Right Directional Chevron Stream: points left <<< */}
         <div 
-          className="ticker-chevron-track right"
-          style={{ display: 'flex', gap: '28px', alignItems: 'center' }}
+          className="ticker-chevrons ticker-chevrons-right ticker-chevron-track right"
+          style={{ display: 'flex', gap: '20px', alignItems: 'center' }}
           title="Direction indicator"
         >
           {[0, 1, 2, 3, 4].map((idx) => (
@@ -122,14 +125,8 @@ export const TopTicker: React.FC = () => {
         }
 
         @keyframes ambientSweep {
-          0%, 100% {
-            opacity: 0.3;
-            transform: translateX(-30%);
-          }
-          50% {
-            opacity: 0.8;
-            transform: translateX(30%);
-          }
+          0%, 100% { opacity: 0.3; transform: translateX(-30%); }
+          50%       { opacity: 0.8; transform: translateX(30%); }
         }
 
         .live-status-pill:hover {
@@ -158,13 +155,72 @@ export const TopTicker: React.FC = () => {
         }
 
         @keyframes radarPing {
-          0% {
-            transform: scale(0.6);
-            opacity: 0.9;
+          0%        { transform: scale(0.6); opacity: 0.9; }
+          70%, 100% { transform: scale(2.4); opacity: 0; }
+        }
+
+        .ticker-chevron {
+          opacity: 0.45;
+          transition: opacity 0.3s ease, transform 0.3s ease;
+          animation: chevronWave 2.4s ease-in-out infinite;
+        }
+
+        .ticker-chevron:hover {
+          opacity: 1 !important;
+          filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
+        }
+
+        @keyframes chevronWave {
+          0%, 100% { opacity: 0.35; }
+          50%       { opacity: 0.95; transform: translateX(-3px); filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.5)); }
+        }
+
+        /* ─── Tablet: ≤768px ─────────────────────────────── */
+        @media (max-width: 768px) {
+          .ticker-chevrons-left > span:nth-child(n+3),
+          .ticker-chevrons-right > span:nth-child(n+4) {
+            display: none !important;
           }
-          70%, 100% {
-            transform: scale(2.4);
-            opacity: 0;
+          .ticker-chevrons {
+            gap: 14px !important;
+          }
+          .ticker-center {
+            font-size: 10px !important;
+            letter-spacing: 1.2px !important;
+          }
+        }
+
+        /* ─── Mobile: ≤480px ─────────────────────────────── */
+        @media (max-width: 480px) {
+          .ticker-inner {
+            padding: 0 10px !important;
+          }
+          .ticker-chevrons-left > span:nth-child(n+2),
+          .ticker-chevrons-right > span:nth-child(n+3) {
+            display: none !important;
+          }
+          .ticker-chevrons {
+            gap: 10px !important;
+          }
+          .ticker-center {
+            font-size: 9.5px !important;
+            letter-spacing: 1px !important;
+            gap: 4px !important;
+            padding: 3px 8px !important;
+          }
+        }
+
+        /* ─── Very small: ≤360px ─────────────────────────── */
+        @media (max-width: 360px) {
+          .ticker-chevrons-left > span:nth-child(n+1) {
+            display: none !important;
+          }
+          .ticker-chevrons-right > span:nth-child(n+2) {
+            display: none !important;
+          }
+          .ticker-center {
+            font-size: 9px !important;
+            letter-spacing: 0.8px !important;
           }
         }
       `}</style>
@@ -174,7 +230,7 @@ export const TopTicker: React.FC = () => {
 
 const PixelTickerChevron: React.FC<{ direction: 'left' | 'right'; delay?: number }> = ({ direction, delay = 0 }) => (
   <span
-    className={`ticker-chevron chevron-${direction}`}
+    className="ticker-chevron"
     style={{
       width: '10px',
       height: '13px',
@@ -192,30 +248,5 @@ const PixelTickerChevron: React.FC<{ direction: 'left' | 'right'; delay?: number
       flexShrink: 0,
       animationDelay: `${delay}ms`
     }}
-  >
-    <style jsx>{`
-      .ticker-chevron {
-        opacity: 0.45;
-        transition: opacity 0.3s ease, transform 0.3s ease;
-        animation: chevronWave 2.4s ease-in-out infinite;
-      }
-
-      .ticker-chevron:hover {
-        opacity: 1 !important;
-        filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
-      }
-
-      @keyframes chevronWave {
-        0%, 100% {
-          opacity: 0.35;
-          transform: ${direction === 'right' ? 'scaleX(-1) translateX(0)' : 'translateX(0)'};
-        }
-        50% {
-          opacity: 0.95;
-          transform: ${direction === 'right' ? 'scaleX(-1) translateX(-3px)' : 'translateX(-3px)'};
-          filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.5));
-        }
-      }
-    `}</style>
-  </span>
+  />
 );
