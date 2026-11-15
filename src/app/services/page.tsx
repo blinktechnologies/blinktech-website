@@ -116,7 +116,7 @@ export default function ServicesPage() {
             className="services-heading-row"
             style={{ 
               display: 'flex', 
-              alignItems: 'flex-start', 
+              alignItems: 'center', 
               justifyContent: 'space-between', 
               gap: '24px',
               marginBottom: '38px',
@@ -150,15 +150,14 @@ export default function ServicesPage() {
                 marginLeft: 'auto'
               }}
             >
-              {/* Row 1: chevrons, shifted right */}
+              {/* Row 1: chevrons, staggered right */}
               <div 
                 className="services-chevron-row services-chevron-row-1"
                 style={{ 
                   display: 'flex', 
                   gap: '16px', 
                   alignItems: 'center',
-                  marginTop: '-40px',
-                  marginLeft: '112px'
+                  marginLeft: '64px'
                 }}
               >
                 {[...Array(10)].map((_, i) => (
@@ -171,7 +170,7 @@ export default function ServicesPage() {
                 ))}
               </div>
 
-              {/* Row 2: chevrons */}
+              {/* Row 2: chevrons, base row */}
               <div 
                 className="services-chevron-row services-chevron-row-2"
                 style={{ 
