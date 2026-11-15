@@ -5,6 +5,7 @@ import React from 'react';
 export const TopTicker: React.FC = () => {
   return (
     <div 
+      className="top-ticker-bar"
       style={{
         backgroundColor: '#050608',
         color: '#ffffff',
@@ -15,32 +16,32 @@ export const TopTicker: React.FC = () => {
         position: 'relative',
         overflow: 'hidden',
         borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-        fontSize: '11px',
-        letterSpacing: '1px',
         userSelect: 'none',
         width: '100%'
       }}
     >
       <div 
+        className="ticker-inner"
         style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           width: '100%',
           maxWidth: '1240px',
-          padding: '0 24px'
+          padding: '0 16px'
         }}
       >
-        {/* Left Pixel Chevrons: 4 pointing right */}
-        <div style={{ display: 'flex', gap: '32px', alignItems: 'center' }}>
+        {/* Left Pixel Chevrons */}
+        <div className="ticker-chevrons ticker-chevrons-left" style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
           <PixelTickerChevron direction="right" />
           <PixelTickerChevron direction="right" />
           <PixelTickerChevron direction="right" />
           <PixelTickerChevron direction="right" />
         </div>
 
-        {/* Center Live Indicator: WE ARE ONLINE with gradient */}
+        {/* Center Live Indicator: WE ARE ONLINE */}
         <div 
+          className="ticker-center"
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -48,7 +49,9 @@ export const TopTicker: React.FC = () => {
             fontFamily: "var(--font-space-grotesk), 'Space Grotesk', sans-serif",
             fontWeight: 700,
             fontSize: '11px',
-            letterSpacing: '1.8px',
+            letterSpacing: '1.6px',
+            flexShrink: 0,
+            whiteSpace: 'nowrap'
           }}
         >
           <span 
@@ -75,7 +78,8 @@ export const TopTicker: React.FC = () => {
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
-              marginLeft: '2px'
+              marginLeft: '2px',
+              flexShrink: 0
             }}
           >
             <div 
@@ -90,8 +94,8 @@ export const TopTicker: React.FC = () => {
           </div>
         </div>
 
-        {/* Right Pixel Chevrons: 5 pointing left */}
-        <div style={{ display: 'flex', gap: '32px', alignItems: 'center' }}>
+        {/* Right Pixel Chevrons */}
+        <div className="ticker-chevrons ticker-chevrons-right" style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
           <PixelTickerChevron direction="left" />
           <PixelTickerChevron direction="left" />
           <PixelTickerChevron direction="left" />
@@ -113,6 +117,52 @@ export const TopTicker: React.FC = () => {
           50% {
             transform: scale(1.1);
             box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+          }
+        }
+
+        /* ─── Tablet: ≤768px ─────────────────────────────── */
+        @media (max-width: 768px) {
+          .ticker-chevrons-left :global(div:nth-child(n+3)),
+          .ticker-chevrons-right :global(div:nth-child(n+4)) {
+            display: none;
+          }
+          .ticker-chevrons {
+            gap: 14px !important;
+          }
+          .ticker-center {
+            font-size: 10px !important;
+            letter-spacing: 1.2px !important;
+          }
+        }
+
+        /* ─── Mobile: ≤480px ─────────────────────────────── */
+        @media (max-width: 480px) {
+          .ticker-inner {
+            padding: 0 10px !important;
+          }
+          .ticker-chevrons-left :global(div:nth-child(n+2)),
+          .ticker-chevrons-right :global(div:nth-child(n+3)) {
+            display: none;
+          }
+          .ticker-chevrons {
+            gap: 10px !important;
+          }
+          .ticker-center {
+            font-size: 9.5px !important;
+            letter-spacing: 1px !important;
+            gap: 4px !important;
+          }
+        }
+
+        /* ─── Very small: ≤360px ─────────────────────────── */
+        @media (max-width: 360px) {
+          .ticker-chevrons-left :global(div),
+          .ticker-chevrons-right :global(div:nth-child(n+2)) {
+            display: none;
+          }
+          .ticker-center {
+            font-size: 9px !important;
+            letter-spacing: 0.8px !important;
           }
         }
       `}</style>

@@ -41,7 +41,7 @@ export const Navbar: React.FC = () => {
       >
         <TopTicker />
         <div 
-          className="container"
+          className="container navbar-container"
           style={{
             height: '76px',
             display: 'flex',
@@ -70,10 +70,11 @@ export const Navbar: React.FC = () => {
 
             {/* Left Box: Blink-Tech Ltd Logo */}
             <div 
+              className="navbar-logo-box"
               style={{ 
                 display: 'flex', 
                 alignItems: 'center', 
-                padding: '0 28px',
+                padding: '0 20px',
                 borderRight: '1px solid #e5e7eb',
                 position: 'relative'
               }}
@@ -147,10 +148,12 @@ export const Navbar: React.FC = () => {
 
           {/* Right Box: Start a Project Button */}
           <div 
+            className="navbar-cta-area"
             style={{ 
               display: 'flex', 
               alignItems: 'center',
-              paddingLeft: '32px'
+              paddingLeft: '20px',
+              gap: '8px'
             }}
           >
             <button
@@ -163,15 +166,16 @@ export const Navbar: React.FC = () => {
                 fontFamily: "var(--font-ui), 'Inter', sans-serif",
                 background: 'linear-gradient(180deg, #4b525d 0%, #30353e 50%, #1c1f24 100%)',
                 color: '#ffffff',
-                padding: '11px 24px',
+                padding: '10px 18px',
                 borderRadius: '8px',
-                fontSize: '13.5px',
+                fontSize: '12.5px',
                 fontWeight: 600,
                 letterSpacing: '0.02em',
                 border: '1px solid rgba(255, 255, 255, 0.14)',
                 boxShadow: '0 8px 18px -2px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.28)',
                 cursor: 'pointer',
-                transition: 'all 0.2s ease'
+                transition: 'all 0.2s ease',
+                whiteSpace: 'nowrap'
               }}
             >
               Start a Project
@@ -189,12 +193,11 @@ export const Navbar: React.FC = () => {
                 backgroundColor: '#ffffff',
                 cursor: 'pointer',
                 alignItems: 'center',
-                justifyContent: 'center',
-                marginLeft: '12px'
+                justifyContent: 'center'
               }}
               aria-label="Toggle menu"
             >
-              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
           </div>
         </div>
@@ -250,12 +253,50 @@ export const Navbar: React.FC = () => {
         .start-project-btn:active {
           transform: translateY(0);
         }
+
+        /* ─── Tablet: hide nav links, show hamburger ─────── */
         @media (max-width: 820px) {
           .desktop-nav {
             display: none !important;
           }
           .mobile-toggle {
             display: flex !important;
+          }
+        }
+
+        /* ─── Mobile: compact the whole navbar ──────────── */
+        @media (max-width: 640px) {
+          .navbar-container {
+            height: 60px !important;
+          }
+          .navbar-logo-box {
+            padding: 0 12px !important;
+          }
+          .navbar-cta-area {
+            padding-left: 10px !important;
+            gap: 6px !important;
+          }
+          .start-project-btn {
+            padding: 8px 11px !important;
+            font-size: 11.5px !important;
+            border-radius: 7px !important;
+          }
+        }
+
+        /* ─── Small phones ───────────────────────────────── */
+        @media (max-width: 400px) {
+          .navbar-container {
+            height: 54px !important;
+          }
+          .navbar-logo-box {
+            padding: 0 8px !important;
+          }
+          .navbar-cta-area {
+            padding-left: 8px !important;
+          }
+          .start-project-btn {
+            padding: 7px 9px !important;
+            font-size: 11px !important;
           }
         }
       `}</style>

@@ -58,6 +58,7 @@ export default function ProjectsPage() {
     <div style={{ backgroundColor: '#ffffff', minHeight: '100vh', fontFamily: "var(--font-urbanist), 'Urbanist', sans-serif" }}>
       {/* SECTION 1: Top Hero Header on White Grid Background */}
       <section
+        className="projects-hero"
         style={{
           padding: '60px 0 50px',
           position: 'relative',
@@ -68,9 +69,9 @@ export default function ProjectsPage() {
           overflow: 'visible'
         }}
       >
-        <div className="container" style={{ position: 'relative', maxWidth: '1240px', margin: '0 auto', padding: '0 24px' }}>
+        <div className="container projects-wrap" style={{ position: 'relative', maxWidth: '1240px', margin: '0 auto', padding: '0 24px' }}>
           {/* Pill Badge: • Projects (tactile 3D pill matching Services page) */}
-          <div style={{ marginBottom: '18px' }}>
+          <div className="projects-badge-wrap" style={{ marginBottom: '18px' }}>
             <div
               style={{
                 display: 'inline-flex',
@@ -94,6 +95,7 @@ export default function ProjectsPage() {
 
           {/* Heading Row with HUD chevrons */}
           <div
+            className="projects-heading-row"
             style={{
               display: 'flex',
               alignItems: 'flex-start',
@@ -102,8 +104,9 @@ export default function ProjectsPage() {
               position: 'relative'
             }}
           >
-            <div>
+            <div className="projects-heading-copy">
               <h1
+                className="projects-hero-title"
                 style={{
                   fontFamily: "var(--font-urbanist), 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif",
                   fontSize: 'clamp(44px, 5.6vw, 72px)',
@@ -118,7 +121,7 @@ export default function ProjectsPage() {
               </h1>
 
               {/* Carousel Buttons (< and >) placed on the left directly under title with clean breathing room */}
-              <div style={{ display: 'flex', gap: '14px', marginTop: '32px', marginBottom: '12px' }}>
+              <div className="projects-carousel" style={{ display: 'flex', gap: '14px', marginTop: '32px', marginBottom: '12px' }}>
                 <button
                   onClick={handlePrev}
                   aria-label="Previous project"
@@ -148,21 +151,21 @@ export default function ProjectsPage() {
               }}
             >
               {/* Row 1: 10 chevrons, shifted furthest right */}
-              <div style={{ display: 'flex', gap: '24px', alignItems: 'center', marginLeft: '140px' }}>
+              <div className="projects-chevron-row projects-chevron-row-1" style={{ display: 'flex', gap: '24px', alignItems: 'center', marginLeft: '140px' }}>
                 {[...Array(10)].map((_, i) => (
                   <ChevronDot key={`p-r1-${i}`} />
                 ))}
               </div>
 
               {/* Row 2: 10 chevrons, middle offset */}
-              <div style={{ display: 'flex', gap: '24px', alignItems: 'center', marginLeft: '70px' }}>
+              <div className="projects-chevron-row projects-chevron-row-2" style={{ display: 'flex', gap: '24px', alignItems: 'center', marginLeft: '70px' }}>
                 {[...Array(10)].map((_, i) => (
                   <ChevronDot key={`p-r2-${i}`} />
                 ))}
               </div>
 
               {/* Row 3: 10 chevrons, aligned on the left */}
-              <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
+              <div className="projects-chevron-row projects-chevron-row-3" style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
                 {[...Array(10)].map((_, i) => (
                   <ChevronDot key={`p-r3-${i}`} />
                 ))}
@@ -174,6 +177,7 @@ export default function ProjectsPage() {
 
       {/* SECTION 2: Full-Width Solid Black Project Showcase Band matching screenshot */}
       <section
+        className="projects-showcase"
         style={{
           backgroundColor: '#000000',
           width: '100%',
@@ -184,7 +188,7 @@ export default function ProjectsPage() {
         }}
       >
         <div
-          className="container"
+          className="container projects-wrap"
           style={{
             maxWidth: '1240px',
             margin: '0 auto',
@@ -203,6 +207,7 @@ export default function ProjectsPage() {
           >
             {/* Left Column: Structured Card with horizontal divider lines & right vertical border */}
             <div
+              className="project-info-col"
               style={{
                 color: '#ffffff',
                 display: 'flex',
@@ -214,6 +219,7 @@ export default function ProjectsPage() {
             >
               {/* Compartment 1: Centered 3D BT Logo Emblem */}
               <div
+                className="project-logo-cell"
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -259,6 +265,7 @@ export default function ProjectsPage() {
 
               {/* Compartment 2: Title and Description with crisp bottom border */}
               <div
+                className="project-copy-cell"
                 style={{
                   padding: '36px 32px 36px 0',
                   borderBottom: '1px solid rgba(255, 255, 255, 0.14)',
@@ -269,6 +276,7 @@ export default function ProjectsPage() {
               >
                 {/* Project Title */}
                 <h2
+                  className="project-copy-title"
                   style={{
                     fontFamily: "var(--font-urbanist), 'Urbanist', sans-serif",
                     fontSize: 'clamp(32px, 3.4vw, 44px)',
@@ -297,8 +305,31 @@ export default function ProjectsPage() {
                 </p>
               </div>
 
-              {/* Compartment 3: Empty lower section aligned with laptop floor */}
-              <div style={{ flex: 1, minHeight: '60px' }} />
+              {/* Compartment 3: Tags row */}
+              <div className="project-tags-cell" style={{ padding: '20px 32px 20px 0', display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                {currentProject.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      padding: '4px 10px',
+                      borderRadius: '4px',
+                      backgroundColor: 'rgba(255,255,255,0.07)',
+                      border: '1px solid rgba(255,255,255,0.12)',
+                      fontSize: '11px',
+                      fontWeight: 600,
+                      color: '#94a3b8',
+                      letterSpacing: '0.3px'
+                    }}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              {/* Compartment 4: Empty lower section aligned with laptop floor */}
+              <div className="project-info-spacer" style={{ flex: 1, minHeight: '40px' }} />
             </div>
 
             {/* Right Column: MacBook Pro Mockup Image protruding upwards into the white grid */}
@@ -370,15 +401,287 @@ export default function ProjectsPage() {
           transform: translateY(0);
         }
 
-        @media (max-width: 980px) {
+        .project-showcase-split > * {
+          min-width: 0;
+        }
+
+        /* ─── Laptop: 1081px – 1239px ──────────────────────────────── */
+        @media (max-width: 1239px) and (min-width: 1081px) {
+          :global(.projects-chevron-dot) {
+            width: 26px !important;
+            height: 26px !important;
+          }
+          .projects-chevron-row {
+            gap: 12px !important;
+          }
+          .projects-chevron-row-1 {
+            margin-left: 72px !important;
+          }
+          .projects-chevron-row-2 {
+            margin-left: 36px !important;
+          }
+          .projects-hud-chevrons {
+            gap: 12px !important;
+            padding-top: 4px !important;
+          }
+        }
+
+        /* ─── Tablet Landscape: 861px – 1080px ─────────────────────── */
+        @media (max-width: 1080px) and (min-width: 861px) {
+          :global(.projects-chevron-dot) {
+            width: 36px !important;
+            height: 36px !important;
+          }
+          :global(.projects-chevron-row > div:nth-child(n+6)) {
+            display: none !important;
+          }
+          .projects-chevron-row-3 {
+            display: none !important;
+          }
+          .projects-chevron-row {
+            gap: 14px !important;
+          }
+          .projects-chevron-row-1 {
+            margin-left: 28px !important;
+          }
+          .projects-chevron-row-2 {
+            margin-left: 0 !important;
+          }
+          .projects-hud-chevrons {
+            gap: 14px !important;
+          }
           .project-showcase-split {
-            grid-template-columns: 1fr;
+            grid-template-columns: minmax(240px, 320px) 1fr !important;
+          }
+        }
+
+        /* ─── Tablet Portrait: 641px – 860px ───────────────────────── */
+        @media (max-width: 860px) and (min-width: 641px) {
+          .projects-hero {
+            padding: 36px 0 28px !important;
+          }
+          .projects-badge-wrap {
+            display: flex;
+            justify-content: flex-start;
+          }
+          .projects-heading-row {
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: flex-start !important;
+            justify-content: space-between !important;
+            text-align: left !important;
+            gap: 20px !important;
+          }
+          .projects-heading-copy {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+            min-width: 0;
+          }
+          .projects-hero-title {
+            font-size: 38px !important;
+            text-align: left !important;
+          }
+          .projects-carousel {
+            margin-top: 24px !important;
+            justify-content: flex-start !important;
+          }
+          .projects-hud-chevrons {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 14px !important;
+            margin-left: auto !important;
+            padding-top: 6px !important;
+            flex-shrink: 0 !important;
+          }
+          .projects-chevron-row-3 {
+            display: none !important;
+          }
+          :global(.projects-chevron-dot) {
+            width: 36px !important;
+            height: 36px !important;
+          }
+          :global(.projects-chevron-row > div:nth-child(n+6)) {
+            display: none !important;
+          }
+          .projects-chevron-row {
+            gap: 12px !important;
+          }
+          .projects-chevron-row-1 {
+            margin-left: 24px !important;
+          }
+          .projects-chevron-row-2 {
+            margin-left: 0 !important;
+          }
+          .project-showcase-split {
+            grid-template-columns: 1fr !important;
+          }
+          .project-info-col {
+            border-right: none !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
+          }
+          .project-logo-cell {
+            padding: 28px 16px !important;
+          }
+          .project-copy-cell {
+            padding: 28px 20px 28px 20px !important;
+            align-items: center;
+            text-align: center;
+          }
+          .project-copy-title {
+            font-size: 32px !important;
+            text-align: center !important;
+          }
+          .project-tags-cell {
+            padding: 16px 20px !important;
+            justify-content: center !important;
+          }
+          .project-info-spacer {
+            display: none !important;
           }
           .laptop-mockup-wrapper {
             margin-top: 0 !important;
+            padding: 20px 0 32px !important;
+            align-items: center !important;
+            justify-content: center !important;
+          }
+        }
+
+        /* ─── Mobile: ≤640px ──────────────────────────────────────── */
+        @media (max-width: 640px) {
+          .projects-wrap {
+            padding-left: 16px !important;
+            padding-right: 16px !important;
+          }
+          .projects-hero {
+            padding: 24px 0 20px !important;
+          }
+          .projects-badge-wrap {
+            display: flex;
+            justify-content: flex-start;
+          }
+          .projects-heading-row {
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: flex-start !important;
+            justify-content: space-between !important;
+            text-align: left !important;
+            gap: 12px !important;
+          }
+          .projects-heading-copy {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+            min-width: 0;
+            flex-shrink: 1;
+          }
+          .projects-hero-title {
+            font-size: clamp(23px, 5.8vw, 28px) !important;
+            line-height: 1.15 !important;
+            text-align: left !important;
+          }
+          .projects-carousel {
+            margin-top: 18px !important;
+            margin-bottom: 4px !important;
+            gap: 10px !important;
+            justify-content: flex-start !important;
+          }
+          .carousel-circle-btn {
+            width: 38px !important;
+            height: 38px !important;
           }
           .projects-hud-chevrons {
-            display: none;
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 12px !important;
+            margin-left: auto !important;
+            padding-top: 4px !important;
+            flex-shrink: 0 !important;
+          }
+          .projects-chevron-row-3 {
+            display: none !important;
+          }
+          :global(.projects-chevron-dot) {
+            width: 32px !important;
+            height: 32px !important;
+          }
+          :global(.projects-chevron-row > div:nth-child(n+6)) {
+            display: none !important;
+          }
+          .projects-chevron-row {
+            gap: 8px !important;
+          }
+          .projects-chevron-row-1 {
+            margin-left: 18px !important;
+          }
+          .projects-chevron-row-2 {
+            margin-left: 0 !important;
+          }
+          .project-showcase-split {
+            grid-template-columns: 1fr !important;
+          }
+          .project-info-col {
+            border-right: none !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
+          }
+          .project-logo-cell {
+            padding: 28px 16px !important;
+          }
+          .project-copy-cell {
+            padding: 22px 16px 22px 16px !important;
+            align-items: center;
+            text-align: center;
+          }
+          .project-copy-title {
+            font-size: 26px !important;
+            margin-bottom: 12px !important;
+            text-align: center !important;
+          }
+          .project-tags-cell {
+            padding: 14px 16px !important;
+            justify-content: center !important;
+          }
+          .laptop-mockup-wrapper {
+            padding: 12px 0 24px !important;
+          }
+        }
+
+        /* ─── Small phones: ≤400px ────────────────────────────────── */
+        @media (max-width: 400px) {
+          .projects-hero-title {
+            font-size: 22px !important;
+          }
+          .project-copy-title {
+            font-size: 22px !important;
+          }
+          .carousel-circle-btn {
+            width: 34px !important;
+            height: 34px !important;
+          }
+          .projects-hud-chevrons {
+            gap: 10px !important;
+            padding-top: 3px !important;
+          }
+          .projects-chevron-row-3 {
+            display: none !important;
+          }
+          :global(.projects-chevron-dot) {
+            width: 27px !important;
+            height: 27px !important;
+          }
+          :global(.projects-chevron-row > div:nth-child(n+6)) {
+            display: none !important;
+          }
+          .projects-chevron-row {
+            gap: 6px !important;
+          }
+          .projects-chevron-row-1 {
+            margin-left: 14px !important;
+          }
+          .projects-chevron-row-2 {
+            margin-left: 0 !important;
           }
         }
       `}</style>
@@ -388,6 +691,7 @@ export default function ProjectsPage() {
 
 const ChevronDot: React.FC = () => (
   <div
+    className="projects-chevron-dot"
     style={{
       width: '40px',
       height: '40px',

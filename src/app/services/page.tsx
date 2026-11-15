@@ -80,16 +80,16 @@ export default function ServicesPage() {
     <div style={{ backgroundColor: '#ffffff', minHeight: '100vh', fontFamily: "'Urbanist', sans-serif" }}>
       {/* SECTION 1: Automation infrastructure built for reliability and scale */}
       <section 
-        className="tech-grid-bg" 
+        className="tech-grid-bg services-hero" 
         style={{ 
           padding: '60px 0 90px', 
           position: 'relative',
           overflow: 'hidden'
         }}
       >
-        <div className="container" style={{ position: 'relative' }}>
+        <div className="container services-wrap" style={{ position: 'relative' }}>
           {/* Pill Badge: • Services (Elevated tactile pill matching screenshot) */}
-          <div style={{ marginBottom: '22px' }}>
+          <div className="services-badge-wrap" style={{ marginBottom: '22px' }}>
             <div 
               style={{
                 display: 'inline-flex',
@@ -113,6 +113,7 @@ export default function ServicesPage() {
 
           {/* Heading Row with HUD chevrons */}
           <div 
+            className="services-heading-row"
             style={{ 
               display: 'flex', 
               alignItems: 'flex-start', 
@@ -122,9 +123,9 @@ export default function ServicesPage() {
               flexWrap: 'wrap'
             }}
           >
-            <div style={{ maxWidth: '640px' }}>
+            <div className="services-heading-copy" style={{ maxWidth: '640px' }}>
               <h1 
-                className="font-urbanist"
+                className="font-urbanist services-hero-title"
                 style={{ 
                   fontFamily: "var(--font-urbanist), 'Urbanist', sans-serif",
                   fontSize: '42px', 
@@ -151,6 +152,7 @@ export default function ServicesPage() {
             >
               {/* Row 1: 11 chevrons, shifted 2 positions right to form echelon alignment */}
               <div 
+                className="services-chevron-row services-chevron-row-1"
                 style={{ 
                   display: 'flex', 
                   gap: '16px', 
@@ -162,6 +164,7 @@ export default function ServicesPage() {
                 {[...Array(10)].map((_, i) => (
                   <img 
                     key={`r1-${i}`} 
+                    className="services-chevron-icon"
                     src="/images/Arrow 19.png" 
                     alt="<" 
                     style={{ 
@@ -176,6 +179,7 @@ export default function ServicesPage() {
 
               {/* Row 2: 11 chevrons, aligned directly with Row 1 columns */}
               <div 
+                className="services-chevron-row services-chevron-row-2"
                 style={{ 
                   display: 'flex', 
                   gap: '16px', 
@@ -185,6 +189,7 @@ export default function ServicesPage() {
                 {[...Array(10)].map((_, i) => (
                   <img 
                     key={`r2-${i}`} 
+                    className="services-chevron-icon"
                     src="/images/Arrow 19.png" 
                     alt="<" 
                     style={{ 
@@ -218,6 +223,7 @@ export default function ServicesPage() {
             <div className="services-split-grid">
               {/* Left Column: Vertical Services List */}
               <div 
+                className="services-list-col"
                 style={{ 
                   borderRight: '1px solid #e5e7eb',
                   display: 'flex',
@@ -275,6 +281,7 @@ export default function ServicesPage() {
 
               {/* Right Column: Vectors Circuit Trace Illustration */}
               <div 
+                className="services-visual"
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -313,13 +320,14 @@ export default function ServicesPage() {
 
       {/* SECTION 2: How We Bring Ideas to Life (Our Process) */}
       <section 
+        className="services-process"
         style={{ 
           padding: '80px 0 100px', 
           backgroundColor: '#ffffff', 
           position: 'relative' 
         }}
       >
-        <div className="container">
+        <div className="container services-wrap">
           {/* Centered Pill Badge: • Our process */}
           <div style={{ textAlign: 'center', marginBottom: '16px' }}>
             <div 
@@ -343,8 +351,9 @@ export default function ServicesPage() {
           </div>
 
           {/* Heading */}
-          <div style={{ textAlign: 'center', maxWidth: '680px', margin: '0 auto 60px' }}>
+          <div className="services-process-heading" style={{ textAlign: 'center', maxWidth: '680px', margin: '0 auto 60px' }}>
             <h2 
+              className="services-process-title"
               style={{ 
                 fontSize: 'clamp(32px, 4.5vw, 50px)', 
                 fontWeight: 900, 
@@ -428,6 +437,7 @@ export default function ServicesPage() {
 
       {/* SECTION 3: LET'S START YOUR AI SYSTEM matching reference image */}
       <section 
+        className="services-cta"
         style={{
           borderTop: '1px solid #eeeff2',
           borderBottom: '1px solid #eeeff2',
@@ -440,9 +450,10 @@ export default function ServicesPage() {
           backgroundPosition: 'center center'
         }}
       >
-        <div className="container" style={{ position: 'relative', maxWidth: '1160px', margin: '0 auto', padding: '0 24px' }}>
+        <div className="container services-wrap" style={{ position: 'relative', maxWidth: '1160px', margin: '0 auto', padding: '0 24px' }}>
           {/* Top Indicator Chevrons */}
           <div 
+            className="services-cta-chevrons"
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -452,14 +463,14 @@ export default function ServicesPage() {
             }}
           >
             {/* Left Chevron Cluster: 3 chevrons pointing RIGHT with directional fade */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+            <div className="services-cta-cluster" style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
               <ChevronCluster direction="right" opacity={1} color="#3d5a73" />
               <ChevronCluster direction="right" opacity={1.0} color="#0d2840" />
               <ChevronCluster direction="right" opacity={1} color="#8ba4b8" />
             </div>
 
             {/* Right Chevron Cluster: 3 chevrons pointing LEFT with directional fade */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+            <div className="services-cta-cluster" style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
               <ChevronCluster direction="left" opacity={1} color="#8ba4b8" />
               <ChevronCluster direction="left" opacity={1.0} color="#0d2840" />
               <ChevronCluster direction="left" opacity={1} color="#3d5a73" />
@@ -476,6 +487,7 @@ export default function ServicesPage() {
             onClick={() => setModalOpen(true)}
           >
             <h2 
+              className="services-cta-title"
               style={{
                 fontFamily: "var(--font-urbanist), 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif",
                 fontSize: 'clamp(46px, 7.5vw, 92px)',
@@ -498,6 +510,7 @@ export default function ServicesPage() {
 
             {/* Center BT Logo Badge */}
             <div 
+              className="services-cta-logo"
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -531,6 +544,7 @@ export default function ServicesPage() {
 
           {/* Bottom Left & Right Technical Markers (Black Solid Badges) */}
           <div 
+            className="services-cta-badges"
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -621,6 +635,10 @@ export default function ServicesPage() {
           grid-template-columns: 420px 1fr;
         }
 
+        .services-split-grid > * {
+          min-width: 0;
+        }
+
         .service-tab-item:hover {
           background-color: #fafbfc !important;
         }
@@ -660,15 +678,259 @@ export default function ServicesPage() {
           }
         }
 
-        @media (max-width: 900px) {
+        /* ─── Large tablet: 981px – 1239px ─────────────────────────── */
+        @media (max-width: 1239px) and (min-width: 981px) {
+          .services-chevron-icon {
+            width: 28px !important;
+            height: 28px !important;
+          }
+          .services-chevron-row {
+            gap: 10px !important;
+          }
+          .services-chevron-row-1 {
+            margin-left: 56px !important;
+            margin-top: -24px !important;
+          }
+          .services-hud-chevrons {
+            gap: 16px !important;
+          }
+          .services-split-grid {
+            grid-template-columns: minmax(280px, 360px) 1fr;
+          }
+        }
+
+        /* ─── Tablet: 641px – 980px ─────────────────────────────────── */
+        @media (max-width: 980px) and (min-width: 641px) {
+          .services-hero {
+            padding: 40px 0 56px !important;
+          }
+          .services-badge-wrap {
+            display: flex;
+            justify-content: flex-start;
+          }
+          .services-heading-row {
+            margin-bottom: 28px !important;
+            display: flex !important;
+            flex-direction: row !important;
+            justify-content: space-between !important;
+            align-items: flex-start !important;
+            text-align: left !important;
+            gap: 16px !important;
+          }
+          .services-heading-copy {
+            max-width: 65% !important;
+            text-align: left !important;
+          }
+          .services-hero-title {
+            text-align: left !important;
+            font-size: 32px !important;
+          }
+          .services-hud-chevrons {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 14px !important;
+            margin-left: auto !important;
+            flex-shrink: 0 !important;
+          }
+          .services-chevron-icon {
+            width: 30px !important;
+            height: 30px !important;
+          }
+          .services-chevron-row > img:nth-child(n+5) {
+            display: none !important;
+          }
+          .services-chevron-row {
+            gap: 12px !important;
+          }
+          .services-chevron-row-1 {
+            margin-left: 32px !important;
+            margin-top: 0 !important;
+          }
           .services-split-grid {
             grid-template-columns: 1fr;
           }
-          .services-hud-chevrons {
-            display: none;
+          .services-list-col {
+            border-right: none !important;
+            border-bottom: 1px solid #e5e7eb;
+          }
+          .services-visual {
+            min-height: 0 !important;
+            padding: 28px 20px 32px !important;
+          }
+          .service-tab-item {
+            padding: 22px 20px !important;
+          }
+          .services-process {
+            padding: 56px 0 64px !important;
+          }
+          .services-process-heading {
+            margin-bottom: 36px !important;
           }
           .process-center-card {
-            margin-top: -40px;
+            margin-top: -64px;
+            padding: 0 8px;
+          }
+          .services-cta {
+            padding: 48px 0 36px !important;
+          }
+          .services-cta-badges {
+            justify-content: center !important;
+          }
+        }
+
+        /* ─── Mobile: ≤640px ─────────────────────────────────────── */
+        @media (max-width: 640px) {
+          .services-wrap {
+            padding-left: 16px !important;
+            padding-right: 16px !important;
+          }
+          .services-hero {
+            padding: 24px 0 36px !important;
+          }
+          .services-badge-wrap {
+            display: flex;
+            justify-content: flex-start;
+          }
+          .services-heading-row {
+            margin-bottom: 18px !important;
+            display: flex !important;
+            flex-direction: row !important;
+            justify-content: space-between !important;
+            align-items: flex-start !important;
+            text-align: left !important;
+            gap: 10px !important;
+            flex-wrap: nowrap !important;
+          }
+          .services-heading-copy {
+            text-align: left !important;
+            max-width: 68% !important;
+            min-width: 0 !important;
+          }
+          .services-hero-title {
+            font-size: clamp(20px, 5.5vw, 26px) !important;
+            line-height: 1.25 !important;
+            text-align: left !important;
+          }
+          .services-hud-chevrons {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 12px !important;
+            margin-left: auto !important;
+            padding-top: 4px !important;
+            flex-shrink: 0 !important;
+          }
+          .services-chevron-icon {
+            width: 32px !important;
+            height: 32px !important;
+          }
+          .services-chevron-row > img:nth-child(n+6) {
+            display: none !important;
+          }
+          .services-chevron-row {
+            gap: 8px !important;
+          }
+          .services-chevron-row-1 {
+            margin-left: 18px !important;
+            margin-top: 0 !important;
+          }
+          .services-split-grid {
+            grid-template-columns: 1fr;
+          }
+          .services-list-col {
+            border-right: none !important;
+            border-bottom: 1px solid #e5e7eb;
+          }
+          .services-visual {
+            min-height: 0 !important;
+            padding: 20px 12px 24px !important;
+          }
+          .service-tab-item {
+            padding: 18px 16px !important;
+          }
+          .services-process {
+            padding: 40px 0 48px !important;
+          }
+          .services-process-heading {
+            margin-bottom: 24px !important;
+          }
+          .services-process-title {
+            font-size: 28px !important;
+          }
+          .process-arc-svg {
+            max-height: 110px;
+          }
+          .process-center-card {
+            margin-top: -24px;
+            padding: 0 4px;
+          }
+          .services-cta {
+            padding: 32px 0 24px !important;
+          }
+          .services-cta-chevrons {
+            margin-bottom: 16px !important;
+          }
+          .services-cta-cluster {
+            gap: 10px !important;
+          }
+          .services-cta-title {
+            font-size: clamp(28px, 9vw, 40px) !important;
+            letter-spacing: -0.03em !important;
+          }
+          .services-cta-logo {
+            margin-top: 18px !important;
+            margin-bottom: 28px !important;
+          }
+          .services-cta-badges {
+            justify-content: center !important;
+            gap: 10px !important;
+          }
+        }
+
+        /* ─── Small phones: ≤400px ──────────────────────────────── */
+        @media (max-width: 400px) {
+          .services-hero-title {
+            font-size: 19px !important;
+          }
+          .services-hud-chevrons {
+            gap: 10px !important;
+            padding-top: 2px !important;
+          }
+          .services-chevron-icon {
+            width: 27px !important;
+            height: 27px !important;
+          }
+          .services-chevron-row > img:nth-child(n+6) {
+            display: none !important;
+          }
+          .services-chevron-row {
+            gap: 6px !important;
+          }
+          .services-chevron-row-1 {
+            margin-left: 14px !important;
+          }
+          .services-process-title {
+            font-size: 24px !important;
+          }
+          .process-arc-svg {
+            max-height: 80px;
+          }
+          .process-center-card {
+            margin-top: 4px;
+          }
+          .services-cta-cluster {
+            gap: 7px !important;
+          }
+          .services-cta-title {
+            font-size: 26px !important;
+          }
+          :global(.services-cta-mark) {
+            width: 16px !important;
+            height: 20px !important;
+          }
+          .services-cta-badges {
+            justify-content: center !important;
+            flex-direction: column;
+            align-items: center;
           }
         }
       `}</style>
@@ -690,6 +952,7 @@ const ChevronCluster: React.FC<{
   const isRight = direction === 'right';
   return (
     <div
+      className="services-cta-mark"
       style={{
         width: `${size}px`,
         height: `${Math.round(size * 1.25)}px`,

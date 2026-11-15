@@ -26,7 +26,7 @@ export default function ContactPage() {
     <div style={{ backgroundColor: '#ffffff', minHeight: '100vh', fontFamily: "'Urbanist', sans-serif" }}>
       {/* Hero & Form Section */}
       <section 
-        className="tech-grid-bg" 
+        className="tech-grid-bg contact-hero" 
         style={{ 
           padding: '50px 0 70px', 
           position: 'relative',
@@ -55,9 +55,9 @@ export default function ContactPage() {
           </div>
         </div>
 
-        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+        <div className="container contact-wrap" style={{ position: 'relative', zIndex: 2 }}>
           {/* Header Area */}
-          <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 46px' }}>
+          <div className="contact-header" style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 46px' }}>
             {/* Pill Badge: • Contact us (tactile 3D pill matching Services and Projects pages) */}
             <div style={{ display: 'inline-flex', marginBottom: '18px' }}>
               <div 
@@ -83,6 +83,7 @@ export default function ContactPage() {
 
             {/* Main Headline: Let's build what's next. */}
             <h1 
+              className="contact-hero-title"
               style={{ 
                 fontSize: 'clamp(38px, 5.5vw, 68px)', 
                 fontWeight: 900, 
@@ -169,6 +170,7 @@ export default function ContactPage() {
 
                   {/* Heading: Let's connect. */}
                   <h2 
+                    className="contact-panel-title"
                     style={{ 
                       fontSize: '34px', 
                       fontWeight: 700, 
@@ -308,6 +310,7 @@ export default function ContactPage() {
               >
                 <div>
                   <h2 
+                    className="contact-form-title"
                     style={{ 
                       fontSize: '30px', 
                       fontWeight: 800, 
@@ -462,6 +465,7 @@ export default function ContactPage() {
 
                       {/* Action Row: Button + Note */}
                       <div 
+                        className="contact-action-row"
                         style={{ 
                           display: 'flex', 
                           alignItems: 'center', 
@@ -532,6 +536,10 @@ export default function ContactPage() {
           gap: 16px;
         }
 
+        .contact-card-grid > * {
+          min-width: 0;
+        }
+
         .contact-social-row {
           display: flex;
           align-items: center;
@@ -588,7 +596,7 @@ export default function ContactPage() {
           border: 1px solid #e2e8f0;
           background-color: #ffffff;
           font-family: 'Urbanist', sans-serif;
-          font-size: '13.5px';
+          font-size: 13.5px;
           color: #0f172a;
           outline: none;
           transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -609,18 +617,122 @@ export default function ContactPage() {
           box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
         }
 
+        /* ─── Large tablet: 901px – 1239px ─────────────────────────── */
+        @media (max-width: 1239px) and (min-width: 901px) {
+          .contact-pixel-step {
+            left: 20px !important;
+          }
+          .contact-card-grid {
+            grid-template-columns: 300px 1fr;
+          }
+        }
+
+        /* ─── Tablet: ≤900px ────────────────────────────────────────── */
         @media (max-width: 900px) {
+          .contact-hero {
+            padding: 36px 0 48px !important;
+          }
+          .contact-header {
+            margin-bottom: 28px !important;
+          }
+          .contact-hero-title {
+            font-size: clamp(32px, 6vw, 52px) !important;
+          }
           .contact-card-grid {
             grid-template-columns: 1fr;
+          }
+          .contact-master-card {
+            padding: 8px !important;
+          }
+          .contact-dark-panel {
+            padding: 28px 22px !important;
+          }
+          .contact-form-panel {
+            padding: 28px 22px 22px !important;
+          }
+          .contact-pixel-step {
+            display: none;
+          }
+        }
+
+        /* ─── Tablet portrait: 641px – 900px ───────────────────────── */
+        @media (max-width: 900px) and (min-width: 641px) {
+          .form-two-col {
+            grid-template-columns: 1fr 1fr !important;
+          }
+        }
+
+        /* ─── Mobile: ≤640px ─────────────────────────────────────── */
+        @media (max-width: 640px) {
+          .contact-wrap {
+            padding-left: 16px !important;
+            padding-right: 16px !important;
+          }
+          .contact-hero {
+            padding: 24px 0 32px !important;
+          }
+          .contact-header {
+            margin-bottom: 20px !important;
+            padding: 0 4px;
+          }
+          .contact-hero-title {
+            font-size: 30px !important;
+            margin-bottom: 10px !important;
+            line-height: 1.15 !important;
+          }
+          .contact-master-card {
+            border-radius: 18px !important;
+            padding: 6px !important;
+          }
+          .contact-dark-panel {
+            padding: 22px 18px !important;
+            border-radius: 14px !important;
+          }
+          .contact-panel-title {
+            font-size: 26px !important;
+          }
+          .contact-form-panel {
+            padding: 22px 16px 18px !important;
+          }
+          .contact-form-title {
+            font-size: 22px !important;
+            line-height: 1.25 !important;
           }
           .form-two-col {
             grid-template-columns: 1fr !important;
           }
-          .contact-master-card {
-            padding: 8px;
+          .contact-action-row {
+            flex-direction: column;
+            align-items: stretch !important;
+            gap: 12px !important;
           }
-          .contact-pixel-step {
-            display: none;
+          .submit-discuss-btn {
+            width: 100%;
+            justify-content: center;
+          }
+          .clean-form-input {
+            font-size: 16px;
+            padding: 13px 14px;
+          }
+        }
+
+        /* ─── Small phones: ≤400px ──────────────────────────────── */
+        @media (max-width: 400px) {
+          .contact-hero-title {
+            font-size: 26px !important;
+          }
+          .contact-panel-title {
+            font-size: 22px !important;
+          }
+          .contact-form-title {
+            font-size: 20px !important;
+          }
+          .submit-discuss-btn {
+            padding: 12px 14px !important;
+            font-size: 12px !important;
+          }
+          .contact-dark-panel {
+            padding: 18px 14px !important;
           }
         }
       `}</style>
