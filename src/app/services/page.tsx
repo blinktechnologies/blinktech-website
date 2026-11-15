@@ -150,7 +150,7 @@ export default function ServicesPage() {
                 marginLeft: 'auto'
               }}
             >
-              {/* Row 1: 11 chevrons, shifted 2 positions right to form echelon alignment */}
+              {/* Row 1: chevrons, shifted right */}
               <div 
                 className="services-chevron-row services-chevron-row-1"
                 style={{ 
@@ -164,20 +164,14 @@ export default function ServicesPage() {
                 {[...Array(10)].map((_, i) => (
                   <img 
                     key={`r1-${i}`} 
-                    className="services-chevron-icon"
+                    className={`services-chevron-icon${i >= 5 ? ' services-chevron-desktop-only' : ''}`}
                     src="/images/Arrow 19.png" 
                     alt="<" 
-                    style={{ 
-                      width: '40px', 
-                      height: '40px', 
-                      objectFit: 'contain',
-                      imageRendering: 'pixelated'
-                    }} 
                   />
                 ))}
               </div>
 
-              {/* Row 2: 11 chevrons, aligned directly with Row 1 columns */}
+              {/* Row 2: chevrons */}
               <div 
                 className="services-chevron-row services-chevron-row-2"
                 style={{ 
@@ -189,15 +183,9 @@ export default function ServicesPage() {
                 {[...Array(10)].map((_, i) => (
                   <img 
                     key={`r2-${i}`} 
-                    className="services-chevron-icon"
+                    className={`services-chevron-icon${i >= 5 ? ' services-chevron-desktop-only' : ''}`}
                     src="/images/Arrow 19.png" 
                     alt="<" 
-                    style={{ 
-                      width: '40px', 
-                      height: '40px', 
-                      objectFit: 'contain',
-                      imageRendering: 'pixelated'
-                    }} 
                   />
                 ))}
               </div>
@@ -637,6 +625,26 @@ export default function ServicesPage() {
 
         .services-split-grid > * {
           min-width: 0;
+        }
+
+        /* ─── Services chevron base size (no inline styles) ────────── */
+        .services-chevron-icon {
+          width: 40px;
+          height: 40px;
+          object-fit: contain;
+          image-rendering: pixelated;
+          flex-shrink: 0;
+        }
+
+        /* Items 6-10 hidden below 1240px */
+        .services-chevron-desktop-only {
+          display: none !important;
+        }
+
+        @media (min-width: 1240px) {
+          .services-chevron-desktop-only {
+            display: inline-block !important;
+          }
         }
 
         .service-tab-item:hover {

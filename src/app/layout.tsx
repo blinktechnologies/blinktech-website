@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Plus_Jakarta_Sans, Inter, Outfit, Space_Grotesk, Urbanist } from 'next/font/google';
 import './globals.css';
 import { Navbar } from '@/components/Navbar';
@@ -39,6 +39,12 @@ const urbanist = Urbanist({
   display: 'swap',
 });
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export const metadata: Metadata = {
   title: 'Blink-Tech Ltd | Next-Gen Tech Solutions Built in a Blink',
   description: 'Blink-Tech architects innovative digital products, robust enterprise cloud systems, and AI automation for visionary enterprises worldwide.',
@@ -56,6 +62,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${plusJakartaSans.variable} ${inter.variable} ${outfit.variable} ${spaceGrotesk.variable} ${urbanist.variable}`}>
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link 
