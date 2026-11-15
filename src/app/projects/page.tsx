@@ -70,7 +70,7 @@ export default function ProjectsPage() {
         }}
       >
         <div className="container projects-wrap" style={{ position: 'relative', maxWidth: '1240px', margin: '0 auto', padding: '0 24px' }}>
-          {/* Pill Badge: • Projects (tactile 3D pill matching Services page) */}
+          {/* Pill Badge: • Projects */}
           <div className="projects-badge-wrap" style={{ marginBottom: '18px' }}>
             <div
               style={{
@@ -120,7 +120,7 @@ export default function ProjectsPage() {
                 Production
               </h1>
 
-              {/* Carousel Buttons (< and >) placed on the left directly under title with clean breathing room */}
+              {/* Carousel Buttons */}
               <div className="projects-carousel" style={{ display: 'flex', gap: '14px', marginTop: '32px', marginBottom: '12px' }}>
                 <button
                   onClick={handlePrev}
@@ -139,33 +139,32 @@ export default function ProjectsPage() {
               </div>
             </div>
 
-            {/* Right Side HUD Chevrons: 3 Staggered Rows of 10 Chevrons pointing LEFT (<) */}
+            {/* Right Side HUD Chevrons */}
             <div
               className="projects-hud-chevrons"
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '16px',
                 marginLeft: 'auto',
-                paddingTop: '10px'
+                paddingTop: '6px'
               }}
             >
-              {/* Row 1: 10 chevrons, shifted furthest right */}
-              <div className="projects-chevron-row projects-chevron-row-1" style={{ display: 'flex', gap: '24px', alignItems: 'center', marginLeft: '140px' }}>
+              {/* Row 1: chevrons */}
+              <div className="projects-chevron-row projects-chevron-row-1">
                 {[...Array(10)].map((_, i) => (
-                  <ChevronDot key={`p-r1-${i}`} />
+                  <ChevronDot key={`p-r1-${i}`} className={i >= 5 ? 'projects-chevron-desktop-only' : ''} />
                 ))}
               </div>
 
-              {/* Row 2: 10 chevrons, middle offset */}
-              <div className="projects-chevron-row projects-chevron-row-2" style={{ display: 'flex', gap: '24px', alignItems: 'center', marginLeft: '70px' }}>
+              {/* Row 2: chevrons */}
+              <div className="projects-chevron-row projects-chevron-row-2">
                 {[...Array(10)].map((_, i) => (
-                  <ChevronDot key={`p-r2-${i}`} />
+                  <ChevronDot key={`p-r2-${i}`} className={i >= 5 ? 'projects-chevron-desktop-only' : ''} />
                 ))}
               </div>
 
-              {/* Row 3: 10 chevrons, aligned on the left */}
-              <div className="projects-chevron-row projects-chevron-row-3" style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
+              {/* Row 3: chevrons - hidden on tablet and mobile */}
+              <div className="projects-chevron-row projects-chevron-row-3 projects-row3-desktop-only">
                 {[...Array(10)].map((_, i) => (
                   <ChevronDot key={`p-r3-${i}`} />
                 ))}
@@ -175,7 +174,7 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      {/* SECTION 2: Full-Width Solid Black Project Showcase Band matching screenshot */}
+      {/* SECTION 2: Full-Width Solid Black Project Showcase Band */}
       <section
         className="projects-showcase"
         style={{
@@ -205,7 +204,7 @@ export default function ProjectsPage() {
               position: 'relative'
             }}
           >
-            {/* Left Column: Structured Card with horizontal divider lines & right vertical border */}
+            {/* Left Column */}
             <div
               className="project-info-col"
               style={{
@@ -217,7 +216,7 @@ export default function ProjectsPage() {
                 zIndex: 2
               }}
             >
-              {/* Compartment 1: Centered 3D BT Logo Emblem */}
+              {/* Compartment 1: Centered BT Logo */}
               <div
                 className="project-logo-cell"
                 style={{
@@ -263,7 +262,7 @@ export default function ProjectsPage() {
                 </div>
               </div>
 
-              {/* Compartment 2: Title and Description with crisp bottom border */}
+              {/* Compartment 2: Title and Description */}
               <div
                 className="project-copy-cell"
                 style={{
@@ -274,7 +273,6 @@ export default function ProjectsPage() {
                   justifyContent: 'center'
                 }}
               >
-                {/* Project Title */}
                 <h2
                   className="project-copy-title"
                   style={{
@@ -290,8 +288,8 @@ export default function ProjectsPage() {
                   {currentProject.title}
                 </h2>
 
-                {/* Project Description */}
                 <p
+                  className="project-copy-desc"
                   style={{
                     fontSize: '15px',
                     lineHeight: 1.65,
@@ -328,11 +326,11 @@ export default function ProjectsPage() {
                 ))}
               </div>
 
-              {/* Compartment 4: Empty lower section aligned with laptop floor */}
+              {/* Compartment 4: Spacer */}
               <div className="project-info-spacer" style={{ flex: 1, minHeight: '40px' }} />
             </div>
 
-            {/* Right Column: MacBook Pro Mockup Image protruding upwards into the white grid */}
+            {/* Right Column: MacBook Pro Mockup */}
             <div
               className="laptop-mockup-wrapper"
               style={{
@@ -368,12 +366,55 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      {/* Clean White Separation Gap before Footer matching screenshot */}
+      {/* Clean White Gap before Footer */}
       <div style={{ height: '38px', backgroundColor: '#ffffff' }} />
 
       <StartProjectModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
 
       <style jsx>{`
+        /* ─── ChevronDot base (no inline width/height) ───────────────── */
+        .projects-chevron-dot {
+          width: 40px;
+          height: 40px;
+        }
+
+        /* ─── Chevron rows base layout ──────────────────────────────── */
+        .projects-chevron-row {
+          display: flex;
+          gap: 24px;
+          align-items: center;
+        }
+
+        .projects-chevron-row-1 {
+          margin-left: 140px;
+        }
+
+        .projects-chevron-row-2 {
+          margin-left: 70px;
+        }
+
+        .projects-hud-chevrons {
+          gap: 16px;
+        }
+
+        /* Row-3 and items 6-10 hidden below 1240px */
+        .projects-row3-desktop-only {
+          display: none;
+        }
+        .projects-chevron-desktop-only {
+          display: none;
+        }
+
+        @media (min-width: 1240px) {
+          .projects-row3-desktop-only {
+            display: flex;
+          }
+          .projects-chevron-desktop-only {
+            display: inline-block;
+          }
+        }
+
+        /* ─── Carousel buttons ──────────────────────────────────────── */
         .carousel-circle-btn {
           width: 44px;
           height: 44px;
@@ -407,7 +448,7 @@ export default function ProjectsPage() {
 
         /* ─── Laptop: 1081px – 1239px ──────────────────────────────── */
         @media (max-width: 1239px) and (min-width: 1081px) {
-          :global(.projects-chevron-dot) {
+          .projects-chevron-dot {
             width: 26px !important;
             height: 26px !important;
           }
@@ -428,15 +469,9 @@ export default function ProjectsPage() {
 
         /* ─── Tablet Landscape: 861px – 1080px ─────────────────────── */
         @media (max-width: 1080px) and (min-width: 861px) {
-          :global(.projects-chevron-dot) {
+          .projects-chevron-dot {
             width: 36px !important;
             height: 36px !important;
-          }
-          :global(.projects-chevron-row > div:nth-child(n+6)) {
-            display: none !important;
-          }
-          .projects-chevron-row-3 {
-            display: none !important;
           }
           .projects-chevron-row {
             gap: 14px !important;
@@ -495,15 +530,9 @@ export default function ProjectsPage() {
             padding-top: 6px !important;
             flex-shrink: 0 !important;
           }
-          .projects-chevron-row-3 {
-            display: none !important;
-          }
-          :global(.projects-chevron-dot) {
+          .projects-chevron-dot {
             width: 36px !important;
             height: 36px !important;
-          }
-          :global(.projects-chevron-row > div:nth-child(n+6)) {
-            display: none !important;
           }
           .projects-chevron-row {
             gap: 12px !important;
@@ -532,6 +561,10 @@ export default function ProjectsPage() {
           .project-copy-title {
             font-size: 32px !important;
             text-align: center !important;
+          }
+          .project-copy-desc {
+            text-align: center !important;
+            margin: 0 auto !important;
           }
           .project-tags-cell {
             padding: 16px 20px !important;
@@ -600,15 +633,9 @@ export default function ProjectsPage() {
             padding-top: 4px !important;
             flex-shrink: 0 !important;
           }
-          .projects-chevron-row-3 {
-            display: none !important;
-          }
-          :global(.projects-chevron-dot) {
+          .projects-chevron-dot {
             width: 32px !important;
             height: 32px !important;
-          }
-          :global(.projects-chevron-row > div:nth-child(n+6)) {
-            display: none !important;
           }
           .projects-chevron-row {
             gap: 8px !important;
@@ -639,6 +666,10 @@ export default function ProjectsPage() {
             margin-bottom: 12px !important;
             text-align: center !important;
           }
+          .project-copy-desc {
+            text-align: center !important;
+            margin: 0 auto !important;
+          }
           .project-tags-cell {
             padding: 14px 16px !important;
             justify-content: center !important;
@@ -664,15 +695,9 @@ export default function ProjectsPage() {
             gap: 10px !important;
             padding-top: 3px !important;
           }
-          .projects-chevron-row-3 {
-            display: none !important;
-          }
-          :global(.projects-chevron-dot) {
+          .projects-chevron-dot {
             width: 27px !important;
             height: 27px !important;
-          }
-          :global(.projects-chevron-row > div:nth-child(n+6)) {
-            display: none !important;
           }
           .projects-chevron-row {
             gap: 6px !important;
@@ -689,12 +714,10 @@ export default function ProjectsPage() {
   );
 }
 
-const ChevronDot: React.FC = () => (
+const ChevronDot: React.FC<{ className?: string }> = ({ className = '' }) => (
   <div
-    className="projects-chevron-dot"
+    className={`projects-chevron-dot${className ? ' ' + className : ''}`}
     style={{
-      width: '40px',
-      height: '40px',
       backgroundColor: '#1e293b',
       maskImage: 'url("/images/arrow-tight.png")',
       WebkitMaskImage: 'url("/images/Arrow 19.png")',
