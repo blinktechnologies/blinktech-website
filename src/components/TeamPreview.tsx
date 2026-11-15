@@ -17,29 +17,29 @@ export const TeamPreview: React.FC = () => {
     {
       id: 'm-1',
       name: 'BIENVENUE Alliance',
-      role: 'BlinkTech Founder',
-      image: '/images/team/person1_bienvenue.png',
+      role: 'CEO & Founder',
+      image: '/images/team/Bienvenue_Alliance.png',
       yOffset: 0
     },
     {
       id: 'm-2',
-      name: 'BYIRINGIRO Emmanuel',
+      name: 'BYIRINGIRO Samuel',
       role: 'BlinkTech Co-Founder',
-      image: '/images/team/person2_emmanuel.png',
+      image: '/images/team/Samuel.png',
       yOffset: 24
     },
     {
       id: 'm-3',
-      name: 'BYIRINGIRO Samuel',
+      name: 'KANEZA Amandine',
       role: 'BlinkTech Co-Founder',
-      image: '/images/team/person3_samuel.png',
+      image: '/images/team/Amandine.png',
       yOffset: 0
     },
     {
       id: 'm-4',
-      name: 'KANEZA Amandine',
+      name: 'BYIRINGIRO Emmanuel',
       role: 'BlinkTech Co-Founder',
-      image: '/images/team/person4_amandine.png',
+      image: '/images/team/Emmanuel.png',
       yOffset: 24
     }
   ];
@@ -47,23 +47,23 @@ export const TeamPreview: React.FC = () => {
   const membersRow2: MemberData[] = [
     {
       id: 'm-5',
-      name: 'UMURERWA Bonnette',
-      role: 'Chief Media & Marketing Officer',
-      image: '/images/team/person5_bonnette.png',
+      name: 'NIYONKURU Darius',
+      role: 'Chief Financial Officer',
+      image: '/images/team/Darius.png',
       yOffset: 0
     },
     {
       id: 'm-6',
-      name: 'ABAYO Moise',
-      role: 'Chief Information Security Officer',
-      image: '/images/team/person6_moise.png',
+      name: 'UMURERWA Bonnette',
+      role: 'Chief Media & Marketing Officer',
+      image: '/images/team/Bonnette.png',
       yOffset: 40
     },
     {
       id: 'm-7',
-      name: 'NIYONKURU Darius',
-      role: 'Chief Financial Officer',
-      image: '/images/team/person7_darius.png',
+      name: 'ABAYO Moise',
+      role: 'Chief Information Security Officer',
+      image: '/images/team/Moise.png',
       yOffset: 0
     }
   ];
@@ -202,19 +202,19 @@ export const TeamPreview: React.FC = () => {
                   </p>
                 </div>
 
-                {/* Full-width Explore the Team Button with lime glow icon */}
-                <Link href="/teams" className="explore-button">
+                {/* Full-width Explore the Team Button with authentic squircle icon and smooth navigation */}
+                <Link 
+                  href="/teams" 
+                  className="explore-button"
+                  id="explore-the-team-btn"
+                  aria-label="Explore the team"
+                >
                   <div className="explore-icon-squircle">
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                      <circle cx="4" cy="5" r="1.3" fill="#64748b" />
-                      <circle cx="4" cy="13" r="1.3" fill="#64748b" />
-                      <circle cx="7.5" cy="3" r="1.3" fill="#64748b" />
-                      <circle cx="7.5" cy="9" r="1.3" fill="#334155" />
-                      <circle cx="7.5" cy="15" r="1.3" fill="#64748b" />
-                      <circle cx="11" cy="6" r="1.3" fill="#334155" />
-                      <circle cx="11" cy="12" r="1.3" fill="#334155" />
-                      <circle cx="14.5" cy="9" r="1.4" fill="#0f172a" />
-                    </svg>
+                    <img 
+                      src="/images/team/btn_logo_icon.png" 
+                      alt="" 
+                      style={{ width: '100%', height: '100%', objectFit: 'contain' }} 
+                    />
                   </div>
                   <span className="explore-button-text">Explore the team</span>
                 </Link>
@@ -240,33 +240,36 @@ export const TeamPreview: React.FC = () => {
           display: flex;
           flex-direction: column;
           align-items: center;
-          transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+          transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), filter 0.45s ease;
           user-select: none;
         }
 
         .member-card:hover {
-          filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.09));
+          filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.11));
         }
 
         .member-portrait-container {
           width: 100%;
+          height: 224px;
           display: flex;
           justify-content: center;
           align-items: flex-end;
           position: relative;
+          overflow: hidden;
         }
 
         .member-portrait-img {
           width: 100%;
           max-width: 238px;
-          height: auto;
+          height: 100%;
           display: block;
           object-fit: contain;
-          transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          object-position: bottom center;
+          transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .member-card:hover .member-portrait-img {
-          transform: scale(1.025);
+          transform: scale(1.045) translateY(-2px);
         }
 
         /* Floating Pill Badge */
@@ -282,20 +285,21 @@ export const TeamPreview: React.FC = () => {
           text-align: center;
           box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08), 0 2px 5px rgba(0, 0, 0, 0.03);
           border: 1px solid rgba(0, 0, 0, 0.04);
-          transition: transform 0.25s ease, box-shadow 0.25s ease;
+          transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.35s ease;
         }
 
         .member-card:hover .member-badge {
-          transform: translateY(-2px);
-          box-shadow: 0 12px 28px rgba(0, 0, 0, 0.11);
+          transform: translateY(-3px) scale(1.015);
+          box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+          border-color: rgba(0, 0, 0, 0.08);
         }
 
         .member-name {
           font-family: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif;
-          font-size: 13.5px;
-          font-weight: 800;
-          color: #0f1115;
-          letter-spacing: -0.015em;
+          font-size: 14.5px;
+          font-weight: 500;
+          color: #0b0d13;
+          letter-spacing: -0.01em;
           margin: 0 0 3px;
           white-space: nowrap;
           overflow: hidden;
@@ -304,10 +308,10 @@ export const TeamPreview: React.FC = () => {
 
         .member-role {
           font-family: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif;
-          font-size: 10.5px;
-          font-weight: 600;
-          color: #71717a;
-          letter-spacing: 0.01em;
+          font-size: 11.5px;
+          font-weight: 400;
+          color: #6b7280;
+          letter-spacing: 0;
           margin: 0;
           white-space: nowrap;
           overflow: hidden;

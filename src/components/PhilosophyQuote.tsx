@@ -1,59 +1,74 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Play } from 'lucide-react';
 import { ScrollReveal } from './ScrollReveal';
 
 export const PhilosophyQuote: React.FC = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const scrollToHero = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <section style={{ padding: '90px 0 100px', backgroundColor: '#ffffff', borderBottom: '1px solid #eeeff2' }}>
       <div className="container">
-        {/* Giant Quote Typography with interactive inline play pill */}
+        {/* Giant Quote Typography with interactive inline Hero section thumbnail */}
         <ScrollReveal delay={60} yOffset={24}>
-          <div style={{ textAlign: 'center', maxWidth: '960px', margin: '0 auto 16px' }}>
+          <div style={{ textAlign: 'center', maxWidth: '980px', margin: '0 auto 16px' }}>
             <h2 
               style={{ 
                 fontFamily: 'var(--font-heading)',
-                fontSize: 'clamp(32px, 5vw, 56px)', 
+                fontSize: 'clamp(32px, 4.8vw, 56px)', 
                 fontWeight: 800, 
                 color: '#0a0a0c',
                 letterSpacing: '-0.03em',
-                lineHeight: 1.2
+                lineHeight: 1.25
               }}
             >
               Turning complexity into clarity and ideas{' '}
-              <button 
-                onClick={() => setIsPlaying(!isPlaying)}
-                aria-label="Play showreel"
+              <span 
+                className="inline-hero-thumb"
+                role="button"
+                tabIndex={0}
+                onClick={scrollToHero}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+                title="View Hero Section"
+                aria-label="Screenshot of hero section at home"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  width: 'clamp(38px, 4.5vw, 52px)',
-                  height: 'clamp(38px, 4.5vw, 52px)',
-                  borderRadius: '50%',
+                  width: 'clamp(82px, 9.5vw, 126px)',
+                  height: 'clamp(38px, 4.4vw, 56px)',
+                  borderRadius: '10px',
                   backgroundColor: '#ffffff',
-                  border: '1.5px solid #cbd5e1',
+                  border: isHovered ? '1.5px solid #0a0a0c' : '1.5px solid #cbd5e1',
                   verticalAlign: 'middle',
                   margin: '0 8px',
-                  color: '#0f172a',
-                  boxShadow: '0 4px 14px rgba(0, 0, 0, 0.08)',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  boxShadow: isHovered 
+                    ? '0 10px 25px rgba(0, 0, 0, 0.16), 0 2px 6px rgba(0, 0, 0, 0.08)' 
+                    : '0 4px 14px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04)',
                   cursor: 'pointer',
-                  transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'scale(1.12)';
-                  e.currentTarget.style.borderColor = '#0f172a';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'scale(1)';
-                  e.currentTarget.style.borderColor = '#cbd5e1';
+                  userSelect: 'none',
+                  transform: isHovered ? 'translateY(-2px) scale(1.06)' : 'translateY(0) scale(1)',
+                  transition: 'all 0.28s cubic-bezier(0.16, 1, 0.3, 1)'
                 }}
               >
-                <Play size={18} fill="#0f172a" style={{ marginLeft: '3px' }} />
-              </button>{' '}
+                <img 
+                  src="/images/hero_section_thumb.png" 
+                  alt="Hero Section at Home" 
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    display: 'block'
+                  }} 
+                />
+              </span>{' '}
               into what comes next of that!
             </h2>
           </div>

@@ -14,13 +14,21 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
   children,
   className = '',
   delay = 0,
-  duration = 700,
-  yOffset = 24
+  duration = 750,
+  yOffset = 28
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const elementRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const currentElem = elementRef.current;
+    if (!currentElem) return;
+
+    if (typeof IntersectionObserver === 'undefined') {
+      setIsVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -29,28 +37,17 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
         }
       },
       {
-        threshold: 0.01,
-        rootMargin: '120px 0px 50px 0px'
+        threshold: 0.08,
+        rootMargin: '60px 0px -20px 0px'
       }
     );
 
-    const currentElem = elementRef.current;
-    if (currentElem) {
-      observer.observe(currentElem);
-    }
-
-    // Safety fallback to guarantee content is visible even if observer is delayed
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 350 + delay);
+    observer.observe(currentElem);
 
     return () => {
-      clearTimeout(timer);
-      if (currentElem) {
-        observer.unobserve(currentElem);
-      }
+      observer.unobserve(currentElem);
     };
-  }, [delay]);
+  }, []);
 
   return (
     <div
@@ -58,9 +55,12 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
       className={`scroll-reveal-container ${className}`}
       style={{
         opacity: isVisible ? 1 : 0,
-        transform: isVisible ? 'translateY(0) scale(1)' : `translateY(${yOffset}px) scale(0.985)`,
-        transition: `opacity ${duration}ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform ${duration}ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
-        willChange: 'opacity, transform'
+        filter: isVisible ? 'blur(0px)' : 'blur(6px)',
+        transform: isVisible
+          ? 'translate3d(0, 0, 0) scale(1)'
+          : `translate3d(0, ${yOffset}px, 0) scale(0.975)`,
+        transition: `opacity ${duration}ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms, transform ${duration}ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms, filter ${duration}ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms`,
+        willChange: 'opacity, transform, filter'
       }}
     >
       {children}
