@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { StartProjectModal } from '@/components/StartProjectModal';
 
 interface ServiceItem {
@@ -89,8 +90,16 @@ export default function ServicesPage() {
       >
         <div className="container services-wrap" style={{ position: 'relative' }}>
           {/* Pill Badge: • Services (Elevated tactile pill matching screenshot) */}
-          <div className="services-badge-wrap" style={{ marginBottom: '22px' }}>
-            <div 
+          <motion.div
+            className="services-badge-wrap"
+            style={{ marginBottom: '22px' }}
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <motion.div 
+              whileHover={{ scale: 1.03, y: -1 }}
+              whileTap={{ scale: 0.97 }}
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -103,13 +112,14 @@ export default function ServicesPage() {
                 fontFamily: "'Urbanist', sans-serif",
                 color: '#0f172a',
                 border: '3px solid #eceef1ff',
-                boxShadow: '4px 4px 14px 4px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.9)'
+                boxShadow: '4px 4px 14px 4px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.9)',
+                cursor: 'default'
               }}
             >
               <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#0f172a', display: 'inline-block' }} />
               <span>Services</span>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Heading Row with HUD chevrons */}
           <div 
@@ -124,27 +134,32 @@ export default function ServicesPage() {
             }}
           >
             <div className="services-heading-copy" style={{ maxWidth: '640px' }}>
-              <h1 
+              <motion.h1 
                 className="font-urbanist services-hero-title"
+                initial={{ opacity: 0, y: 22 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
                 style={{ 
                   fontFamily: "var(--font-urbanist), 'Urbanist', sans-serif",
-                  fontSize: '42px', 
+                  fontSize: 'clamp(32px, 3.8vw, 44px)', 
                   color: '#0a0a0c',
                   letterSpacing: '-0.025em',
-                  lineHeight: 1.4,
+                  lineHeight: 1.25,
                   margin: 0,
                 }}
               >
-                Automation infrastructure <br />
+                Automation infrastructure <br className="services-hero-br" />
                 built for reliability and scale
-              </h1>
+              </motion.h1>
             </div>
 
             {/* Right Side HUD Chevrons matching Image using Arrow 19.png */}
-            <div 
+            <motion.div 
               className="services-hud-chevrons" 
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
               style={{ 
-                display: 'flex', 
                 flexDirection: 'column', 
                 gap: '24px', 
                 marginLeft: 'auto'
@@ -188,12 +203,15 @@ export default function ServicesPage() {
                   />
                 ))}
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Technical Box Container with Crosshair Corners */}
-          <div 
+          <motion.div 
             className="services-crosshair-box"
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             style={{
               position: 'relative',
               backgroundColor: '#ffffff',
@@ -220,16 +238,20 @@ export default function ServicesPage() {
                 {services.map((item) => {
                   const isActive = activeServiceId === item.id;
                   return (
-                    <div 
+                    <motion.div 
                       key={item.id}
                       onClick={() => setActiveServiceId(item.id)}
                       className={`service-tab-item ${isActive ? 'active' : ''}`}
+                      whileHover={{ x: isActive ? 0 : 4 }}
+                      transition={{ duration: 0.2 }}
                       style={{
                         padding: '28px 32px',
                         borderBottom: '1px solid #eef0f3',
                         cursor: 'pointer',
                         transition: 'background-color 0.2s ease',
-                        backgroundColor: isActive ? '#fafbfc' : '#ffffff'
+                        backgroundColor: isActive ? '#fafbfc' : '#ffffff',
+                        position: 'relative',
+                        borderLeft: isActive ? '3px solid #0f172a' : '3px solid transparent'
                       }}
                     >
                       <h3 
@@ -247,21 +269,27 @@ export default function ServicesPage() {
                         <span>{item.title}</span>
                       </h3>
 
-                      {isActive && (
-                        <p 
-                          style={{ 
-                            fontSize: '13px', 
-                            lineHeight: 1.6, 
-                            color: '#64748b', 
-                            margin: 0,
-                            maxWidth: '380px',
-                            animation: 'fadeIn 0.3s ease'
-                          }}
-                        >
-                          {item.description}
-                        </p>
-                      )}
-                    </div>
+                      <AnimatePresence>
+                        {isActive && (
+                          <motion.p 
+                            initial={{ opacity: 0, y: -6, height: 0 }}
+                            animate={{ opacity: 1, y: 0, height: 'auto' }}
+                            exit={{ opacity: 0, y: -6, height: 0 }}
+                            transition={{ duration: 0.25, ease: 'easeOut' }}
+                            style={{ 
+                              fontSize: '13px', 
+                              lineHeight: 1.6, 
+                              color: '#64748b', 
+                              margin: 0,
+                              maxWidth: '380px',
+                              overflow: 'hidden'
+                            }}
+                          >
+                            {item.description}
+                          </motion.p>
+                        )}
+                      </AnimatePresence>
+                    </motion.div>
                   );
                 })}
               </div>
@@ -280,7 +308,9 @@ export default function ServicesPage() {
                   overflow: 'hidden'
                 }}
               >
-                <div 
+                <motion.div 
+                  animate={{ y: [0, -8, 0] }}
+                  transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
                   style={{
                     width: '100%',
                     maxWidth: '520px',
@@ -298,10 +328,10 @@ export default function ServicesPage() {
                       filter: 'contrast(1.05)'
                     }} 
                   />
-                </div>
+                </motion.div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -316,8 +346,16 @@ export default function ServicesPage() {
       >
         <div className="container services-wrap">
           {/* Centered Pill Badge: • Our process */}
-          <div style={{ textAlign: 'center', marginBottom: '16px' }}>
-            <div 
+          <motion.div 
+            style={{ textAlign: 'center', marginBottom: '16px' }}
+            initial={{ opacity: 0, y: -10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <motion.div 
+              whileHover={{ scale: 1.04, y: -1 }}
+              whileTap={{ scale: 0.96 }}
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -329,16 +367,24 @@ export default function ServicesPage() {
                 fontWeight: 700,
                 color: '#0f172a',
                 border: '1px solid #e2e8f0',
-                boxShadow: '0 1px 3px rgba(0, 0, 0, 0.04)'
+                boxShadow: '0 1px 3px rgba(0, 0, 0, 0.04)',
+                cursor: 'default'
               }}
             >
               <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#0f172a', display: 'inline-block' }} />
               <span>Our process</span>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Heading */}
-          <div className="services-process-heading" style={{ textAlign: 'center', maxWidth: '680px', margin: '0 auto 60px' }}>
+          <motion.div 
+            className="services-process-heading" 
+            style={{ textAlign: 'center', maxWidth: '680px', margin: '0 auto 40px' }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          >
             <h2 
               className="services-process-title"
               style={{ 
@@ -354,7 +400,60 @@ export default function ServicesPage() {
             <p style={{ fontSize: '14.5px', color: '#64748b', lineHeight: 1.6, margin: 0 }}>
               A thoughtful, collaborative process designed to turn complex ideas into meaningful digital solutions.
             </p>
-          </div>
+          </motion.div>
+
+          {/* Interactive Process Step Selector Pills */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2, ease: 'easeOut' }}
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: '10px',
+              flexWrap: 'wrap',
+              marginBottom: '36px',
+              padding: '0 8px'
+            }}
+          >
+            {processSteps.map((step, idx) => {
+              const isCurrent = activeProcessStep === idx;
+              return (
+                <motion.button
+                  key={step.id}
+                  onClick={() => setActiveProcessStep(idx)}
+                  whileHover={{ scale: 1.05, y: -1 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.15 }}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    padding: '8px 16px',
+                    borderRadius: '4px',
+                    fontSize: '12.5px',
+                    fontWeight: 700,
+                    fontFamily: "'Urbanist', sans-serif",
+                    cursor: 'pointer',
+                    border: isCurrent ? '1px solid #000000' : '1px solid #e2e8f0',
+                    backgroundColor: isCurrent ? '#000000' : '#ffffff',
+                    color: isCurrent ? '#ffffff' : '#475569',
+                    boxShadow: isCurrent 
+                      ? '0 4px 12px rgba(0, 0, 0, 0.25)' 
+                      : '0 1px 3px rgba(0, 0, 0, 0.04)',
+                    transition: 'background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease'
+                  }}
+                >
+                  <span style={{ opacity: isCurrent ? 0.75 : 0.5, fontSize: '11px', fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}>
+                    0{idx + 1}.
+                  </span>
+                  <span>{step.name}</span>
+                </motion.button>
+              );
+            })}
+          </motion.div>
 
           {/* Semi-circular Curved Dashed Arc matching Image 3 */}
           <div className="process-arc-container">
@@ -375,48 +474,61 @@ export default function ServicesPage() {
 
             {/* Step Icon & Content in the Center */}
             <div className="process-center-card">
-              {/* Search Icon from public folder */}
-              <div 
-                style={{ 
-                  width: '64px', 
-                  height: '64px', 
-                  margin: '0 auto 16px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-              >
-                <img 
-                  src={processSteps[activeProcessStep].icon} 
-                  alt="Process Step Icon" 
-                  style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-                />
-              </div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeProcessStep}
+                  initial={{ opacity: 0, y: 16, scale: 0.94 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -16, scale: 0.94 }}
+                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  {/* Search Icon with gentle float effect */}
+                  <motion.div 
+                    animate={{ y: [0, -6, 0] }}
+                    transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
+                    style={{ 
+                      width: '64px', 
+                      height: '64px', 
+                      margin: '0 auto 16px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      filter: 'drop-shadow(0 6px 16px rgba(0,0,0,0.06))'
+                    }}
+                  >
+                    <img 
+                      src={processSteps[activeProcessStep].icon} 
+                      alt="Process Step Icon" 
+                      style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                    />
+                  </motion.div>
 
-              {/* Step Title: Discover */}
-              <h3 
-                style={{ 
-                  fontSize: '21px', 
-                  fontWeight: 800, 
-                  color: '#0a0a0c', 
-                  marginBottom: '12px' 
-                }}
-              >
-                {processSteps[activeProcessStep].name}
-              </h3>
+                  {/* Step Title: Discover */}
+                  <h3 
+                    style={{ 
+                      fontSize: '21px', 
+                      fontWeight: 800, 
+                      color: '#0a0a0c', 
+                      marginBottom: '12px' 
+                    }}
+                  >
+                    {processSteps[activeProcessStep].name}
+                  </h3>
 
-              {/* Step Description */}
-              <p 
-                style={{ 
-                  fontSize: '13.5px', 
-                  color: '#555966', 
-                  lineHeight: 1.65, 
-                  maxWidth: '480px', 
-                  margin: '0 auto' 
-                }}
-              >
-                {processSteps[0].description}
-              </p>
+                  {/* Step Description */}
+                  <p 
+                    style={{ 
+                      fontSize: '13.5px', 
+                      color: '#555966', 
+                      lineHeight: 1.65, 
+                      maxWidth: '480px', 
+                      margin: '0 auto' 
+                    }}
+                  >
+                    {processSteps[activeProcessStep].description}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
             </div>
           </div>
         </div>
@@ -438,7 +550,7 @@ export default function ServicesPage() {
         }}
       >
         <div className="container services-wrap" style={{ position: 'relative', maxWidth: '1160px', margin: '0 auto', padding: '0 24px' }}>
-          {/* Top Indicator Chevrons */}
+          {/* Top Indicator Chevrons with subtle continuous directional pulse */}
           <div 
             className="services-cta-chevrons"
             style={{
@@ -450,18 +562,28 @@ export default function ServicesPage() {
             }}
           >
             {/* Left Chevron Cluster: 3 chevrons pointing RIGHT with directional fade */}
-            <div className="services-cta-cluster" style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+            <motion.div 
+              className="services-cta-cluster"
+              animate={{ x: [0, 8, 0] }}
+              transition={{ repeat: Infinity, duration: 2.8, ease: 'easeInOut' }}
+              style={{ display: 'flex', alignItems: 'center', gap: '24px' }}
+            >
               <ChevronCluster direction="right" opacity={1} color="#3d5a73" />
               <ChevronCluster direction="right" opacity={1.0} color="#0d2840" />
               <ChevronCluster direction="right" opacity={1} color="#8ba4b8" />
-            </div>
+            </motion.div>
 
             {/* Right Chevron Cluster: 3 chevrons pointing LEFT with directional fade */}
-            <div className="services-cta-cluster" style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+            <motion.div 
+              className="services-cta-cluster"
+              animate={{ x: [0, -8, 0] }}
+              transition={{ repeat: Infinity, duration: 2.8, ease: 'easeInOut' }}
+              style={{ display: 'flex', alignItems: 'center', gap: '24px' }}
+            >
               <ChevronCluster direction="left" opacity={1} color="#8ba4b8" />
               <ChevronCluster direction="left" opacity={1.0} color="#0d2840" />
               <ChevronCluster direction="left" opacity={1} color="#3d5a73" />
-            </div>
+            </motion.div>
           </div>
 
           {/* Main Giant Headline: LET'S START YOUR AI SYSTEM */}
@@ -473,8 +595,10 @@ export default function ServicesPage() {
             }}
             onClick={() => setModalOpen(true)}
           >
-            <h2 
+            <motion.h2 
               className="services-cta-title"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3 }}
               style={{
                 fontFamily: "var(--font-urbanist), 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif",
                 fontSize: 'clamp(46px, 7.5vw, 92px)',
@@ -493,9 +617,9 @@ export default function ServicesPage() {
             >
               LET’S START <br />
               YOUR AI SYSTEM
-            </h2>
+            </motion.h2>
 
-            {/* Center BT Logo Badge */}
+            {/* Center BT Logo Badge with interactive magnetic hover & radial glow */}
             <div 
               className="services-cta-logo"
               style={{
@@ -506,8 +630,12 @@ export default function ServicesPage() {
                 marginBottom: '48px'
               }}
             >
-              <div 
+              <motion.div 
+                whileHover={{ scale: 1.15, rotate: [0, -4, 4, 0] }}
+                whileTap={{ scale: 0.94 }}
+                transition={{ duration: 0.3 }}
                 style={{
+                  position: 'relative',
                   width: '84px',
                   height: '84px',
                   borderRadius: '50%',
@@ -515,17 +643,27 @@ export default function ServicesPage() {
                   alignItems: 'center',
                   justifyContent: 'center',
                   filter: 'drop-shadow(0 14px 22px rgba(0, 0, 0, 0.42))',
-                  transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
+                  cursor: 'pointer'
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.08)')}
-                onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
               >
+                {/* Breathing radial glow behind BT logo */}
+                <motion.div
+                  animate={{ scale: [1, 1.3, 1], opacity: [0.18, 0.38, 0.18] }}
+                  transition={{ repeat: Infinity, duration: 3.2, ease: 'easeInOut' }}
+                  style={{
+                    position: 'absolute',
+                    inset: '-8px',
+                    borderRadius: '50%',
+                    background: 'radial-gradient(circle, rgba(0, 0, 0, 0.3) 0%, transparent 70%)',
+                    filter: 'blur(10px)'
+                  }}
+                />
                 <img 
                   src="/images/bt-logo.png" 
                   alt="BT Logo" 
-                  style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                  style={{ width: '100%', height: '100%', objectFit: 'contain', position: 'relative', zIndex: 1 }}
                 />
-              </div>
+              </motion.div>
             </div>
           </div>
 
@@ -542,7 +680,9 @@ export default function ServicesPage() {
             }}
           >
             {/* Left Badge: INTELLIGENT AUTOMATION */}
-            <div 
+            <motion.div 
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -551,7 +691,8 @@ export default function ServicesPage() {
                 color: '#ffffff',
                 padding: '3px 8px',
                 borderRadius: '1px',
-                boxShadow: '0 1px 3px rgba(0,0,0,0.18)'
+                boxShadow: '0 1px 3px rgba(0,0,0,0.18)',
+                cursor: 'default'
               }}
             >
               <span 
@@ -574,10 +715,12 @@ export default function ServicesPage() {
               >
                 INTELLIGENT AUTOMATION
               </span>
-            </div>
+            </motion.div>
 
             {/* Right Badge: GLOBAL SUPPORT */}
-            <div 
+            <motion.div 
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -586,7 +729,8 @@ export default function ServicesPage() {
                 color: '#ffffff',
                 padding: '3px 8px',
                 borderRadius: '1px',
-                boxShadow: '0 1px 3px rgba(0,0,0,0.18)'
+                boxShadow: '0 1px 3px rgba(0,0,0,0.18)',
+                cursor: 'default'
               }}
             >
               <span 
@@ -609,14 +753,18 @@ export default function ServicesPage() {
               >
                 GLOBAL SUPPORT
               </span>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       <StartProjectModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
 
-      <style jsx>{`
+      <style jsx global>{`
+        .services-hud-chevrons {
+          display: flex;
+        }
+
         .services-split-grid {
           display: grid;
           grid-template-columns: 420px 1fr;
@@ -712,46 +860,43 @@ export default function ServicesPage() {
             padding: 40px 0 56px !important;
           }
           .services-badge-wrap {
-            display: flex;
-            justify-content: flex-start;
+            display: flex !important;
+            justify-content: center !important;
+            width: 100% !important;
+            margin-bottom: 20px !important;
           }
           .services-heading-row {
             margin-bottom: 28px !important;
             display: flex !important;
-            flex-direction: row !important;
-            justify-content: space-between !important;
-            align-items: flex-start !important;
-            text-align: left !important;
-            gap: 16px !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            text-align: center !important;
+            gap: 0 !important;
+            width: 100% !important;
           }
           .services-heading-copy {
-            max-width: 65% !important;
-            text-align: left !important;
-          }
-          .services-hero-title {
-            text-align: left !important;
-            font-size: 32px !important;
-          }
-          .services-hud-chevrons {
+            max-width: 100% !important;
+            width: 100% !important;
+            text-align: center !important;
             display: flex !important;
             flex-direction: column !important;
-            gap: 14px !important;
-            margin-left: auto !important;
-            flex-shrink: 0 !important;
+            align-items: center !important;
+            justify-content: center !important;
           }
-          .services-chevron-icon {
-            width: 30px !important;
-            height: 30px !important;
-          }
-          .services-chevron-row > img:nth-child(n+5) {
+          .services-hero-br {
             display: none !important;
           }
-          .services-chevron-row {
-            gap: 12px !important;
+          .services-hero-title {
+            text-align: center !important;
+            margin: 0 auto !important;
+            font-size: clamp(34px, 5.2vw, 44px) !important;
+            line-height: 1.2 !important;
+            letter-spacing: -0.03em !important;
+            text-wrap: balance;
           }
-          .services-chevron-row-1 {
-            margin-left: 32px !important;
-            margin-top: 0 !important;
+          .services-hud-chevrons {
+            display: none !important;
           }
           .services-split-grid {
             grid-template-columns: 1fr;
@@ -792,53 +937,48 @@ export default function ServicesPage() {
             padding-right: 16px !important;
           }
           .services-hero {
-            padding: 24px 0 36px !important;
+            padding: 28px 0 36px !important;
           }
           .services-badge-wrap {
-            display: flex;
-            justify-content: flex-start;
+            display: flex !important;
+            justify-content: center !important;
+            width: 100% !important;
+            margin-bottom: 16px !important;
           }
           .services-heading-row {
-            margin-bottom: 18px !important;
-            display: flex !important;
-            flex-direction: row !important;
-            justify-content: space-between !important;
-            align-items: flex-start !important;
-            text-align: left !important;
-            gap: 10px !important;
-            flex-wrap: nowrap !important;
-          }
-          .services-heading-copy {
-            text-align: left !important;
-            max-width: 68% !important;
-            min-width: 0 !important;
-          }
-          .services-hero-title {
-            font-size: clamp(20px, 5.5vw, 26px) !important;
-            line-height: 1.25 !important;
-            text-align: left !important;
-          }
-          .services-hud-chevrons {
+            margin-bottom: 22px !important;
             display: flex !important;
             flex-direction: column !important;
-            gap: 12px !important;
-            margin-left: auto !important;
-            padding-top: 4px !important;
-            flex-shrink: 0 !important;
+            align-items: center !important;
+            justify-content: center !important;
+            text-align: center !important;
+            gap: 0 !important;
+            width: 100% !important;
           }
-          .services-chevron-icon {
-            width: 32px !important;
-            height: 32px !important;
+          .services-heading-copy {
+            text-align: center !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
           }
-          .services-chevron-row > img:nth-child(n+6) {
+          .services-hero-br {
             display: none !important;
           }
-          .services-chevron-row {
-            gap: 8px !important;
+          .services-hero-title {
+            font-size: clamp(28px, 7.5vw, 38px) !important;
+            line-height: 1.2 !important;
+            text-align: center !important;
+            margin: 0 auto !important;
+            letter-spacing: -0.03em !important;
+            text-wrap: balance;
+            font-weight: 700 !important;
           }
-          .services-chevron-row-1 {
-            margin-left: 18px !important;
-            margin-top: 0 !important;
+          .services-hud-chevrons {
+            display: none !important;
           }
           .services-split-grid {
             grid-template-columns: 1fr;
@@ -896,24 +1036,14 @@ export default function ServicesPage() {
         /* ─── Small phones: ≤400px ──────────────────────────────── */
         @media (max-width: 400px) {
           .services-hero-title {
-            font-size: 19px !important;
+            font-size: clamp(24px, 7vw, 28px) !important;
+            line-height: 1.22 !important;
+            text-align: center !important;
+            margin: 0 auto !important;
+            letter-spacing: -0.025em !important;
           }
           .services-hud-chevrons {
-            gap: 10px !important;
-            padding-top: 2px !important;
-          }
-          .services-chevron-icon {
-            width: 27px !important;
-            height: 27px !important;
-          }
-          .services-chevron-row > img:nth-child(n+6) {
             display: none !important;
-          }
-          .services-chevron-row {
-            gap: 6px !important;
-          }
-          .services-chevron-row-1 {
-            margin-left: 14px !important;
           }
           .services-process-title {
             font-size: 24px !important;

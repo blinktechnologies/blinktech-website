@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { StartProjectModal } from '@/components/StartProjectModal';
 
 interface ProjectItem {
@@ -16,6 +17,7 @@ interface ProjectItem {
 
 export default function ProjectsPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
   const [modalOpen, setModalOpen] = useState(false);
 
   const projects: ProjectItem[] = [
@@ -86,10 +88,12 @@ export default function ProjectsPage() {
   const currentProject = projects[currentIndex];
 
   const handlePrev = () => {
+    setDirection(-1);
     setCurrentIndex((prev) => (prev === 0 ? projects.length - 1 : prev - 1));
   };
 
   const handleNext = () => {
+    setDirection(1);
     setCurrentIndex((prev) => (prev === projects.length - 1 ? 0 : prev + 1));
   };
 
@@ -110,8 +114,16 @@ export default function ProjectsPage() {
       >
         <div className="container projects-wrap" style={{ position: 'relative', maxWidth: '1240px', margin: '0 auto', padding: '0 24px' }}>
           {/* Pill Badge: • Projects */}
-          <div className="projects-badge-wrap" style={{ marginBottom: '18px' }}>
-            <div
+          <motion.div
+            className="projects-badge-wrap"
+            style={{ marginBottom: '18px' }}
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <motion.div
+              whileHover={{ scale: 1.03, y: -1 }}
+              whileTap={{ scale: 0.97 }}
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -124,13 +136,14 @@ export default function ProjectsPage() {
                 fontFamily: "var(--font-urbanist), 'Urbanist', sans-serif",
                 color: '#0f172a',
                 border: '3px solid #eceef1ff',
-                boxShadow: '4px 4px 14px 4px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.9)'
+                boxShadow: '4px 4px 14px 4px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.9)',
+                cursor: 'default'
               }}
             >
               <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#0f172a', display: 'inline-block' }} />
               <span>Projects</span>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Heading Row with HUD chevrons */}
           <div
@@ -144,11 +157,14 @@ export default function ProjectsPage() {
             }}
           >
             <div className="projects-heading-copy">
-              <h1
+              <motion.h1
                 className="projects-hero-title"
+                initial={{ opacity: 0, y: 22 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
                 style={{
                   fontFamily: "var(--font-urbanist), 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif",
-                  fontSize: 'clamp(44px, 5.6vw, 72px)',
+                  fontSize: 'clamp(40px, 5.2vw, 68px)',
                   color: '#0a0a0c',
                   letterSpacing: '-0.035em',
                   lineHeight: 1.15,
@@ -157,7 +173,7 @@ export default function ProjectsPage() {
               >
                 From Idea to<br />
                 Production
-              </h1>
+              </motion.h1>
 
               {/* Carousel Buttons (< and >) placed on the left directly under title with clean breathing room */}
               <div className="projects-carousel" style={{ display: 'flex', alignItems: 'center', gap: '16px', marginTop: '32px', marginBottom: '12px' }}>
@@ -194,10 +210,12 @@ export default function ProjectsPage() {
             </div>
 
             {/* Right Side HUD Chevrons */}
-            <div
+            <motion.div
               className="projects-hud-chevrons"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
               style={{
-                display: 'flex',
                 flexDirection: 'column',
                 marginLeft: 'auto',
                 paddingTop: '6px'
@@ -206,24 +224,42 @@ export default function ProjectsPage() {
               {/* Row 1: chevrons */}
               <div className="projects-chevron-row projects-chevron-row-1">
                 {[...Array(10)].map((_, i) => (
-                  <ChevronDot key={`p-r1-${i}`} className={i >= 5 ? 'projects-chevron-desktop-only' : ''} />
+                  <ChevronDot
+                    key={`p-r1-${i}`}
+                    className={
+                      i >= 5
+                        ? 'projects-chevron-desktop-only'
+                        : i === 4
+                        ? 'projects-chevron-mobile-hide'
+                        : ''
+                    }
+                  />
                 ))}
               </div>
 
               {/* Row 2: chevrons */}
               <div className="projects-chevron-row projects-chevron-row-2">
                 {[...Array(10)].map((_, i) => (
-                  <ChevronDot key={`p-r2-${i}`} className={i >= 5 ? 'projects-chevron-desktop-only' : ''} />
+                  <ChevronDot
+                    key={`p-r2-${i}`}
+                    className={
+                      i >= 5
+                        ? 'projects-chevron-desktop-only'
+                        : i === 4
+                        ? 'projects-chevron-mobile-hide'
+                        : ''
+                    }
+                  />
                 ))}
               </div>
 
-              {/* Row 3: chevrons - hidden on tablet and mobile */}
+              {/* Row 3: chevrons - visible ONLY on desktop */}
               <div className="projects-chevron-row projects-chevron-row-3 projects-row3-desktop-only">
                 {[...Array(10)].map((_, i) => (
                   <ChevronDot key={`p-r3-${i}`} />
                 ))}
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -282,7 +318,7 @@ export default function ProjectsPage() {
                   width: '100%'
                 }}
               >
-                <div
+                <motion.div
                   style={{
                     width: '82px',
                     height: '82px',
@@ -292,19 +328,21 @@ export default function ProjectsPage() {
                     justifyContent: 'center',
                     position: 'relative',
                     filter: 'drop-shadow(0 12px 26px rgba(0, 0, 0, 0.8))',
-                    cursor: 'pointer',
-                    transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
+                    cursor: 'pointer'
                   }}
                   onClick={() => setModalOpen(true)}
-                  onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.08)')}
-                  onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                  whileHover={{ scale: 1.1, rotate: [0, -3, 3, 0] }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.3 }}
                 >
-                  <div
+                  <motion.div
+                    animate={{ scale: [1, 1.25, 1], opacity: [0.14, 0.28, 0.14] }}
+                    transition={{ repeat: Infinity, duration: 3.5, ease: 'easeInOut' }}
                     style={{
                       position: 'absolute',
                       inset: '-6px',
                       borderRadius: '50%',
-                      background: 'radial-gradient(circle, rgba(255, 255, 255, 0.14) 0%, transparent 70%)',
+                      background: 'radial-gradient(circle, rgba(255, 255, 255, 0.22) 0%, transparent 70%)',
                       filter: 'blur(8px)'
                     }}
                   />
@@ -313,10 +351,10 @@ export default function ProjectsPage() {
                     alt="BT Logo"
                     style={{ width: '100%', height: '100%', objectFit: 'contain', position: 'relative', zIndex: 1 }}
                   />
-                </div>
+                </motion.div>
               </div>
 
-              {/* Compartment 2: Title and Description */}
+              {/* Compartment 2: Title and Description with Animated Slide */}
               <div
                 key={`info-${currentProject.id}`}
                 className="project-copy-cell"
@@ -396,34 +434,50 @@ export default function ProjectsPage() {
                 )}
               </div>
 
-              {/* Compartment 3: Tags row */}
+              {/* Compartment 3: Tags row with Staggered Pop-In */}
               <div className="project-tags-cell" style={{ padding: '20px 32px 20px 0', display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                {currentProject.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      padding: '4px 10px',
-                      borderRadius: '4px',
-                      backgroundColor: 'rgba(255,255,255,0.07)',
-                      border: '1px solid rgba(255,255,255,0.12)',
-                      fontSize: '11px',
-                      fontWeight: 600,
-                      color: '#94a3b8',
-                      letterSpacing: '0.3px'
-                    }}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentProject.id}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}
                   >
-                    {tag}
-                  </span>
-                ))}
+                    {currentProject.tags.map((tag, idx) => (
+                      <motion.span
+                        key={tag}
+                        initial={{ opacity: 0, y: 8, scale: 0.88 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        transition={{ delay: idx * 0.05 + 0.1, duration: 0.3, ease: 'easeOut' }}
+                        whileHover={{ scale: 1.06, backgroundColor: 'rgba(255,255,255,0.14)', color: '#ffffff' }}
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          padding: '4px 10px',
+                          borderRadius: '4px',
+                          backgroundColor: 'rgba(255,255,255,0.07)',
+                          border: '1px solid rgba(255,255,255,0.12)',
+                          fontSize: '11px',
+                          fontWeight: 600,
+                          color: '#94a3b8',
+                          letterSpacing: '0.3px',
+                          cursor: 'default'
+                        }}
+                      >
+                        {tag}
+                      </motion.span>
+                    ))}
+                  </motion.div>
+                </AnimatePresence>
               </div>
 
               {/* Compartment 4: Spacer */}
               <div className="project-info-spacer" style={{ flex: 1, minHeight: '40px' }} />
             </div>
 
-            {/* Right Column: MacBook Pro Mockup */}
+            {/* Right Column: MacBook Pro Mockup with Floating Animation & Smooth Directional Transition */}
             <div
               className="laptop-mockup-wrapper"
               style={{
@@ -436,12 +490,13 @@ export default function ProjectsPage() {
                 zIndex: 10
               }}
             >
-              <div
+              <motion.div
+                animate={{ y: [0, -8, 0] }}
+                transition={{ repeat: Infinity, duration: 5, ease: 'easeInOut' }}
                 style={{
                   width: '100%',
                   maxWidth: '820px',
-                  position: 'relative',
-                  filter: 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.95))'
+                  position: 'relative'
                 }}
               >
                 <img
@@ -455,7 +510,7 @@ export default function ProjectsPage() {
                     display: 'block'
                   }}
                 />
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>
@@ -466,9 +521,14 @@ export default function ProjectsPage() {
 
       <StartProjectModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
 
-      <style jsx>{`
-        /* ─── ChevronDot: must use :global() because component is outside scope ── */
+      <style jsx global>{`
+        .projects-hud-chevrons {
+          display: flex;
+        }
+
+        /* ─── ChevronDot: base styles ────────────────────────────────── */
         :global(.projects-chevron-dot) {
+          display: inline-block;
           width: 40px;
           height: 40px;
         }
@@ -492,19 +552,30 @@ export default function ProjectsPage() {
           gap: 16px;
         }
 
-        /* Row-3 and items 6-10: visible on all sizes, hidden classes inactive until needed */
+        /* Row-3 and extra items: hidden by default (mobile/tablet), enabled on larger screens */
+        .projects-chevron-row-3,
         :global(.projects-row3-desktop-only) {
-          display: none;
-        }
-        :global(.projects-chevron-desktop-only) {
-          display: none;
+          display: none !important;
         }
 
+        :global(.projects-chevron-desktop-only) {
+          display: none !important;
+        }
+
+        :global(.projects-chevron-mobile-hide) {
+          display: none !important;
+        }
+
+        /* ─── Large Desktop: ≥1240px (10 chevrons per row, 3 rows) ─── */
         @media (min-width: 1240px) {
+          .projects-chevron-row-3,
           :global(.projects-row3-desktop-only) {
             display: flex !important;
           }
           :global(.projects-chevron-desktop-only) {
+            display: inline-block !important;
+          }
+          :global(.projects-chevron-mobile-hide) {
             display: inline-block !important;
           }
         }
@@ -607,9 +678,9 @@ export default function ProjectsPage() {
           min-width: 0;
         }
 
-        /* ─── Laptop: 1081px – 1239px ──────────────────────────────── */
+        /* ─── Laptop: 1081px – 1239px (10 chevrons per row, 3 rows) ── */
         @media (max-width: 1239px) and (min-width: 1081px) {
-          .projects-chevron-dot {
+          :global(.projects-chevron-dot) {
             width: 26px !important;
             height: 26px !important;
           }
@@ -626,16 +697,26 @@ export default function ProjectsPage() {
             gap: 12px !important;
             padding-top: 4px !important;
           }
+          .projects-chevron-row-3,
+          :global(.projects-row3-desktop-only) {
+            display: flex !important;
+          }
+          :global(.projects-chevron-desktop-only) {
+            display: inline-block !important;
+          }
+          :global(.projects-chevron-mobile-hide) {
+            display: inline-block !important;
+          }
         }
 
-        /* ─── Tablet Landscape: 861px – 1080px ─────────────────────── */
+        /* ─── Tablet Landscape: 861px – 1080px (5 chevrons per row, 2 rows) ── */
         @media (max-width: 1080px) and (min-width: 861px) {
-          .projects-chevron-dot {
-            width: 36px !important;
-            height: 36px !important;
+          :global(.projects-chevron-dot) {
+            width: 34px !important;
+            height: 34px !important;
           }
           .projects-chevron-row {
-            gap: 14px !important;
+            gap: 12px !important;
           }
           .projects-chevron-row-1 {
             margin-left: 28px !important;
@@ -646,63 +727,64 @@ export default function ProjectsPage() {
           .projects-hud-chevrons {
             gap: 14px !important;
           }
+          .projects-chevron-row-3,
+          :global(.projects-row3-desktop-only) {
+            display: none !important;
+          }
+          :global(.projects-chevron-desktop-only) {
+            display: none !important;
+          }
+          :global(.projects-chevron-mobile-hide) {
+            display: inline-block !important;
+          }
           .project-showcase-split {
             grid-template-columns: minmax(240px, 320px) 1fr !important;
           }
         }
 
-        /* ─── Tablet Portrait: 641px – 860px ───────────────────────── */
+        /* ─── Tablet Portrait: 641px – 860px (single column, clean hero) ─── */
         @media (max-width: 860px) and (min-width: 641px) {
           .projects-hero {
             padding: 36px 0 28px !important;
           }
           .projects-badge-wrap {
-            display: flex;
-            justify-content: flex-start;
+            display: flex !important;
+            justify-content: center !important;
+            width: 100% !important;
+            margin-bottom: 18px !important;
           }
           .projects-heading-row {
             display: flex !important;
-            flex-direction: row !important;
-            align-items: flex-start !important;
-            justify-content: space-between !important;
-            text-align: left !important;
-            gap: 20px !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            text-align: center !important;
+            gap: 0 !important;
+            width: 100% !important;
           }
           .projects-heading-copy {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            text-align: left;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            text-align: center !important;
+            width: 100% !important;
             min-width: 0;
           }
           .projects-hero-title {
-            font-size: 38px !important;
-            text-align: left !important;
+            font-size: clamp(38px, 6vw, 52px) !important;
+            line-height: 1.15 !important;
+            text-align: center !important;
+            margin: 0 auto !important;
+            letter-spacing: -0.035em !important;
+            text-wrap: balance;
           }
           .projects-carousel {
-            margin-top: 24px !important;
-            justify-content: flex-start !important;
+            margin-top: 22px !important;
+            justify-content: center !important;
           }
           .projects-hud-chevrons {
-            display: flex !important;
-            flex-direction: column !important;
-            gap: 14px !important;
-            margin-left: auto !important;
-            padding-top: 6px !important;
-            flex-shrink: 0 !important;
-          }
-          :global(.projects-chevron-dot) {
-            width: 36px !important;
-            height: 36px !important;
-          }
-          .projects-chevron-row {
-            gap: 12px !important;
-          }
-          .projects-chevron-row-1 {
-            margin-left: 24px !important;
-          }
-          .projects-chevron-row-2 {
-            margin-left: 0 !important;
+            display: none !important;
           }
           .project-showcase-split {
             grid-template-columns: 1fr !important;
@@ -742,7 +824,7 @@ export default function ProjectsPage() {
           }
         }
 
-        /* ─── Mobile: ≤640px ──────────────────────────────────────── */
+        /* ─── Mobile: ≤640px ─────────────────────────────────────────── */
         @media (max-width: 640px) {
           .projects-wrap {
             padding-left: 16px !important;
@@ -752,60 +834,51 @@ export default function ProjectsPage() {
             padding: 24px 0 20px !important;
           }
           .projects-badge-wrap {
-            display: flex;
-            justify-content: flex-start;
+            display: flex !important;
+            justify-content: center !important;
+            width: 100% !important;
+            margin-bottom: 16px !important;
           }
           .projects-heading-row {
             display: flex !important;
-            flex-direction: row !important;
-            align-items: flex-start !important;
-            justify-content: space-between !important;
-            text-align: left !important;
-            gap: 12px !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            text-align: center !important;
+            gap: 0 !important;
+            width: 100% !important;
           }
           .projects-heading-copy {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            text-align: left;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            text-align: center !important;
+            width: 100% !important;
             min-width: 0;
             flex-shrink: 1;
           }
           .projects-hero-title {
-            font-size: clamp(23px, 5.8vw, 28px) !important;
+            font-size: clamp(32px, 8.5vw, 44px) !important;
             line-height: 1.15 !important;
-            text-align: left !important;
+            text-align: center !important;
+            margin: 0 auto !important;
+            letter-spacing: -0.035em !important;
+            text-wrap: balance;
+            font-weight: 700 !important;
           }
           .projects-carousel {
-            margin-top: 18px !important;
-            margin-bottom: 4px !important;
-            gap: 10px !important;
-            justify-content: flex-start !important;
+            margin-top: 20px !important;
+            margin-bottom: 6px !important;
+            gap: 12px !important;
+            justify-content: center !important;
           }
           .carousel-circle-btn {
             width: 38px !important;
             height: 38px !important;
           }
           .projects-hud-chevrons {
-            display: flex !important;
-            flex-direction: column !important;
-            gap: 12px !important;
-            margin-left: auto !important;
-            padding-top: 4px !important;
-            flex-shrink: 0 !important;
-          }
-          :global(.projects-chevron-dot) {
-            width: 32px !important;
-            height: 32px !important;
-          }
-          .projects-chevron-row {
-            gap: 8px !important;
-          }
-          .projects-chevron-row-1 {
-            margin-left: 18px !important;
-          }
-          .projects-chevron-row-2 {
-            margin-left: 0 !important;
+            display: none !important;
           }
           .project-showcase-split {
             grid-template-columns: 1fr !important;
@@ -840,34 +913,24 @@ export default function ProjectsPage() {
           }
         }
 
-        /* ─── Small phones: ≤400px ────────────────────────────────── */
+        /* ─── Small phones: ≤400px (compact) ──── */
         @media (max-width: 400px) {
           .projects-hero-title {
-            font-size: 22px !important;
+            font-size: clamp(26px, 7.5vw, 32px) !important;
+            line-height: 1.18 !important;
+            text-align: center !important;
+            margin: 0 auto !important;
+            letter-spacing: -0.03em !important;
           }
           .project-copy-title {
-            font-size: 22px !important;
+            font-size: 20px !important;
           }
           .carousel-circle-btn {
-            width: 34px !important;
-            height: 34px !important;
+            width: 32px !important;
+            height: 32px !important;
           }
           .projects-hud-chevrons {
-            gap: 10px !important;
-            padding-top: 3px !important;
-          }
-          :global(.projects-chevron-dot) {
-            width: 27px !important;
-            height: 27px !important;
-          }
-          .projects-chevron-row {
-            gap: 6px !important;
-          }
-          .projects-chevron-row-1 {
-            margin-left: 14px !important;
-          }
-          .projects-chevron-row-2 {
-            margin-left: 0 !important;
+            display: none !important;
           }
         }
       `}</style>
@@ -888,7 +951,6 @@ const ChevronDot: React.FC<{ className?: string }> = ({ className = '' }) => (
       WebkitMaskRepeat: 'no-repeat',
       maskPosition: 'center',
       WebkitMaskPosition: 'center',
-      display: 'inline-block',
       flexShrink: 0
     }}
   />
