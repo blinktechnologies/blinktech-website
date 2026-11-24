@@ -160,7 +160,6 @@ export default function ServicesPage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
               style={{ 
-                display: 'flex', 
                 flexDirection: 'column', 
                 gap: '24px', 
                 marginLeft: 'auto'
@@ -433,21 +432,21 @@ export default function ServicesPage() {
                     alignItems: 'center',
                     gap: '6px',
                     padding: '8px 16px',
-                    borderRadius: '20px',
+                    borderRadius: '4px',
                     fontSize: '12.5px',
                     fontWeight: 700,
                     fontFamily: "'Urbanist', sans-serif",
                     cursor: 'pointer',
-                    border: isCurrent ? '1px solid #0f172a' : '1px solid #e2e8f0',
-                    backgroundColor: isCurrent ? '#0f172a' : '#ffffff',
+                    border: isCurrent ? '1px solid #000000' : '1px solid #e2e8f0',
+                    backgroundColor: isCurrent ? '#000000' : '#ffffff',
                     color: isCurrent ? '#ffffff' : '#475569',
                     boxShadow: isCurrent 
-                      ? '0 4px 12px rgba(15, 23, 42, 0.2)' 
+                      ? '0 4px 12px rgba(0, 0, 0, 0.25)' 
                       : '0 1px 3px rgba(0, 0, 0, 0.04)',
                     transition: 'background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease'
                   }}
                 >
-                  <span style={{ opacity: isCurrent ? 0.75 : 0.5, fontSize: '11px', fontFamily: 'monospace' }}>
+                  <span style={{ opacity: isCurrent ? 0.75 : 0.5, fontSize: '11px', fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}>
                     0{idx + 1}.
                   </span>
                   <span>{step.name}</span>
@@ -761,7 +760,11 @@ export default function ServicesPage() {
 
       <StartProjectModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
 
-      <style jsx>{`
+      <style jsx global>{`
+        .services-hud-chevrons {
+          display: flex;
+        }
+
         .services-split-grid {
           display: grid;
           grid-template-columns: 420px 1fr;
@@ -857,46 +860,43 @@ export default function ServicesPage() {
             padding: 40px 0 56px !important;
           }
           .services-badge-wrap {
-            display: flex;
-            justify-content: flex-start;
+            display: flex !important;
+            justify-content: center !important;
+            width: 100% !important;
+            margin-bottom: 20px !important;
           }
           .services-heading-row {
             margin-bottom: 28px !important;
             display: flex !important;
-            flex-direction: row !important;
-            justify-content: space-between !important;
-            align-items: flex-start !important;
-            text-align: left !important;
-            gap: 16px !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            text-align: center !important;
+            gap: 0 !important;
+            width: 100% !important;
           }
           .services-heading-copy {
-            max-width: 65% !important;
-            text-align: left !important;
-          }
-          .services-hero-title {
-            text-align: left !important;
-            font-size: 32px !important;
-          }
-          .services-hud-chevrons {
+            max-width: 100% !important;
+            width: 100% !important;
+            text-align: center !important;
             display: flex !important;
             flex-direction: column !important;
-            gap: 14px !important;
-            margin-left: auto !important;
-            flex-shrink: 0 !important;
+            align-items: center !important;
+            justify-content: center !important;
           }
-          .services-chevron-icon {
-            width: 30px !important;
-            height: 30px !important;
-          }
-          .services-chevron-row > img:nth-child(n+5) {
+          .services-hero-br {
             display: none !important;
           }
-          .services-chevron-row {
-            gap: 12px !important;
+          .services-hero-title {
+            text-align: center !important;
+            margin: 0 auto !important;
+            font-size: clamp(34px, 5.2vw, 44px) !important;
+            line-height: 1.2 !important;
+            letter-spacing: -0.03em !important;
+            text-wrap: balance;
           }
-          .services-chevron-row-1 {
-            margin-left: 32px !important;
-            margin-top: 0 !important;
+          .services-hud-chevrons {
+            display: none !important;
           }
           .services-split-grid {
             grid-template-columns: 1fr;
@@ -937,57 +937,48 @@ export default function ServicesPage() {
             padding-right: 16px !important;
           }
           .services-hero {
-            padding: 24px 0 36px !important;
+            padding: 28px 0 36px !important;
           }
           .services-badge-wrap {
-            display: flex;
-            justify-content: flex-start;
+            display: flex !important;
+            justify-content: center !important;
+            width: 100% !important;
+            margin-bottom: 16px !important;
           }
           .services-heading-row {
-            margin-bottom: 18px !important;
+            margin-bottom: 22px !important;
             display: flex !important;
-            flex-direction: row !important;
-            justify-content: space-between !important;
-            align-items: flex-start !important;
-            text-align: left !important;
-            gap: 10px !important;
-            flex-wrap: nowrap !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            text-align: center !important;
+            gap: 0 !important;
+            width: 100% !important;
           }
           .services-heading-copy {
-            text-align: left !important;
-            flex: 1 1 auto;
-            max-width: none !important;
+            text-align: center !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 100% !important;
+            max-width: 100% !important;
             min-width: 0 !important;
           }
           .services-hero-br {
             display: none !important;
           }
           .services-hero-title {
-            font-size: clamp(17px, 4.4vw, 21px) !important;
-            line-height: 1.3 !important;
-            text-align: left !important;
+            font-size: clamp(28px, 7.5vw, 38px) !important;
+            line-height: 1.2 !important;
+            text-align: center !important;
+            margin: 0 auto !important;
+            letter-spacing: -0.03em !important;
+            text-wrap: balance;
+            font-weight: 700 !important;
           }
           .services-hud-chevrons {
-            display: flex !important;
-            flex-direction: column !important;
-            gap: 8px !important;
-            margin-left: auto !important;
-            padding-top: 4px !important;
-            flex-shrink: 0 !important;
-          }
-          .services-chevron-icon {
-            width: 22px !important;
-            height: 22px !important;
-          }
-          .services-chevron-row > img:nth-child(n+5) {
             display: none !important;
-          }
-          .services-chevron-row {
-            gap: 6px !important;
-          }
-          .services-chevron-row-1 {
-            margin-left: 10px !important;
-            margin-top: 0 !important;
           }
           .services-split-grid {
             grid-template-columns: 1fr;
@@ -1045,25 +1036,14 @@ export default function ServicesPage() {
         /* ─── Small phones: ≤400px ──────────────────────────────── */
         @media (max-width: 400px) {
           .services-hero-title {
-            font-size: 16px !important;
-            line-height: 1.25 !important;
+            font-size: clamp(24px, 7vw, 28px) !important;
+            line-height: 1.22 !important;
+            text-align: center !important;
+            margin: 0 auto !important;
+            letter-spacing: -0.025em !important;
           }
           .services-hud-chevrons {
-            gap: 6px !important;
-            padding-top: 2px !important;
-          }
-          .services-chevron-icon {
-            width: 19px !important;
-            height: 19px !important;
-          }
-          .services-chevron-row > img:nth-child(n+5) {
             display: none !important;
-          }
-          .services-chevron-row {
-            gap: 5px !important;
-          }
-          .services-chevron-row-1 {
-            margin-left: 8px !important;
           }
           .services-process-title {
             font-size: 24px !important;

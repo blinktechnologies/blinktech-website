@@ -125,7 +125,7 @@ export default function ProjectsPage() {
                 transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
                 style={{
                   fontFamily: "var(--font-urbanist), 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif",
-                  fontSize: 'clamp(44px, 5.6vw, 72px)',
+                  fontSize: 'clamp(40px, 5.2vw, 68px)',
                   color: '#0a0a0c',
                   letterSpacing: '-0.035em',
                   lineHeight: 1.15,
@@ -174,7 +174,6 @@ export default function ProjectsPage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
               style={{
-                display: 'flex',
                 flexDirection: 'column',
                 marginLeft: 'auto',
                 paddingTop: '6px'
@@ -464,7 +463,11 @@ export default function ProjectsPage() {
 
       <StartProjectModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
 
-      <style jsx>{`
+      <style jsx global>{`
+        .projects-hud-chevrons {
+          display: flex;
+        }
+
         /* ─── ChevronDot: base styles ────────────────────────────────── */
         :global(.projects-chevron-dot) {
           display: inline-block;
@@ -615,68 +618,49 @@ export default function ProjectsPage() {
           }
         }
 
-        /* ─── Tablet Portrait: 641px – 860px (5 chevrons per row, 2 rows) ─── */
+        /* ─── Tablet Portrait: 641px – 860px (single column, clean hero) ─── */
         @media (max-width: 860px) and (min-width: 641px) {
           .projects-hero {
             padding: 36px 0 28px !important;
           }
           .projects-badge-wrap {
-            display: flex;
-            justify-content: flex-start;
+            display: flex !important;
+            justify-content: center !important;
+            width: 100% !important;
+            margin-bottom: 18px !important;
           }
           .projects-heading-row {
             display: flex !important;
-            flex-direction: row !important;
-            align-items: flex-start !important;
-            justify-content: space-between !important;
-            text-align: left !important;
-            gap: 20px !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            text-align: center !important;
+            gap: 0 !important;
+            width: 100% !important;
           }
           .projects-heading-copy {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            text-align: left;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            text-align: center !important;
+            width: 100% !important;
             min-width: 0;
           }
           .projects-hero-title {
-            font-size: 38px !important;
-            text-align: left !important;
+            font-size: clamp(38px, 6vw, 52px) !important;
+            line-height: 1.15 !important;
+            text-align: center !important;
+            margin: 0 auto !important;
+            letter-spacing: -0.035em !important;
+            text-wrap: balance;
           }
           .projects-carousel {
-            margin-top: 24px !important;
-            justify-content: flex-start !important;
+            margin-top: 22px !important;
+            justify-content: center !important;
           }
           .projects-hud-chevrons {
-            display: flex !important;
-            flex-direction: column !important;
-            gap: 14px !important;
-            margin-left: auto !important;
-            padding-top: 6px !important;
-            flex-shrink: 0 !important;
-          }
-          .projects-chevron-row-3,
-          :global(.projects-row3-desktop-only) {
             display: none !important;
-          }
-          :global(.projects-chevron-desktop-only) {
-            display: none !important;
-          }
-          :global(.projects-chevron-mobile-hide) {
-            display: inline-block !important;
-          }
-          :global(.projects-chevron-dot) {
-            width: 32px !important;
-            height: 32px !important;
-          }
-          .projects-chevron-row {
-            gap: 10px !important;
-          }
-          .projects-chevron-row-1 {
-            margin-left: 20px !important;
-          }
-          .projects-chevron-row-2 {
-            margin-left: 0 !important;
           }
           .project-showcase-split {
             grid-template-columns: 1fr !important;
@@ -716,7 +700,7 @@ export default function ProjectsPage() {
           }
         }
 
-        /* ─── Mobile: ≤640px (4 chevrons per row, 2 rows) ─────────── */
+        /* ─── Mobile: ≤640px ─────────────────────────────────────────── */
         @media (max-width: 640px) {
           .projects-wrap {
             padding-left: 16px !important;
@@ -726,71 +710,51 @@ export default function ProjectsPage() {
             padding: 24px 0 20px !important;
           }
           .projects-badge-wrap {
-            display: flex;
-            justify-content: flex-start;
+            display: flex !important;
+            justify-content: center !important;
+            width: 100% !important;
+            margin-bottom: 16px !important;
           }
           .projects-heading-row {
             display: flex !important;
-            flex-direction: row !important;
-            align-items: flex-start !important;
-            justify-content: space-between !important;
-            text-align: left !important;
-            gap: 12px !important;
-            flex-wrap: nowrap !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            text-align: center !important;
+            gap: 0 !important;
+            width: 100% !important;
           }
           .projects-heading-copy {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            text-align: left;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            text-align: center !important;
+            width: 100% !important;
             min-width: 0;
             flex-shrink: 1;
           }
           .projects-hero-title {
-            font-size: clamp(18px, 4.4vw, 22px) !important;
-            line-height: 1.2 !important;
-            text-align: left !important;
+            font-size: clamp(32px, 8.5vw, 44px) !important;
+            line-height: 1.15 !important;
+            text-align: center !important;
+            margin: 0 auto !important;
+            letter-spacing: -0.035em !important;
+            text-wrap: balance;
+            font-weight: 700 !important;
           }
           .projects-carousel {
-            margin-top: 18px !important;
-            margin-bottom: 4px !important;
-            gap: 10px !important;
-            justify-content: flex-start !important;
+            margin-top: 20px !important;
+            margin-bottom: 6px !important;
+            gap: 12px !important;
+            justify-content: center !important;
           }
           .carousel-circle-btn {
             width: 38px !important;
             height: 38px !important;
           }
           .projects-hud-chevrons {
-            display: flex !important;
-            flex-direction: column !important;
-            gap: 8px !important;
-            margin-left: auto !important;
-            padding-top: 4px !important;
-            flex-shrink: 0 !important;
-          }
-          .projects-chevron-row-3,
-          :global(.projects-row3-desktop-only) {
             display: none !important;
-          }
-          :global(.projects-chevron-desktop-only) {
-            display: none !important;
-          }
-          :global(.projects-chevron-mobile-hide) {
-            display: none !important;
-          }
-          :global(.projects-chevron-dot) {
-            width: 22px !important;
-            height: 22px !important;
-          }
-          .projects-chevron-row {
-            gap: 6px !important;
-          }
-          .projects-chevron-row-1 {
-            margin-left: 10px !important;
-          }
-          .projects-chevron-row-2 {
-            margin-left: 0 !important;
           }
           .project-showcase-split {
             grid-template-columns: 1fr !important;
@@ -825,11 +789,14 @@ export default function ProjectsPage() {
           }
         }
 
-        /* ─── Small phones: ≤400px (4 chevrons per row, compact) ──── */
+        /* ─── Small phones: ≤400px (compact) ──── */
         @media (max-width: 400px) {
           .projects-hero-title {
-            font-size: 16px !important;
-            line-height: 1.25 !important;
+            font-size: clamp(26px, 7.5vw, 32px) !important;
+            line-height: 1.18 !important;
+            text-align: center !important;
+            margin: 0 auto !important;
+            letter-spacing: -0.03em !important;
           }
           .project-copy-title {
             font-size: 20px !important;
@@ -839,31 +806,7 @@ export default function ProjectsPage() {
             height: 32px !important;
           }
           .projects-hud-chevrons {
-            gap: 6px !important;
-            padding-top: 2px !important;
-          }
-          .projects-chevron-row-3,
-          :global(.projects-row3-desktop-only) {
             display: none !important;
-          }
-          :global(.projects-chevron-desktop-only) {
-            display: none !important;
-          }
-          :global(.projects-chevron-mobile-hide) {
-            display: none !important;
-          }
-          :global(.projects-chevron-dot) {
-            width: 19px !important;
-            height: 19px !important;
-          }
-          .projects-chevron-row {
-            gap: 5px !important;
-          }
-          .projects-chevron-row-1 {
-            margin-left: 8px !important;
-          }
-          .projects-chevron-row-2 {
-            margin-left: 0 !important;
           }
         }
       `}</style>
