@@ -77,6 +77,20 @@ body {
   font-family: var(--font-mono) !important;
 }
 
+.font-outfit,
+.font-outfit * {
+  font-family: var(--font-outfit), 'Outfit', sans-serif !important;
+}
+
+/* Ensure all form inputs, textareas, selects, and their placeholders use the Outfit font */
+input, textarea, select {
+  font-family: var(--font-outfit), 'Outfit', sans-serif !important;
+}
+
+input::placeholder, textarea::placeholder {
+  font-family: var(--font-outfit), 'Outfit', sans-serif !important;
+}
+
 body {
   width: 100%;
   min-height: 100vh;
@@ -280,31 +294,6 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.02em;
   font-weight: 600;
   color: var(--text-primary);
-}
-
-main {
-  animation: pageSmoothEnter 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-@keyframes pageSmoothEnter {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.pill-badge {
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, border-color 0.3s ease;
-}
-
-.pill-badge:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
-  border-color: #cbd5e1;
 }
 
 /* Custom Scrollbar */

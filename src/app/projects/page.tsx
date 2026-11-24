@@ -97,6 +97,7 @@ export default function ProjectsPage() {
     <div style={{ backgroundColor: '#ffffff', minHeight: '100vh', fontFamily: "var(--font-urbanist), 'Urbanist', sans-serif" }}>
       {/* SECTION 1: Top Hero Header on White Grid Background */}
       <section
+        className="projects-hero"
         style={{
           padding: '60px 0 50px',
           position: 'relative',
@@ -107,9 +108,9 @@ export default function ProjectsPage() {
           overflow: 'visible'
         }}
       >
-        <div className="container" style={{ position: 'relative', maxWidth: '1240px', margin: '0 auto', padding: '0 24px' }}>
-          {/* Pill Badge: • Projects (tactile 3D pill matching Services page) */}
-          <div style={{ marginBottom: '18px' }}>
+        <div className="container projects-wrap" style={{ position: 'relative', maxWidth: '1240px', margin: '0 auto', padding: '0 24px' }}>
+          {/* Pill Badge: • Projects */}
+          <div className="projects-badge-wrap" style={{ marginBottom: '18px' }}>
             <div
               style={{
                 display: 'inline-flex',
@@ -133,6 +134,7 @@ export default function ProjectsPage() {
 
           {/* Heading Row with HUD chevrons */}
           <div
+            className="projects-heading-row"
             style={{
               display: 'flex',
               alignItems: 'flex-start',
@@ -141,8 +143,9 @@ export default function ProjectsPage() {
               position: 'relative'
             }}
           >
-            <div>
+            <div className="projects-heading-copy">
               <h1
+                className="projects-hero-title"
                 style={{
                   fontFamily: "var(--font-urbanist), 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif",
                   fontSize: 'clamp(44px, 5.6vw, 72px)',
@@ -157,7 +160,7 @@ export default function ProjectsPage() {
               </h1>
 
               {/* Carousel Buttons (< and >) placed on the left directly under title with clean breathing room */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginTop: '32px', marginBottom: '12px' }}>
+              <div className="projects-carousel" style={{ display: 'flex', alignItems: 'center', gap: '16px', marginTop: '32px', marginBottom: '12px' }}>
                 <div style={{ display: 'flex', gap: '10px' }}>
                   <button
                     onClick={handlePrev}
@@ -184,39 +187,38 @@ export default function ProjectsPage() {
                     />
                   ))}
                 </div>
-                <span style={{ fontSize: '13px', fontWeight: 600, color: '#64748b', marginLeft: '4px' }}>
+                <span style={{ fontSize: '13px', fontWeight: 600, color: '#64748b', marginLeft: '4px', whiteSpace: 'nowrap' }}>
                   0{currentIndex + 1} / 0{projects.length}
                 </span>
               </div>
             </div>
 
-            {/* Right Side HUD Chevrons: 3 Staggered Rows of 10 Chevrons pointing LEFT (<) */}
+            {/* Right Side HUD Chevrons */}
             <div
               className="projects-hud-chevrons"
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '16px',
                 marginLeft: 'auto',
-                paddingTop: '10px'
+                paddingTop: '6px'
               }}
             >
-              {/* Row 1: 10 chevrons, shifted furthest right */}
-              <div style={{ display: 'flex', gap: '24px', alignItems: 'center', marginLeft: '140px' }}>
+              {/* Row 1: chevrons */}
+              <div className="projects-chevron-row projects-chevron-row-1">
                 {[...Array(10)].map((_, i) => (
-                  <ChevronDot key={`p-r1-${i}`} />
+                  <ChevronDot key={`p-r1-${i}`} className={i >= 5 ? 'projects-chevron-desktop-only' : ''} />
                 ))}
               </div>
 
-              {/* Row 2: 10 chevrons, middle offset */}
-              <div style={{ display: 'flex', gap: '24px', alignItems: 'center', marginLeft: '70px' }}>
+              {/* Row 2: chevrons */}
+              <div className="projects-chevron-row projects-chevron-row-2">
                 {[...Array(10)].map((_, i) => (
-                  <ChevronDot key={`p-r2-${i}`} />
+                  <ChevronDot key={`p-r2-${i}`} className={i >= 5 ? 'projects-chevron-desktop-only' : ''} />
                 ))}
               </div>
 
-              {/* Row 3: 10 chevrons, aligned on the left */}
-              <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
+              {/* Row 3: chevrons - hidden on tablet and mobile */}
+              <div className="projects-chevron-row projects-chevron-row-3 projects-row3-desktop-only">
                 {[...Array(10)].map((_, i) => (
                   <ChevronDot key={`p-r3-${i}`} />
                 ))}
@@ -226,8 +228,9 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      {/* SECTION 2: Full-Width Solid Black Project Showcase Band matching screenshot */}
+      {/* SECTION 2: Full-Width Solid Black Project Showcase Band */}
       <section
+        className="projects-showcase"
         style={{
           backgroundColor: '#000000',
           width: '100%',
@@ -238,7 +241,7 @@ export default function ProjectsPage() {
         }}
       >
         <div
-          className="container"
+          className="container projects-wrap"
           style={{
             maxWidth: '1240px',
             margin: '0 auto',
@@ -255,8 +258,9 @@ export default function ProjectsPage() {
               position: 'relative'
             }}
           >
-            {/* Left Column: Structured Card with horizontal divider lines & right vertical border */}
+            {/* Left Column */}
             <div
+              className="project-info-col"
               style={{
                 color: '#ffffff',
                 display: 'flex',
@@ -266,8 +270,9 @@ export default function ProjectsPage() {
                 zIndex: 2
               }}
             >
-              {/* Compartment 1: Centered 3D BT Logo Emblem */}
+              {/* Compartment 1: Centered BT Logo */}
               <div
+                className="project-logo-cell"
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -311,9 +316,10 @@ export default function ProjectsPage() {
                 </div>
               </div>
 
-              {/* Compartment 2: Title and Description with crisp bottom border */}
+              {/* Compartment 2: Title and Description */}
               <div
                 key={`info-${currentProject.id}`}
+                className="project-copy-cell"
                 style={{
                   padding: '36px 32px 36px 0',
                   borderBottom: '1px solid rgba(255, 255, 255, 0.14)',
@@ -344,6 +350,7 @@ export default function ProjectsPage() {
 
                 {/* Project Title */}
                 <h2
+                  className="project-copy-title"
                   style={{
                     fontFamily: "var(--font-urbanist), 'Urbanist', sans-serif",
                     fontSize: 'clamp(30px, 3.2vw, 42px)',
@@ -357,8 +364,8 @@ export default function ProjectsPage() {
                   {currentProject.title}
                 </h2>
 
-                {/* Project Description */}
                 <p
+                  className="project-copy-desc"
                   style={{
                     fontSize: '14.5px',
                     lineHeight: 1.65,
@@ -389,11 +396,34 @@ export default function ProjectsPage() {
                 )}
               </div>
 
-              {/* Compartment 3: Empty lower section aligned with laptop floor */}
-              <div style={{ flex: 1, minHeight: '60px' }} />
+              {/* Compartment 3: Tags row */}
+              <div className="project-tags-cell" style={{ padding: '20px 32px 20px 0', display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                {currentProject.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      padding: '4px 10px',
+                      borderRadius: '4px',
+                      backgroundColor: 'rgba(255,255,255,0.07)',
+                      border: '1px solid rgba(255,255,255,0.12)',
+                      fontSize: '11px',
+                      fontWeight: 600,
+                      color: '#94a3b8',
+                      letterSpacing: '0.3px'
+                    }}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              {/* Compartment 4: Spacer */}
+              <div className="project-info-spacer" style={{ flex: 1, minHeight: '40px' }} />
             </div>
 
-            {/* Right Column: MacBook Pro Mockup Image protruding upwards into the white grid */}
+            {/* Right Column: MacBook Pro Mockup */}
             <div
               className="laptop-mockup-wrapper"
               style={{
@@ -431,12 +461,55 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      {/* Clean White Separation Gap before Footer matching screenshot */}
+      {/* Clean White Gap before Footer */}
       <div style={{ height: '38px', backgroundColor: '#ffffff' }} />
 
       <StartProjectModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
 
       <style jsx>{`
+        /* ─── ChevronDot: must use :global() because component is outside scope ── */
+        :global(.projects-chevron-dot) {
+          width: 40px;
+          height: 40px;
+        }
+
+        /* ─── Chevron rows base layout ──────────────────────────────── */
+        .projects-chevron-row {
+          display: flex;
+          gap: 24px;
+          align-items: center;
+        }
+
+        .projects-chevron-row-1 {
+          margin-left: 140px;
+        }
+
+        .projects-chevron-row-2 {
+          margin-left: 70px;
+        }
+
+        .projects-hud-chevrons {
+          gap: 16px;
+        }
+
+        /* Row-3 and items 6-10: visible on all sizes, hidden classes inactive until needed */
+        :global(.projects-row3-desktop-only) {
+          display: none;
+        }
+        :global(.projects-chevron-desktop-only) {
+          display: none;
+        }
+
+        @media (min-width: 1240px) {
+          :global(.projects-row3-desktop-only) {
+            display: flex !important;
+          }
+          :global(.projects-chevron-desktop-only) {
+            display: inline-block !important;
+          }
+        }
+
+        /* ─── Carousel buttons ──────────────────────────────────────── */
         .carousel-circle-btn {
           width: 44px;
           height: 44px;
@@ -530,15 +603,271 @@ export default function ProjectsPage() {
           }
         }
 
-        @media (max-width: 980px) {
+        .project-showcase-split > * {
+          min-width: 0;
+        }
+
+        /* ─── Laptop: 1081px – 1239px ──────────────────────────────── */
+        @media (max-width: 1239px) and (min-width: 1081px) {
+          .projects-chevron-dot {
+            width: 26px !important;
+            height: 26px !important;
+          }
+          .projects-chevron-row {
+            gap: 12px !important;
+          }
+          .projects-chevron-row-1 {
+            margin-left: 72px !important;
+          }
+          .projects-chevron-row-2 {
+            margin-left: 36px !important;
+          }
+          .projects-hud-chevrons {
+            gap: 12px !important;
+            padding-top: 4px !important;
+          }
+        }
+
+        /* ─── Tablet Landscape: 861px – 1080px ─────────────────────── */
+        @media (max-width: 1080px) and (min-width: 861px) {
+          .projects-chevron-dot {
+            width: 36px !important;
+            height: 36px !important;
+          }
+          .projects-chevron-row {
+            gap: 14px !important;
+          }
+          .projects-chevron-row-1 {
+            margin-left: 28px !important;
+          }
+          .projects-chevron-row-2 {
+            margin-left: 0 !important;
+          }
+          .projects-hud-chevrons {
+            gap: 14px !important;
+          }
           .project-showcase-split {
-            grid-template-columns: 1fr;
+            grid-template-columns: minmax(240px, 320px) 1fr !important;
+          }
+        }
+
+        /* ─── Tablet Portrait: 641px – 860px ───────────────────────── */
+        @media (max-width: 860px) and (min-width: 641px) {
+          .projects-hero {
+            padding: 36px 0 28px !important;
+          }
+          .projects-badge-wrap {
+            display: flex;
+            justify-content: flex-start;
+          }
+          .projects-heading-row {
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: flex-start !important;
+            justify-content: space-between !important;
+            text-align: left !important;
+            gap: 20px !important;
+          }
+          .projects-heading-copy {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+            min-width: 0;
+          }
+          .projects-hero-title {
+            font-size: 38px !important;
+            text-align: left !important;
+          }
+          .projects-carousel {
+            margin-top: 24px !important;
+            justify-content: flex-start !important;
+          }
+          .projects-hud-chevrons {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 14px !important;
+            margin-left: auto !important;
+            padding-top: 6px !important;
+            flex-shrink: 0 !important;
+          }
+          :global(.projects-chevron-dot) {
+            width: 36px !important;
+            height: 36px !important;
+          }
+          .projects-chevron-row {
+            gap: 12px !important;
+          }
+          .projects-chevron-row-1 {
+            margin-left: 24px !important;
+          }
+          .projects-chevron-row-2 {
+            margin-left: 0 !important;
+          }
+          .project-showcase-split {
+            grid-template-columns: 1fr !important;
+          }
+          .project-info-col {
+            border-right: none !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
+          }
+          .project-logo-cell {
+            padding: 28px 16px !important;
+          }
+          .project-copy-cell {
+            padding: 28px 20px 28px 20px !important;
+            align-items: center;
+            text-align: center;
+          }
+          .project-copy-title {
+            font-size: 32px !important;
+            text-align: center !important;
+          }
+          .project-copy-desc {
+            text-align: center !important;
+            margin: 0 auto !important;
+          }
+          .project-tags-cell {
+            padding: 16px 20px !important;
+            justify-content: center !important;
+          }
+          .project-info-spacer {
+            display: none !important;
           }
           .laptop-mockup-wrapper {
             margin-top: 0 !important;
+            padding: 20px 0 32px !important;
+            align-items: center !important;
+            justify-content: center !important;
+          }
+        }
+
+        /* ─── Mobile: ≤640px ──────────────────────────────────────── */
+        @media (max-width: 640px) {
+          .projects-wrap {
+            padding-left: 16px !important;
+            padding-right: 16px !important;
+          }
+          .projects-hero {
+            padding: 24px 0 20px !important;
+          }
+          .projects-badge-wrap {
+            display: flex;
+            justify-content: flex-start;
+          }
+          .projects-heading-row {
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: flex-start !important;
+            justify-content: space-between !important;
+            text-align: left !important;
+            gap: 12px !important;
+          }
+          .projects-heading-copy {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+            min-width: 0;
+            flex-shrink: 1;
+          }
+          .projects-hero-title {
+            font-size: clamp(23px, 5.8vw, 28px) !important;
+            line-height: 1.15 !important;
+            text-align: left !important;
+          }
+          .projects-carousel {
+            margin-top: 18px !important;
+            margin-bottom: 4px !important;
+            gap: 10px !important;
+            justify-content: flex-start !important;
+          }
+          .carousel-circle-btn {
+            width: 38px !important;
+            height: 38px !important;
           }
           .projects-hud-chevrons {
-            display: none !important;
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 12px !important;
+            margin-left: auto !important;
+            padding-top: 4px !important;
+            flex-shrink: 0 !important;
+          }
+          :global(.projects-chevron-dot) {
+            width: 32px !important;
+            height: 32px !important;
+          }
+          .projects-chevron-row {
+            gap: 8px !important;
+          }
+          .projects-chevron-row-1 {
+            margin-left: 18px !important;
+          }
+          .projects-chevron-row-2 {
+            margin-left: 0 !important;
+          }
+          .project-showcase-split {
+            grid-template-columns: 1fr !important;
+          }
+          .project-info-col {
+            border-right: none !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
+          }
+          .project-logo-cell {
+            padding: 28px 16px !important;
+          }
+          .project-copy-cell {
+            padding: 22px 16px 22px 16px !important;
+            align-items: center;
+            text-align: center;
+          }
+          .project-copy-title {
+            font-size: 26px !important;
+            margin-bottom: 12px !important;
+            text-align: center !important;
+          }
+          .project-copy-desc {
+            text-align: center !important;
+            margin: 0 auto !important;
+          }
+          .project-tags-cell {
+            padding: 14px 16px !important;
+            justify-content: center !important;
+          }
+          .laptop-mockup-wrapper {
+            padding: 12px 0 24px !important;
+          }
+        }
+
+        /* ─── Small phones: ≤400px ────────────────────────────────── */
+        @media (max-width: 400px) {
+          .projects-hero-title {
+            font-size: 22px !important;
+          }
+          .project-copy-title {
+            font-size: 22px !important;
+          }
+          .carousel-circle-btn {
+            width: 34px !important;
+            height: 34px !important;
+          }
+          .projects-hud-chevrons {
+            gap: 10px !important;
+            padding-top: 3px !important;
+          }
+          :global(.projects-chevron-dot) {
+            width: 27px !important;
+            height: 27px !important;
+          }
+          .projects-chevron-row {
+            gap: 6px !important;
+          }
+          .projects-chevron-row-1 {
+            margin-left: 14px !important;
+          }
+          .projects-chevron-row-2 {
+            margin-left: 0 !important;
           }
         }
       `}</style>
@@ -546,11 +875,10 @@ export default function ProjectsPage() {
   );
 }
 
-const ChevronDot: React.FC = () => (
+const ChevronDot: React.FC<{ className?: string }> = ({ className = '' }) => (
   <div
+    className={`projects-chevron-dot${className ? ' ' + className : ''}`}
     style={{
-      width: '40px',
-      height: '40px',
       backgroundColor: '#1e293b',
       maskImage: 'url("/images/arrow-tight.png")',
       WebkitMaskImage: 'url("/images/Arrow 19.png")',

@@ -74,12 +74,14 @@ export const StartProjectModal: React.FC<StartProjectModalProps> = ({ isOpen, on
           boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.35)',
           border: '1px solid #e5e7eb',
           overflow: 'hidden',
-          position: 'relative'
+          position: 'relative',
+          fontFamily: "var(--font-outfit), 'Outfit', sans-serif"
         }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
         <div 
+          className="modal-header"
           style={{
             padding: '24px 28px',
             borderBottom: '1px solid #f0f2f5',
@@ -89,7 +91,7 @@ export const StartProjectModal: React.FC<StartProjectModalProps> = ({ isOpen, on
             background: 'linear-gradient(to right, #fafafa, #ffffff)'
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div className="modal-header-copy" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <BTLogo size={36} />
             <div>
               <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#111827', margin: 0 }}>Start a Project</h3>
@@ -113,7 +115,7 @@ export const StartProjectModal: React.FC<StartProjectModalProps> = ({ isOpen, on
         </div>
 
         {/* Modal Content */}
-        <div style={{ padding: '28px' }}>
+        <div className="modal-body" style={{ padding: '28px' }}>
           {submitted ? (
             <div style={{ textAlign: 'center', padding: '32px 16px' }}>
               <div 
@@ -145,7 +147,7 @@ export const StartProjectModal: React.FC<StartProjectModalProps> = ({ isOpen, on
             </div>
           ) : (
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+              <div className="modal-field-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                 <div>
                   <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', color: '#374151', marginBottom: '6px' }}>Your Name *</label>
                   <input 
@@ -161,7 +163,8 @@ export const StartProjectModal: React.FC<StartProjectModalProps> = ({ isOpen, on
                       border: '1px solid #d1d5db',
                       fontSize: '14px',
                       outline: 'none',
-                      backgroundColor: '#f9fafb'
+                      backgroundColor: '#f9fafb',
+                      fontFamily: "var(--font-outfit), 'Outfit', sans-serif"
                     }}
                   />
                 </div>
@@ -180,13 +183,14 @@ export const StartProjectModal: React.FC<StartProjectModalProps> = ({ isOpen, on
                       border: '1px solid #d1d5db',
                       fontSize: '14px',
                       outline: 'none',
-                      backgroundColor: '#f9fafb'
+                      backgroundColor: '#f9fafb',
+                      fontFamily: "var(--font-outfit), 'Outfit', sans-serif"
                     }}
                   />
                 </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+              <div className="modal-field-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                 <div>
                   <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', color: '#374151', marginBottom: '6px' }}>Service of Interest</label>
                   <select 
@@ -199,7 +203,8 @@ export const StartProjectModal: React.FC<StartProjectModalProps> = ({ isOpen, on
                       border: '1px solid #d1d5db',
                       fontSize: '14px',
                       outline: 'none',
-                      backgroundColor: '#f9fafb'
+                      backgroundColor: '#f9fafb',
+                      fontFamily: "var(--font-outfit), 'Outfit', sans-serif"
                     }}
                   >
                     <option>Product Development</option>
@@ -222,7 +227,8 @@ export const StartProjectModal: React.FC<StartProjectModalProps> = ({ isOpen, on
                       border: '1px solid #d1d5db',
                       fontSize: '14px',
                       outline: 'none',
-                      backgroundColor: '#f9fafb'
+                      backgroundColor: '#f9fafb',
+                      fontFamily: "var(--font-outfit), 'Outfit', sans-serif"
                     }}
                   >
                     <option>&lt; $5,000</option>
@@ -248,12 +254,13 @@ export const StartProjectModal: React.FC<StartProjectModalProps> = ({ isOpen, on
                     fontSize: '14px',
                     outline: 'none',
                     backgroundColor: '#f9fafb',
-                    resize: 'vertical'
+                    resize: 'vertical',
+                    fontFamily: "var(--font-outfit), 'Outfit', sans-serif"
                   }}
                 />
               </div>
 
-              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: '8px' }}>
+              <div className="modal-actions" style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: '8px' }}>
                 <button 
                   type="button" 
                   onClick={onClose}
@@ -285,6 +292,17 @@ export const StartProjectModal: React.FC<StartProjectModalProps> = ({ isOpen, on
       </div>
 
       <style jsx>{`
+        .modal-card input,
+        .modal-card select,
+        .modal-card textarea {
+          font-family: var(--font-outfit), 'Outfit', sans-serif !important;
+        }
+
+        .modal-card input::placeholder,
+        .modal-card textarea::placeholder {
+          font-family: var(--font-outfit), 'Outfit', sans-serif !important;
+        }
+
         .modal-overlay {
           animation: backdropFade 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
@@ -306,6 +324,37 @@ export const StartProjectModal: React.FC<StartProjectModalProps> = ({ isOpen, on
           to {
             opacity: 1;
             transform: scale(1) translateY(0);
+          }
+        }
+
+        @media (max-width: 640px) {
+          .modal-card {
+            max-height: calc(100dvh - 24px);
+            overflow-y: auto;
+            border-radius: 14px !important;
+          }
+          .modal-header {
+            padding: 16px !important;
+            align-items: flex-start !important;
+            gap: 12px;
+          }
+          .modal-header-copy {
+            min-width: 0;
+          }
+          .modal-body {
+            padding: 16px !important;
+          }
+          .modal-field-grid {
+            grid-template-columns: 1fr !important;
+            gap: 14px !important;
+          }
+          .modal-actions {
+            flex-direction: column-reverse;
+            align-items: stretch;
+          }
+          .modal-actions :global(button) {
+            width: 100%;
+            justify-content: center;
           }
         }
       `}</style>
