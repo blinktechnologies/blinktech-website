@@ -3,605 +3,421 @@
 import React, { useState } from 'react';
 import { BTLogo } from './BTLogo';
 import { StartProjectModal } from './StartProjectModal';
+import { DotChevron } from './DotChevron';
 
 export const HeroSection: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
-    <section 
-      className="tech-grid-bg"
-      style={{
-        position: 'relative',
-        minHeight: 'calc(100vh - 86px)',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
-        paddingTop: '16px',
-        paddingBottom: '36px',
-        borderBottom: '1px solid #eeeff2',
-        overflow: 'hidden',
-        backgroundColor: '#ffffff'
-      }}
-    >
-      {/* Top-Left Exact Stepped Pixel Blocks matching user close-up image */}
-      <div 
-        className="corner-pixel-block-top"
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 'max(16px, calc((100vw - 1240px) / 2 + 16px))',
-          width: '192px',
-          height: '144px',
-          pointerEvents: 'none',
-          userSelect: 'none',
-          zIndex: 2
-        }}
-      >
-        <svg width="192" height="144" viewBox="0 0 192 144" fill="none">
-          {/* Row 0 (y=0..48): col 0 square, col 2 & 3 horizontal rectangle */}
-          <rect x="0" y="0" width="48" height="48" fill="#000000" />
-          <rect x="96" y="0" width="96" height="48" fill="#000000" />
-          {/* Row 1 (y=48..96): col 1 square */}
-          <rect x="48" y="48" width="48" height="48" fill="#000000" />
-          {/* Row 2 (y=96..144): col 0 square */}
-          <rect x="0" y="96" width="48" height="48" fill="#000000" />
+    <section className="hero">
+      <div className="hero-canvas">
+        {/* Top-left stepped pixel block */}
+        <svg className="px-block px-tl" width="260" height="222" viewBox="0 0 260 222" aria-hidden="true">
+          <rect x="0" y="0" width="74" height="74" fill="#0a0a0b" />
+          <rect x="112" y="0" width="148" height="74" fill="#0a0a0b" />
+          <rect x="73" y="74" width="74" height="74" fill="#0a0a0b" />
+          <rect x="0" y="148" width="74" height="74" fill="#0a0a0b" />
         </svg>
-      </div>
 
-      {/* Bottom-Right Exact Stepped Pixel Blocks matching user screenshot (180 deg rotation) */}
-      <div 
-        className="corner-pixel-block-bottom"
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          right: 'max(16px, calc((100vw - 1240px) / 2 + 16px))',
-          width: '192px',
-          height: '144px',
-          pointerEvents: 'none',
-          userSelect: 'none',
-          zIndex: 2
-        }}
-      >
-        <svg width="192" height="144" viewBox="0 0 192 144" fill="none">
-          {/* Row 0 (y=0..48): col 3 square */}
-          <rect x="144" y="0" width="48" height="48" fill="#000000" />
-          {/* Row 1 (y=48..96): col 2 square */}
-          <rect x="96" y="48" width="48" height="48" fill="#000000" />
-          {/* Row 2 (y=96..144): col 0 & 1 rectangle, col 3 square */}
-          <rect x="0" y="96" width="96" height="48" fill="#000000" />
-          <rect x="144" y="96" width="48" height="48" fill="#000000" />
+        {/* Bottom-right stepped pixel block */}
+        <svg className="px-block px-br" width="377" height="321" viewBox="0 0 377 321" aria-hidden="true">
+          <rect x="270" y="0" width="107" height="107" fill="#0a0a0b" />
+          <rect x="163" y="107" width="107" height="107" fill="#0a0a0b" />
+          <rect x="0" y="214" width="215" height="107" fill="#0a0a0b" />
+          <rect x="270" y="214" width="107" height="107" fill="#0a0a0b" />
         </svg>
-      </div>
 
-      {/* Vertical Dashed Center Guideline from top down through center */}
-      <div 
-        style={{
-          position: 'absolute',
-          top: 0,
-          bottom: '260px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: '1px',
-          borderLeft: '1px dashed #cbd5e1',
-          pointerEvents: 'none',
-          zIndex: 1
-        }}
-      />
+        {/* Horizontal dashed band lines */}
+        <div className="band-line band-top" />
+        <div className="band-line band-bottom" />
 
-      <div style={{ position: 'relative', zIndex: 3, width: '100%' }}>
-        {/* Top Tag: AI-Driven Agency with animated entrance and twinkle */}
-        <div className="hero-ai-tag-wrapper">
-          <div 
-            className="ai-badge"
-            style={{ 
-              display: 'inline-flex', 
-              alignItems: 'center', 
-              gap: '6px', 
-              padding: '6px 16px', 
-              borderRadius: '999px', 
-              backgroundColor: '#ffffff', 
-              border: '1px solid #e2e8f0',
-              boxShadow: '0 2px 6px rgba(0, 0, 0, 0.04)',
-              fontFamily: "'Plus Jakarta Sans', var(--font-plus-jakarta), sans-serif",
-              fontSize: '11.5px',
-              fontWeight: 600,
-              letterSpacing: '0.02em',
-              color: '#0f172a'
-            }}
-          >
-            <span className="ai-sparkle" style={{ fontSize: '12px', display: 'inline-block' }}>✦</span>
-            <span>AI-Driven Agency</span>
-          </div>
+        {/* Chevron rows */}
+        <div className="chev-row chev-row-top">
+          {Array.from({ length: 10 }).map((_, i) => (
+            <span key={i} className="chev-flow-left" style={{ animationDelay: `${(9 - i) * 150}ms` }}>
+              <DotChevron direction="left" color={i === 6 ? '#111111' : '#c9ccd1'} />
+            </span>
+          ))}
         </div>
-
-        {/* Horizontal Technical Dashed Band behind WE CRAFT [BT] IMPACT */}
-        <div className="hero-band-wrapper">
-          <div className="container hero-band-content">
-            {/* Left: WE CRAFT */}
-            <div 
-              className="hero-we-craft"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 'clamp(10px, 1.8vw, 20px)',
-                flex: 1,
-                justifyContent: 'flex-end',
-                paddingRight: 'clamp(8px, 2vw, 24px)'
-              }}
-            >
-              <span 
-                className="word-we"
-                style={{
-                  fontFamily: "'Space Grotesk', var(--font-space-grotesk), sans-serif",
-                  fontSize: 'clamp(42px, 7.5vw, 98px)',
-                  fontWeight: 700,
-                  color: '#64748b',
-                  letterSpacing: '0.04em',
-                  lineHeight: 1
-                }}
-              >
-                WE
-              </span>
-              <span 
-                className="word-craft"
-                style={{
-                  fontFamily: "'Space Grotesk', var(--font-space-grotesk), sans-serif",
-                  fontSize: 'clamp(42px, 7.5vw, 98px)',
-                  fontWeight: 700,
-                  color: '#000000',
-                  letterSpacing: '0.04em',
-                  lineHeight: 1
-                }}
-              >
-                CRAFT
-              </span>
-            </div>
-
-            {/* Center Box with 4 Black Corner Marks, Dashed Circular Halo, and BT Logo */}
-            <div className="center-bt-card">
-              {/* 4 Black Corner Marks positioned exactly at dashed line intersection points */}
-              <div style={{ position: 'absolute', top: '35px', left: '-3px', width: '6px', height: '6px', backgroundColor: '#000000', zIndex: 10 }} />
-              <div style={{ position: 'absolute', top: '35px', right: '-3px', width: '6px', height: '6px', backgroundColor: '#000000', zIndex: 10 }} />
-              <div style={{ position: 'absolute', bottom: '35px', left: '-3px', width: '6px', height: '6px', backgroundColor: '#000000', zIndex: 10 }} />
-              <div style={{ position: 'absolute', bottom: '35px', right: '-3px', width: '6px', height: '6px', backgroundColor: '#000000', zIndex: 10 }} />
-
-              {/* Animated Dashed Circular Halo enclosing the BT emblem */}
-              <div className="bt-dashed-halo" />
-
-              {/* Exact BT Metallic Circular Emblem with float response */}
-              <div className="bt-emblem-float">
-                <BTLogo size={136} />
-              </div>
-            </div>
-
-            {/* Right: IMPACT + Row of Chevrons inside the band */}
-            <div 
-              className="hero-impact-container"
-              style={{ 
-                position: 'relative', 
-                display: 'flex', 
-                alignItems: 'center',
-                flex: 1,
-                justifyContent: 'flex-start',
-                paddingLeft: 'clamp(8px, 2vw, 24px)'
-              }}
-            >
-              <span 
-                className="word-impact"
-                style={{
-                  fontFamily: "'Space Grotesk', var(--font-space-grotesk), sans-serif",
-                  fontSize: 'clamp(42px, 7.5vw, 98px)',
-                  fontWeight: 700,
-                  color: '#000000',
-                  letterSpacing: '0.04em',
-                  lineHeight: 1
-                }}
-              >
-                IMPACT
-              </span>
-
-              {/* Chevrons inside the band pointing LEFT with animated wave (< < < < < < < < <) */}
-              <div 
-                style={{
-                  position: 'absolute',
-                  top: '-32px',
-                  right: 'clamp(12px, 3vw, 48px)',
-                  display: 'flex',
-                  gap: '24px',
-                  userSelect: 'none',
-                  pointerEvents: 'none'
-                }}
-              >
-                {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-                  <div key={i} className="chevron-stream-left" style={{ animationDelay: `${(8 - i) * 180}ms` }}>
-                    <PixelChevronLeft color={i === 6 ? '#000000' : '#cbd5e1'} />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom Chevrons Row on the left with animated wave (pointing RIGHT: > > > > > > > > > > >) */}
-        <div 
-          className="container hero-bottom-chevrons"
-          style={{
-            display: 'flex',
-            justifyContent: 'flex-start',
-            gap: '26px',
-            userSelect: 'none',
-            pointerEvents: 'none',
-            paddingLeft: 'clamp(20px, 6vw, 72px)',
-            marginTop: '16px',
-            marginBottom: '26px'
-          }}
-        >
-          {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
-            <div key={i} className="chevron-stream-right" style={{ animationDelay: `${i * 160}ms` }}>
-              <PixelChevronRight color={i === 3 ? '#000000' : '#cbd5e1'} />
-            </div>
+        <div className="chev-row chev-row-bottom">
+          {Array.from({ length: 11 }).map((_, i) => (
+            <span key={i} className="chev-flow-right" style={{ animationDelay: `${i * 150}ms` }}>
+              <DotChevron direction="right" color={i === 3 ? '#111111' : '#c9ccd1'} />
+            </span>
           ))}
         </div>
 
-        {/* Subtitle text */}
-        <div 
-          className="hero-subtitle-box"
-          style={{
-            textAlign: 'center',
-            marginBottom: '28px',
-            fontFamily: "'Plus Jakarta Sans', var(--font-plus-jakarta), sans-serif",
-            fontSize: '13px',
-            lineHeight: 1.55,
-            color: '#334155',
-            fontWeight: 500,
-            letterSpacing: '-0.01em'
-          }}
-        >
-          <p style={{ margin: 0 }}>Turning ideas into meaningful change.</p>
-          <p style={{ margin: 0 }}>Creating for today. Shaping tomorrow.</p>
+        {/* Headline band: WE CRAFT [BT] IMPACT */}
+        <div className="band-grid">
+          <div className="band-left">
+            <h1 className="hero-word word-left">
+              <span className="w-we">WE</span>
+              <span className="w-craft">CRAFT</span>
+            </h1>
+          </div>
+
+          <div className="band-center">
+            {/* Dashed guides from the top of the hero down to the card */}
+            <span className="v-guide v-guide-a" />
+            <span className="v-guide v-guide-b" />
+
+            <div className="ai-badge">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#111" aria-hidden="true">
+                <path d="M10 2l1.8 5.6L17.5 9.5l-5.7 1.9L10 17l-1.8-5.6L2.5 9.5l5.7-1.9z" />
+                <path d="M18.5 13l.9 2.6 2.6.9-2.6.9-.9 2.6-.9-2.6-2.6-.9 2.6-.9z" />
+                <path d="M5 16l.6 1.6 1.6.6-1.6.6L5 20.4l-.6-1.6-1.6-.6 1.6-.6z" />
+              </svg>
+              <span>AI-Driven Agency</span>
+            </div>
+
+            <div className="bt-card">
+              <span className="card-mark" style={{ top: 46, left: -4 }} />
+              <span className="card-mark" style={{ top: 46, right: -4 }} />
+              <span className="card-mark" style={{ bottom: 45, left: -4 }} />
+              <span className="card-mark" style={{ bottom: 45, right: -4 }} />
+              <div className="bt-halo" />
+              <div className="bt-emblem">
+                <BTLogo size={224} />
+              </div>
+            </div>
+          </div>
+
+          <div className="band-right">
+            <span className="hero-word word-right">IMPACT</span>
+          </div>
         </div>
 
-        {/* CTA Buttons */}
-        <div 
-          className="hero-cta-buttons"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '14px',
-            flexWrap: 'wrap'
-          }}
-        >
-          {/* Explore our vision */}
-          <a
-            href="#about"
-            className="btn-explore"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: '#ffffff',
-              color: '#0f172a',
-              padding: '10px 24px',
-              borderRadius: '8px',
-              fontFamily: "'Plus Jakarta Sans', var(--font-plus-jakarta), sans-serif",
-              fontSize: '12.5px',
-              fontWeight: 600,
-              letterSpacing: '0.01em',
-              border: '1px solid #e2e8f0',
-              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
-              transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)'
-            }}
-          >
-            Explore our vision
-          </a>
-
-          {/* Get in touch with dotted matrix icon, glossy pill, and neon rim glow */}
-          <button
-            onClick={() => setModalOpen(true)}
-            className="btn-touch"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '10px',
-              background: 'linear-gradient(180deg, #2c2e35 0%, #151619 100%)',
-              color: '#ffffff',
-              padding: '6px 20px 6px 7px',
-              borderRadius: '10px',
-              fontFamily: "'Plus Jakarta Sans', var(--font-plus-jakarta), sans-serif",
-              fontSize: '12.5px',
-              fontWeight: 600,
-              letterSpacing: '0.01em',
-              border: '1px solid #33353e',
-              boxShadow: '0 10px 24px rgba(0, 0, 0, 0.4)',
-              cursor: 'pointer',
-              transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
-              position: 'relative',
-              overflow: 'hidden'
-            }}
-          >
-            {/* Light Inset Badge with Dotted Constellation Arrow */}
-            <div 
-              className="touch-badge"
-              style={{
-                width: '28px',
-                height: '28px',
-                borderRadius: '6px',
-                background: 'linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%)',
-                boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(163, 230, 53, 0.35)',
-                border: '1px solid rgba(255, 255, 255, 0.5)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                transition: 'transform 0.25s ease'
-              }}
-            >
-              {/* Dotted Arrow matching scratch_buttons.png */}
-              <svg className="touch-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ transition: 'transform 0.25s ease' }}>
-                <circle cx="2.5" cy="3.5" r="1.1" fill="#475569" />
-                <circle cx="5.5" cy="3.5" r="1.1" fill="#475569" />
-                <circle cx="5.5" cy="6.5" r="1.1" fill="#475569" />
-                <circle cx="8.5" cy="6.5" r="1.1" fill="#475569" />
-                <circle cx="11.5" cy="7" r="1.1" fill="#475569" />
-                <circle cx="8.5" cy="7.5" r="1.1" fill="#475569" />
-                <circle cx="5.5" cy="7.5" r="1.1" fill="#475569" />
-                <circle cx="5.5" cy="10.5" r="1.1" fill="#475569" />
-                <circle cx="2.5" cy="10.5" r="1.1" fill="#475569" />
-              </svg>
-            </div>
-            <span>Get in touch</span>
-          </button>
+        {/* Subtitle + CTAs */}
+        <div className="hero-bottom">
+          <p className="hero-sub">
+            Turning ideas into meaningful change.
+            <br />
+            Creating for today. Shaping tomorrow.
+          </p>
+          <div className="hero-ctas">
+            <a href="#about" className="btn-explore">Explore our vision</a>
+            <button onClick={() => setModalOpen(true)} className="btn-touch">
+              <span className="touch-tile">
+                <DotChevron direction="right" color="#6b7078" size={3.2} />
+              </span>
+              <span className="touch-label">Get in touch</span>
+            </button>
+          </div>
         </div>
       </div>
 
       <StartProjectModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
 
       <style jsx>{`
-        /* Hero Load Choreography - zero layout shift, seamless entrance */
-        .hero-ai-tag-wrapper {
-          text-align: center;
-          padding-top: 64px;
-          padding-bottom: 60px;
+        .hero {
           position: relative;
-          z-index: 5;
-          animation: dropTag 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+          background-color: #f3f4f6;
+          background-image:
+            linear-gradient(to right, rgba(17, 24, 39, 0.035) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(17, 24, 39, 0.035) 1px, transparent 1px);
+          background-size: 50.5px 50.5px;
+          background-position: 17px 0;
+          overflow: hidden;
         }
-
-        .hero-we-craft {
-          animation: heroFadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
-        }
-
-        .hero-impact-container {
-          animation: heroFadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
-        }
-
-        .center-bt-card {
+        .hero-canvas {
           position: relative;
-          width: clamp(170px, 18vw, 215px);
-          height: clamp(170px, 18vw, 215px);
-          background-color: #ffffff;
-          border-radius: 40px;
+          max-width: 1441px;
+          height: 814px;
+          margin: 0 auto;
+          border-left: 1px solid #dadada;
+          border-right: 1px solid #dadada;
+        }
+        .hero::before,
+        .hero::after {
+          content: '';
+        }
+        .px-block {
+          position: absolute;
+          z-index: 1;
+          pointer-events: none;
+        }
+        .px-tl { top: 0; left: 0; }
+        .px-br { bottom: 15px; right: 0; }
+
+        .band-line {
+          position: absolute;
+          left: 0;
+          right: 0;
+          border-top: 1px dashed #c4c7cc;
+          z-index: 1;
+        }
+        .band-top { top: 222px; }
+        .band-bottom { top: 423px; }
+
+        .chev-row {
+          position: absolute;
+          display: flex;
+          gap: 41px;
+          z-index: 2;
+          pointer-events: none;
+        }
+        .chev-row-top { top: 188px; left: 939px; }
+        .chev-row-bottom { top: 438px; left: 32px; }
+        .chev-flow-left,
+        .chev-flow-right {
+          display: inline-flex;
+          width: 10px;
+          justify-content: center;
+        }
+        .chev-flow-left { animation: flowLeft 2.6s ease-in-out infinite; }
+        .chev-flow-right { animation: flowRight 2.6s ease-in-out infinite; }
+        @keyframes flowLeft {
+          0%, 100% { opacity: 0.55; transform: translateX(0); }
+          50% { opacity: 1; transform: translateX(-3px); }
+        }
+        @keyframes flowRight {
+          0%, 100% { opacity: 0.55; transform: translateX(0); }
+          50% { opacity: 1; transform: translateX(3px); }
+        }
+
+        .band-grid {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 472px;
+          display: grid;
+          grid-template-columns: minmax(0, 593fr) 304px minmax(0, 542fr);
+          z-index: 3;
+        }
+        .band-left,
+        .band-right {
+          display: flex;
+          align-items: center;
+          padding-top: 222px;
+          height: 423px;
+        }
+        .band-left {
+          justify-content: flex-end;
+          padding-right: 27px;
+        }
+        .band-right {
+          justify-content: flex-start;
+          padding-left: 67px;
+        }
+        .hero-word {
+          font-family: var(--font-inter-tight), 'Inter Tight', 'Helvetica Neue', Arial, sans-serif;
+          font-size: 120px;
+          font-weight: 600;
+          letter-spacing: -0.085em;
+          line-height: 1;
+          margin: 0;
+          white-space: nowrap;
+          display: flex;
+          gap: 0.38em;
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          color: transparent;
+        }
+        .word-left {
+          background-image: linear-gradient(90deg, #4c4f53 0%, #3a3c3f 45%, #050505 100%);
+        }
+        .word-right {
+          background-image: linear-gradient(90deg, #6b6e72 0%, #3f4144 45%, #1c1d1f 100%);
+        }
+
+        .band-center {
+          position: relative;
+          height: 472px;
+        }
+        .v-guide {
+          position: absolute;
+          top: 0;
+          height: 172px;
+          border-left: 1px dashed #c4c7cc;
+        }
+        .v-guide-a { left: 102px; }
+        .v-guide-b { left: 200px; }
+
+        .ai-badge {
+          position: absolute;
+          top: 88px;
+          left: 50%;
+          transform: translateX(-50%);
+          display: inline-flex;
+          align-items: center;
+          gap: 9px;
+          height: 35px;
+          padding: 0 17px 0 14px;
+          border-radius: 8px;
+          background: #ffffff;
+          border: 1px solid #e5e7eb;
+          box-shadow: 0 2px 0 #d9dbdf, 0 6px 14px rgba(0, 0, 0, 0.05);
+          font-family: var(--font-urbanist), 'Urbanist', sans-serif;
+          font-size: 16px;
+          font-weight: 500;
+          color: #111111;
+          white-space: nowrap;
+          z-index: 4;
+          transition: transform 0.25s ease;
+        }
+        .ai-badge:hover { transform: translateX(-50%) translateY(-2px); }
+
+        .bt-card {
+          position: absolute;
+          top: 172px;
+          left: 0;
+          width: 304px;
+          height: 300px;
+          border-radius: 20px;
+          background: #f8f8fa;
+          border: 1px solid #e2e4e8;
           display: flex;
           align-items: center;
           justify-content: center;
-          box-shadow: 0 12px 36px rgba(0, 0, 0, 0.06);
-          border: 1px dashed #cbd5e1;
-          flex-shrink: 0;
-          z-index: 5;
-          animation: heroFadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
-          transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.3s ease;
         }
-
-        .center-bt-card:hover {
-          transform: translateY(-5px) scale(1.02);
-          box-shadow: 0 24px 54px rgba(0, 0, 0, 0.12);
-          border-color: #94a3b8;
-        }
-
-        /* Rotating Orbit Halo */
-        .bt-dashed-halo {
+        .card-mark {
           position: absolute;
-          width: clamp(130px, 14vw, 172px);
-          height: clamp(130px, 14vw, 172px);
+          width: 8px;
+          height: 8px;
+          background: #000000;
+          z-index: 2;
+        }
+        .bt-halo {
+          position: absolute;
+          width: 298px;
+          height: 298px;
           border-radius: 50%;
-          border: 1px dashed #cbd5e1;
-          pointer-events: none;
-          animation: rotateOrbit 36s linear infinite;
-          transition: border-color 0.35s ease, box-shadow 0.35s ease;
+          background: #ffffff;
+          border: 1px dashed #c9ccd1;
+          animation: haloSpin 60s linear infinite;
         }
-
-        .center-bt-card:hover .bt-dashed-halo {
-          border-color: #475569;
-          box-shadow: 0 0 18px rgba(15, 23, 42, 0.08);
-          animation-duration: 20s;
-        }
-
-        .bt-emblem-float {
+        .bt-emblem {
+          position: relative;
+          z-index: 1;
           transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
-        .center-bt-card:hover .bt-emblem-float {
-          transform: scale(1.05);
+        .bt-card:hover .bt-emblem { transform: scale(1.04) rotate(-2deg); }
+        @keyframes haloSpin {
+          to { transform: rotate(360deg); }
         }
 
-        .hero-subtitle-box {
-          animation: heroFadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
+        .hero-bottom {
+          position: absolute;
+          top: 535px;
+          left: 0;
+          right: 0;
+          text-align: center;
+          z-index: 3;
         }
-
-        .hero-cta-buttons {
-          animation: heroFadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both;
+        .hero-sub {
+          font-family: var(--font-urbanist), 'Urbanist', sans-serif;
+          font-size: 16px;
+          font-weight: 500;
+          line-height: 22px;
+          color: #111111;
+          margin: 0 0 35px;
         }
-
-        .hero-band-wrapper {
-          border-top: 1px dashed #cbd5e1;
-          border-bottom: 1px dashed #cbd5e1;
-          height: 144px;
+        .hero-ctas {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 16px;
+        }
+        .btn-explore {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 188px;
+          height: 62px;
+          border-radius: 12px;
           background: #ffffff;
-          display: flex;
-          align-items: center;
-          position: relative;
+          font-family: var(--font-urbanist), 'Urbanist', sans-serif;
+          font-size: 18.5px;
+          font-weight: 600;
+          color: #111111;
+          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-
-        .hero-band-content {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          position: relative;
-          height: 100%;
-        }
-
-        /* Streaming Animated Chevrons moving into page */
-        .chevron-stream-left {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          animation: streamLeft 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-        }
-
-        @keyframes streamLeft {
-          0% {
-            opacity: 0.15;
-            transform: translateX(12px) scale(0.92);
-          }
-          40%, 60% {
-            opacity: 1;
-            transform: translateX(0px) scale(1.08);
-          }
-          100% {
-            opacity: 0.15;
-            transform: translateX(-12px) scale(0.92);
-          }
-        }
-
-        .chevron-stream-right {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          animation: streamRight 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-        }
-
-        @keyframes streamRight {
-          0% {
-            opacity: 0.15;
-            transform: translateX(-12px) scale(0.92);
-          }
-          40%, 60% {
-            opacity: 1;
-            transform: translateX(0px) scale(1.08);
-          }
-          100% {
-            opacity: 0.15;
-            transform: translateX(12px) scale(0.92);
-          }
-        }
-
-        @keyframes rotateOrbit {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
-        }
-
-        @keyframes dropTag {
-          from {
-            opacity: 0;
-            transform: translateY(-8px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes heroFadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(6px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        /* Twinkle on AI Sparkle */
-        .ai-sparkle {
-          animation: twinkleSparkle 2.6s ease-in-out infinite;
-        }
-
-        @keyframes twinkleSparkle {
-          0%, 100% {
-            transform: scale(1) rotate(0deg);
-            opacity: 0.9;
-          }
-          50% {
-            transform: scale(1.28) rotate(30deg);
-            opacity: 1;
-            color: #0284c7;
-          }
-        }
-
-        /* Interactive Buttons */
         .btn-explore:hover {
           transform: translateY(-2px);
-          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08) !important;
-          border-color: #cbd5e1 !important;
+          box-shadow: 0 12px 26px rgba(0, 0, 0, 0.08);
         }
-
-        .btn-explore:active {
-          transform: translateY(0) scale(0.98);
+        .btn-touch {
+          display: inline-flex;
+          align-items: center;
+          width: 201px;
+          height: 62px;
+          padding: 0 8px;
+          border-radius: 12px;
+          background: linear-gradient(180deg, #303236 0%, #121315 100%);
+          border: 1px solid #0b0b0c;
+          box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.12),
+            0 4px 0 #1a1b1d,
+            0 10px 18px rgba(0, 0, 0, 0.25);
+          cursor: pointer;
+          transition: transform 0.2s ease, filter 0.2s ease;
         }
-
         .btn-touch:hover {
           transform: translateY(-2px);
-          box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 12px rgba(163, 230, 53, 0.35) !important;
-          border-color: #4b5162 !important;
+          filter: brightness(1.12);
+        }
+        .touch-tile {
+          width: 44px;
+          height: 50px;
+          border-radius: 8px;
+          background: linear-gradient(180deg, #f5f5f6 0%, #c9cbce 100%);
+          box-shadow: inset 0 -2px 0 #9ccf6b, 0 1px 2px rgba(0, 0, 0, 0.3);
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+          transition: transform 0.25s ease;
+        }
+        .btn-touch:hover .touch-tile { transform: translateX(2px); }
+        .touch-label {
+          flex: 1;
+          text-align: center;
+          font-family: var(--font-urbanist), 'Urbanist', sans-serif;
+          font-size: 18.5px;
+          font-weight: 500;
+          color: #ffffff;
         }
 
-        .btn-touch:hover .touch-arrow {
-          transform: translateX(3px);
+        /* ---------- Responsive: stack the band below desktop widths ---------- */
+        @media (max-width: 1200px) {
+          .hero-canvas {
+            height: auto;
+            padding: 150px 16px 200px;
+          }
+          .band-line, .chev-row, .v-guide { display: none; }
+          .px-tl { transform: scale(0.6); transform-origin: top left; }
+          .px-br { transform: scale(0.5); transform-origin: bottom right; }
+          .band-grid {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: auto;
+            gap: 20px;
+          }
+          .band-left, .band-right {
+            padding: 0;
+            height: auto;
+            justify-content: center;
+          }
+          .band-center { order: -1; height: auto; display: flex; flex-direction: column; align-items: center; gap: 24px; }
+          .ai-badge { position: relative; top: 0; left: 0; transform: none; }
+          .ai-badge:hover { transform: translateY(-2px); }
+          .bt-card { position: relative; top: 0; width: 220px; height: 220px; }
+          .bt-halo { width: 214px; height: 214px; }
+          .bt-emblem :global(div > div) { width: 150px !important; height: 150px !important; }
+          .hero-word { font-size: clamp(54px, 11vw, 110px); }
+          .hero-bottom { position: relative; top: 0; margin-top: 40px; }
         }
-
-        .btn-touch:hover .touch-badge {
-          transform: scale(1.06);
-        }
-
-        .btn-touch:active {
-          transform: translateY(0) scale(0.98);
-        }
-
-        :global(.ai-badge) {
-          transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
-        }
-
-        :global(.ai-badge:hover) {
-          transform: translateY(-2px);
-          box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08) !important;
-          border-color: #cbd5e1 !important;
+        @media (max-width: 520px) {
+          .hero-ctas { flex-direction: column; }
+          .px-tl { transform: scale(0.4); }
+          .px-br { transform: scale(0.35); }
         }
       `}</style>
     </section>
   );
 };
-
-const PixelChevronRight: React.FC<{ color?: string }> = ({ color = '#cbd5e1' }) => (
-  <svg width="7" height="9" viewBox="0 0 7 9" fill="none">
-    <circle cx="1" cy="1" r="0.8" fill={color} />
-    <circle cx="2.5" cy="2.5" r="0.8" fill={color} />
-    <circle cx="4" cy="4.5" r="0.8" fill={color} />
-    <circle cx="2.5" cy="6.5" r="0.8" fill={color} />
-    <circle cx="1" cy="8" r="0.8" fill={color} />
-  </svg>
-);
-
-const PixelChevronLeft: React.FC<{ color?: string }> = ({ color = '#cbd5e1' }) => (
-  <svg width="7" height="9" viewBox="0 0 7 9" fill="none">
-    <circle cx="6" cy="1" r="0.8" fill={color} />
-    <circle cx="4.5" cy="2.5" r="0.8" fill={color} />
-    <circle cx="3" cy="4.5" r="0.8" fill={color} />
-    <circle cx="4.5" cy="6.5" r="0.8" fill={color} />
-    <circle cx="6" cy="8" r="0.8" fill={color} />
-  </svg>
-);

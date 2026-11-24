@@ -1,135 +1,145 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
+import Link from 'next/link';
 import { ScrollReveal } from './ScrollReveal';
 
 export const PhilosophyQuote: React.FC = () => {
-  const [isHovered, setIsHovered] = useState(false);
-
-  const scrollToHero = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const scrollToHero = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   return (
-    <section style={{ padding: '90px 0 100px', backgroundColor: '#ffffff', borderBottom: '1px solid #eeeff2' }}>
-      <div className="container">
-        {/* Giant Quote Typography with interactive inline Hero section thumbnail */}
-        <ScrollReveal delay={60} yOffset={24}>
-          <div style={{ textAlign: 'center', maxWidth: '980px', margin: '0 auto 16px' }}>
-            <h2 
-              style={{ 
-                fontFamily: 'var(--font-heading)',
-                fontSize: 'clamp(32px, 4.8vw, 56px)', 
-                fontWeight: 800, 
-                color: '#0a0a0c',
-                letterSpacing: '-0.03em',
-                lineHeight: 1.25
-              }}
-            >
-              Turning complexity into clarity and ideas{' '}
-              <span 
-                className="inline-hero-thumb"
-                role="button"
-                tabIndex={0}
-                onClick={scrollToHero}
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
-                title="View Hero Section"
-                aria-label="Screenshot of hero section at home"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: 'clamp(82px, 9.5vw, 126px)',
-                  height: 'clamp(38px, 4.4vw, 56px)',
-                  borderRadius: '10px',
-                  backgroundColor: '#ffffff',
-                  border: isHovered ? '1.5px solid #0a0a0c' : '1.5px solid #cbd5e1',
-                  verticalAlign: 'middle',
-                  margin: '0 8px',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  boxShadow: isHovered 
-                    ? '0 10px 25px rgba(0, 0, 0, 0.16), 0 2px 6px rgba(0, 0, 0, 0.08)' 
-                    : '0 4px 14px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04)',
-                  cursor: 'pointer',
-                  userSelect: 'none',
-                  transform: isHovered ? 'translateY(-2px) scale(1.06)' : 'translateY(0) scale(1)',
-                  transition: 'all 0.28s cubic-bezier(0.16, 1, 0.3, 1)'
-                }}
-              >
-                <img 
-                  src="/images/hero_section_thumb.png" 
-                  alt="Hero Section at Home" 
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    display: 'block'
-                  }} 
-                />
-              </span>{' '}
-              into what comes next of that!
-            </h2>
-          </div>
-        </ScrollReveal>
+    <section className="philo">
+      <ScrollReveal delay={60} yOffset={22}>
+        <h2 className="philo-heading">
+          Turning complexity into clarity
+          <br />
+          and ideas{' '}
+          <button type="button" className="hero-thumb" onClick={scrollToHero} aria-label="Back to the hero section">
+            <img src="/images/hero_section_thumb.png" alt="" loading="lazy" decoding="async" />
+          </button>{' '}
+          into what
+          <br />
+          comes next of that!
+        </h2>
+      </ScrollReveal>
 
-        {/* Subtitle Paragraph */}
-        <ScrollReveal delay={140} yOffset={20}>
-          <p 
-            style={{ 
-              textAlign: 'center', 
-              fontSize: '14.5px', 
-              color: '#64748b', 
-              maxWidth: '680px', 
-              margin: '0 auto 48px', 
-              lineHeight: 1.6 
-            }}
-          >
-            We bridge the gap between abstract challenges and elegant software solutions, delivering measurable business impact at startup velocity.
-          </p>
-        </ScrollReveal>
+      <ScrollReveal delay={130} yOffset={18}>
+        <p className="philo-text">
+          We are a team of passionate individuals who saw the need for dependable and innovative software solutions.
+          <br />
+          Our story is guided by the belief that technology should solve real problems while empowering people and organizations.
+          <br />
+          With creativity and expertise, we craft solutions that are practical, scalable, and built with lasting value.
+        </p>
+      </ScrollReveal>
 
-        {/* Laptop Project Showcase with exact reference asset */}
-        <ScrollReveal delay={200} duration={850} yOffset={32}>
-          <div className="laptop-reference-container">
-            <div className="laptop-img-wrapper">
-              <img 
-                src="/images/laptop-mockup.png" 
-                alt="Chatbot Website showcase"
-                className="laptop-showcase-img"
-              />
-            </div>
+      <ScrollReveal delay={190} duration={850} yOffset={28}>
+        <div className="showcase">
+          <img
+            src="/images/showcase-ai-chatbot.png"
+            alt="AI Chatbot Website shown on a laptop"
+            loading="lazy"
+            decoding="async"
+            className="showcase-img"
+          />
+          <div className="sr-only">
+            <h3>AI Chatbot Website</h3>
+            <p>We developed an AI-powered website with integrated chatbot features focused on automation and seamless user support.</p>
+            <ul>
+              <li>+70% Response Time</li>
+              <li>1 unified Chatbot system</li>
+              <li>4 weeks Delivery time</li>
+            </ul>
           </div>
-        </ScrollReveal>
-      </div>
+          <Link href="/projects" className="showcase-nav prev" aria-label="See all our projects" />
+          <Link href="/projects" className="showcase-nav next" aria-label="Browse projects" />
+        </div>
+      </ScrollReveal>
 
       <style jsx>{`
-        .laptop-reference-container {
-          max-width: 1040px;
-          margin: 0 auto;
-          position: relative;
-          border-radius: 20px;
+        .philo {
+          background: #f3f4f6;
+          padding: 112px 0 0;
+        }
+        .philo-heading {
+          font-family: var(--font-urbanist), 'Urbanist', sans-serif;
+          font-size: 66px;
+          font-weight: 600;
+          line-height: 75px;
+          letter-spacing: -0.03em;
+          color: #0b0b16;
+          text-align: center;
+          margin: 0;
+        }
+        .hero-thumb {
+          display: inline-block;
+          vertical-align: middle;
+          width: 140px;
+          height: 64px;
+          margin: -8px 12px 0;
+          padding: 0;
+          border-radius: 2px;
           overflow: hidden;
-          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
-          background: #0f1014;
-          transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+          box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
+          transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
         }
-
-        .laptop-reference-container:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 26px 70px rgba(0, 0, 0, 0.35);
+        .hero-thumb:hover {
+          transform: translateY(-3px) scale(1.06) rotate(-2deg);
+          box-shadow: 0 16px 30px rgba(0, 0, 0, 0.24);
         }
-
-        .laptop-img-wrapper {
+        .hero-thumb img {
           width: 100%;
-          position: relative;
-        }
-
-        .laptop-showcase-img {
-          width: 100%;
-          height: auto;
+          height: 100%;
+          object-fit: cover;
           display: block;
+        }
+        .philo-text {
+          font-family: var(--font-urbanist), 'Urbanist', sans-serif;
+          font-size: 16px;
+          line-height: 24px;
+          color: #6b6b72;
+          text-align: center;
+          margin: 34px 0 0;
+          padding: 0 16px;
+        }
+        .showcase {
+          position: relative;
+          max-width: 1407px;
+          margin: 57px auto 0;
+          aspect-ratio: 1407 / 680;
+          overflow: hidden;
+        }
+        .showcase-img {
+          width: 100%;
+          height: 100%;
+          display: block;
+          object-fit: cover;
+          transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .showcase:hover .showcase-img { transform: scale(1.01); }
+        .showcase :global(.showcase-nav) {
+          position: absolute;
+          bottom: 0;
+          width: 8.17%;
+          height: 16.2%;
+          transition: background 0.25s ease;
+        }
+        .showcase :global(.showcase-nav.prev) { right: 8.17%; }
+        .showcase :global(.showcase-nav.next) { right: 0; }
+        .showcase :global(.showcase-nav:hover) { background: rgba(255, 255, 255, 0.1); }
+        .sr-only {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          overflow: hidden;
+          clip: rect(0 0 0 0);
+          white-space: nowrap;
+        }
+        @media (max-width: 900px) {
+          .philo { padding-top: 72px; }
+          .philo-heading { font-size: clamp(32px, 7vw, 56px); line-height: 1.15; padding: 0 16px; }
+          .hero-thumb { width: 96px; height: 44px; }
+          .philo-text br, .philo-heading br { display: none; }
         }
       `}</style>
     </section>

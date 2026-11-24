@@ -62,6 +62,24 @@ export default function ProjectsPage() {
       image: '/images/project_wordpress_ecommerce_website.png',
       tags: ['WordPress', 'WooCommerce', 'Payment Gateway', 'Inventory Management'],
       projectUrl: 'https://www.blissfultreasureinterior.com'
+    },
+    {
+      id: 'liinkspace',
+      badge: 'Link-in-Bio & Personal Sites',
+      title: 'Liinkspace',
+      description: 'One link for everything you share — your personal page in one URL. Build links, feeds, and multi-page sites, track clicks, and keep full ownership of your work, socials, and offers.',
+      image: '/images/project_liinkspace.png',
+      tags: ['Link-in-Bio', 'Site Builder', 'Click Analytics', 'Creator Tools'],
+      projectUrl: 'https://liinkspace.com'
+    },
+    {
+      id: 'rcatalent',
+      badge: 'Talent & Recruitment',
+      title: 'RCA Talent',
+      description: 'The Rwanda Coding Academy talent marketplace. Students showcase verified profiles; companies discover and connect with the next generation of tech talent.',
+      image: '/images/project_rcatalent.png',
+      tags: ['Talent Marketplace', 'Verified Profiles', 'Recruitment', 'Web Platform'],
+      projectUrl: 'https://www.rcatalent.rw'
     }
   ];
 
@@ -520,7 +538,7 @@ export default function ProjectsPage() {
             margin-top: 0 !important;
           }
           .projects-hud-chevrons {
-            display: none;
+            display: none !important;
           }
         }
       `}</style>

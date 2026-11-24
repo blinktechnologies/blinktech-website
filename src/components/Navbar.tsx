@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { BlinkTechTextLogo } from './BTLogo';
@@ -8,18 +8,49 @@ import { StartProjectModal } from './StartProjectModal';
 import { TopTicker } from './TopTicker';
 import { Menu, X } from 'lucide-react';
 
+const Marker: React.FC<{ style: React.CSSProperties }> = ({ style }) => (
+  <span className="nav-marker" style={style} aria-hidden="true" />
+);
+
 export const Navbar: React.FC = () => {
   const pathname = usePathname();
   const [modalOpen, setModalOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  React.useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+  // Subtle elevation once the page scrolls under the sticky header
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  // Close the mobile menu whenever the route changes
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [pathname]);
+
+  // Mobile menu: Escape to close, lock background scroll, close if resized to desktop
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false);
+    };
+    const mq = window.matchMedia('(min-width: 861px)');
+    const onMq = () => {
+      if (mq.matches) setMobileMenuOpen(false);
+    };
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', onKey);
+    mq.addEventListener('change', onMq);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener('keydown', onKey);
+      mq.removeEventListener('change', onMq);
+    };
+  }, [mobileMenuOpen]);
 
   const navLinks = [
     { label: 'HOME', href: '/' },
@@ -37,256 +68,308 @@ export const Navbar: React.FC = () => {
 
   return (
     <>
-      <header 
-        style={{
-          position: 'sticky',
-          top: 0,
-          zIndex: 50,
-          backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.92)' : '#ffffff',
-          backdropFilter: scrolled ? 'blur(14px) saturate(180%)' : 'none',
-          WebkitBackdropFilter: scrolled ? 'blur(14px) saturate(180%)' : 'none',
-          borderBottom: '1px solid #eeeff2',
-          boxShadow: scrolled ? '0 8px 30px rgba(0, 0, 0, 0.04)' : 'none',
-          transition: 'background-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease'
-        }}
-      >
+      <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
         <TopTicker />
-        <div 
-          className="container"
-          style={{
-            height: '76px',
-            display: 'flex',
-            alignItems: 'stretch',
-            position: 'relative'
-          }}
-        >
-          {/* Framed Section: Logo Box + Links Box with border lines and 6 black squares */}
-          <div
-            className="navbar-framed-area"
-            style={{
-              display: 'flex',
-              alignItems: 'stretch',
-              flex: 1,
-              position: 'relative',
-              borderTop: '1px solid #e5e7eb',
-              borderBottom: '1px solid #e5e7eb',
-              borderLeft: '1px solid #e5e7eb',
-              borderRight: '1px solid #e5e7eb'
-            }}
-          >
-            {/* Top-Left Square Marker */}
-            <div style={{ position: 'absolute', top: '-3px', left: '-3px', width: '5px', height: '5px', backgroundColor: '#000000', zIndex: 10 }} />
-            {/* Bottom-Left Square Marker */}
-            <div style={{ position: 'absolute', bottom: '-3px', left: '-3px', width: '5px', height: '5px', backgroundColor: '#000000', zIndex: 10 }} />
 
-            {/* Left Box: Blink-Tech Ltd Logo */}
-            <div 
-              style={{ 
-                display: 'flex', 
-                alignItems: 'center', 
-                padding: '0 28px',
-                borderRight: '1px solid #e5e7eb',
-                position: 'relative'
-              }}
-            >
-              {/* Divider Top-Center Square Marker */}
-              <div style={{ position: 'absolute', top: '-3px', right: '-3px', width: '5px', height: '5px', backgroundColor: '#000000', zIndex: 10 }} />
-              {/* Divider Bottom-Center Square Marker */}
-              <div style={{ position: 'absolute', bottom: '-3px', right: '-3px', width: '5px', height: '5px', backgroundColor: '#000000', zIndex: 10 }} />
-
-              <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
+        <div className="nav-shell">
+          <div className="nav-frame">
+            {/* Logo cell */}
+            <div className="nav-cell nav-logo-cell">
+              <Marker style={{ top: -3, left: -3 }} />
+              <Marker style={{ bottom: -3, left: -3 }} />
+              <Link href="/" aria-label="Blink-Tech home" style={{ display: 'flex', alignItems: 'center' }}>
                 <BlinkTechTextLogo theme="light" />
               </Link>
             </div>
 
-            {/* Center Box: Navigation Links */}
-            <nav 
-              className="desktop-nav" 
-              style={{ 
-                display: 'flex', 
-                alignItems: 'center', 
-                justifyContent: 'center',
-                gap: '36px',
-                flex: 1,
-                padding: '0 32px',
-                position: 'relative'
-              }}
-            >
-              {navLinks.map((link) => {
-                const active = isActive(link.href);
-                return (
-                  <Link
-                    key={link.label}
-                    href={link.href}
-                    className="nav-link-item font-space-grotesk"
-                    style={{
-                      position: 'relative',
-                      fontFamily: "var(--font-space-grotesk), 'Space Grotesk', sans-serif",
-                      fontSize: '12px',
-                      fontWeight: 700,
-                      letterSpacing: '0.04em',
-                      color: active ? '#09090b' : '#475569',
-                      padding: '8px 2px',
-                      textTransform: 'uppercase',
-                      transition: 'color 0.2s ease'
-                    }}
-                  >
-                    <span style={{ fontFamily: "var(--font-space-grotesk), 'Space Grotesk', sans-serif" }}>{link.label}</span>
-                    {active && (
-                      <span 
-                        style={{
-                          position: 'absolute',
-                          bottom: '0',
-                          left: '50%',
-                          transform: 'translateX(-50%)',
-                          width: '16px',
-                          height: '2px',
-                          backgroundColor: '#09090b',
-                          borderRadius: '9999px'
-                        }}
-                      />
-                    )}
-                  </Link>
-                );
-              })}
+            {/* Links cell */}
+            <nav className="nav-cell nav-links-cell">
+              <Marker style={{ top: -3, left: -3 }} />
+              <Marker style={{ bottom: -3, left: -3 }} />
+              <Marker style={{ top: -3, right: -3 }} />
+              <Marker style={{ bottom: -3, right: -3 }} />
+              {navLinks.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className={`nav-link-item ${isActive(link.href) ? 'is-active' : ''}`}
+                  aria-current={isActive(link.href) ? 'page' : undefined}
+                >
+                  {link.label}
+                </Link>
+              ))}
             </nav>
 
-            {/* End of Links Box: Top-Right & Bottom-Right Square Markers */}
-            <div style={{ position: 'absolute', top: '-3px', right: '-3px', width: '5px', height: '5px', backgroundColor: '#000000', zIndex: 10 }} />
-            <div style={{ position: 'absolute', bottom: '-3px', right: '-3px', width: '5px', height: '5px', backgroundColor: '#000000', zIndex: 10 }} />
-          </div>
-
-          {/* Right Box: Start a Project Button */}
-          <div 
-            style={{ 
-              display: 'flex', 
-              alignItems: 'center',
-              paddingLeft: '32px'
-            }}
-          >
-            <button
-              onClick={() => setModalOpen(true)}
-              className="start-project-btn"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontFamily: "var(--font-ui), 'Inter', sans-serif",
-                background: 'linear-gradient(180deg, #4b525d 0%, #30353e 50%, #1c1f24 100%)',
-                color: '#ffffff',
-                padding: '11px 24px',
-                borderRadius: '8px',
-                fontSize: '13.5px',
-                fontWeight: 600,
-                letterSpacing: '0.02em',
-                border: '1px solid rgba(255, 255, 255, 0.14)',
-                boxShadow: '0 8px 18px -2px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.28)',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease'
-              }}
-            >
-              Start a Project
-            </button>
-
-            {/* Mobile toggle */}
-            <button
-              className="mobile-toggle"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              style={{
-                display: 'none',
-                padding: '7px',
-                borderRadius: '8px',
-                border: '1px solid #e5e7eb',
-                backgroundColor: '#ffffff',
-                cursor: 'pointer',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginLeft: '12px'
-              }}
-              aria-label="Toggle menu"
-            >
-              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
+            {/* CTA cell */}
+            <div className="nav-cell nav-cta-cell">
+              <Marker style={{ top: -3, right: -3 }} />
+              <Marker style={{ bottom: -3, right: -3 }} />
+              <button onClick={() => setModalOpen(true)} className="start-project-btn">
+                Start a Project
+              </button>
+              <button
+                className="mobile-toggle"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+                aria-expanded={mobileMenuOpen}
+                aria-controls="mobile-menu"
+              >
+                {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* Mobile dropdown */}
-        {mobileMenuOpen && (
-          <div 
-            style={{
-              backgroundColor: '#ffffff',
-              borderTop: '1px solid #eeeff2',
-              padding: '16px 24px 20px',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '14px'
-            }}
-          >
-            {navLinks.map((link) => (
+        <div
+          id="mobile-menu"
+          className={`mobile-menu ${mobileMenuOpen ? 'open' : ''}`}
+          aria-hidden={!mobileMenuOpen}
+        >
+          <nav className="mobile-menu-inner" aria-label="Mobile">
+            {navLinks.map((link, i) => (
               <Link
                 key={link.label}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                style={{
-                  fontFamily: "var(--font-space-grotesk), 'Space Grotesk', sans-serif",
-                  fontSize: '13px',
-                  fontWeight: isActive(link.href) ? 700 : 600,
-                  color: isActive(link.href) ? '#0a0a0c' : '#4b5563',
-                  padding: '6px 0',
-                  borderBottom: '1px solid #f3f4f6'
-                }}
+                className={isActive(link.href) ? 'is-active' : ''}
+                aria-current={isActive(link.href) ? 'page' : undefined}
+                tabIndex={mobileMenuOpen ? 0 : -1}
+                style={{ transitionDelay: mobileMenuOpen ? `${60 + i * 35}ms` : '0ms' }}
               >
                 {link.label}
+                <span aria-hidden="true">→</span>
               </Link>
             ))}
-          </div>
+            <button
+              type="button"
+              className="mobile-cta"
+              tabIndex={mobileMenuOpen ? 0 : -1}
+              onClick={() => {
+                setMobileMenuOpen(false);
+                setModalOpen(true);
+              }}
+            >
+              Start a Project
+            </button>
+          </nav>
+        </div>
+        {mobileMenuOpen && (
+          <button
+            type="button"
+            className="mobile-scrim"
+            aria-label="Close menu"
+            tabIndex={-1}
+            onClick={() => setMobileMenuOpen(false)}
+          />
         )}
       </header>
 
       <StartProjectModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
 
       <style jsx>{`
-        .nav-link-item,
-        .nav-link-item * {
-          font-family: var(--font-space-grotesk), 'Space Grotesk', sans-serif !important;
+        .site-header {
+          position: sticky;
+          top: 0;
+          z-index: 50;
+          background: #f3f4f6;
+          transition: box-shadow 0.3s ease;
         }
-        .nav-link-item {
-          transition: color 0.25s ease, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1) !important;
+        .site-header.is-scrolled {
+          box-shadow: 0 10px 30px -18px rgba(15, 23, 42, 0.35);
         }
-        .nav-link-item::after {
+        .nav-shell {
+          position: relative;
+          z-index: 3;
+          background: #f3f4f6;
+          padding: 15px 17px 0;
+          border-bottom: 1px solid #dadada;
+        }
+        .nav-frame {
+          display: flex;
+          align-items: stretch;
+          height: 73px;
+          border-top: 1px solid #e5e7eb;
+        }
+        .nav-cell {
+          position: relative;
+          display: flex;
+          align-items: center;
+        }
+        .nav-cell :global(.nav-marker) {
+          position: absolute;
+          width: 6px;
+          height: 6px;
+          background: #000000;
+          z-index: 2;
+        }
+        .nav-logo-cell {
+          width: 299px;
+          flex-shrink: 0;
+          background: #ffffff;
+          justify-content: center;
+          border-left: 1px solid #dadada;
+        }
+        .nav-links-cell {
+          flex: 1;
+          background: #ffffff;
+          justify-content: center;
+          gap: 38px;
+          border-left: 1px solid #dadada;
+          border-right: 1px solid #dadada;
+        }
+        .nav-cta-cell {
+          width: 224px;
+          flex-shrink: 0;
+          justify-content: center;
+          border-right: 1px solid #dadada;
+        }
+        .nav-links-cell :global(.nav-link-item) {
+          position: relative;
+          font-family: var(--font-inter), 'Inter', sans-serif;
+          font-size: 13.5px;
+          font-weight: 400;
+          letter-spacing: 0.01em;
+          color: #111111;
+          padding: 6px 0;
+          transition: color 0.2s ease;
+        }
+        .nav-links-cell :global(.nav-link-item)::after {
           content: '';
           position: absolute;
+          left: 0;
+          right: 0;
           bottom: 0;
-          left: 50%;
-          width: 0;
-          height: 2px;
-          background-color: #09090b;
-          border-radius: 9999px;
-          transform: translateX(-50%);
-          transition: width 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+          height: 1.5px;
+          background: #111111;
+          transform: scaleX(0);
+          transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
         }
-        .nav-link-item:hover {
-          color: #09090b !important;
-          transform: translateY(-1px);
+        .nav-links-cell :global(.nav-link-item:hover)::after,
+        .nav-links-cell :global(.nav-link-item:focus-visible)::after {
+          transform: scaleX(1);
         }
-        .nav-link-item:hover::after {
-          width: 16px;
+        .nav-links-cell :global(.nav-link-item.is-active) {
+          font-weight: 600;
+        }
+        .nav-links-cell :global(.nav-link-item.is-active)::after {
+          transform: scaleX(1);
+          opacity: 0.25;
+        }
+        .nav-links-cell :global(.nav-link-item.is-active:hover)::after {
+          opacity: 1;
+        }
+        .start-project-btn {
+          font-family: var(--font-urbanist), 'Urbanist', sans-serif;
+          font-size: 16px;
+          font-weight: 500;
+          color: #ffffff;
+          width: 150px;
+          height: 46px;
+          border-radius: 10px;
+          background: linear-gradient(180deg, #5f6165 0%, #3b3d41 55%, #2a2b2e 100%);
+          border: 1px solid #2a2b2e;
+          box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.25),
+            0 3px 0 #1f2023,
+            0 18px 30px rgba(0, 0, 0, 0.28);
+          cursor: pointer;
+          transition: transform 0.2s ease, filter 0.2s ease;
         }
         .start-project-btn:hover {
-          transform: translateY(-2px) scale(1.015);
-          box-shadow: 0 14px 28px -2px rgba(0, 0, 0, 0.52), inset 0 1px 1px rgba(255, 255, 255, 0.45) !important;
-          filter: brightness(1.08);
+          transform: translateY(-1px);
+          filter: brightness(1.1);
         }
         .start-project-btn:active {
-          transform: translateY(0) scale(0.985);
+          transform: translateY(1px);
         }
-        @media (max-width: 820px) {
-          .desktop-nav {
-            display: none !important;
-          }
-          .mobile-toggle {
-            display: flex !important;
-          }
+        .mobile-toggle {
+          display: none;
+          padding: 7px;
+          border-radius: 8px;
+          border: 1px solid #e5e7eb;
+          background: #ffffff;
+          align-items: center;
+          justify-content: center;
+          margin-left: 12px;
+        }
+        .mobile-menu {
+          display: grid;
+          grid-template-rows: 0fr;
+          background: #ffffff;
+          position: relative;
+          z-index: 2;
+          transition: grid-template-rows 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .mobile-menu.open {
+          grid-template-rows: 1fr;
+          border-bottom: 1px solid #dadada;
+        }
+        .mobile-menu-inner {
+          overflow: hidden;
+          min-height: 0;
+          display: flex;
+          flex-direction: column;
+          padding: 0 24px;
+        }
+        .mobile-menu.open .mobile-menu-inner { padding: 8px 24px 20px; }
+        .mobile-menu :global(a) {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-family: var(--font-inter), 'Inter', sans-serif;
+          font-size: 15px;
+          color: #4b5563;
+          min-height: 48px;
+          border-bottom: 1px solid #f1f2f4;
+          opacity: 0;
+          transform: translateY(-6px);
+          transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), color 0.2s ease;
+        }
+        .mobile-menu.open :global(a) { opacity: 1; transform: none; }
+        .mobile-menu :global(a span) { color: #b5b7bc; transition: transform 0.2s ease; }
+        .mobile-menu :global(a:active span) { transform: translateX(4px); }
+        .mobile-menu :global(a.is-active) {
+          color: #0a0a0c;
+          font-weight: 600;
+        }
+        .mobile-menu :global(a.is-active span) { color: #0a0a0c; }
+        .mobile-cta {
+          margin-top: 18px;
+          height: 50px;
+          border-radius: 10px;
+          font-family: var(--font-urbanist), 'Urbanist', sans-serif;
+          font-size: 16px;
+          font-weight: 600;
+          color: #ffffff;
+          background: linear-gradient(180deg, #5f6165 0%, #3b3d41 55%, #2a2b2e 100%);
+          border: 1px solid #2a2b2e;
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 3px 0 #1f2023;
+        }
+        .mobile-scrim {
+          position: fixed;
+          inset: 0;
+          z-index: 1;
+          background: rgba(10, 10, 14, 0.28);
+          backdrop-filter: blur(2px);
+          animation: scrimIn 0.25s ease;
+          cursor: default;
+        }
+        @keyframes scrimIn { from { opacity: 0; } to { opacity: 1; } }
+        @media (max-width: 1100px) {
+          .nav-logo-cell { width: 220px; }
+          .nav-links-cell { gap: 24px; }
+          .nav-cta-cell { width: 190px; }
+        }
+        @media (max-width: 860px) {
+          .nav-links-cell { display: none; }
+          .nav-logo-cell { flex: 1; width: auto; justify-content: flex-start; padding-left: 20px; }
+          .nav-cta-cell { width: auto; padding: 0 16px; border-left: 1px solid #dadada; background: #ffffff; }
+          .start-project-btn { width: auto; padding: 0 16px; height: 40px; font-size: 14px; }
+          .mobile-toggle { display: flex; width: 44px; height: 44px; }
+        }
+        @media (max-width: 480px) {
+          .nav-shell { padding: 10px 10px 0; }
+          .start-project-btn { display: none; }
         }
       `}</style>
     </>

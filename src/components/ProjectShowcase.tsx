@@ -1,469 +1,502 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ScrollReveal } from './ScrollReveal';
+import { SectionPill } from './SectionPill';
+
+const projects = [
+  {
+    id: 'inziralink',
+    title: 'Inziralink',
+    description: 'A design of a platform that helps people transport goods easily just connecting companies to transport systems to ensure the safety and efficiency of transportation of Goods.',
+    image: '/images/project_inziralink_scene.png',
+    projectUrl: null as string | null
+  },
+  {
+    id: 'restohive',
+    title: 'RestoHive',
+    description: 'Resto Hive is an all-in-one restaurant management solution designed to simplify operations, boost efficiency, and enhance customer experiences. From POS and menu management to reservations, inventory, and payments, Resto Hive provides restaurants with the tools they need to grow and thrive in today’s fast-paced food industry.',
+    image: '/images/project_restohive.png',
+    projectUrl: 'https://restohive.com/'
+  },
+  {
+    id: 'thepressradio',
+    title: 'Thepressradio.com',
+    description: 'ThePressRadio.com is a dynamic African-focused news and media platform delivering timely, credible stories from across Africa and the world. It covers diverse topics including politics, business, sports, lifestyle, and entertainment, while also offering an online radio station and space for public opinions.',
+    image: '/images/project_thepressradio_com.png',
+    projectUrl: 'https://thepressradio.com'
+  },
+  {
+    id: 'mazi-care',
+    title: 'Mazi-care website and web-app',
+    description: 'MaziCare is a platform that connects families in Greece with verified caregivers, allowing users to easily create an account, describe their loved one’s needs, and receive personalized caregiver recommendations.',
+    image: '/images/project_mazi_care_website_and_web_app.png',
+    projectUrl: 'https://mazicare.gr/'
+  },
+  {
+    id: 'wordpress-ecommerce',
+    title: 'WordPress eCommerce Website',
+    description: 'Developed a fully functional eCommerce platform using WordPress and WooCommerce, enabling seamless product browsing, cart management, and secure checkout. Implemented responsive design, product categorization, inventory management, and payment integration to deliver a smooth user experience across devices.',
+    image: '/images/project_wordpress_ecommerce_website.png',
+    projectUrl: 'https://www.blissfultreasureinterior.com'
+  },
+  {
+    id: 'liinkspace',
+    title: 'Liinkspace',
+    description: 'Liinkspace gives you one link for everything you share — your personal page in one URL. Build links, feeds, and multi-page sites, track clicks, and keep full ownership of your work, socials, and offers in one place.',
+    image: '/images/project_liinkspace.png',
+    projectUrl: 'https://liinkspace.com'
+  },
+  {
+    id: 'rcatalent',
+    title: 'RCA Talent',
+    description: 'RCA Talent is the Rwanda Coding Academy talent marketplace. Students showcase verified profiles while companies discover and connect with the next generation of tech talent — a trusted platform connecting exceptional developers with forward-thinking companies.',
+    image: '/images/project_rcatalent.png',
+    projectUrl: 'https://www.rcatalent.rw'
+  }
+];
+
+// Light "bitten" pixel cells over the image corners (39px grid, from the design): [col, row, widthInCells]
+const AUTOPLAY_MS = 5200;
+
+const TL_CELLS: Array<[number, number, number]> = [[0, 0, 1], [2, 0, 2], [1, 1, 1], [0, 2, 1]];
+const TR_CELLS: Array<[number, number, number]> = [[0, 0, 1], [2, 0, 1], [1, 1, 1], [0, 2, 1], [0, 3, 1]];
 
 export const ProjectShowcase: React.FC = () => {
   const [activeSlide, setActiveSlide] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const [inView, setInView] = useState(false);
+  const [tabVisible, setTabVisible] = useState(true);
+  const [reduceMotion, setReduceMotion] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const touchX = useRef<number | null>(null);
 
-  const projects = [
-    {
-      id: 'inziralink',
-      title: 'Inziralink',
-      description: 'A design of a platform that helps people transport goods easily just connecting companies to transport systems to ensure the safety and efficiency of transportation of Goods.',
-      image: '/images/project_inziralink_exact.png',
-      projectUrl: null
-    },
-    {
-      id: 'restohive',
-      title: 'RestoHive',
-      description: 'Resto Hive is an all-in-one restaurant management solution designed to simplify operations, boost efficiency, and enhance customer experiences. From POS and menu management to reservations, inventory, and payments, Resto Hive provides restaurants with the tools they need to grow and thrive in today’s fast-paced food industry.',
-      image: '/images/project_restohive.png',
-      projectUrl: 'https://restohive.com/'
-    },
-    {
-      id: 'thepressradio',
-      title: 'Thepressradio.com',
-      description: 'ThePressRadio.com is a dynamic African-focused news and media platform delivering timely, credible stories from across Africa and the world. It covers diverse topics including politics, business, sports, lifestyle, and entertainment, while also offering an online radio station and space for public opinions.',
-      image: '/images/project_thepressradio_com.png',
-      projectUrl: 'https://thepressradio.com'
-    },
-    {
-      id: 'mazi-care',
-      title: 'Mazi-care website and web-app',
-      description: 'MaziCare is a platform that connects families in Greece with verified caregivers, allowing users to easily create an account, describe their loved one’s needs, and receive personalized caregiver recommendations.',
-      image: '/images/project_mazi_care_website_and_web_app.png',
-      projectUrl: 'https://mazicare.gr/'
-    },
-    {
-      id: 'wordpress-ecommerce',
-      title: 'WordPress eCommerce Website',
-      description: 'Developed a fully functional eCommerce platform using WordPress and WooCommerce, enabling seamless product browsing, cart management, and secure checkout. Implemented responsive design, product categorization, inventory management, and payment integration to deliver a smooth user experience across devices.',
-      image: '/images/project_wordpress_ecommerce_website.png',
-      projectUrl: 'https://www.blissfultreasureinterior.com'
+  const isPaused = hovered || focused || !inView || !tabVisible || reduceMotion;
+
+  const next = useCallback(() => setActiveSlide((p) => (p + 1) % projects.length), []);
+  const prev = useCallback(() => setActiveSlide((p) => (p === 0 ? projects.length - 1 : p - 1)), []);
+
+  // Only autoplay while the carousel is on screen, the tab is visible and motion is welcome
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setReduceMotion(mq.matches);
+    const onMq = () => setReduceMotion(mq.matches);
+    mq.addEventListener('change', onMq);
+
+    const onVis = () => setTabVisible(document.visibilityState === 'visible');
+    document.addEventListener('visibilitychange', onVis);
+
+    let io: IntersectionObserver | undefined;
+    if (cardRef.current && typeof IntersectionObserver !== 'undefined') {
+      io = new IntersectionObserver(([e]) => setInView(e.isIntersecting), { threshold: 0.35 });
+      io.observe(cardRef.current);
+    } else {
+      setInView(true);
     }
-  ];
+    return () => {
+      mq.removeEventListener('change', onMq);
+      document.removeEventListener('visibilitychange', onVis);
+      io?.disconnect();
+    };
+  }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isPaused) return;
-    const timer = setInterval(() => {
-      setActiveSlide((prev) => (prev + 1) % projects.length);
-    }, 4800);
-    return () => clearInterval(timer);
-  }, [isPaused, projects.length]);
+    const timer = setTimeout(next, AUTOPLAY_MS);
+    return () => clearTimeout(timer);
+  }, [isPaused, activeSlide, next]);
+
+  // Warm the cache for the neighbouring slides so switching never flashes
+  useEffect(() => {
+    [activeSlide + 1, activeSlide - 1 + projects.length].forEach((i) => {
+      const img = new Image();
+      img.src = projects[i % projects.length].image;
+    });
+  }, [activeSlide]);
+
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      next();
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      prev();
+    }
+  };
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchX.current = e.touches[0].clientX;
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (touchX.current === null) return;
+    const dx = e.changedTouches[0].clientX - touchX.current;
+    touchX.current = null;
+    if (Math.abs(dx) < 40) return;
+    if (dx < 0) next();
+    else prev();
+  };
 
   const current = projects[activeSlide];
 
   return (
-    <section 
-      id="projects" 
-      style={{ 
-        padding: '76px 20px 92px', 
-        backgroundColor: '#ffffff', 
-        borderBottom: '1px solid #eeeff2',
-        position: 'relative',
-        overflow: 'hidden'
-      }}
-    >
-      <div className="container" style={{ maxWidth: '1060px', margin: '0 auto' }}>
-        {/* Section Pill Badge: • Projects */}
-        <ScrollReveal delay={40} yOffset={14}>
-          <div style={{ textAlign: 'center', marginBottom: '14px' }}>
-            <div 
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '6px 18px',
-                borderRadius: '999px',
-                backgroundColor: '#ffffff',
-                fontSize: '12px',
-                fontWeight: 700,
-                fontFamily: "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
-                color: '#0f172a',
-                border: '1px solid #e2e8f0',
-                boxShadow: '0 2px 6px rgba(0, 0, 0, 0.04)'
-              }}
-            >
-              <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#0f172a', display: 'inline-block' }} />
-              <span>Projects</span>
-            </div>
-          </div>
-        </ScrollReveal>
+    <section id="projects" className="projects">
+      <ScrollReveal delay={40} yOffset={10}>
+        <div className="proj-pill-row">
+          <SectionPill label="Projects" />
+        </div>
+      </ScrollReveal>
 
-        {/* Section Heading & Subtitle */}
-        <ScrollReveal delay={90} yOffset={20}>
-          <div style={{ textAlign: 'center', marginBottom: '46px' }}>
-            <h2 
-              style={{ 
-                fontFamily: "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
-                fontSize: 'clamp(36px, 4.8vw, 56px)', 
-                fontWeight: 800, 
-                color: '#0a0b0d',
-                letterSpacing: '-0.025em',
-                lineHeight: 1.15,
-                margin: '0 0 12px'
-              }}
-            >
-              From Idea to Production
-            </h2>
-            <p 
-              style={{
-                fontFamily: "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
-                fontSize: '13.5px',
-                lineHeight: 1.55,
-                color: '#64748b',
-                maxWidth: '560px',
-                margin: '0 auto'
-              }}
-            >
-              From concept to execution, we build solutions that matter.<br />
-              Explore the breakthrough projects shaping the future of our industry.
-            </p>
-          </div>
-        </ScrollReveal>
+      <ScrollReveal delay={90} yOffset={18}>
+        <h2 className="proj-heading">From Idea to Production</h2>
+        <p className="proj-sub">
+          From concept to execution, we build solutions that matter.
+          <br />
+          Explore the breakthrough projects shaping the future of our industry.
+        </p>
+      </ScrollReveal>
 
-        {/* Main Showcase Card matching exact design */}
-        <ScrollReveal delay={160} duration={800} yOffset={24}>
-          <div 
-            className="showcase-card"
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
-          >
-            {/* Outer Stepped Pixel Pattern (Outside the dark photo/video frame) */}
-            <div className="project-corner-pixel top-left" aria-hidden="true">
-              <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                <rect x="0" y="0" width="16" height="16" fill="#f8fafc" />
-                <rect x="16" y="0" width="16" height="16" fill="#f8fafc" />
-                <rect x="0" y="16" width="16" height="16" fill="#f8fafc" />
-                <rect x="16" y="16" width="16" height="16" fill="#ffffff" />
-                <rect x="32" y="16" width="16" height="16" fill="#f8fafc" />
-                <rect x="0" y="32" width="16" height="16" fill="#f8fafc" />
+      <ScrollReveal delay={160} duration={800} yOffset={24}>
+        <div
+          ref={cardRef}
+          className="proj-card"
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Featured projects"
+          tabIndex={0}
+          onKeyDown={onKeyDown}
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+          onFocus={() => setFocused(true)}
+          onBlur={(e) => {
+            if (!e.currentTarget.contains(e.relatedTarget as Node)) setFocused(false);
+          }}
+        >
+          <div className="proj-media" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+            <img
+              key={current.id}
+              src={current.image}
+              alt={`${current.title} – project preview`}
+              className="proj-img"
+              draggable={false}
+              decoding="async"
+            />
+            <span className="proj-count" aria-hidden="true">
+              {String(activeSlide + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}
+            </span>
+            {TL_CELLS.map(([c, r, w], i) => (
+              <span key={`tl${i}`} className="px-cell" style={{ left: c * 39, top: r * 39, width: 39 * w }} />
+            ))}
+            {TR_CELLS.map(([c, r, w], i) => (
+              <span key={`tr${i}`} className="px-cell" style={{ right: c * 39, top: r * 39, width: 39 * w }} />
+            ))}
+            <button
+              type="button"
+              className="proj-nav prev"
+              aria-label="Previous project"
+              onClick={prev}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M15 18l-6-6 6-6" />
               </svg>
-            </div>
-            <div className="project-corner-pixel top-right" aria-hidden="true">
-              <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                <rect x="16" y="0" width="16" height="16" fill="#f8fafc" />
-                <rect x="32" y="0" width="16" height="16" fill="#f8fafc" />
-                <rect x="0" y="16" width="16" height="16" fill="#f8fafc" />
-                <rect x="16" y="16" width="16" height="16" fill="#ffffff" />
-                <rect x="32" y="16" width="16" height="16" fill="#f8fafc" />
-                <rect x="32" y="32" width="16" height="16" fill="#f8fafc" />
+            </button>
+            <button
+              type="button"
+              className="proj-nav next"
+              aria-label="Next project"
+              onClick={next}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M9 18l6-6-6-6" />
               </svg>
-            </div>
+            </button>
+          </div>
 
-            {/* Dark Media Preview Box with clean photo inside */}
-            <div className="media-preview-box">
-              <img 
-                key={current.id}
-                src={current.image} 
-                alt={current.title} 
-                className="showcase-laptop-img"
-              />
-            </div>
-
-            {/* Pagination Controls Row */}
-            <div className="showcase-controls-row">
-              <div className="showcase-dots-row">
-                {projects.map((proj, idx) => (
-                  <button
-                    key={proj.id}
-                    onClick={() => setActiveSlide(idx)}
-                    className={`dot-pill ${activeSlide === idx ? 'dot-active' : ''}`}
-                    aria-label={`Go to ${proj.title}`}
-                  />
-                ))}
-              </div>
-
-              {/* Slide Counter & Arrow Nav */}
-              <div className="showcase-nav-actions">
-                <span className="slide-counter-badge">
-                  0{activeSlide + 1} / 0{projects.length}
-                </span>
+          <div className="proj-dots-row">
+            <div className="proj-dots">
+              {projects.map((p, idx) => (
                 <button
+                  key={p.id}
                   type="button"
-                  onClick={() => setActiveSlide((prev) => (prev === 0 ? projects.length - 1 : prev - 1))}
-                  className="showcase-arrow-btn"
-                  aria-label="Previous slide"
+                  onClick={() => setActiveSlide(idx)}
+                  className={`proj-dot ${activeSlide === idx ? 'on' : ''}`}
+                  aria-label={`Show project ${idx + 1}: ${p.title}`}
+                  aria-current={activeSlide === idx ? 'true' : undefined}
                 >
-                  ‹
+                  {activeSlide === idx && (
+                    <span
+                      key={`${current.id}-${isPaused ? 'p' : 'r'}`}
+                      className={`proj-dot-fill ${isPaused ? 'paused' : ''}`}
+                      style={{ animationDuration: `${AUTOPLAY_MS}ms` }}
+                    />
+                  )}
                 </button>
-                <button
-                  type="button"
-                  onClick={() => setActiveSlide((prev) => (prev + 1) % projects.length)}
-                  className="showcase-arrow-btn"
-                  aria-label="Next slide"
-                >
-                  ›
-                </button>
-              </div>
+              ))}
             </div>
+            {current.projectUrl ? (
+              <a href={current.projectUrl} target="_blank" rel="noopener noreferrer" className="proj-link">
+                Visit live site <span aria-hidden="true">↗</span>
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
+            ) : (
+              <span className="proj-link proj-link-muted">Case study coming soon</span>
+            )}
+          </div>
 
-            {/* Bottom Details Row */}
-            <div key={`details-${current.id}`} className="showcase-details-row">
-              <div className="project-title-group">
-                <h3 className="project-heading-title">{current.title}</h3>
-                {current.projectUrl && (
-                  <a
-                    href={current.projectUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="project-live-link"
-                  >
-                    <span>Visit Live Site</span>
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M7 17l9.2-9.2M17 17V7H7" />
-                    </svg>
-                  </a>
-                )}
-              </div>
+          <div className="proj-divider" />
 
-              <div className="project-description-box">
-                <span className="desc-heading-label">DESCRIPTION</span>
-                <p className="desc-body-text">{current.description}</p>
-              </div>
+          <div key={`d-${current.id}`} className="proj-details" aria-live={isPaused ? 'polite' : 'off'}>
+            <div>
+              <h3 className="proj-title">{current.title}</h3>
+            </div>
+            <div>
+              <span className="proj-desc-label">DESCRIPTION</span>
+              <p className="proj-desc">{current.description}</p>
             </div>
           </div>
-        </ScrollReveal>
-      </div>
+        </div>
+      </ScrollReveal>
 
       <style jsx>{`
-        .showcase-card {
+        .projects {
           position: relative;
-          background: #ffffff;
-          border: 1px solid #e5e7eb;
-          border-radius: 26px;
-          padding: 16px 16px 28px;
-          box-shadow: 0 10px 34px rgba(0, 0, 0, 0.05);
-          max-width: 980px;
-          margin: 0 auto;
-          transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+          background: #f3f4f6;
+          padding: 0 0 44px;
+          border-bottom: 1px solid #dadcdf;
+          box-shadow: inset 0 -15px 0 #f3f4f6, inset 0 -16px 0 #dadcdf;
         }
-
-        .showcase-card:hover {
-          box-shadow: 0 18px 48px rgba(0, 0, 0, 0.08);
-        }
-
-        /* Exterior Corner Pixel Accents (positioned on outside border of media preview) */
-        .project-corner-pixel {
-          position: absolute;
-          z-index: 4;
-          pointer-events: none;
-          user-select: none;
-          filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.04));
-        }
-
-        .project-corner-pixel.top-left {
-          top: 10px;
-          left: 10px;
-        }
-
-        .project-corner-pixel.top-right {
-          top: 10px;
-          right: 10px;
-        }
-
-        /* Dark Media Preview Box */
-        .media-preview-box {
+        .proj-pill-row {
+          text-align: center;
           position: relative;
-          background: #111316;
-          border-radius: 20px;
+          z-index: 2;
+          margin-top: -16px;
+        }
+        .proj-heading {
+          font-family: var(--font-urbanist), 'Urbanist', sans-serif;
+          font-size: 74px;
+          font-weight: 500;
+          line-height: 1;
+          letter-spacing: -0.035em;
+          text-align: center;
+          margin: 36px 0 0;
+          padding-bottom: 6px;
+          background: linear-gradient(90deg, #5c5f63 0%, #3b3d40 45%, #1f2022 100%);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          color: transparent;
+        }
+        .proj-sub {
+          font-family: var(--font-urbanist), 'Urbanist', sans-serif;
+          font-size: 18px;
+          line-height: 22px;
+          color: #6b6b6e;
+          text-align: center;
+          margin: 26px 0 0;
+        }
+        .proj-card {
+          position: relative;
+          width: 1327px;
+          max-width: calc(100% - 32px);
+          margin: 58px auto 0;
+          padding: 11px 11px 0;
+          height: 885px;
           overflow: hidden;
+          border-radius: 30px;
+          background: #f3f3f4;
+          border: 1px solid #e6e6e8;
+          box-shadow: 0 6px 0 #e2e2e4, 0 14px 24px rgba(0, 0, 0, 0.04);
+        }
+        .proj-media {
+          position: relative;
+          height: 659px;
+          border-radius: 30px;
+          overflow: hidden;
+          background: #26292d;
+        }
+        .proj-img {
           width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          animation: projIn 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+          transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .proj-card:hover .proj-img { transform: scale(1.012); }
+        @keyframes projIn {
+          from { opacity: 0; transform: scale(0.985); filter: blur(4px); }
+          to { opacity: 1; transform: scale(1); filter: blur(0); }
+        }
+        .px-cell {
+          position: absolute;
+          height: 39px;
+          background: #ececed;
+          z-index: 2;
+          pointer-events: none;
+        }
+        .proj-card:focus-visible { outline: 2px solid #0f172a; outline-offset: 4px; }
+        .proj-media { touch-action: pan-y; user-select: none; }
+        .proj-count {
+          position: absolute;
+          left: 20px;
+          bottom: 20px;
+          z-index: 3;
+          padding: 6px 12px;
+          border-radius: 999px;
+          background: rgba(10, 10, 14, 0.45);
+          backdrop-filter: blur(6px);
+          color: #ffffff;
+          font-family: var(--font-inter), 'Inter', sans-serif;
+          font-size: 12px;
+          letter-spacing: 0.08em;
+          font-variant-numeric: tabular-nums;
+          opacity: 0;
+          transition: opacity 0.25s ease;
+        }
+        .proj-media:hover .proj-count, .proj-card:focus-within .proj-count { opacity: 1; }
+        .proj-nav {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.14);
+          border: 1px solid rgba(255, 255, 255, 0.25);
+          color: #ffffff;
+          font-size: 26px;
+          line-height: 1;
           display: flex;
           align-items: center;
           justify-content: center;
-          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+          opacity: 0;
+          z-index: 3;
+          backdrop-filter: blur(6px);
+          transition: opacity 0.25s ease, background 0.25s ease;
         }
-
-        .showcase-laptop-img {
-          width: 100%;
-          height: auto;
-          display: block;
-          object-fit: cover;
-          animation: fadeInSlide 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-          transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+        .proj-nav.prev { left: 20px; }
+        .proj-nav.next { right: 20px; }
+        .proj-media:hover .proj-nav,
+        .proj-card:focus-within .proj-nav { opacity: 1; }
+        .proj-nav:hover { background: rgba(255, 255, 255, 0.3); }
+        .proj-nav:active { transform: translateY(-50%) scale(0.92); }
+        @media (hover: none) {
+          .proj-nav, .proj-count { opacity: 1; }
+          .proj-nav { background: rgba(10, 10, 14, 0.35); }
         }
-
-        @keyframes fadeInSlide {
-          from {
-            opacity: 0;
-            transform: scale(0.975) translateY(6px);
-            filter: blur(4px);
-          }
-          to {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-            filter: blur(0px);
-          }
-        }
-
-        .showcase-card:hover .showcase-laptop-img {
-          transform: scale(1.016);
-        }
-
-        /* Slider Controls */
-        .showcase-controls-row {
+        .proj-dots-row {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          margin: 20px 8px 18px;
+          padding: 44px 40px 0;
+          height: 56px;
         }
-
-        .showcase-dots-row {
+        .proj-dots {
           display: flex;
-          align-items: center;
-          gap: 8px;
-        }
-
-        .showcase-nav-actions {
-          display: flex;
-          align-items: center;
           gap: 10px;
         }
-
-        .slide-counter-badge {
-          font-family: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif;
-          font-size: 11.5px;
-          font-weight: 600;
-          color: #94a3b8;
-          letter-spacing: 0.5px;
-          margin-right: 4px;
-        }
-
-        .showcase-arrow-btn {
-          width: 32px;
-          height: 32px;
-          border-radius: 50%;
-          border: 1px solid #e2e8f0;
-          background: #ffffff;
-          color: #334155;
-          font-size: 18px;
-          line-height: 1;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .showcase-arrow-btn:hover {
-          background: #0f172a;
-          color: #ffffff;
-          border-color: #0f172a;
-          transform: translateY(-1px);
-        }
-
-        .dot-pill {
-          width: 7px;
-          height: 7px;
-          border-radius: 999px;
-          background-color: #d1d5db;
-          border: none;
+        .proj-dot {
+          position: relative;
+          width: 12px;
+          height: 12px;
+          border-radius: 6px;
+          background: #dcdcde;
           padding: 0;
-          cursor: pointer;
-          transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.25s ease, transform 0.25s ease;
+          overflow: hidden;
+          transition: background 0.25s ease, width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
         }
-
-        .dot-pill:hover {
-          background-color: #94a3b8;
-          transform: scale(1.15);
+        .proj-dot::before {
+          /* invisible 32px hit area for touch */
+          content: '';
+          position: absolute;
+          inset: -10px -3px;
         }
-
-        .dot-active {
-          width: 24px;
-          background-color: #0f172a;
+        .proj-dot:hover { background: #bfbfc3; }
+        .proj-dot.on { width: 34px; background: #cfcfd2; }
+        .proj-dot-fill {
+          position: absolute;
+          inset: 0;
+          border-radius: inherit;
+          background: #1a1a1a;
+          transform-origin: 0 50%;
+          animation: dotFill linear forwards;
         }
-
-        /* Bottom Details */
-        .showcase-details-row {
-          display: flex;
-          align-items: flex-start;
-          justify-content: space-between;
-          padding: 0 12px;
-          gap: 32px;
-          animation: detailsFadeIn 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+        .proj-dot-fill.paused { animation: none; transform: none; }
+        @keyframes dotFill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+        .proj-divider {
+          margin: 23px 40px 0;
+          border-top: 1px solid #dcdcde;
         }
-
-        .project-title-group {
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-          flex-shrink: 0;
+        .proj-details {
+          display: grid;
+          grid-template-columns: 517px 1fr;
+          padding: 38px 40px 0;
+          animation: projIn 0.45s cubic-bezier(0.22, 1, 0.36, 1);
         }
-
-        .project-live-link {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          font-family: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif;
-          font-size: 12.5px;
-          font-weight: 600;
-          color: #2563eb;
-          text-decoration: none;
-          transition: all 0.2s ease;
-          width: fit-content;
+        .proj-title {
+          font-family: var(--font-urbanist), 'Urbanist', sans-serif;
+          font-size: 37px;
+          font-weight: 500;
+          letter-spacing: -0.01em;
+          color: #222222;
+          margin: 8px 0 0;
+          line-height: 40px;
+          padding-right: 40px;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
         }
-
-        .project-live-link:hover {
-          color: #1d4ed8;
-          transform: translateX(2px);
-        }
-
-        @keyframes detailsFadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(8px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .project-heading-title {
-          font-family: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif;
-          font-size: 26px;
-          font-weight: 800;
-          color: #0a0b0d;
-          letter-spacing: -0.02em;
-          margin: 0;
-          flex-shrink: 0;
-        }
-
-        .project-description-box {
-          max-width: 500px;
-        }
-
-        .desc-heading-label {
-          display: block;
-          font-family: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif;
-          font-size: 11px;
-          font-weight: 700;
-          color: #94a3b8;
-          letter-spacing: 0.8px;
-          margin-bottom: 6px;
-        }
-
-        .desc-body-text {
-          font-family: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif;
+        .proj-link {
+          display: inline-block;
+          font-family: var(--font-inter), 'Inter', sans-serif;
           font-size: 13px;
-          line-height: 1.58;
-          color: #52525b;
-          margin: 0;
-          font-weight: 400;
+          color: #6b6b6e;
+          transition: color 0.2s ease;
         }
-
-        @media (max-width: 768px) {
-          .showcase-details-row {
-            flex-direction: column;
-            gap: 16px;
-          }
-
-          .project-description-box {
-            max-width: 100%;
-          }
+        .proj-link:hover { color: #111111; }
+        .proj-link-muted, .proj-link-muted:hover { color: #a3a3a8; cursor: default; }
+        .sr-only {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          overflow: hidden;
+          clip: rect(0 0 0 0);
+          white-space: nowrap;
+        }
+        .proj-desc-label {
+          display: block;
+          font-family: var(--font-inter), 'Inter', sans-serif;
+          font-size: 17px;
+          letter-spacing: 0.02em;
+          color: #77777a;
+        }
+        .proj-desc {
+          font-family: var(--font-inter), 'Inter', sans-serif;
+          font-size: 16px;
+          line-height: 20px;
+          color: #111111;
+          margin: 8px 0 0;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+        @media (max-width: 1100px) {
+          .proj-heading { font-size: clamp(42px, 8vw, 74px); }
+          .proj-card { height: auto; padding-bottom: 32px; overflow: visible; }
+          .proj-media { height: auto; aspect-ratio: 1304 / 659; }
+          .proj-details { grid-template-columns: 1fr; gap: 18px; }
+          .px-cell { transform: scale(0.6); }
+        }
+        @media (max-width: 600px) {
+          .proj-dots-row, .proj-details { padding-left: 20px; padding-right: 20px; }
+          .proj-divider { margin-left: 20px; margin-right: 20px; }
+          .proj-dots-row { gap: 12px; }
+          .proj-dots { gap: 7px; }
+          .proj-link { white-space: nowrap; font-size: 12px; }
+          .proj-count { left: 12px; bottom: 12px; }
+          .px-cell { display: none; }
         }
       `}</style>
     </section>

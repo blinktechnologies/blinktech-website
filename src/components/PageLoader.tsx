@@ -8,15 +8,32 @@ export const PageLoader: React.FC = () => {
   const [shouldRender, setShouldRender] = useState(true);
 
   useEffect(() => {
-    // Check if the page has already loaded in this session to make return visits ultra fast
-    const hasLoaded = sessionStorage.getItem('blink_loaded');
+    // Brand splash only on the very first page of a visit; return visits and
+    // reduced-motion users get the content immediately.
+    let hasLoaded = false;
+    try {
+      hasLoaded = sessionStorage.getItem('blink_loaded') === 'true';
+    } catch {
+      /* storage blocked */
+    }
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const hold = hasLoaded || reduce ? 0 : 600;
+
+    let removeTimer: ReturnType<typeof setTimeout>;
     const timer = setTimeout(() => {
       setLoading(false);
-      sessionStorage.setItem('blink_loaded', 'true');
-      setTimeout(() => setShouldRender(false), 550); // allow fade out transition to complete
-    }, hasLoaded ? 350 : 800);
+      try {
+        sessionStorage.setItem('blink_loaded', 'true');
+      } catch {
+        /* storage blocked */
+      }
+      removeTimer = setTimeout(() => setShouldRender(false), 550); // allow fade out transition to complete
+    }, hold);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(removeTimer);
+    };
   }, []);
 
   if (!shouldRender) return null;
