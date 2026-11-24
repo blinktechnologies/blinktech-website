@@ -1,531 +1,335 @@
 'use client';
 
 import React from 'react';
-import { PixelCornerCluster } from './PixelBlocks';
 import { ScrollReveal } from './ScrollReveal';
+import { SectionPill } from './SectionPill';
+import { DotChevron } from './DotChevron';
 
-const LinkedinIcon = ({ size = 11 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.53 1.53 0 1 0 0-3.06 1.53 1.53 0 0 0 0 3.06m1.4 9.74v-8.37H5.06v8.37h2.8z" />
+const LinkedinIcon = () => (
+  <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M6.94 5a2 2 0 1 1-4-.002 2 2 0 0 1 4 .002zM7 8.48H3V21h4V8.48zm6.32 0H9.34V21h3.94v-6.57c0-3.66 4.77-4 4.77 0V21H22v-7.93c0-6.17-7.06-5.94-8.72-2.91l.04-1.68z" />
   </svg>
 );
 
-const TwitterIcon = ({ size = 11 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+const XIcon = () => (
+  <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
   </svg>
 );
 
-const GlobeIcon = ({ size = 11 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="10" />
-    <line x1="2" y1="12" x2="22" y2="12" />
-    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+const InstagramIcon = () => (
+  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true">
+    <rect x="3" y="3" width="18" height="18" rx="5" />
+    <circle cx="12" cy="12" r="4" />
+    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
   </svg>
 );
 
+const founders = [
+  { name: 'BIENVENUE Alliance', role: 'BlinkTech Founder', image: '/images/team/Bienvenue_Alliance.png' },
+  { name: 'BYIRINGIRO Emmanuel', role: 'BlinkTech Co-Founder', image: '/images/team/Emmanuel.png' },
+  { name: 'BYIRINGIRO Samuel', role: 'BlinkTech Co-Founder', image: '/images/team/Samuel.png' },
+  { name: 'KANEZA Amandine', role: 'BlinkTech Co-Founder', image: '/images/team/Amandine.png' },
+  { name: 'UMURERWA Bonnette', role: 'Chief Media & Marketing Officer', image: '/images/team/Bonnette.png' },
+  { name: 'ABAYO Moise', role: 'Chief Information Security Officer', image: '/images/team/Moise.png' },
+  { name: 'NIYONKURU Darius', role: 'Chief Financial Officer', image: '/images/team/Darius.png' }
+];
+
+const developers = [
+  { name: 'UWASE UTUJE Sandrine', image: '/images/team/sandrine_circle.png' },
+  { name: 'TWARIMITSWE Aron', image: '/images/team/aron_circle.png' },
+  { name: 'IRAKOZE Prince Bonheur', image: '/images/team/prince_bonheur_circle.png' },
+  { name: 'IMPANO Blessed Winner', image: '/images/team/blessed_winner_circle.png' },
+  { name: 'ISHIMWE Amani Samuel', image: '/images/team/amani_samuel_circle.png' },
+  { name: 'HITAYEZU Frank', image: '/images/team/hitayezu_frank_circle.png' },
+  { name: 'IZERE Joshua', image: '/images/team/izere_joshua_circle.png' },
+  { name: 'UWASE Sonia', image: '/images/team/uwase_sonia_circle.png' }
+];
+
 export const TeamsSection: React.FC<{ isFullPage?: boolean }> = () => {
-  // Exactly 7 Founders matching user instructions: Row 1 has 4, Row 2 has 3
-  const foundersRow1 = [
-    { id: 'f-1', name: 'BIENVENUE Alliance', role: 'CEO & Founder', image: '/images/team/Bienvenue_Alliance.png' },
-    { id: 'f-2', name: 'BYIRINGIRO Samuel', role: 'BlinkTech Co-Founder', image: '/images/team/Samuel.png' },
-    { id: 'f-3', name: 'KANEZA Amandine', role: 'BlinkTech Co-Founder', image: '/images/team/Amandine.png' },
-    { id: 'f-4', name: 'BYIRINGIRO Emmanuel', role: 'BlinkTech Co-Founder', image: '/images/team/Emmanuel.png' },
-  ];
-
-  const foundersRow2 = [
-    { id: 'f-5', name: 'NIYONKURU Darius', role: 'Chief Financial Officer', image: '/images/team/Darius.png' },
-    { id: 'f-6', name: 'UMURERWA Bonnette', role: 'Chief Media & Marketing Officer', image: '/images/team/Bonnette.png' },
-    { id: 'f-7', name: 'ABAYO Moise', role: 'Chief Information Security Officer', image: '/images/team/Moise.png' },
-  ];
-
-  // Software Engineers in Section Below (2 balanced rows of 4 for 8 developers)
-  const developers = [
-    {
-      id: 'dev-1',
-      name: 'UWASE UTUJE Sandrine',
-      role: 'Software Engineer',
-      image: '/images/team/sandrine_circle.png'
-    },
-    {
-      id: 'dev-2',
-      name: 'TWARIMITSWE Aron',
-      role: 'Software Engineer',
-      image: '/images/team/aron_circle.png'
-    },
-    {
-      id: 'dev-3',
-      name: 'IRAKOZE Prince Bonheur',
-      role: 'Software Engineer',
-      image: '/images/team/prince_bonheur_circle.png'
-    },
-    {
-      id: 'dev-4',
-      name: 'IMPANO Blessed Winner',
-      role: 'Software Engineer',
-      image: '/images/team/blessed_winner_circle.png'
-    },
-    {
-      id: 'dev-5',
-      name: 'ISHIMWE Amani Samuel',
-      role: 'Software Engineer',
-      image: '/images/team/amani_samuel_circle.png'
-    },
-    {
-      id: 'dev-6',
-      name: 'HITAYEZU Frank',
-      role: 'Software Engineer',
-      image: '/images/team/hitayezu_frank_circle.png'
-    },
-    {
-      id: 'dev-7',
-      name: 'IZERE Joshua',
-      role: 'Software Engineer',
-      image: '/images/team/izere_joshua_circle.png'
-    },
-    {
-      id: 'dev-8',
-      name: 'UWASE Sonia',
-      role: 'Software Engineer',
-      image: '/images/team/uwase_sonia_circle.png'
-    }
-  ];
-
   return (
-    <section 
-      className="teams-page-section"
-      style={{ 
-        padding: '70px 20px 110px', 
-        backgroundColor: '#f5f5f7', 
-        position: 'relative',
-        overflow: 'hidden'
-      }}
-    >
-      {/* Background Technical Grid Pattern */}
-      <div 
-        className="technical-grid-bg"
-        style={{
-          position: 'absolute',
-          inset: 0,
-          backgroundImage: `
-            linear-gradient(to right, rgba(0, 0, 0, 0.035) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(0, 0, 0, 0.035) 1px, transparent 1px)
-          `,
-          backgroundSize: '24px 24px',
-          backgroundPosition: 'center top',
-          pointerEvents: 'none',
-          zIndex: 0
-        }}
-      />
-
-      {/* Decorative corner pixel cluster */}
-      <div style={{ position: 'absolute', top: '24px', left: '16px', zIndex: 1, pointerEvents: 'none' }}>
-        <PixelCornerCluster type="corner-top-left" size={18} color="#000000" />
-      </div>
-      <div style={{ position: 'absolute', top: '24px', right: '16px', zIndex: 1, pointerEvents: 'none' }}>
-        <PixelCornerCluster type="corner-top-right" size={18} color="#000000" />
-      </div>
-
-      <div className="container" style={{ position: 'relative', zIndex: 2, maxWidth: '1060px', margin: '0 auto' }}>
-        
-        {/* Page Title */}
-        <ScrollReveal delay={60} yOffset={16}>
-          <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 52px' }}>
-            <div style={{ display: 'inline-flex', marginBottom: '14px' }}>
-              <span className="pill-badge">
-                <span className="dot" />
-                Leadership & Team
-              </span>
-            </div>
-            <h1 
-              style={{ 
-                fontFamily: "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
-                fontSize: 'clamp(36px, 5vw, 56px)', 
-                fontWeight: 800, 
-                color: '#0a0a0c',
-                letterSpacing: '-0.03em',
-                lineHeight: 1.15,
-                marginBottom: '14px'
-              }}
-            >
-              The Minds of BlinkTech
-            </h1>
-            <p style={{ fontSize: '15.5px', color: '#575a65', lineHeight: 1.6 }}>
-              Meet the brains behind every solution, driven by tech to build, solve & give real impacts to the world.
-            </p>
+    <section className="teams-page">
+      {/* ---------- Header on grid ---------- */}
+      <div className="tp-header">
+        <svg className="tp-px" width="128" height="96" viewBox="0 0 128 96" aria-hidden="true">
+          <rect x="0" y="0" width="32" height="32" fill="#000" />
+          <rect x="64" y="0" width="64" height="32" fill="#000" />
+          <rect x="32" y="32" width="32" height="32" fill="#000" />
+          <rect x="0" y="64" width="32" height="32" fill="#000" />
+        </svg>
+        <ScrollReveal delay={40} yOffset={12}>
+          <div style={{ textAlign: 'center' }}>
+            <SectionPill label="Our Team" />
           </div>
         </ScrollReveal>
-
-        {/* SECTION 1: FOUNDERS OF BLINKTECH (Exactly matching user reference Image 1) */}
-        <div style={{ marginBottom: '64px' }}>
-          <ScrollReveal delay={100} yOffset={14}>
-            <div style={{ textAlign: 'center', marginBottom: '38px' }}>
-              <h2 
-                style={{ 
-                  fontFamily: "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
-                  fontSize: '15px', 
-                  fontWeight: 800, 
-                  letterSpacing: '1.6px', 
-                  textTransform: 'uppercase', 
-                  color: '#0a0a0c',
-                  margin: 0
-                }}
-              >
-                FOUNDERS OF BLINKTECH
-              </h2>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal delay={160} duration={800} yOffset={20}>
-            {/* Row 1: 4 Cards */}
-            <div className="founders-row row-1">
-              {foundersRow1.map((founder, idx) => (
-                <div key={founder.id} className="founder-card" style={{ animationDelay: `${idx * 80}ms` }}>
-                  <div className="founder-portrait-container">
-                    <img 
-                      src={founder.image} 
-                      alt={founder.name} 
-                      className="founder-portrait-img"
-                      loading="eager"
-                    />
-                  </div>
-                  <div className="founder-badge">
-                    <h3 className="founder-name">{founder.name}</h3>
-                    <p className="founder-role">{founder.role}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Row 2: 3 Cards (Col 4 remains empty as in user reference) */}
-            <div className="founders-row row-2">
-              {foundersRow2.map((founder, idx) => (
-                <div key={founder.id} className="founder-card" style={{ animationDelay: `${(idx + 4) * 80}ms` }}>
-                  <div className="founder-portrait-container">
-                    <img 
-                      src={founder.image} 
-                      alt={founder.name} 
-                      className="founder-portrait-img"
-                      loading="eager"
-                    />
-                  </div>
-                  <div className="founder-badge">
-                    <h3 className="founder-name">{founder.name}</h3>
-                    <p className="founder-role">{founder.role}</p>
-                  </div>
-                </div>
-              ))}
-              <div className="founder-card-placeholder" />
-            </div>
-          </ScrollReveal>
-        </div>
-
-        {/* HUD Chevrons Row: < < < < < < < < < < (10 Chevrons as in reference Image 1) */}
-        <div 
-          style={{ 
-            display: 'flex', 
-            justifyContent: 'center', 
-            alignItems: 'center', 
-            gap: '18px', 
-            color: '#94a3b8', 
-            margin: '50px 0 60px' 
-          }}
-        >
-          {Array.from({ length: 10 }).map((_, i) => (
-            <svg 
-              key={i} 
-              className={`chevron-pulse delay-${i}`}
-              width="7" 
-              height="11" 
-              viewBox="0 0 7 11" 
-              fill="none"
-            >
-              <path 
-                d="M5.5 1.5L1.5 5.5L5.5 9.5" 
-                stroke="#94a3b8" 
-                strokeWidth="1.6" 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-              />
-            </svg>
-          ))}
-        </div>
-
-        {/* SECTION 2: THE DEVELOPERS BEHIND EVERY SOLUTION (Matching user reference Image 1) */}
-        <div>
-          <ScrollReveal delay={100} yOffset={14}>
-            <div style={{ textAlign: 'center', marginBottom: '46px' }}>
-              <h2 
-                style={{ 
-                  fontFamily: "var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif",
-                  fontSize: '15px', 
-                  fontWeight: 800, 
-                  letterSpacing: '1.6px', 
-                  textTransform: 'uppercase', 
-                  color: '#0a0a0c',
-                  margin: 0
-                }}
-              >
-                THE DEVELOPERS BEHIND EVERY SOLUTION
-              </h2>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal delay={180} duration={800} yOffset={20}>
-            <div className="developers-grid">
-              {developers.map((dev, idx) => (
-                <div key={dev.id} className="dev-card" style={{ animationDelay: `${idx * 70}ms` }}>
-                  <div className="dev-avatar-ring">
-                    <img src={dev.image} alt={dev.name} className="dev-avatar" loading="lazy" />
-                  </div>
-                  <h3 className="dev-name">{dev.name}</h3>
-                  <p className="dev-role">{dev.role}</p>
-                  <div className="dev-socials">
-                    <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="dev-social-btn" title="LinkedIn">
-                      <LinkedinIcon size={11} />
-                    </a>
-                    <a href="https://twitter.com" target="_blank" rel="noreferrer" className="dev-social-btn" title="X (Twitter)">
-                      <TwitterIcon size={11} />
-                    </a>
-                    <a href="#" className="dev-social-btn" title="Portfolio / Website">
-                      <GlobeIcon size={11} />
-                    </a>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </ScrollReveal>
-        </div>
-
+        <ScrollReveal delay={100} yOffset={16}>
+          <h1 className="tp-title">The Minds of BlinkTech</h1>
+          <p className="tp-sub">
+            Meet the brains behind every solution, driven by tech to build,
+            <br />
+            solve &amp; give real impacts to the world.
+          </p>
+        </ScrollReveal>
       </div>
 
-      <style jsx>{`
-        /* Founders Grid Rows matching user screenshot */
-        .founders-row {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 28px 18px;
-          max-width: 1040px;
-          margin: 0 auto;
-        }
-        .founders-row.row-1 {
-          margin-bottom: 28px;
-        }
+      {/* ---------- Founders ---------- */}
+      <ScrollReveal delay={80} yOffset={12}>
+        <h2 className="tp-label">FOUNDERS OF BLINKTECH</h2>
+      </ScrollReveal>
+      <ScrollReveal delay={140} duration={800} yOffset={20}>
+        <div className="founders">
+          {founders.map((f) => (
+            <div key={f.name} className="founder">
+              <div className="founder-photo">
+                <img src={f.image} alt={f.name} loading="lazy" decoding="async" />
+              </div>
+              <div className="founder-badge">
+                <h3>{f.name}</h3>
+                <p>{f.role}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </ScrollReveal>
 
-        .founder-card {
+      <div className="tp-chevs" aria-hidden="true">
+        {Array.from({ length: 11 }).map((_, i) => (
+          <span key={i} className="tp-chev" style={{ animationDelay: `${(10 - i) * 120}ms` }}>
+            <DotChevron direction="left" color="#111111" size={2.6} />
+          </span>
+        ))}
+      </div>
+
+      {/* ---------- Developers ---------- */}
+      <ScrollReveal delay={80} yOffset={12}>
+        <h2 className="tp-label tp-label-dev">THE DEVELOPERS BEHIND EVERY SOLUTION</h2>
+      </ScrollReveal>
+      <ScrollReveal delay={140} duration={800} yOffset={20}>
+        <div className="devs">
+          {developers.map((d) => (
+            <div key={d.name} className="dev">
+              <div className="dev-photo">
+                <img src={d.image} alt={d.name} loading="lazy" decoding="async" />
+              </div>
+              <h3>{d.name}</h3>
+              <p>SOFTWARE ENGINEER</p>
+              <div className="dev-socials">
+                <a href="https://www.linkedin.com/company/blink-technologiz/" target="_blank" rel="noopener noreferrer" aria-label="BlinkTech on LinkedIn (opens in a new tab)"><LinkedinIcon /></a>
+                <a href="https://x.com" target="_blank" rel="noreferrer" aria-label={`${d.name} on X`}><XIcon /></a>
+                <a href="https://www.instagram.com/_blink_tech/" target="_blank" rel="noopener noreferrer" aria-label="BlinkTech on Instagram (opens in a new tab)"><InstagramIcon /></a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </ScrollReveal>
+
+      <style jsx>{`
+        .teams-page {
+          background: #f3f4f6;
+          padding-bottom: 120px;
           position: relative;
+          overflow: hidden;
+        }
+        .tp-header {
+          position: relative;
+          max-width: 1408px;
+          height: 309px;
+          margin: 0 auto;
+          padding-top: 62px;
+          background-image:
+            linear-gradient(to right, #e4e5e8 1px, transparent 1px),
+            linear-gradient(to bottom, #e4e5e8 1px, transparent 1px);
+          background-size: 64px 64px;
+          background-position: 0 0;
+          -webkit-mask-image: linear-gradient(to bottom, #000 85%, transparent 100%);
+        }
+        .tp-px {
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+        .tp-title {
+          font-family: var(--font-urbanist), 'Urbanist', sans-serif;
+          font-size: 82px;
+          font-weight: 500;
+          line-height: 1;
+          letter-spacing: -0.04em;
+          text-align: center;
+          margin: 22px 0 0;
+          padding-bottom: 6px;
+          background: linear-gradient(90deg, #5c5f63 0%, #3b3d40 45%, #1f2022 100%);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          color: transparent;
+        }
+        .tp-sub {
+          font-family: var(--font-urbanist), 'Urbanist', sans-serif;
+          font-size: 18px;
+          line-height: 27px;
+          color: #6b6b72;
+          text-align: center;
+          margin: 26px 0 0;
+        }
+        .tp-label {
+          font-family: var(--font-urbanist), 'Urbanist', sans-serif;
+          font-size: 23px;
+          font-weight: 700;
+          letter-spacing: 0.005em;
+          color: #000000;
+          text-align: center;
+          margin: 20px 0 0;
+        }
+        .founders {
+          display: grid;
+          grid-template-columns: repeat(4, 306px);
+          justify-content: center;
+          column-gap: 24px;
+          row-gap: 26px;
+          margin: 62px auto 0;
+          transform: translateX(-12px);
+        }
+        .founder {
+          position: relative;
+          height: 380px;
+        }
+        .founder-photo {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: flex-end;
+          justify-content: center;
+          overflow: hidden;
+          -webkit-mask-image: linear-gradient(to bottom, #000 75%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 75%, transparent 100%);
+        }
+        .founder-photo img {
+          height: 410px;
+          width: auto;
+          max-width: none;
+          margin-bottom: -40px;
+          transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .founder:hover .founder-photo img { transform: scale(1.04) translateY(-4px); }
+        .founder-badge {
+          position: absolute;
+          left: 16px;
+          right: 16px;
+          bottom: 22px;
+          height: 90px;
+          border-radius: 6px;
+          background: #ffffff;
+          box-shadow: 0 4px 0 #e6e6e8, 0 10px 20px rgba(0, 0, 0, 0.05);
           display: flex;
           flex-direction: column;
           align-items: center;
-          animation: cardStaggerIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
-          transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), filter 0.45s ease;
-          user-select: none;
-        }
-        @keyframes cardStaggerIn {
-          from {
-            opacity: 0;
-            transform: translateY(22px) scale(0.96);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-          }
-        }
-        .founder-card:hover {
-          transform: translateY(-6px);
-          filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.1));
-        }
-
-        .founder-portrait-container {
-          width: 100%;
-          height: 224px;
-          display: flex;
           justify-content: center;
-          align-items: flex-end;
-          position: relative;
-          overflow: hidden;
+          transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
         }
-
-        .founder-portrait-img {
-          width: 100%;
-          max-width: 236px;
-          height: 100%;
-          display: block;
-          object-fit: contain;
-          object-position: bottom center;
-          transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), filter 0.45s ease;
-        }
-        .founder-card:hover .founder-portrait-img {
-          transform: scale(1.045) translateY(-2px);
-        }
-
-        /* Clean White Pill Badge */
-        .founder-badge {
-          position: relative;
-          z-index: 2;
-          background: #ffffff;
-          border-radius: 12px;
-          padding: 10px 14px 11px;
-          width: 90%;
-          max-width: 220px;
-          margin-top: -24px;
-          text-align: center;
-          box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.02);
-          border: 1px solid rgba(0, 0, 0, 0.04);
-          transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.35s ease;
-        }
-        .founder-card:hover .founder-badge {
-          transform: translateY(-3px) scale(1.015);
-          box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
-          border-color: rgba(0, 0, 0, 0.08);
-        }
-
-        .founder-name {
-          font-family: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif;
-          font-size: 14.5px;
+        .founder:hover .founder-badge { transform: translateY(-3px); }
+        .founder-badge h3 {
+          font-family: var(--font-urbanist), 'Urbanist', sans-serif;
+          font-size: 24px;
           font-weight: 500;
-          color: #0b0d13;
-          letter-spacing: -0.01em;
-          margin: 0 0 3px;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-
-        .founder-role {
-          font-family: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif;
-          font-size: 11.5px;
-          font-weight: 400;
-          color: #6b7280;
-          letter-spacing: 0;
+          color: #111111;
           margin: 0;
           white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
         }
-
-        /* Developers Grid (2 rows of 4 for 8 developers) */
-        .developers-grid {
+        .founder-badge p {
+          font-family: var(--font-urbanist), 'Urbanist', sans-serif;
+          font-size: 16px;
+          color: #66666a;
+          margin: 8px 0 0;
+          white-space: nowrap;
+        }
+        .tp-chevs {
+          display: flex;
+          gap: 41px;
+          padding-left: 17px;
+          margin-top: 80px;
+        }
+        .tp-chev {
+          display: inline-flex;
+          width: 10px;
+          justify-content: center;
+          animation: tpChev 2.4s ease-in-out infinite;
+        }
+        @keyframes tpChev {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.35; }
+        }
+        .tp-label-dev { margin-top: 70px; }
+        .devs {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 38px 24px;
-          text-align: center;
-          max-width: 980px;
-          margin: 0 auto;
+          grid-template-columns: repeat(5, 262px);
+          justify-content: center;
+          row-gap: 50px;
+          margin: 90px auto 0;
         }
-
-        .dev-card {
+        .dev {
           display: flex;
           flex-direction: column;
           align-items: center;
-          animation: cardStaggerIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
-          transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+          text-align: center;
         }
-        .dev-card:hover {
-          transform: translateY(-6px);
-        }
-
-        .dev-avatar-ring {
-          width: 104px;
-          height: 104px;
+        .dev-photo {
+          width: 188px;
+          height: 196px;
           border-radius: 50%;
           overflow: hidden;
-          padding: 2px;
-          background: #ffffff;
-          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-          border: 1px solid #e2e8f0;
-          margin-bottom: 12px;
+          background: #e5e7eb;
           transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
         }
-        .dev-card:hover .dev-avatar-ring {
-          transform: scale(1.06);
-          box-shadow: 0 8px 20px rgba(0, 0, 0, 0.14);
+        .dev:hover .dev-photo { transform: translateY(-4px); box-shadow: 0 14px 26px rgba(0, 0, 0, 0.12); }
+        .dev-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .dev h3 {
+          font-family: var(--font-urbanist), 'Urbanist', sans-serif;
+          font-size: 20px;
+          font-weight: 700;
+          text-transform: uppercase;
+          color: #000000;
+          margin: 52px 0 0;
+          white-space: nowrap;
         }
-
-        .dev-avatar {
-          width: 100%;
-          height: 100%;
-          border-radius: 50%;
-          object-fit: cover;
-          display: block;
+        .dev p {
+          font-family: var(--font-urbanist), 'Urbanist', sans-serif;
+          font-size: 13px;
+          color: #444448;
+          margin: 12px 0 0;
         }
-
-        .dev-name {
-          font-family: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif;
-          font-size: 14.5px;
-          font-weight: 500;
-          letter-spacing: -0.01em;
-          color: #0b0d13;
-          margin: 0 0 3px;
-        }
-
-        .dev-role {
-          font-family: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif;
-          font-size: 11.5px;
-          font-weight: 400;
-          color: #6b7280;
-          letter-spacing: 0;
-          margin: 0 0 10px;
-        }
-
         .dev-socials {
           display: flex;
-          align-items: center;
-          gap: 6px;
+          gap: 11px;
+          margin-top: 14px;
         }
-
-        .dev-social-btn {
-          width: 24px;
-          height: 24px;
+        .dev-socials a {
+          width: 20px;
+          height: 20px;
           border-radius: 50%;
-          background: #475569;
+          background: #2b2b2e;
           color: #ffffff;
           display: flex;
           align-items: center;
           justify-content: center;
-          transition: background-color 0.2s, transform 0.2s;
+          transition: transform 0.2s ease, background 0.2s ease;
         }
-        .dev-social-btn:hover {
-          background: #0f172a;
-          transform: translateY(-1.5px);
-        }
+        .dev-socials a:hover { transform: translateY(-2px); background: #000000; }
+        .dev-socials a { position: relative; }
+        .dev-socials a::after { content: ""; position: absolute; inset: -6px -5px; }
 
-        /* Subtle animated radar pulse on chevrons */
-        @keyframes chevronWave {
-          0%, 100% { opacity: 0.4; transform: scale(0.95); }
-          50% { opacity: 0.95; transform: scale(1.1); filter: drop-shadow(0 0 3px rgba(148, 163, 184, 0.5)); }
+        @media (max-width: 1360px) {
+          .founders { grid-template-columns: repeat(auto-fill, minmax(260px, 306px)); transform: none; padding: 0 20px; }
+          .devs { grid-template-columns: repeat(auto-fill, minmax(220px, 262px)); padding: 0 20px; }
+          .founder-badge h3 { font-size: 20px; }
+          .founder-badge p { font-size: 14px; }
         }
-        .chevron-pulse {
-          animation: chevronWave 2.8s infinite ease-in-out;
-        }
-        .delay-0 { animation-delay: 0s; }
-        .delay-1 { animation-delay: 0.12s; }
-        .delay-2 { animation-delay: 0.24s; }
-        .delay-3 { animation-delay: 0.36s; }
-        .delay-4 { animation-delay: 0.48s; }
-        .delay-5 { animation-delay: 0.60s; }
-        .delay-6 { animation-delay: 0.72s; }
-        .delay-7 { animation-delay: 0.84s; }
-        .delay-8 { animation-delay: 0.96s; }
-        .delay-9 { animation-delay: 1.08s; }
-
-        @media (max-width: 1024px) {
-          .founders-row {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px 16px;
-          }
-          .developers-grid {
-            grid-template-columns: repeat(3, 1fr);
-          }
-        }
-
-        @media (max-width: 600px) {
-          .founders-row {
-            grid-template-columns: 1fr;
-          }
-          .developers-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
+        @media (max-width: 700px) {
+          .tp-title { font-size: clamp(40px, 11vw, 70px); }
+          .tp-sub br { display: none; }
+          .tp-sub { padding: 0 20px; }
+          .tp-px { transform: scale(0.6); transform-origin: top left; }
+          .tp-chevs { display: none; }
+          .dev h3 { font-size: 17px; white-space: normal; }
         }
       `}</style>
     </section>

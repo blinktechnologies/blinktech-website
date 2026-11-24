@@ -10,6 +10,8 @@ interface ScrollRevealProps {
   yOffset?: number;
 }
 
+const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)';
+
 export const ScrollReveal: React.FC<ScrollRevealProps> = ({
   children,
   className = '',
@@ -18,14 +20,17 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
   yOffset = 28
 }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [settled, setSettled] = useState(false);
   const elementRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const currentElem = elementRef.current;
-    if (!currentElem) return;
+    const el = elementRef.current;
+    if (!el) return;
 
-    if (typeof IntersectionObserver === 'undefined') {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || typeof IntersectionObserver === 'undefined') {
       setIsVisible(true);
+      setSettled(true);
       return;
     }
 
@@ -33,36 +38,35 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          observer.unobserve(entry.target);
+          observer.disconnect();
         }
       },
-      {
-        threshold: 0.08,
-        rootMargin: '60px 0px -20px 0px'
-      }
+      { threshold: 0.08, rootMargin: '80px 0px -20px 0px' }
     );
-
-    observer.observe(currentElem);
-
-    return () => {
-      observer.unobserve(currentElem);
-    };
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
-  return (
-    <div
-      ref={elementRef}
-      className={`scroll-reveal-container ${className}`}
-      style={{
+  // Once the entrance animation has finished, drop the compositor hints so long
+  // pages don't keep dozens of promoted layers alive.
+  useEffect(() => {
+    if (!isVisible || settled) return;
+    const t = setTimeout(() => setSettled(true), delay + duration + 50);
+    return () => clearTimeout(t);
+  }, [isVisible, settled, delay, duration]);
+
+  const style: React.CSSProperties = settled
+    ? {}
+    : {
         opacity: isVisible ? 1 : 0,
-        filter: isVisible ? 'blur(0px)' : 'blur(6px)',
-        transform: isVisible
-          ? 'translate3d(0, 0, 0) scale(1)'
-          : `translate3d(0, ${yOffset}px, 0) scale(0.975)`,
-        transition: `opacity ${duration}ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms, transform ${duration}ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms, filter ${duration}ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms`,
-        willChange: 'opacity, transform, filter'
-      }}
-    >
+        filter: isVisible ? 'none' : 'blur(4px)',
+        transform: isVisible ? 'none' : `translate3d(0, ${yOffset}px, 0) scale(0.98)`,
+        transition: `opacity ${duration}ms ${EASE} ${delay}ms, transform ${duration}ms ${EASE} ${delay}ms, filter ${duration}ms ${EASE} ${delay}ms`,
+        willChange: 'opacity, transform'
+      };
+
+  return (
+    <div ref={elementRef} className={`scroll-reveal-container ${className}`} style={style}>
       {children}
     </div>
   );

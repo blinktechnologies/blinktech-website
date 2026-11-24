@@ -71,29 +71,27 @@ export const BlinkTechTextLogo: React.FC<{ theme?: 'light' | 'dark' }> = ({ them
   return (
     <div style={{ display: 'inline-flex', alignItems: 'flex-start', userSelect: 'none', position: 'relative' }}>
       <span 
-        className="blink-tech-logo-text"
         style={{ 
-          fontFamily: "'Plus Jakarta Sans', var(--font-heading), sans-serif",  
-          fontWeight: 700, 
-          fontSize: 'clamp(17px, 2.4vw, 28px)',
-          letterSpacing: '-0.02em',
+          fontFamily: "var(--font-urbanist), 'Urbanist', sans-serif",
+          fontWeight: 500,
+          fontSize: '33px',
+          lineHeight: 1,
+          letterSpacing: '-0.01em',
           display: 'inline-flex',
           alignItems: 'baseline',
-          color: isLight ? '#0f0f0fff' : '#ffffff',
-          whiteSpace: 'nowrap'
+          color: isLight ? '#3a3a3a' : '#ffffff'
         }}
       >
         Blink-Tech
       </span>
-      <span 
-        style={{ 
-          fontFamily: "var(--font-ui), 'Inter', sans-serif",
-          fontSize: '9px', 
-          fontWeight: 600, 
-          color: isLight ? '#475569' : '#94a3b8', 
-          marginLeft: '2px',
-          transform: 'translateY(-2px)',
-          whiteSpace: 'nowrap'
+      <span
+        style={{
+          fontFamily: "var(--font-urbanist), 'Urbanist', sans-serif",
+          fontSize: '10px',
+          fontWeight: 500,
+          color: isLight ? '#3a3a3a' : '#94a3b8',
+          marginLeft: '6px',
+          transform: 'translateY(-6px)'
         }}
       >
         Ltd
