@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { MapPin, ArrowUpRight, CheckCircle2 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -33,7 +34,7 @@ export default function ContactPage() {
           overflow: 'hidden'
         }}
       >
-        {/* Stepped Black Pixel Blocks in Upper Left (Matching Image 1) */}
+        {/* Stepped Black Pixel Blocks in Upper Left (Matching Image 1) with Staggered Entrance */}
         <div 
           className="contact-pixel-step"
           style={{
@@ -46,12 +47,32 @@ export default function ContactPage() {
         >
           <div style={{ position: 'relative', width: '90px', height: '90px' }}>
             {/* Row 0: 2 blocks */}
-            <div style={{ position: 'absolute', top: '0px', left: '0px', width: '30px', height: '30px', backgroundColor: '#000000' }} />
-            <div style={{ position: 'absolute', top: '0px', left: '30px', width: '30px', height: '30px', backgroundColor: '#000000' }} />
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.2 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.05, duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              style={{ position: 'absolute', top: '0px', left: '0px', width: '30px', height: '30px', backgroundColor: '#000000' }} 
+            />
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.2 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.12, duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              style={{ position: 'absolute', top: '0px', left: '30px', width: '30px', height: '30px', backgroundColor: '#000000' }} 
+            />
             {/* Row 1: 1 block */}
-            <div style={{ position: 'absolute', top: '30px', left: '0px', width: '30px', height: '30px', backgroundColor: '#000000' }} />
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.2 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.19, duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              style={{ position: 'absolute', top: '30px', left: '0px', width: '30px', height: '30px', backgroundColor: '#000000' }} 
+            />
             {/* Row 2: 1 block */}
-            <div style={{ position: 'absolute', top: '60px', left: '0px', width: '30px', height: '30px', backgroundColor: '#000000' }} />
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.2 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.26, duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              style={{ position: 'absolute', top: '60px', left: '0px', width: '30px', height: '30px', backgroundColor: '#000000' }} 
+            />
           </div>
         </div>
 
@@ -59,8 +80,15 @@ export default function ContactPage() {
           {/* Header Area */}
           <div className="contact-header" style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 46px' }}>
             {/* Pill Badge: • Contact us (tactile 3D pill matching Services and Projects pages) */}
-            <div style={{ display: 'inline-flex', marginBottom: '18px' }}>
-              <div 
+            <motion.div 
+              style={{ display: 'inline-flex', marginBottom: '18px' }}
+              initial={{ opacity: 0, y: -12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <motion.div 
+                whileHover={{ scale: 1.03, y: -1 }}
+                whileTap={{ scale: 0.97 }}
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -73,17 +101,21 @@ export default function ContactPage() {
                   fontFamily: "var(--font-urbanist), 'Urbanist', sans-serif",
                   color: '#0f172a',
                   border: '3px solid #eceef1ff',
-                  boxShadow: '4px 4px 14px 4px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.9)'
+                  boxShadow: '4px 4px 14px 4px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.9)',
+                  cursor: 'default'
                 }}
               >
                 <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#0f172a', display: 'inline-block' }} />
                 <span>Contact us</span>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
 
             {/* Main Headline: Let's build what's next. */}
-            <h1 
+            <motion.h1 
               className="contact-hero-title"
+              initial={{ opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
               style={{ 
                 fontSize: 'clamp(38px, 5.5vw, 68px)', 
                 fontWeight: 900, 
@@ -94,20 +126,29 @@ export default function ContactPage() {
               }}
             >
               Let&apos;s build what&apos;s next.
-            </h1>
+            </motion.h1>
 
             {/* Subtitles */}
-            <p style={{ fontSize: '15px', color: '#64748b', lineHeight: 1.6, margin: 0, fontWeight: 500 }}>
-              Have an idea, a challenge, or a project in mind?
-            </p>
-            <p style={{ fontSize: '15px', color: '#64748b', lineHeight: 1.6, margin: 0, fontWeight: 500 }}>
-              Let&apos;s turn it into a solution that makes an impact.
-            </p>
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.16, ease: 'easeOut' }}
+            >
+              <p style={{ fontSize: '15px', color: '#64748b', lineHeight: 1.6, margin: 0, fontWeight: 500 }}>
+                Have an idea, a challenge, or a project in mind?
+              </p>
+              <p style={{ fontSize: '15px', color: '#64748b', lineHeight: 1.6, margin: 0, fontWeight: 500 }}>
+                Let&apos;s turn it into a solution that makes an impact.
+              </p>
+            </motion.div>
           </div>
 
           {/* Large Master Card Container */}
-          <div 
+          <motion.div 
             className="contact-master-card"
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.22, ease: [0.16, 1, 0.3, 1] }}
             style={{
               backgroundColor: '#ffffff',
               borderRadius: '24px',
@@ -135,9 +176,11 @@ export default function ContactPage() {
                 }}
               >
                 <div>
-                  {/* Brand Header: Logo + BLINK-TECH */}
+                  {/* Brand Header: Logo + BLINK-TECH with interactive hover */}
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '28px' }}>
-                    <div 
+                    <motion.div 
+                      whileHover={{ scale: 1.12, rotate: [0, -5, 5, 0] }}
+                      transition={{ duration: 0.3 }}
                       style={{ 
                         width: '40px', 
                         height: '40px', 
@@ -149,11 +192,12 @@ export default function ContactPage() {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        padding: '2px'
+                        padding: '2px',
+                        cursor: 'pointer'
                       }}
                     >
                       <img src="/images/bt-logo.png" alt="BT Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-                    </div>
+                    </motion.div>
                     <span 
                       style={{ 
                         fontFamily: "'Urbanist', sans-serif", 
@@ -188,7 +232,7 @@ export default function ContactPage() {
                     Big ideas start with a simple hello. Tell us what you&apos;re thinking.
                   </p>
 
-                  {/* Location info: BASED IN / Kigali, Rwanda */}
+                  {/* Location info: BASED IN / Kigali, Rwanda with Live Pulsing Radar Beacon */}
                   <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', marginBottom: '36px' }}>
                     <div 
                       style={{ 
@@ -212,9 +256,20 @@ export default function ContactPage() {
                       >
                         BASED IN
                       </span>
-                      <span style={{ fontSize: '16px', fontWeight: 700, color: '#ffffff' }}>
-                        Kigali, Rwanda
-                      </span>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <span style={{ fontSize: '16px', fontWeight: 700, color: '#ffffff' }}>
+                          Kigali, Rwanda
+                        </span>
+                        {/* Live pulsating beacon dot */}
+                        <span style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '10px', height: '10px' }}>
+                          <motion.span 
+                            animate={{ scale: [1, 2.2, 1], opacity: [0.8, 0, 0.8] }}
+                            transition={{ repeat: Infinity, duration: 2.2, ease: 'easeOut' }}
+                            style={{ position: 'absolute', width: '100%', height: '100%', borderRadius: '50%', backgroundColor: '#10b981' }} 
+                          />
+                          <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#10b981', display: 'inline-block', position: 'relative', zIndex: 1 }} />
+                        </span>
+                      </div>
                     </div>
                   </div>
 
@@ -232,14 +287,16 @@ export default function ContactPage() {
                     FIND US ON SOCIAL
                   </div>
 
-                  {/* Social Links List matching design */}
+                  {/* Social Links List with interactive hover slide */}
                   <div style={{ display: 'flex', flexDirection: 'column' }}>
                     {/* LinkedIn */}
-                    <a 
+                    <motion.a 
                       href="https://linkedin.com" 
                       target="_blank" 
                       rel="noreferrer"
                       className="contact-social-row"
+                      whileHover={{ x: 6 }}
+                      transition={{ duration: 0.2 }}
                     >
                       <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
                         <div className="social-icon-box">
@@ -250,14 +307,16 @@ export default function ContactPage() {
                         <span style={{ fontSize: '15px', fontWeight: 600, color: '#ffffff' }}>LinkedIn</span>
                       </div>
                       <ArrowUpRight size={17} className="social-arrow" />
-                    </a>
+                    </motion.a>
 
                     {/* Instagram */}
-                    <a 
+                    <motion.a 
                       href="https://instagram.com" 
                       target="_blank" 
                       rel="noreferrer"
                       className="contact-social-row"
+                      whileHover={{ x: 6 }}
+                      transition={{ duration: 0.2 }}
                     >
                       <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
                         <div className="social-icon-box">
@@ -268,14 +327,16 @@ export default function ContactPage() {
                         <span style={{ fontSize: '15px', fontWeight: 600, color: '#ffffff' }}>Instagram</span>
                       </div>
                       <ArrowUpRight size={17} className="social-arrow" />
-                    </a>
+                    </motion.a>
 
                     {/* Twitter */}
-                    <a 
+                    <motion.a 
                       href="https://twitter.com" 
                       target="_blank" 
                       rel="noreferrer"
                       className="contact-social-row"
+                      whileHover={{ x: 6 }}
+                      transition={{ duration: 0.2 }}
                     >
                       <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
                         <div className="social-icon-box">
@@ -286,7 +347,7 @@ export default function ContactPage() {
                         <span style={{ fontSize: '15px', fontWeight: 600, color: '#ffffff' }}>Twitter</span>
                       </div>
                       <ArrowUpRight size={17} className="social-arrow" />
-                    </a>
+                    </motion.a>
                   </div>
                 </div>
 
@@ -326,53 +387,118 @@ export default function ContactPage() {
                     Whether you&apos;re building something new or improving what&apos;s already there, we&apos;d love to hear about it. Share a little about your project below.
                   </p>
 
-                  {submitted ? (
-                    <div 
-                      style={{
-                        padding: '40px 24px',
-                        textAlign: 'center',
-                        backgroundColor: '#f8fafc',
-                        borderRadius: '16px',
-                        border: '1px solid #e2e8f0',
-                        margin: '20px 0'
-                      }}
-                    >
-                      <div 
+                  <AnimatePresence mode="wait">
+                    {submitted ? (
+                      <motion.div 
+                        key="submitted-state"
+                        initial={{ opacity: 0, scale: 0.9, y: 12 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.9, y: -12 }}
+                        transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                         style={{
-                          width: '56px',
-                          height: '56px',
-                          borderRadius: '50%',
-                          backgroundColor: '#ecfdf5',
-                          color: '#10b981',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          margin: '0 auto 16px'
+                          padding: '40px 24px',
+                          textAlign: 'center',
+                          backgroundColor: '#f8fafc',
+                          borderRadius: '16px',
+                          border: '1px solid #e2e8f0',
+                          margin: '20px 0'
                         }}
                       >
-                        <CheckCircle2 size={32} />
-                      </div>
-                      <h3 style={{ fontSize: '20px', fontWeight: 800, color: '#0f172a', marginBottom: '8px' }}>
-                        Thank You!
-                      </h3>
-                      <p style={{ color: '#64748b', fontSize: '13.5px', maxWidth: '380px', margin: '0 auto 20px' }}>
-                        We&apos;ve received your project details. An engineering lead will review your submission and reach out within 24 hours.
-                      </p>
-                      <button 
-                        onClick={() => {
-                          setSubmitted(false);
-                          setFormData({ name: '', email: '', helpWith: '', projectDetails: '' });
-                        }}
-                        className="btn-metallic"
-                        style={{ fontSize: '12px', padding: '9px 20px' }}
+                        <motion.div 
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{ delay: 0.15, type: 'spring', stiffness: 350, damping: 20 }}
+                          style={{
+                            width: '56px',
+                            height: '56px',
+                            borderRadius: '50%',
+                            backgroundColor: '#ecfdf5',
+                            color: '#10b981',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            margin: '0 auto 16px',
+                            boxShadow: '0 4px 14px rgba(16, 185, 129, 0.2)'
+                          }}
+                        >
+                          <CheckCircle2 size={32} />
+                        </motion.div>
+                        <h3 style={{ fontSize: '20px', fontWeight: 800, color: '#0f172a', marginBottom: '8px' }}>
+                          Thank You!
+                        </h3>
+                        <p style={{ color: '#64748b', fontSize: '13.5px', maxWidth: '380px', margin: '0 auto 20px' }}>
+                          We&apos;ve received your project details. An engineering lead will review your submission and reach out within 24 hours.
+                        </p>
+                        <motion.button 
+                          onClick={() => {
+                            setSubmitted(false);
+                            setFormData({ name: '', email: '', helpWith: '', projectDetails: '' });
+                          }}
+                          whileHover={{ scale: 1.04, y: -1 }}
+                          whileTap={{ scale: 0.96 }}
+                          className="btn-metallic"
+                          style={{ fontSize: '12px', padding: '9px 20px', cursor: 'pointer' }}
+                        >
+                          Send Another Project Inquiry
+                        </motion.button>
+                      </motion.div>
+                    ) : (
+                      <motion.form 
+                        key="contact-form"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onSubmit={handleSubmit} 
+                        style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}
                       >
-                        Send Another Project Inquiry
-                      </button>
-                    </div>
-                  ) : (
-                    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
-                      {/* Row 1: Name & Email */}
-                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }} className="form-two-col">
+                        {/* Row 1: Name & Email */}
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }} className="form-two-col">
+                          <div>
+                            <label 
+                              style={{ 
+                                display: 'block', 
+                                fontSize: '12.5px', 
+                                fontWeight: 700, 
+                                color: '#111827', 
+                                marginBottom: '8px' 
+                              }}
+                            >
+                              Your name
+                            </label>
+                            <input 
+                              type="text"
+                              required
+                              placeholder="What's your name?"
+                              value={formData.name}
+                              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                              className="clean-form-input"
+                            />
+                          </div>
+
+                          <div>
+                            <label 
+                              style={{ 
+                                display: 'block', 
+                                fontSize: '12.5px', 
+                                fontWeight: 700, 
+                                color: '#111827', 
+                                marginBottom: '8px' 
+                              }}
+                            >
+                              Email address
+                            </label>
+                            <input 
+                              type="email"
+                              required
+                              placeholder="Your email address"
+                              value={formData.email}
+                              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                              className="clean-form-input"
+                            />
+                          </div>
+                        </div>
+
+                        {/* Row 2: What can we help you with? */}
                         <div>
                           <label 
                             style={{ 
@@ -383,18 +509,18 @@ export default function ContactPage() {
                               marginBottom: '8px' 
                             }}
                           >
-                            Your name
+                            What can we help you with?
                           </label>
                           <input 
                             type="text"
-                            required
-                            placeholder="What's your name?"
-                            value={formData.name}
-                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                            placeholder="Design, development, AI, or something else?"
+                            value={formData.helpWith}
+                            onChange={(e) => setFormData({ ...formData, helpWith: e.target.value })}
                             className="clean-form-input"
                           />
                         </div>
 
+                        {/* Row 3: Tell us about your project */}
                         <div>
                           <label 
                             style={{ 
@@ -405,106 +531,64 @@ export default function ContactPage() {
                               marginBottom: '8px' 
                             }}
                           >
-                            Email address
+                            Tell us about your project
                           </label>
-                          <input 
-                            type="email"
-                            required
-                            placeholder="Your email address"
-                            value={formData.email}
-                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                          <textarea 
+                            rows={4}
+                            placeholder="What are you building? Share your goals, ideas, or the challenge you'd like to solve."
+                            value={formData.projectDetails}
+                            onChange={(e) => setFormData({ ...formData, projectDetails: e.target.value })}
                             className="clean-form-input"
+                            style={{ resize: 'vertical' }}
                           />
                         </div>
-                      </div>
 
-                      {/* Row 2: What can we help you with? */}
-                      <div>
-                        <label 
+                        {/* Action Row: Button + Note */}
+                        <div 
+                          className="contact-action-row"
                           style={{ 
-                            display: 'block', 
-                            fontSize: '12.5px', 
-                            fontWeight: 700, 
-                            color: '#111827', 
-                            marginBottom: '8px' 
+                            display: 'flex', 
+                            alignItems: 'center', 
+                            gap: '18px', 
+                            marginTop: '6px',
+                            flexWrap: 'wrap'
                           }}
                         >
-                          What can we help you with?
-                        </label>
-                        <input 
-                          type="text"
-                          placeholder="Design, development, AI, or something else?"
-                          value={formData.helpWith}
-                          onChange={(e) => setFormData({ ...formData, helpWith: e.target.value })}
-                          className="clean-form-input"
-                        />
-                      </div>
+                          <motion.button 
+                            type="submit" 
+                            disabled={loading}
+                            whileHover={{ scale: 1.02, y: -1 }}
+                            whileTap={{ scale: 0.98, y: 1 }}
+                            transition={{ duration: 0.15 }}
+                            style={{
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '8px',
+                              background: 'linear-gradient(180deg, #383a42 0%, #1f2025 50%, #141416 100%)',
+                              color: '#ffffff',
+                              padding: '12px 24px',
+                              borderRadius: '10px',
+                              fontSize: '13px',
+                              fontWeight: 700,
+                              border: '1px solid #2d2f36',
+                              boxShadow: '0 6px 18px rgba(0, 0, 0, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.2)',
+                              cursor: 'pointer',
+                              transition: 'background 0.2s ease, box-shadow 0.2s ease'
+                            }}
+                            className="submit-discuss-btn"
+                          >
+                            <span>{loading ? 'Submitting...' : "Let's discuss your project"}</span>
+                            <ArrowUpRight size={16} />
+                          </motion.button>
 
-                      {/* Row 3: Tell us about your project */}
-                      <div>
-                        <label 
-                          style={{ 
-                            display: 'block', 
-                            fontSize: '12.5px', 
-                            fontWeight: 700, 
-                            color: '#111827', 
-                            marginBottom: '8px' 
-                          }}
-                        >
-                          Tell us about your project
-                        </label>
-                        <textarea 
-                          rows={4}
-                          placeholder="What are you building? Share your goals, ideas, or the challenge you'd like to solve."
-                          value={formData.projectDetails}
-                          onChange={(e) => setFormData({ ...formData, projectDetails: e.target.value })}
-                          className="clean-form-input"
-                          style={{ resize: 'vertical' }}
-                        />
-                      </div>
-
-                      {/* Action Row: Button + Note */}
-                      <div 
-                        className="contact-action-row"
-                        style={{ 
-                          display: 'flex', 
-                          alignItems: 'center', 
-                          gap: '18px', 
-                          marginTop: '6px',
-                          flexWrap: 'wrap'
-                        }}
-                      >
-                        <button 
-                          type="submit" 
-                          disabled={loading}
-                          style={{
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: '8px',
-                            background: 'linear-gradient(180deg, #383a42 0%, #1f2025 50%, #141416 100%)',
-                            color: '#ffffff',
-                            padding: '12px 24px',
-                            borderRadius: '10px',
-                            fontSize: '13px',
-                            fontWeight: 700,
-                            border: '1px solid #2d2f36',
-                            boxShadow: '0 6px 18px rgba(0, 0, 0, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.2)',
-                            cursor: 'pointer',
-                            transition: 'all 0.2s ease'
-                          }}
-                          className="submit-discuss-btn"
-                        >
-                          <span>{loading ? 'Submitting...' : "Let's discuss your project"}</span>
-                          <ArrowUpRight size={16} />
-                        </button>
-
-                        <div style={{ fontSize: '12px', color: '#6b7280', lineHeight: 1.4 }}>
-                          <span style={{ display: 'block' }}>No polished brief needed.</span>
-                          <span>Just bring your idea.</span>
+                          <div style={{ fontSize: '12px', color: '#6b7280', lineHeight: 1.4 }}>
+                            <span style={{ display: 'block' }}>No polished brief needed.</span>
+                            <span>Just bring your idea.</span>
+                          </div>
                         </div>
-                      </div>
-                    </form>
-                  )}
+                      </motion.form>
+                    )}
+                  </AnimatePresence>
                 </div>
 
                 {/* Bottom Divider & Tagline */}
@@ -518,7 +602,7 @@ export default function ContactPage() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Centered Slogan below card */}
           <div style={{ textAlign: 'center', marginTop: '36px', marginBottom: '10px' }}>

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { StartProjectModal } from '@/components/StartProjectModal';
 
 interface ProjectItem {
@@ -15,6 +16,7 @@ interface ProjectItem {
 
 export default function ProjectsPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
   const [modalOpen, setModalOpen] = useState(false);
 
   const projects: ProjectItem[] = [
@@ -47,10 +49,12 @@ export default function ProjectsPage() {
   const currentProject = projects[currentIndex];
 
   const handlePrev = () => {
+    setDirection(-1);
     setCurrentIndex((prev) => (prev === 0 ? projects.length - 1 : prev - 1));
   };
 
   const handleNext = () => {
+    setDirection(1);
     setCurrentIndex((prev) => (prev === projects.length - 1 ? 0 : prev + 1));
   };
 
@@ -71,8 +75,16 @@ export default function ProjectsPage() {
       >
         <div className="container projects-wrap" style={{ position: 'relative', maxWidth: '1240px', margin: '0 auto', padding: '0 24px' }}>
           {/* Pill Badge: • Projects */}
-          <div className="projects-badge-wrap" style={{ marginBottom: '18px' }}>
-            <div
+          <motion.div
+            className="projects-badge-wrap"
+            style={{ marginBottom: '18px' }}
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <motion.div
+              whileHover={{ scale: 1.03, y: -1 }}
+              whileTap={{ scale: 0.97 }}
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -85,13 +97,14 @@ export default function ProjectsPage() {
                 fontFamily: "var(--font-urbanist), 'Urbanist', sans-serif",
                 color: '#0f172a',
                 border: '3px solid #eceef1ff',
-                boxShadow: '4px 4px 14px 4px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.9)'
+                boxShadow: '4px 4px 14px 4px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.9)',
+                cursor: 'default'
               }}
             >
               <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#0f172a', display: 'inline-block' }} />
               <span>Projects</span>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Heading Row with HUD chevrons */}
           <div
@@ -105,8 +118,11 @@ export default function ProjectsPage() {
             }}
           >
             <div className="projects-heading-copy">
-              <h1
+              <motion.h1
                 className="projects-hero-title"
+                initial={{ opacity: 0, y: 22 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
                 style={{
                   fontFamily: "var(--font-urbanist), 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif",
                   fontSize: 'clamp(44px, 5.6vw, 72px)',
@@ -118,30 +134,45 @@ export default function ProjectsPage() {
               >
                 From Idea to<br />
                 Production
-              </h1>
+              </motion.h1>
 
               {/* Carousel Buttons */}
-              <div className="projects-carousel" style={{ display: 'flex', gap: '14px', marginTop: '32px', marginBottom: '12px' }}>
-                <button
+              <motion.div
+                className="projects-carousel"
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.18, ease: 'easeOut' }}
+                style={{ display: 'flex', gap: '14px', marginTop: '32px', marginBottom: '12px' }}
+              >
+                <motion.button
                   onClick={handlePrev}
                   aria-label="Previous project"
                   className="carousel-circle-btn"
+                  whileHover={{ scale: 1.08, y: -2 }}
+                  whileTap={{ scale: 0.92, y: 0 }}
+                  transition={{ duration: 0.15 }}
                 >
                   <ChevronLeft size={20} strokeWidth={2.4} />
-                </button>
-                <button
+                </motion.button>
+                <motion.button
                   onClick={handleNext}
                   aria-label="Next project"
                   className="carousel-circle-btn"
+                  whileHover={{ scale: 1.08, y: -2 }}
+                  whileTap={{ scale: 0.92, y: 0 }}
+                  transition={{ duration: 0.15 }}
                 >
                   <ChevronRight size={20} strokeWidth={2.4} />
-                </button>
-              </div>
+                </motion.button>
+              </motion.div>
             </div>
 
             {/* Right Side HUD Chevrons */}
-            <div
+            <motion.div
               className="projects-hud-chevrons"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
               style={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -187,7 +218,7 @@ export default function ProjectsPage() {
                   <ChevronDot key={`p-r3-${i}`} />
                 ))}
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -246,7 +277,7 @@ export default function ProjectsPage() {
                   width: '100%'
                 }}
               >
-                <div
+                <motion.div
                   style={{
                     width: '82px',
                     height: '82px',
@@ -256,19 +287,21 @@ export default function ProjectsPage() {
                     justifyContent: 'center',
                     position: 'relative',
                     filter: 'drop-shadow(0 12px 26px rgba(0, 0, 0, 0.8))',
-                    cursor: 'pointer',
-                    transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
+                    cursor: 'pointer'
                   }}
                   onClick={() => setModalOpen(true)}
-                  onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.08)')}
-                  onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                  whileHover={{ scale: 1.1, rotate: [0, -3, 3, 0] }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.3 }}
                 >
-                  <div
+                  <motion.div
+                    animate={{ scale: [1, 1.25, 1], opacity: [0.14, 0.28, 0.14] }}
+                    transition={{ repeat: Infinity, duration: 3.5, ease: 'easeInOut' }}
                     style={{
                       position: 'absolute',
                       inset: '-6px',
                       borderRadius: '50%',
-                      background: 'radial-gradient(circle, rgba(255, 255, 255, 0.14) 0%, transparent 70%)',
+                      background: 'radial-gradient(circle, rgba(255, 255, 255, 0.22) 0%, transparent 70%)',
                       filter: 'blur(8px)'
                     }}
                   />
@@ -277,10 +310,10 @@ export default function ProjectsPage() {
                     alt="BT Logo"
                     style={{ width: '100%', height: '100%', objectFit: 'contain', position: 'relative', zIndex: 1 }}
                   />
-                </div>
+                </motion.div>
               </div>
 
-              {/* Compartment 2: Title and Description */}
+              {/* Compartment 2: Title and Description with Animated Slide */}
               <div
                 className="project-copy-cell"
                 style={{
@@ -288,67 +321,94 @@ export default function ProjectsPage() {
                   borderBottom: '1px solid rgba(255, 255, 255, 0.14)',
                   display: 'flex',
                   flexDirection: 'column',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
+                  minHeight: '210px'
                 }}
               >
-                <h2
-                  className="project-copy-title"
-                  style={{
-                    fontFamily: "var(--font-urbanist), 'Urbanist', sans-serif",
-                    fontSize: 'clamp(32px, 3.4vw, 44px)',
-                    fontWeight: 900,
-                    color: '#ffffff',
-                    letterSpacing: '-0.025em',
-                    lineHeight: 1.15,
-                    margin: '0 0 16px 0'
-                  }}
-                >
-                  {currentProject.title}
-                </h2>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentProject.id}
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -16 }}
+                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    <h2
+                      className="project-copy-title"
+                      style={{
+                        fontFamily: "var(--font-urbanist), 'Urbanist', sans-serif",
+                        fontSize: 'clamp(32px, 3.4vw, 44px)',
+                        fontWeight: 900,
+                        color: '#ffffff',
+                        letterSpacing: '-0.025em',
+                        lineHeight: 1.15,
+                        margin: '0 0 16px 0'
+                      }}
+                    >
+                      {currentProject.title}
+                    </h2>
 
-                <p
-                  className="project-copy-desc"
-                  style={{
-                    fontSize: '15px',
-                    lineHeight: 1.65,
-                    color: '#94a3b8',
-                    margin: 0,
-                    maxWidth: '380px',
-                    fontWeight: 400
-                  }}
-                >
-                  {currentProject.description}
-                </p>
+                    <p
+                      className="project-copy-desc"
+                      style={{
+                        fontSize: '15px',
+                        lineHeight: 1.65,
+                        color: '#94a3b8',
+                        margin: 0,
+                        maxWidth: '380px',
+                        fontWeight: 400
+                      }}
+                    >
+                      {currentProject.description}
+                    </p>
+                  </motion.div>
+                </AnimatePresence>
               </div>
 
-              {/* Compartment 3: Tags row */}
+              {/* Compartment 3: Tags row with Staggered Pop-In */}
               <div className="project-tags-cell" style={{ padding: '20px 32px 20px 0', display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                {currentProject.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      padding: '4px 10px',
-                      borderRadius: '4px',
-                      backgroundColor: 'rgba(255,255,255,0.07)',
-                      border: '1px solid rgba(255,255,255,0.12)',
-                      fontSize: '11px',
-                      fontWeight: 600,
-                      color: '#94a3b8',
-                      letterSpacing: '0.3px'
-                    }}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentProject.id}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}
                   >
-                    {tag}
-                  </span>
-                ))}
+                    {currentProject.tags.map((tag, idx) => (
+                      <motion.span
+                        key={tag}
+                        initial={{ opacity: 0, y: 8, scale: 0.88 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        transition={{ delay: idx * 0.05 + 0.1, duration: 0.3, ease: 'easeOut' }}
+                        whileHover={{ scale: 1.06, backgroundColor: 'rgba(255,255,255,0.14)', color: '#ffffff' }}
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          padding: '4px 10px',
+                          borderRadius: '4px',
+                          backgroundColor: 'rgba(255,255,255,0.07)',
+                          border: '1px solid rgba(255,255,255,0.12)',
+                          fontSize: '11px',
+                          fontWeight: 600,
+                          color: '#94a3b8',
+                          letterSpacing: '0.3px',
+                          cursor: 'default'
+                        }}
+                      >
+                        {tag}
+                      </motion.span>
+                    ))}
+                  </motion.div>
+                </AnimatePresence>
               </div>
 
               {/* Compartment 4: Spacer */}
               <div className="project-info-spacer" style={{ flex: 1, minHeight: '40px' }} />
             </div>
 
-            {/* Right Column: MacBook Pro Mockup */}
+            {/* Right Column: MacBook Pro Mockup with Floating Animation & Smooth Directional Transition */}
             <div
               className="laptop-mockup-wrapper"
               style={{
@@ -361,24 +421,39 @@ export default function ProjectsPage() {
                 zIndex: 10
               }}
             >
-              <div
+              <motion.div
+                animate={{ y: [0, -8, 0] }}
+                transition={{ repeat: Infinity, duration: 5, ease: 'easeInOut' }}
                 style={{
                   width: '100%',
                   maxWidth: '820px',
-                  position: 'relative',
-                  filter: 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.95))'
+                  position: 'relative'
                 }}
               >
-                <img
-                  src={currentProject.image}
-                  alt={currentProject.title}
-                  style={{
-                    width: '100%',
-                    height: 'auto',
-                    display: 'block'
-                  }}
-                />
-              </div>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentProject.id}
+                    initial={{ opacity: 0, x: direction * 45, scale: 0.96 }}
+                    animate={{ opacity: 1, x: 0, scale: 1 }}
+                    exit={{ opacity: 0, x: -direction * 45, scale: 0.96 }}
+                    transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                    style={{
+                      width: '100%',
+                      filter: 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.95))'
+                    }}
+                  >
+                    <img
+                      src={currentProject.image}
+                      alt={currentProject.title}
+                      style={{
+                        width: '100%',
+                        height: 'auto',
+                        display: 'block'
+                      }}
+                    />
+                  </motion.div>
+                </AnimatePresence>
+              </motion.div>
             </div>
           </div>
         </div>
