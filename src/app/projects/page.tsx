@@ -152,18 +152,36 @@ export default function ProjectsPage() {
               {/* Row 1: chevrons */}
               <div className="projects-chevron-row projects-chevron-row-1">
                 {[...Array(10)].map((_, i) => (
-                  <ChevronDot key={`p-r1-${i}`} className={i >= 5 ? 'projects-chevron-desktop-only' : ''} />
+                  <ChevronDot
+                    key={`p-r1-${i}`}
+                    className={
+                      i >= 5
+                        ? 'projects-chevron-desktop-only'
+                        : i === 4
+                        ? 'projects-chevron-mobile-hide'
+                        : ''
+                    }
+                  />
                 ))}
               </div>
 
               {/* Row 2: chevrons */}
               <div className="projects-chevron-row projects-chevron-row-2">
                 {[...Array(10)].map((_, i) => (
-                  <ChevronDot key={`p-r2-${i}`} className={i >= 5 ? 'projects-chevron-desktop-only' : ''} />
+                  <ChevronDot
+                    key={`p-r2-${i}`}
+                    className={
+                      i >= 5
+                        ? 'projects-chevron-desktop-only'
+                        : i === 4
+                        ? 'projects-chevron-mobile-hide'
+                        : ''
+                    }
+                  />
                 ))}
               </div>
 
-              {/* Row 3: chevrons - hidden on tablet and mobile */}
+              {/* Row 3: chevrons - visible ONLY on desktop */}
               <div className="projects-chevron-row projects-chevron-row-3 projects-row3-desktop-only">
                 {[...Array(10)].map((_, i) => (
                   <ChevronDot key={`p-r3-${i}`} />
@@ -372,8 +390,9 @@ export default function ProjectsPage() {
       <StartProjectModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
 
       <style jsx>{`
-        /* ─── ChevronDot: must use :global() because component is outside scope ── */
+        /* ─── ChevronDot: base styles ────────────────────────────────── */
         :global(.projects-chevron-dot) {
+          display: inline-block;
           width: 40px;
           height: 40px;
         }
@@ -397,19 +416,30 @@ export default function ProjectsPage() {
           gap: 16px;
         }
 
-        /* Row-3 and items 6-10: visible on all sizes, hidden classes inactive until needed */
+        /* Row-3 and extra items: hidden by default (mobile/tablet), enabled on larger screens */
+        .projects-chevron-row-3,
         :global(.projects-row3-desktop-only) {
-          display: none;
-        }
-        :global(.projects-chevron-desktop-only) {
-          display: none;
+          display: none !important;
         }
 
+        :global(.projects-chevron-desktop-only) {
+          display: none !important;
+        }
+
+        :global(.projects-chevron-mobile-hide) {
+          display: none !important;
+        }
+
+        /* ─── Large Desktop: ≥1240px (10 chevrons per row, 3 rows) ─── */
         @media (min-width: 1240px) {
+          .projects-chevron-row-3,
           :global(.projects-row3-desktop-only) {
             display: flex !important;
           }
           :global(.projects-chevron-desktop-only) {
+            display: inline-block !important;
+          }
+          :global(.projects-chevron-mobile-hide) {
             display: inline-block !important;
           }
         }
@@ -446,9 +476,9 @@ export default function ProjectsPage() {
           min-width: 0;
         }
 
-        /* ─── Laptop: 1081px – 1239px ──────────────────────────────── */
+        /* ─── Laptop: 1081px – 1239px (10 chevrons per row, 3 rows) ── */
         @media (max-width: 1239px) and (min-width: 1081px) {
-          .projects-chevron-dot {
+          :global(.projects-chevron-dot) {
             width: 26px !important;
             height: 26px !important;
           }
@@ -465,16 +495,26 @@ export default function ProjectsPage() {
             gap: 12px !important;
             padding-top: 4px !important;
           }
+          .projects-chevron-row-3,
+          :global(.projects-row3-desktop-only) {
+            display: flex !important;
+          }
+          :global(.projects-chevron-desktop-only) {
+            display: inline-block !important;
+          }
+          :global(.projects-chevron-mobile-hide) {
+            display: inline-block !important;
+          }
         }
 
-        /* ─── Tablet Landscape: 861px – 1080px ─────────────────────── */
+        /* ─── Tablet Landscape: 861px – 1080px (5 chevrons per row, 2 rows) ── */
         @media (max-width: 1080px) and (min-width: 861px) {
-          .projects-chevron-dot {
-            width: 36px !important;
-            height: 36px !important;
+          :global(.projects-chevron-dot) {
+            width: 34px !important;
+            height: 34px !important;
           }
           .projects-chevron-row {
-            gap: 14px !important;
+            gap: 12px !important;
           }
           .projects-chevron-row-1 {
             margin-left: 28px !important;
@@ -485,12 +525,22 @@ export default function ProjectsPage() {
           .projects-hud-chevrons {
             gap: 14px !important;
           }
+          .projects-chevron-row-3,
+          :global(.projects-row3-desktop-only) {
+            display: none !important;
+          }
+          :global(.projects-chevron-desktop-only) {
+            display: none !important;
+          }
+          :global(.projects-chevron-mobile-hide) {
+            display: inline-block !important;
+          }
           .project-showcase-split {
             grid-template-columns: minmax(240px, 320px) 1fr !important;
           }
         }
 
-        /* ─── Tablet Portrait: 641px – 860px ───────────────────────── */
+        /* ─── Tablet Portrait: 641px – 860px (5 chevrons per row, 2 rows) ─── */
         @media (max-width: 860px) and (min-width: 641px) {
           .projects-hero {
             padding: 36px 0 28px !important;
@@ -530,15 +580,25 @@ export default function ProjectsPage() {
             padding-top: 6px !important;
             flex-shrink: 0 !important;
           }
+          .projects-chevron-row-3,
+          :global(.projects-row3-desktop-only) {
+            display: none !important;
+          }
+          :global(.projects-chevron-desktop-only) {
+            display: none !important;
+          }
+          :global(.projects-chevron-mobile-hide) {
+            display: inline-block !important;
+          }
           :global(.projects-chevron-dot) {
-            width: 36px !important;
-            height: 36px !important;
+            width: 32px !important;
+            height: 32px !important;
           }
           .projects-chevron-row {
-            gap: 12px !important;
+            gap: 10px !important;
           }
           .projects-chevron-row-1 {
-            margin-left: 24px !important;
+            margin-left: 20px !important;
           }
           .projects-chevron-row-2 {
             margin-left: 0 !important;
@@ -581,7 +641,7 @@ export default function ProjectsPage() {
           }
         }
 
-        /* ─── Mobile: ≤640px ──────────────────────────────────────── */
+        /* ─── Mobile: ≤640px (4 chevrons per row, 2 rows) ─────────── */
         @media (max-width: 640px) {
           .projects-wrap {
             padding-left: 16px !important;
@@ -601,6 +661,7 @@ export default function ProjectsPage() {
             justify-content: space-between !important;
             text-align: left !important;
             gap: 12px !important;
+            flex-wrap: nowrap !important;
           }
           .projects-heading-copy {
             display: flex;
@@ -611,7 +672,7 @@ export default function ProjectsPage() {
             flex-shrink: 1;
           }
           .projects-hero-title {
-            font-size: clamp(23px, 5.8vw, 28px) !important;
+            font-size: clamp(22px, 5.6vw, 28px) !important;
             line-height: 1.15 !important;
             text-align: left !important;
           }
@@ -628,20 +689,30 @@ export default function ProjectsPage() {
           .projects-hud-chevrons {
             display: flex !important;
             flex-direction: column !important;
-            gap: 12px !important;
+            gap: 10px !important;
             margin-left: auto !important;
             padding-top: 4px !important;
             flex-shrink: 0 !important;
           }
+          .projects-chevron-row-3,
+          :global(.projects-row3-desktop-only) {
+            display: none !important;
+          }
+          :global(.projects-chevron-desktop-only) {
+            display: none !important;
+          }
+          :global(.projects-chevron-mobile-hide) {
+            display: none !important;
+          }
           :global(.projects-chevron-dot) {
-            width: 32px !important;
-            height: 32px !important;
+            width: 26px !important;
+            height: 26px !important;
           }
           .projects-chevron-row {
-            gap: 8px !important;
+            gap: 6px !important;
           }
           .projects-chevron-row-1 {
-            margin-left: 18px !important;
+            margin-left: 12px !important;
           }
           .projects-chevron-row-2 {
             margin-left: 0 !important;
@@ -679,10 +750,10 @@ export default function ProjectsPage() {
           }
         }
 
-        /* ─── Small phones: ≤400px ────────────────────────────────── */
+        /* ─── Small phones: ≤400px (4 chevrons per row, compact) ──── */
         @media (max-width: 400px) {
           .projects-hero-title {
-            font-size: 22px !important;
+            font-size: 20px !important;
           }
           .project-copy-title {
             font-size: 22px !important;
@@ -692,18 +763,28 @@ export default function ProjectsPage() {
             height: 34px !important;
           }
           .projects-hud-chevrons {
-            gap: 10px !important;
+            gap: 8px !important;
             padding-top: 3px !important;
           }
+          .projects-chevron-row-3,
+          :global(.projects-row3-desktop-only) {
+            display: none !important;
+          }
+          :global(.projects-chevron-desktop-only) {
+            display: none !important;
+          }
+          :global(.projects-chevron-mobile-hide) {
+            display: none !important;
+          }
           :global(.projects-chevron-dot) {
-            width: 27px !important;
-            height: 27px !important;
+            width: 22px !important;
+            height: 22px !important;
           }
           .projects-chevron-row {
-            gap: 6px !important;
+            gap: 5px !important;
           }
           .projects-chevron-row-1 {
-            margin-left: 14px !important;
+            margin-left: 8px !important;
           }
           .projects-chevron-row-2 {
             margin-left: 0 !important;
@@ -727,7 +808,6 @@ const ChevronDot: React.FC<{ className?: string }> = ({ className = '' }) => (
       WebkitMaskRepeat: 'no-repeat',
       maskPosition: 'center',
       WebkitMaskPosition: 'center',
-      display: 'inline-block',
       flexShrink: 0
     }}
   />
