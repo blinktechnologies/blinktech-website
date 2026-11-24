@@ -164,10 +164,10 @@ export default function ProjectsPage() {
                 transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
                 style={{
                   fontFamily: "var(--font-urbanist), 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif",
-                  fontSize: 'clamp(40px, 5.2vw, 68px)',
+                  fontSize: 'clamp(32px, 3.8vw, 44px)',
                   color: '#0a0a0c',
-                  letterSpacing: '-0.035em',
-                  lineHeight: 1.15,
+                  letterSpacing: '-0.025em',
+                  lineHeight: 1.25,
                   margin: 0
                 }}
               >
@@ -250,13 +250,6 @@ export default function ProjectsPage() {
                         : ''
                     }
                   />
-                ))}
-              </div>
-
-              {/* Row 3: chevrons - visible ONLY on desktop */}
-              <div className="projects-chevron-row projects-chevron-row-3 projects-row3-desktop-only">
-                {[...Array(10)].map((_, i) => (
-                  <ChevronDot key={`p-r3-${i}`} />
                 ))}
               </div>
             </motion.div>
@@ -536,26 +529,20 @@ export default function ProjectsPage() {
         /* ─── Chevron rows base layout ──────────────────────────────── */
         .projects-chevron-row {
           display: flex;
-          gap: 24px;
+          gap: 16px;
           align-items: center;
         }
 
         .projects-chevron-row-1 {
-          margin-left: 140px;
+          margin-left: 64px;
         }
 
         .projects-chevron-row-2 {
-          margin-left: 70px;
+          margin-left: 0;
         }
 
         .projects-hud-chevrons {
-          gap: 16px;
-        }
-
-        /* Row-3 and extra items: hidden by default (mobile/tablet), enabled on larger screens */
-        .projects-chevron-row-3,
-        :global(.projects-row3-desktop-only) {
-          display: none !important;
+          gap: 24px;
         }
 
         :global(.projects-chevron-desktop-only) {
@@ -566,12 +553,8 @@ export default function ProjectsPage() {
           display: none !important;
         }
 
-        /* ─── Large Desktop: ≥1240px (10 chevrons per row, 3 rows) ─── */
+        /* ─── Large Desktop: ≥1240px (10 chevrons per row, 2 rows) ─── */
         @media (min-width: 1240px) {
-          .projects-chevron-row-3,
-          :global(.projects-row3-desktop-only) {
-            display: flex !important;
-          }
           :global(.projects-chevron-desktop-only) {
             display: inline-block !important;
           }
@@ -678,31 +661,27 @@ export default function ProjectsPage() {
           min-width: 0;
         }
 
-        /* ─── Laptop: 1081px – 1239px (10 chevrons per row, 3 rows) ── */
+        /* ─── Laptop: 1081px – 1239px (10 chevrons per row, 2 rows) ── */
         @media (max-width: 1239px) and (min-width: 1081px) {
           :global(.projects-chevron-dot) {
-            width: 26px !important;
-            height: 26px !important;
+            width: 28px !important;
+            height: 28px !important;
           }
           .projects-chevron-row {
-            gap: 12px !important;
+            gap: 10px !important;
           }
           .projects-chevron-row-1 {
-            margin-left: 72px !important;
+            margin-left: 56px !important;
           }
           .projects-chevron-row-2 {
-            margin-left: 36px !important;
+            margin-left: 0 !important;
           }
           .projects-hud-chevrons {
-            gap: 12px !important;
+            gap: 16px !important;
             padding-top: 4px !important;
           }
-          .projects-chevron-row-3,
-          :global(.projects-row3-desktop-only) {
-            display: flex !important;
-          }
           :global(.projects-chevron-desktop-only) {
-            display: inline-block !important;
+            display: none !important;
           }
           :global(.projects-chevron-mobile-hide) {
             display: inline-block !important;
@@ -712,24 +691,20 @@ export default function ProjectsPage() {
         /* ─── Tablet Landscape: 861px – 1080px (5 chevrons per row, 2 rows) ── */
         @media (max-width: 1080px) and (min-width: 861px) {
           :global(.projects-chevron-dot) {
-            width: 34px !important;
-            height: 34px !important;
+            width: 30px !important;
+            height: 30px !important;
           }
           .projects-chevron-row {
             gap: 12px !important;
           }
           .projects-chevron-row-1 {
-            margin-left: 28px !important;
+            margin-left: 32px !important;
           }
           .projects-chevron-row-2 {
             margin-left: 0 !important;
           }
           .projects-hud-chevrons {
             gap: 14px !important;
-          }
-          .projects-chevron-row-3,
-          :global(.projects-row3-desktop-only) {
-            display: none !important;
           }
           :global(.projects-chevron-desktop-only) {
             display: none !important;
