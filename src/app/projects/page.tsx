@@ -747,8 +747,8 @@ export default function ProjectsPage() {
             flex-shrink: 1;
           }
           .projects-hero-title {
-            font-size: clamp(22px, 5.6vw, 28px) !important;
-            line-height: 1.15 !important;
+            font-size: clamp(18px, 4.4vw, 22px) !important;
+            line-height: 1.2 !important;
             text-align: left !important;
           }
           .projects-carousel {
@@ -764,7 +764,7 @@ export default function ProjectsPage() {
           .projects-hud-chevrons {
             display: flex !important;
             flex-direction: column !important;
-            gap: 10px !important;
+            gap: 8px !important;
             margin-left: auto !important;
             padding-top: 4px !important;
             flex-shrink: 0 !important;
@@ -780,14 +780,14 @@ export default function ProjectsPage() {
             display: none !important;
           }
           :global(.projects-chevron-dot) {
-            width: 26px !important;
-            height: 26px !important;
+            width: 22px !important;
+            height: 22px !important;
           }
           .projects-chevron-row {
             gap: 6px !important;
           }
           .projects-chevron-row-1 {
-            margin-left: 12px !important;
+            margin-left: 10px !important;
           }
           .projects-chevron-row-2 {
             margin-left: 0 !important;
@@ -828,18 +828,19 @@ export default function ProjectsPage() {
         /* ─── Small phones: ≤400px (4 chevrons per row, compact) ──── */
         @media (max-width: 400px) {
           .projects-hero-title {
-            font-size: 20px !important;
+            font-size: 16px !important;
+            line-height: 1.25 !important;
           }
           .project-copy-title {
-            font-size: 22px !important;
+            font-size: 20px !important;
           }
           .carousel-circle-btn {
-            width: 34px !important;
-            height: 34px !important;
+            width: 32px !important;
+            height: 32px !important;
           }
           .projects-hud-chevrons {
-            gap: 8px !important;
-            padding-top: 3px !important;
+            gap: 6px !important;
+            padding-top: 2px !important;
           }
           .projects-chevron-row-3,
           :global(.projects-row3-desktop-only) {
@@ -852,8 +853,8 @@ export default function ProjectsPage() {
             display: none !important;
           }
           :global(.projects-chevron-dot) {
-            width: 22px !important;
-            height: 22px !important;
+            width: 19px !important;
+            height: 19px !important;
           }
           .projects-chevron-row {
             gap: 5px !important;

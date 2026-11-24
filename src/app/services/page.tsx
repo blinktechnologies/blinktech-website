@@ -141,14 +141,14 @@ export default function ServicesPage() {
                 transition={{ duration: 0.6, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
                 style={{ 
                   fontFamily: "var(--font-urbanist), 'Urbanist', sans-serif",
-                  fontSize: '42px', 
+                  fontSize: 'clamp(32px, 3.8vw, 44px)', 
                   color: '#0a0a0c',
                   letterSpacing: '-0.025em',
-                  lineHeight: 1.4,
+                  lineHeight: 1.25,
                   margin: 0,
                 }}
               >
-                Automation infrastructure <br />
+                Automation infrastructure <br className="services-hero-br" />
                 built for reliability and scale
               </motion.h1>
             </div>
@@ -955,34 +955,38 @@ export default function ServicesPage() {
           }
           .services-heading-copy {
             text-align: left !important;
-            max-width: 68% !important;
+            flex: 1 1 auto;
+            max-width: none !important;
             min-width: 0 !important;
           }
+          .services-hero-br {
+            display: none !important;
+          }
           .services-hero-title {
-            font-size: clamp(20px, 5.5vw, 26px) !important;
-            line-height: 1.25 !important;
+            font-size: clamp(17px, 4.4vw, 21px) !important;
+            line-height: 1.3 !important;
             text-align: left !important;
           }
           .services-hud-chevrons {
             display: flex !important;
             flex-direction: column !important;
-            gap: 12px !important;
+            gap: 8px !important;
             margin-left: auto !important;
             padding-top: 4px !important;
             flex-shrink: 0 !important;
           }
           .services-chevron-icon {
-            width: 32px !important;
-            height: 32px !important;
+            width: 22px !important;
+            height: 22px !important;
           }
-          .services-chevron-row > img:nth-child(n+6) {
+          .services-chevron-row > img:nth-child(n+5) {
             display: none !important;
           }
           .services-chevron-row {
-            gap: 8px !important;
+            gap: 6px !important;
           }
           .services-chevron-row-1 {
-            margin-left: 18px !important;
+            margin-left: 10px !important;
             margin-top: 0 !important;
           }
           .services-split-grid {
@@ -1041,24 +1045,25 @@ export default function ServicesPage() {
         /* ─── Small phones: ≤400px ──────────────────────────────── */
         @media (max-width: 400px) {
           .services-hero-title {
-            font-size: 19px !important;
+            font-size: 16px !important;
+            line-height: 1.25 !important;
           }
           .services-hud-chevrons {
-            gap: 10px !important;
+            gap: 6px !important;
             padding-top: 2px !important;
           }
           .services-chevron-icon {
-            width: 27px !important;
-            height: 27px !important;
+            width: 19px !important;
+            height: 19px !important;
           }
-          .services-chevron-row > img:nth-child(n+6) {
+          .services-chevron-row > img:nth-child(n+5) {
             display: none !important;
           }
           .services-chevron-row {
-            gap: 6px !important;
+            gap: 5px !important;
           }
           .services-chevron-row-1 {
-            margin-left: 14px !important;
+            margin-left: 8px !important;
           }
           .services-process-title {
             font-size: 24px !important;

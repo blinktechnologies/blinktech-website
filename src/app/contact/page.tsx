@@ -761,9 +761,9 @@ export default function ContactPage() {
             padding: 0 4px;
           }
           .contact-hero-title {
-            font-size: 30px !important;
+            font-size: clamp(20px, 5.2vw, 24px) !important;
             margin-bottom: 10px !important;
-            line-height: 1.15 !important;
+            line-height: 1.2 !important;
           }
           .contact-master-card {
             border-radius: 18px !important;
@@ -804,7 +804,7 @@ export default function ContactPage() {
         /* ─── Small phones: ≤400px ──────────────────────────────── */
         @media (max-width: 400px) {
           .contact-hero-title {
-            font-size: 26px !important;
+            font-size: 19px !important;
           }
           .contact-panel-title {
             font-size: 22px !important;
